@@ -1,0 +1,2854 @@
+{
+  "schema": "twisted-yetter/lean-semantic-review-ledger/1",
+  "generated_at_utc": "2026-08-09T05:04:40.557769Z",
+  "status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+  "scope": {
+    "entry": "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean",
+    "scope_file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/semantic-review-scope-v1.json",
+    "local_import_closure_file_count": 42,
+    "local_import_closure": [
+      "lean/TwistedYetter/CategoryTheory/FiniteSemisimple/Basic.lean",
+      "lean/TwistedYetter/CategoryTheory/FiniteSemisimple/Chosen.lean",
+      "lean/TwistedYetter/CategoryTheory/FiniteSemisimple/Simple.lean",
+      "lean/TwistedYetter/CategoryTheory/Fusion/Basic.lean",
+      "lean/TwistedYetter/CategoryTheory/Fusion/Dual.lean",
+      "lean/TwistedYetter/CategoryTheory/Fusion/PivotalTrace.lean",
+      "lean/TwistedYetter/CategoryTheory/Fusion/Schur.lean",
+      "lean/TwistedYetter/CategoryTheory/Monoidal/IdentityCharacter.lean",
+      "lean/TwistedYetter/CategoryTheory/Pivotal/Basic.lean",
+      "lean/TwistedYetter/CategoryTheory/Pivotal/Trace.lean",
+      "lean/TwistedYetter/CategoryTheory/Premodular/Basic.lean",
+      "lean/TwistedYetter/CategoryTheory/Premodular/Bundled.lean",
+      "lean/TwistedYetter/CategoryTheory/Premodular/CanonicalSpherical.lean",
+      "lean/TwistedYetter/CategoryTheory/Ribbon/Basic.lean",
+      "lean/TwistedYetter/CategoryTheory/Ribbon/CanonicalPivotal.lean",
+      "lean/TwistedYetter/CategoryTheory/Ribbon/CanonicalSpherical.lean",
+      "lean/TwistedYetter/Kirby/Final/Proofs/CancellationMoves.lean",
+      "lean/TwistedYetter/Kirby/Final/Proofs/CancellationNormalForms.lean",
+      "lean/TwistedYetter/Kirby/Final/Proofs/CancellationTraceFactorization.lean",
+      "lean/TwistedYetter/Kirby/Final/Proofs/CleanBandSlides.lean",
+      "lean/TwistedYetter/Kirby/Final/Proofs/DottedBoundaryFactor.lean",
+      "lean/TwistedYetter/Kirby/Final/Proofs/DottedIncidenceNaturality.lean",
+      "lean/TwistedYetter/Kirby/Final/Proofs/DottedRepresentativeIndependence.lean",
+      "lean/TwistedYetter/Kirby/Final/Proofs/FrozenFrontendLocalMoves.lean",
+      "lean/TwistedYetter/Kirby/Final/Proofs/RepresentativeIndependence.lean",
+      "lean/TwistedYetter/Kirby/Final/Proofs/SpecialCutMeridian.lean",
+      "lean/TwistedYetter/Kirby/Final/Proofs/TwoThreeTraceFactorization.lean",
+      "lean/TwistedYetter/Kirby/Final/Semantics/Independent/CutOpen.lean",
+      "lean/TwistedYetter/Kirby/Final/Semantics/Independent/DiagramLabeling.lean",
+      "lean/TwistedYetter/Kirby/Final/Semantics/Independent/DottedTopologyAxioms.lean",
+      "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean",
+      "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Entry.lean",
+      "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Evaluator.lean",
+      "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Graphical.lean",
+      "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Homology.lean",
+      "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Invariant.lean",
+      "lean/TwistedYetter/Kirby/Final/Semantics/Independent/KirbyDiagram.lean",
+      "lean/TwistedYetter/Kirby/Final/Semantics/Independent/LocalReplacementSyntax.lean",
+      "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean",
+      "lean/TwistedYetter/Kirby/Final/Semantics/Independent/OneTwoLocalReplacement.lean",
+      "lean/TwistedYetter/Kirby/Final/Semantics/Independent/TwoThreeLocalReplacement.lean",
+      "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean"
+    ],
+    "recorded_kernel_axiom_source": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/explicit-trust-boundary-v15.json"
+  },
+  "provenance": {
+    "git_commit": "dd359e43385c180ad4d8fe90451c1ec0650df8db",
+    "git_dirty": true,
+    "generator": "scripts/lean_semantic_review_ledger.py",
+    "scope_sha256": "b8806f34488ae3ea4bfb1863cc593283fa748a1a2a7f8bd8bc450d7f7e869c05"
+  },
+  "policy": {
+    "old_chat_or_prose_is_not_approval": true,
+    "approval_is_valid_only_for_exact_declaration_sha256": true,
+    "changed_declaration_makes_review_stale": true,
+    "unclassified_field_fails_closed": true
+  },
+  "summary": {
+    "entry_count": 85,
+    "current_human_approvals": 0,
+    "stale_human_approvals": 0,
+    "unreviewed_entries": 85,
+    "field_count": 161,
+    "unclassified_fields": 0,
+    "field_classification_counts": {
+      "CUT_OPEN_COMBINATORIAL_DATA": 14,
+      "DERIVED_GRAPH_COORDINATE_DATA": 2,
+      "DERIVED_NONCOMPUTABLE_CHOICE_DATA": 5,
+      "DOMAIN_BALANCING_DATA": 1,
+      "DOMAIN_CHARACTER_LAW": 1,
+      "DOMAIN_COORDINATE_DATA": 10,
+      "DOMAIN_DECOMPOSITION_LAW": 4,
+      "DOMAIN_EXISTENCE_LAW": 2,
+      "DOMAIN_FINITE_HOM_LAW": 1,
+      "DOMAIN_FUSION_LAW": 1,
+      "DOMAIN_PIVOTAL_DATA": 2,
+      "DOMAIN_PIVOTAL_LAW": 1,
+      "DOMAIN_RIBBON_DATA": 1,
+      "DOMAIN_SKELETON_LAW": 3,
+      "DOMAIN_SPHERICAL_DATA": 1,
+      "EXTERNAL_TOPOLOGY_REALIZATION_CERTIFICATE": 1,
+      "GRAPHICAL_LABEL_DATA": 2,
+      "GRAPHICAL_NORMAL_FORM_DATA": 3,
+      "GRAPHICAL_TRACE_DATA": 2,
+      "HOMOLOGY_COORDINATE_DATA": 3,
+      "HOMOLOGY_TRANSPORT_DATA": 3,
+      "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE": 22,
+      "KERNEL_CHECKED_HANDLE_COUNT_CERTIFICATE": 1,
+      "KERNEL_CHECKED_HOMOLOGY_TO_CUT_BINDING": 1,
+      "KERNEL_CHECKED_HOMOLOGY_TRANSPORT_CERTIFICATE": 6,
+      "KERNEL_CHECKED_PATH_ENDPOINT_CERTIFICATE": 2,
+      "KERNEL_CHECKED_PATH_STEP_CERTIFICATE": 1,
+      "KIRBY_BAND_SLIDE_DATA": 10,
+      "KIRBY_COMPONENT_DATA": 3,
+      "KIRBY_HANDLE_COUNT_DATA": 3,
+      "KIRBY_HANDLE_DATA": 1,
+      "KIRBY_ISOTOPY_DATA": 2,
+      "KIRBY_LOCAL_TRANSPORT_DATA": 1,
+      "KIRBY_MOVE_TAG_DATA": 1,
+      "KIRBY_MOVIE_DATA": 2,
+      "KIRBY_STRAND_DATA": 2,
+      "KIRBY_TRACE_DATA": 8,
+      "MARKED_DIAGRAM_DATA": 3,
+      "PUBLIC_CATEGORY_DATA": 3,
+      "PUBLIC_CATEGORY_DOMAIN_CERTIFICATE": 1,
+      "PUBLIC_CATEGORY_INSTANCE_DATA": 7,
+      "PUBLIC_CHARACTER_DATA": 2,
+      "REDUNDANT_FINITE_TAG_CERTIFICATE": 1,
+      "SEMANTIC_CHAIN_DATA_NOT_A_PROOF": 1,
+      "SEMANTIC_INDEXING_DATA_NOT_A_PROOF": 2,
+      "SEMANTIC_INPUT_DATA_NOT_A_PROOF": 1,
+      "SERIALIZATION_DATA": 8,
+      "TOPOLOGY_REPRESENTATIVE_DATA": 3
+    }
+  },
+  "entries": [
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/FiniteSemisimple/Basic.lean::CategoryTheory.FiniteSemisimpleCategory",
+      "name": "CategoryTheory.FiniteSemisimpleCategory",
+      "local_name": "FiniteSemisimpleCategory",
+      "kind": "class",
+      "classification": "DOMAIN_DEFINITION_EGNO_FINITE_SEMISIMPLICITY",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/FiniteSemisimple/Basic.lean",
+        "start_line": 23,
+        "end_line": 32,
+        "declaration_sha256": "0e0d1a28526f2f261ed509d4ae6211e717c9382d0d43116d1111e38e083d1b06",
+        "file_sha256": "5e9053aba96228dc1e8428e78eaa434106166acfffb84aeabecc1b5abb29eae7"
+      },
+      "fields": [
+        {
+          "name": "CategoryTheory.FiniteSemisimpleCategory.hom_finite",
+          "classification": "DOMAIN_FINITE_HOM_LAW"
+        },
+        {
+          "name": "CategoryTheory.FiniteSemisimpleCategory.finite_simple_skeleton",
+          "classification": "DOMAIN_EXISTENCE_LAW"
+        },
+        {
+          "name": "CategoryTheory.FiniteSemisimpleCategory.finite_simple_decomposition",
+          "classification": "DOMAIN_EXISTENCE_LAW"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/FiniteSemisimple/Chosen.lean::CategoryTheory.FiniteSimpleDecomposition",
+      "name": "CategoryTheory.FiniteSimpleDecomposition",
+      "local_name": "FiniteSimpleDecomposition",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/FiniteSemisimple/Chosen.lean",
+        "start_line": 42,
+        "end_line": 61,
+        "declaration_sha256": "c5ae271e66ccda5bfcf3248a3bb969663ea9e5a79397f8e10497de9006577bdb",
+        "file_sha256": "edad1a4e5b42a7aff77d265ad417aac626ea7573bb4c583ce5113607e7066ab5"
+      },
+      "fields": [
+        {
+          "name": "CategoryTheory.FiniteSimpleDecomposition.SummandIndex",
+          "classification": "DOMAIN_COORDINATE_DATA"
+        },
+        {
+          "name": "CategoryTheory.FiniteSimpleDecomposition.summandFintype",
+          "classification": "DOMAIN_COORDINATE_DATA"
+        },
+        {
+          "name": "CategoryTheory.FiniteSimpleDecomposition.summandDecidableEq",
+          "classification": "DOMAIN_COORDINATE_DATA"
+        },
+        {
+          "name": "CategoryTheory.FiniteSimpleDecomposition.summandObject",
+          "classification": "DOMAIN_COORDINATE_DATA"
+        },
+        {
+          "name": "CategoryTheory.FiniteSimpleDecomposition.summand_isSimple",
+          "classification": "DOMAIN_DECOMPOSITION_LAW"
+        },
+        {
+          "name": "CategoryTheory.FiniteSimpleDecomposition.inclusion",
+          "classification": "DOMAIN_COORDINATE_DATA"
+        },
+        {
+          "name": "CategoryTheory.FiniteSimpleDecomposition.projection",
+          "classification": "DOMAIN_COORDINATE_DATA"
+        },
+        {
+          "name": "CategoryTheory.FiniteSimpleDecomposition.pairing_same",
+          "classification": "DOMAIN_DECOMPOSITION_LAW"
+        },
+        {
+          "name": "CategoryTheory.FiniteSimpleDecomposition.pairing_distinct",
+          "classification": "DOMAIN_DECOMPOSITION_LAW"
+        },
+        {
+          "name": "CategoryTheory.FiniteSimpleDecomposition.resolution_identity",
+          "classification": "DOMAIN_DECOMPOSITION_LAW"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/FiniteSemisimple/Chosen.lean::CategoryTheory.FiniteSimpleSkeleton",
+      "name": "CategoryTheory.FiniteSimpleSkeleton",
+      "local_name": "FiniteSimpleSkeleton",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/FiniteSemisimple/Chosen.lean",
+        "start_line": 22,
+        "end_line": 41,
+        "declaration_sha256": "6fb1f8ad00f90a797359984dcd2dbfdb9dc131ed0ece7f0ccd77d4539c8ffef6",
+        "file_sha256": "edad1a4e5b42a7aff77d265ad417aac626ea7573bb4c583ce5113607e7066ab5"
+      },
+      "fields": [
+        {
+          "name": "CategoryTheory.FiniteSimpleSkeleton.SimpleIndex",
+          "classification": "DOMAIN_COORDINATE_DATA"
+        },
+        {
+          "name": "CategoryTheory.FiniteSimpleSkeleton.simpleFintype",
+          "classification": "DOMAIN_COORDINATE_DATA"
+        },
+        {
+          "name": "CategoryTheory.FiniteSimpleSkeleton.simpleDecidableEq",
+          "classification": "DOMAIN_COORDINATE_DATA"
+        },
+        {
+          "name": "CategoryTheory.FiniteSimpleSkeleton.simpleObject",
+          "classification": "DOMAIN_COORDINATE_DATA"
+        },
+        {
+          "name": "CategoryTheory.FiniteSimpleSkeleton.simple_isSimple",
+          "classification": "DOMAIN_SKELETON_LAW"
+        },
+        {
+          "name": "CategoryTheory.FiniteSimpleSkeleton.simple_pairwise",
+          "classification": "DOMAIN_SKELETON_LAW"
+        },
+        {
+          "name": "CategoryTheory.FiniteSimpleSkeleton.simple_complete",
+          "classification": "DOMAIN_SKELETON_LAW"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/Fusion/Basic.lean::CategoryTheory.FusionCategory",
+      "name": "CategoryTheory.FusionCategory",
+      "local_name": "FusionCategory",
+      "kind": "class",
+      "classification": "DOMAIN_DEFINITION_EGNO_FUSION_CATEGORY",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/Fusion/Basic.lean",
+        "start_line": 25,
+        "end_line": 33,
+        "declaration_sha256": "bf768d2831fd51be9f19cc0decc75eda10cc71aa71bbe9b7e91729a3bd6181a2",
+        "file_sha256": "2621055da7e411dc312bf4b5cab307c2b44b825abbaa9e27f96d1d0d45961736"
+      },
+      "fields": [
+        {
+          "name": "CategoryTheory.FusionCategory.tensorUnit_simple",
+          "classification": "DOMAIN_FUSION_LAW"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/Monoidal/IdentityCharacter.lean::CategoryTheory.TensorIdentityCharacter",
+      "name": "CategoryTheory.TensorIdentityCharacter",
+      "local_name": "TensorIdentityCharacter",
+      "kind": "structure",
+      "classification": "DOMAIN_DEFINITION_MONOIDAL_IDENTITY_AUTOMORPHISM",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/Monoidal/IdentityCharacter.lean",
+        "start_line": 20,
+        "end_line": 25,
+        "declaration_sha256": "c22b719a1aaace78edfa7c5d10d92ca7f7022be9ca2f91bbd61392ccabc38d03",
+        "file_sha256": "24f3c2b82b19e15825793ab4760cf38f917df0f9df5c5fa73afa95ed5c8c2baf"
+      },
+      "fields": [
+        {
+          "name": "CategoryTheory.TensorIdentityCharacter.iso",
+          "classification": "PUBLIC_CHARACTER_DATA"
+        },
+        {
+          "name": "CategoryTheory.TensorIdentityCharacter.monoidal",
+          "classification": "DOMAIN_CHARACTER_LAW"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/Pivotal/Basic.lean::CategoryTheory.PivotalCategory",
+      "name": "CategoryTheory.PivotalCategory",
+      "local_name": "PivotalCategory",
+      "kind": "class",
+      "classification": "DOMAIN_CLASS_REQUIRES_REFERENCE_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/Pivotal/Basic.lean",
+        "start_line": 45,
+        "end_line": 54,
+        "declaration_sha256": "94107f4218a92416fd18720104ab9fb73157e511fe69df624e634fc8a8c801b5",
+        "file_sha256": "0fe555bf9756851a474c0179ff1e75df145733b73041e4cf7c397203e829ab7f"
+      },
+      "fields": [
+        {
+          "name": "CategoryTheory.PivotalCategory.pivotalStructure",
+          "classification": "DOMAIN_PIVOTAL_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/Pivotal/Basic.lean::CategoryTheory.PivotalStructure",
+      "name": "CategoryTheory.PivotalStructure",
+      "local_name": "PivotalStructure",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/Pivotal/Basic.lean",
+        "start_line": 40,
+        "end_line": 44,
+        "declaration_sha256": "924d7fdc856b1bb9201c32d9e030c4aa8732d255ba4479becc92b34f7a6929d1",
+        "file_sha256": "0fe555bf9756851a474c0179ff1e75df145733b73041e4cf7c397203e829ab7f"
+      },
+      "fields": [
+        {
+          "name": "CategoryTheory.PivotalStructure.iso",
+          "classification": "DOMAIN_PIVOTAL_DATA"
+        },
+        {
+          "name": "CategoryTheory.PivotalStructure.monoidal",
+          "classification": "DOMAIN_PIVOTAL_LAW"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/Pivotal/Basic.lean::CategoryTheory.SphericalCategory",
+      "name": "CategoryTheory.SphericalCategory",
+      "local_name": "SphericalCategory",
+      "kind": "class",
+      "classification": "DOMAIN_CLASS_REQUIRES_REFERENCE_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/Pivotal/Basic.lean",
+        "start_line": 189,
+        "end_line": 192,
+        "declaration_sha256": "8e7c20f132fa34038d41b07db91fdb371c75cb01ade6df08171279800548c8bd",
+        "file_sha256": "0fe555bf9756851a474c0179ff1e75df145733b73041e4cf7c397203e829ab7f"
+      },
+      "fields": [
+        {
+          "name": "CategoryTheory.SphericalCategory.sphericalStructure",
+          "classification": "DOMAIN_SPHERICAL_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/Pivotal/Basic.lean::CategoryTheory.SphericalStructure",
+      "name": "CategoryTheory.SphericalStructure",
+      "local_name": "SphericalStructure",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/Pivotal/Basic.lean",
+        "start_line": 182,
+        "end_line": 188,
+        "declaration_sha256": "bd2d76ba596ba9243cf48e307a3a28ba8f29fe70c7b6510840e0edccea6533b6",
+        "file_sha256": "0fe555bf9756851a474c0179ff1e75df145733b73041e4cf7c397203e829ab7f"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/Premodular/Basic.lean::CategoryTheory.PremodularCategory",
+      "name": "CategoryTheory.PremodularCategory",
+      "local_name": "PremodularCategory",
+      "kind": "class",
+      "classification": "DOMAIN_DEFINITION_EGNO_PREMODULAR_CATEGORY",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/Premodular/Basic.lean",
+        "start_line": 25,
+        "end_line": 32,
+        "declaration_sha256": "fe5ad9357b699c7be0740c1f65931a5b12fc70c2901ba1862a83993265f1ea47",
+        "file_sha256": "4eb979fdb655f00a812cd2648ecdb9a502ced4e4f6fef28d1d6bb072df95d6d5"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/Premodular/Bundled.lean::CategoryTheory.BundledPremodularCategory",
+      "name": "CategoryTheory.BundledPremodularCategory",
+      "local_name": "BundledPremodularCategory",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/Premodular/Bundled.lean",
+        "start_line": 19,
+        "end_line": 67,
+        "declaration_sha256": "cc8b5f1e757afc64c0b21edf36a3ec08b260dcc281e5beb975e298684940fa9a",
+        "file_sha256": "5fe20918d80fcb6e6087fd6faa8b967457eebcceb7435a66643bcad3f460db79"
+      },
+      "fields": [
+        {
+          "name": "CategoryTheory.BundledPremodularCategory.C",
+          "classification": "PUBLIC_CATEGORY_DATA"
+        },
+        {
+          "name": "CategoryTheory.BundledPremodularCategory.category",
+          "classification": "PUBLIC_CATEGORY_DATA"
+        },
+        {
+          "name": "CategoryTheory.BundledPremodularCategory.abelian",
+          "classification": "PUBLIC_CATEGORY_INSTANCE_DATA"
+        },
+        {
+          "name": "CategoryTheory.BundledPremodularCategory.linear",
+          "classification": "PUBLIC_CATEGORY_INSTANCE_DATA"
+        },
+        {
+          "name": "CategoryTheory.BundledPremodularCategory.monoidal",
+          "classification": "PUBLIC_CATEGORY_INSTANCE_DATA"
+        },
+        {
+          "name": "CategoryTheory.BundledPremodularCategory.rigid",
+          "classification": "PUBLIC_CATEGORY_INSTANCE_DATA"
+        },
+        {
+          "name": "CategoryTheory.BundledPremodularCategory.braided",
+          "classification": "PUBLIC_CATEGORY_INSTANCE_DATA"
+        },
+        {
+          "name": "CategoryTheory.BundledPremodularCategory.monoidalPreadditive",
+          "classification": "PUBLIC_CATEGORY_INSTANCE_DATA"
+        },
+        {
+          "name": "CategoryTheory.BundledPremodularCategory.monoidalLinear",
+          "classification": "PUBLIC_CATEGORY_INSTANCE_DATA"
+        },
+        {
+          "name": "CategoryTheory.BundledPremodularCategory.premodular",
+          "classification": "PUBLIC_CATEGORY_DOMAIN_CERTIFICATE"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/Premodular/Bundled.lean::CategoryTheory.BundledPremodularCategory.ChosenSimpleFamily",
+      "name": "CategoryTheory.BundledPremodularCategory.ChosenSimpleFamily",
+      "local_name": "ChosenSimpleFamily",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/Premodular/Bundled.lean",
+        "start_line": 274,
+        "end_line": 282,
+        "declaration_sha256": "deeca9bf2f450c3e125e4097fef74cd4f476eb31c50be651fc2d78df86c8511b",
+        "file_sha256": "5fe20918d80fcb6e6087fd6faa8b967457eebcceb7435a66643bcad3f460db79"
+      },
+      "fields": [
+        {
+          "name": "CategoryTheory.BundledPremodularCategory.ChosenSimpleFamily.skeleton",
+          "classification": "DERIVED_NONCOMPUTABLE_CHOICE_DATA"
+        },
+        {
+          "name": "CategoryTheory.BundledPremodularCategory.ChosenSimpleFamily.tensorUnit",
+          "classification": "DERIVED_NONCOMPUTABLE_CHOICE_DATA"
+        },
+        {
+          "name": "CategoryTheory.BundledPremodularCategory.ChosenSimpleFamily.unitIso",
+          "classification": "DERIVED_NONCOMPUTABLE_CHOICE_DATA"
+        },
+        {
+          "name": "CategoryTheory.BundledPremodularCategory.ChosenSimpleFamily.dual",
+          "classification": "DERIVED_NONCOMPUTABLE_CHOICE_DATA"
+        },
+        {
+          "name": "CategoryTheory.BundledPremodularCategory.ChosenSimpleFamily.dualIso",
+          "classification": "DERIVED_NONCOMPUTABLE_CHOICE_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/Premodular/Bundled.lean::CategoryTheory.BundledPremodularCategory.chosenSimpleFamily",
+      "name": "CategoryTheory.BundledPremodularCategory.chosenSimpleFamily",
+      "local_name": "chosenSimpleFamily",
+      "kind": "def",
+      "classification": "CORE_DEFINITION_SEMANTIC_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/Premodular/Bundled.lean",
+        "start_line": 283,
+        "end_line": 306,
+        "declaration_sha256": "1b69a41744d1c578220e2b22a9141bc48ad2ddbdb21ae71e4d1e18b50ec6780a",
+        "file_sha256": "5fe20918d80fcb6e6087fd6faa8b967457eebcceb7435a66643bcad3f460db79"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/Premodular/Bundled.lean::CategoryTheory.BundledPremodularCategory.decomposition",
+      "name": "CategoryTheory.BundledPremodularCategory.decomposition",
+      "local_name": "decomposition",
+      "kind": "def",
+      "classification": "CORE_DEFINITION_SEMANTIC_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/Premodular/Bundled.lean",
+        "start_line": 74,
+        "end_line": 79,
+        "declaration_sha256": "84409332a451031a075957fc3c7cee295cffd3bc7774c22c6907ba2e40662a5c",
+        "file_sha256": "5fe20918d80fcb6e6087fd6faa8b967457eebcceb7435a66643bcad3f460db79"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/Premodular/Bundled.lean::CategoryTheory.BundledPremodularCategory.globalDimension",
+      "name": "CategoryTheory.BundledPremodularCategory.globalDimension",
+      "local_name": "globalDimension",
+      "kind": "def",
+      "classification": "CORE_DEFINITION_SEMANTIC_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/Premodular/Bundled.lean",
+        "start_line": 265,
+        "end_line": 273,
+        "declaration_sha256": "674e1ee99f710efd0b6d29950eb93dcdfe0b1007b87b676585b3fd4e56252415",
+        "file_sha256": "5fe20918d80fcb6e6087fd6faa8b967457eebcceb7435a66643bcad3f460db79"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/Premodular/Bundled.lean::CategoryTheory.BundledPremodularCategory.simpleSkeleton",
+      "name": "CategoryTheory.BundledPremodularCategory.simpleSkeleton",
+      "local_name": "simpleSkeleton",
+      "kind": "def",
+      "classification": "CORE_DEFINITION_SEMANTIC_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/Premodular/Bundled.lean",
+        "start_line": 68,
+        "end_line": 73,
+        "declaration_sha256": "d2e9a4e458f72d6cf546de67a6919071572b6e151f7c86ac1b946bf7d8a0796f",
+        "file_sha256": "5fe20918d80fcb6e6087fd6faa8b967457eebcceb7435a66643bcad3f460db79"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/Premodular/Bundled.lean::CategoryTheory.TwistedPremodularCategory",
+      "name": "CategoryTheory.TwistedPremodularCategory",
+      "local_name": "TwistedPremodularCategory",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/Premodular/Bundled.lean",
+        "start_line": 446,
+        "end_line": 456,
+        "declaration_sha256": "3fb4903110837fe4a4b743d622e8ce2516fcab65c744d5392084c73257bc663a",
+        "file_sha256": "5fe20918d80fcb6e6087fd6faa8b967457eebcceb7435a66643bcad3f460db79"
+      },
+      "fields": [
+        {
+          "name": "CategoryTheory.TwistedPremodularCategory.category",
+          "classification": "PUBLIC_CATEGORY_DATA"
+        },
+        {
+          "name": "CategoryTheory.TwistedPremodularCategory.character",
+          "classification": "PUBLIC_CHARACTER_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/Ribbon/Basic.lean::CategoryTheory.Balancing",
+      "name": "CategoryTheory.Balancing",
+      "local_name": "Balancing",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/Ribbon/Basic.lean",
+        "start_line": 27,
+        "end_line": 39,
+        "declaration_sha256": "91f5b560eabd0e903a236349ae55b189adb470de23d64afbd5bb5b90cb685fb0",
+        "file_sha256": "dd90bba52ea558c5da9b7d4feb75c27d50ed8d0dccd4eb0c0fa09cc40bb3ea42"
+      },
+      "fields": [
+        {
+          "name": "CategoryTheory.Balancing.twist",
+          "classification": "DOMAIN_BALANCING_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/Ribbon/Basic.lean::CategoryTheory.RibbonCategory",
+      "name": "CategoryTheory.RibbonCategory",
+      "local_name": "RibbonCategory",
+      "kind": "class",
+      "classification": "DOMAIN_CLASS_REQUIRES_REFERENCE_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/Ribbon/Basic.lean",
+        "start_line": 45,
+        "end_line": 48,
+        "declaration_sha256": "8cda4c463c132329e3e162e090b44f74d4d5f93e691322e1302860b0b5d0ab60",
+        "file_sha256": "dd90bba52ea558c5da9b7d4feb75c27d50ed8d0dccd4eb0c0fa09cc40bb3ea42"
+      },
+      "fields": [
+        {
+          "name": "CategoryTheory.RibbonCategory.ribbonStructure",
+          "classification": "DOMAIN_RIBBON_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/Ribbon/Basic.lean::CategoryTheory.RibbonStructure",
+      "name": "CategoryTheory.RibbonStructure",
+      "local_name": "RibbonStructure",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/Ribbon/Basic.lean",
+        "start_line": 40,
+        "end_line": 44,
+        "declaration_sha256": "5301d6ce683d850ebef0a11b0995146a2e442bfd63fd7d9195b0562f12de14c7",
+        "file_sha256": "dd90bba52ea558c5da9b7d4feb75c27d50ed8d0dccd4eb0c0fa09cc40bb3ea42"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/CategoryTheory/Ribbon/Basic.lean::when",
+      "name": "when",
+      "local_name": "when",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/CategoryTheory/Ribbon/Basic.lean",
+        "start_line": 9,
+        "end_line": 26,
+        "declaration_sha256": "b32f6e808143177e50d08338acff8e300b912b16785592d014161097febbca5e",
+        "file_sha256": "dd90bba52ea558c5da9b7d4feb75c27d50ed8d0dccd4eb0c0fa09cc40bb3ea42"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Proofs/CancellationTraceFactorization.lean::TwistedYetter.Kirby.Final.Proofs.OneTwoGraphCoordinates",
+      "name": "TwistedYetter.Kirby.Final.Proofs.OneTwoGraphCoordinates",
+      "local_name": "OneTwoGraphCoordinates",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Proofs/CancellationTraceFactorization.lean",
+        "start_line": 244,
+        "end_line": 249,
+        "declaration_sha256": "cb29c23c0d0c3e295c164ccfcd777eeeddd845d6f19c9705e826fc713c593602",
+        "file_sha256": "9811a288b575eea707b07576acb58513763f1a178a917c9a6d14d3fc68a277fb"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Kirby.Final.Proofs.OneTwoGraphCoordinates.indexEquiv",
+          "classification": "DERIVED_GRAPH_COORDINATE_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Proofs/FrozenFrontendLocalMoves.lean::TwistedYetter.Kirby.Final.Proofs.frozenFrontendLocalMoveInvariance",
+      "name": "TwistedYetter.Kirby.Final.Proofs.frozenFrontendLocalMoveInvariance",
+      "local_name": "frozenFrontendLocalMoveInvariance",
+      "kind": "theorem",
+      "classification": "CORE_THEOREM_STATEMENT_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Proofs/FrozenFrontendLocalMoves.lean",
+        "start_line": 100,
+        "end_line": 138,
+        "declaration_sha256": "c089b926ad52278fc185c7cb282be4067980e23bd113133f00568f339f83c2e8",
+        "file_sha256": "99f16c8de2b795f268e635a56bf4b1c7c29495344a447722af95e5618daba847"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Proofs/RepresentativeIndependence.lean::TwistedYetter.Kirby.Final.Proofs.frozenFrontendRepresentativeIndependence",
+      "name": "TwistedYetter.Kirby.Final.Proofs.frozenFrontendRepresentativeIndependence",
+      "local_name": "frozenFrontendRepresentativeIndependence",
+      "kind": "theorem",
+      "classification": "CORE_THEOREM_STATEMENT_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Proofs/RepresentativeIndependence.lean",
+        "start_line": 28,
+        "end_line": 39,
+        "declaration_sha256": "8db98fb47fe6576b4b8ddd24105c3b0d7d97ea46d094d989c21a84e993a52bca",
+        "file_sha256": "aea923b36a3bc4c2a641059303f61c8a6c35e5b01b0caac5ef5dd08fa2c9cbf9"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Proofs/TwoThreeTraceFactorization.lean::TwistedYetter.Kirby.Final.Proofs.TwoThreeGraphCoordinates",
+      "name": "TwistedYetter.Kirby.Final.Proofs.TwoThreeGraphCoordinates",
+      "local_name": "TwoThreeGraphCoordinates",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Proofs/TwoThreeTraceFactorization.lean",
+        "start_line": 277,
+        "end_line": 282,
+        "declaration_sha256": "cbac548d7a9d9dc4c003484cd7190ca3970dd16b7c5f81606642dde85dc9674a",
+        "file_sha256": "452d911514ab200fe27d9f7c625b1fc287f2de7307a87cf05a2d74b42a231171"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Kirby.Final.Proofs.TwoThreeGraphCoordinates.indexEquiv",
+          "classification": "DERIVED_GRAPH_COORDINATE_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/CutOpen.lean::TwistedYetter.Semantics.Independent.CutOpenExteriorTrace",
+      "name": "TwistedYetter.Semantics.Independent.CutOpenExteriorTrace",
+      "local_name": "CutOpenExteriorTrace",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/CutOpen.lean",
+        "start_line": 273,
+        "end_line": 299,
+        "declaration_sha256": "8d6860074631a361df5cc081e0071c3548be3ef1e27d23076b258b5d634404e0",
+        "file_sha256": "c0518e0bf23036a5e7b8922a31a37b4d15a829aca3be7ef1979af64a22bfd126"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.CutOpenExteriorTrace.eventCount",
+          "classification": "CUT_OPEN_COMBINATORIAL_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CutOpenExteriorTrace.events",
+          "classification": "CUT_OPEN_COMBINATORIAL_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CutOpenExteriorTrace.activeOrder",
+          "classification": "CUT_OPEN_COMBINATORIAL_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CutOpenExteriorTrace.initialBoundaryEmpty",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CutOpenExteriorTrace.finalBoundaryEmpty",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CutOpenExteriorTrace.transitionValid",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CutOpenExteriorTrace.strandContinuationsAreWellFormed",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CutOpenExteriorTrace.eventPortsAreDistinct",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CutOpenExteriorTrace.everyStrandHasUniqueInputAndOutput",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CutOpenExteriorTrace.activeWordsNoDuplicates",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CutOpenExteriorTrace.activeStrandsAreTwoHandles",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/CutOpen.lean::TwistedYetter.Semantics.Independent.DottedCollarBendingPath",
+      "name": "TwistedYetter.Semantics.Independent.DottedCollarBendingPath",
+      "local_name": "DottedCollarBendingPath",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/CutOpen.lean",
+        "start_line": 243,
+        "end_line": 250,
+        "declaration_sha256": "9891901c462c856a7d6b147193d48b1827807b147f48b9684d5962fcd34a1dcb",
+        "file_sha256": "c0518e0bf23036a5e7b8922a31a37b4d15a829aca3be7ef1979af64a22bfd126"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.DottedCollarBendingPath.eventCount",
+          "classification": "CUT_OPEN_COMBINATORIAL_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.DottedCollarBendingPath.events",
+          "classification": "CUT_OPEN_COMBINATORIAL_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.DottedCollarBendingPath.activeOrder",
+          "classification": "CUT_OPEN_COMBINATORIAL_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/CutOpen.lean::TwistedYetter.Semantics.Independent.DottedCutData",
+      "name": "TwistedYetter.Semantics.Independent.DottedCutData",
+      "local_name": "DottedCutData",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/CutOpen.lean",
+        "start_line": 300,
+        "end_line": 310,
+        "declaration_sha256": "b2124281c57338646415098ebafbd75aaf62749b20d4839a0dc173de509fb33e",
+        "file_sha256": "c0518e0bf23036a5e7b8922a31a37b4d15a829aca3be7ef1979af64a22bfd126"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.DottedCutData.punctureWord",
+          "classification": "SEMANTIC_INPUT_DATA_NOT_A_PROOF"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.DottedCutData.exterior",
+          "classification": "CUT_OPEN_COMBINATORIAL_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/CutOpen.lean::TwistedYetter.Semantics.Independent.DottedCutPresentation",
+      "name": "TwistedYetter.Semantics.Independent.DottedCutPresentation",
+      "local_name": "DottedCutPresentation",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/CutOpen.lean",
+        "start_line": 475,
+        "end_line": 490,
+        "declaration_sha256": "0552c21405d2b074445b7877459efd65804f9f04a0cc3c425648378f9e5eaca3",
+        "file_sha256": "c0518e0bf23036a5e7b8922a31a37b4d15a829aca3be7ef1979af64a22bfd126"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.DottedCutPresentation.cut",
+          "classification": "CUT_OPEN_COMBINATORIAL_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.DottedCutPresentation.incidence_agrees_with_handle_boundary",
+          "classification": "KERNEL_CHECKED_HOMOLOGY_TO_CUT_BINDING"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/CutOpen.lean::TwistedYetter.Semantics.Independent.DottedPuncture",
+      "name": "TwistedYetter.Semantics.Independent.DottedPuncture",
+      "local_name": "DottedPuncture",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/CutOpen.lean",
+        "start_line": 38,
+        "end_line": 57,
+        "declaration_sha256": "87cc08a6c0f9d3e8ec2d2d202b961332a113ad0fcf29339cb65ada522f3d3899",
+        "file_sha256": "c0518e0bf23036a5e7b8922a31a37b4d15a829aca3be7ef1979af64a22bfd126"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.DottedPuncture.dottedComponent",
+          "classification": "CUT_OPEN_COMBINATORIAL_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.DottedPuncture.twoHandleComponent",
+          "classification": "CUT_OPEN_COMBINATORIAL_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.DottedPuncture.inputStrand",
+          "classification": "CUT_OPEN_COMBINATORIAL_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.DottedPuncture.outputStrand",
+          "classification": "CUT_OPEN_COMBINATORIAL_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.DottedPuncture.direction",
+          "classification": "CUT_OPEN_COMBINATORIAL_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.DottedPuncture.cutPosition",
+          "classification": "CUT_OPEN_COMBINATORIAL_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.DottedPuncture.dotted_role",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.DottedPuncture.two_handle_role",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.DottedPuncture.input_on_two_handle",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.DottedPuncture.output_on_two_handle",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.DottedPuncture.orientation_preserved",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/DottedTopologyAxioms.lean::TwistedYetter.Semantics.Independent.standardDottedProjectorEventCompleteness",
+      "name": "TwistedYetter.Semantics.Independent.standardDottedProjectorEventCompleteness",
+      "local_name": "standardDottedProjectorEventCompleteness",
+      "kind": "axiom",
+      "classification": "CUT_OPEN_COMPLETENESS_AXIOM_HUMAN_REVIEW_REQUIRED",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/DottedTopologyAxioms.lean",
+        "start_line": 29,
+        "end_line": 36,
+        "declaration_sha256": "51d6effa0ef2b39f3c148b134c1591f37a1442737bbc097c945fc0408acec51b",
+        "file_sha256": "fd379e70c10c6ed8b804ae4a8a7fb684716d6e55acd9cb8754a1d8d4981bccac"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean::TwistedYetter.Semantics.Independent.CleanBandEndpointNormalForm",
+      "name": "TwistedYetter.Semantics.Independent.CleanBandEndpointNormalForm",
+      "local_name": "CleanBandEndpointNormalForm",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean",
+        "start_line": 147,
+        "end_line": 161,
+        "declaration_sha256": "ed85e60a6abf95443a09768df6759acc43b7158917bf8d6c4d58bdb89d5a32ef",
+        "file_sha256": "f22187c3de302d47298caed4bdbe67e5988828a7e919065b7af5fb4a63c35bcb"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.CleanBandEndpointNormalForm.movingLabel",
+          "classification": "GRAPHICAL_NORMAL_FORM_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CleanBandEndpointNormalForm.stationaryLabel",
+          "classification": "GRAPHICAL_NORMAL_FORM_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CleanBandEndpointNormalForm.context",
+          "classification": "GRAPHICAL_NORMAL_FORM_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean::TwistedYetter.Semantics.Independent.ClosedOrientedSmoothFourManifold",
+      "name": "TwistedYetter.Semantics.Independent.ClosedOrientedSmoothFourManifold",
+      "local_name": "ClosedOrientedSmoothFourManifold",
+      "kind": "axiom",
+      "classification": "FOUNDATIONAL_MANIFOLD_VOCABULARY",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean",
+        "start_line": 332,
+        "end_line": 334,
+        "declaration_sha256": "87335bca180941bfff9a3e425fea4b095d2a1d71cd766aae872591d27e19064a",
+        "file_sha256": "f22187c3de302d47298caed4bdbe67e5988828a7e919065b7af5fb4a63c35bcb"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean::TwistedYetter.Semantics.Independent.FramedRibbonIsotopyWitness",
+      "name": "TwistedYetter.Semantics.Independent.FramedRibbonIsotopyWitness",
+      "local_name": "FramedRibbonIsotopyWitness",
+      "kind": "axiom",
+      "classification": "LITERATURE_GRAPHICAL_VOCABULARY",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean",
+        "start_line": 49,
+        "end_line": 54,
+        "declaration_sha256": "31564749707d7759835531b017249b12161582a3e9375c077b65245f4280666a",
+        "file_sha256": "f22187c3de302d47298caed4bdbe67e5988828a7e919065b7af5fb4a63c35bcb"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean::TwistedYetter.Semantics.Independent.OrientedDiffeomorphism",
+      "name": "TwistedYetter.Semantics.Independent.OrientedDiffeomorphism",
+      "local_name": "OrientedDiffeomorphism",
+      "kind": "axiom",
+      "classification": "FOUNDATIONAL_MANIFOLD_VOCABULARY",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean",
+        "start_line": 338,
+        "end_line": 343,
+        "declaration_sha256": "653726679aadfab6c896e88edd78a31f2a381b9dab3cbf133bab67f35cd4c707",
+        "file_sha256": "f22187c3de302d47298caed4bdbe67e5988828a7e919065b7af5fb4a63c35bcb"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean::TwistedYetter.Semantics.Independent.PresentsClosedFourManifold",
+      "name": "TwistedYetter.Semantics.Independent.PresentsClosedFourManifold",
+      "local_name": "PresentsClosedFourManifold",
+      "kind": "axiom",
+      "classification": "EXTERNAL_TOPOLOGY_RELATION_SEMANTICS_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean",
+        "start_line": 380,
+        "end_line": 394,
+        "declaration_sha256": "c31feca1068ed6ea98b9958dd40c16cbc644cb0fae6df83cdae9bd6961647658",
+        "file_sha256": "f22187c3de302d47298caed4bdbe67e5988828a7e919065b7af5fb4a63c35bcb"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean::TwistedYetter.Semantics.Independent.RepresentsPoincareDualClass",
+      "name": "TwistedYetter.Semantics.Independent.RepresentsPoincareDualClass",
+      "local_name": "RepresentsPoincareDualClass",
+      "kind": "axiom",
+      "classification": "EXTERNAL_TOPOLOGY_RELATION_SEMANTICS_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean",
+        "start_line": 395,
+        "end_line": 400,
+        "declaration_sha256": "b645b3c3b45cf1a3c77168a22f5abca3c77d7957d45a44d41cd0b48f1a5b4335",
+        "file_sha256": "f22187c3de302d47298caed4bdbe67e5988828a7e919065b7af5fb4a63c35bcb"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean::TwistedYetter.Semantics.Independent.SpecialKirbyRepresentativeOf",
+      "name": "TwistedYetter.Semantics.Independent.SpecialKirbyRepresentativeOf",
+      "local_name": "SpecialKirbyRepresentativeOf",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean",
+        "start_line": 401,
+        "end_line": 407,
+        "declaration_sha256": "8653c2536ff642d700930d01c075f1938b1abff9d8c2cbccb7f41ac6d027ad06",
+        "file_sha256": "f22187c3de302d47298caed4bdbe67e5988828a7e919065b7af5fb4a63c35bcb"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.SpecialKirbyRepresentativeOf.diagram",
+          "classification": "TOPOLOGY_REPRESENTATIVE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.SpecialKirbyRepresentativeOf.cut",
+          "classification": "TOPOLOGY_REPRESENTATIVE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.SpecialKirbyRepresentativeOf.presents",
+          "classification": "EXTERNAL_TOPOLOGY_REALIZATION_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.SpecialKirbyRepresentativeOf.thamAlpha",
+          "classification": "TOPOLOGY_REPRESENTATIVE_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean::TwistedYetter.Semantics.Independent.cleanAttach_hasStandardGraphicalInterpretation",
+      "name": "TwistedYetter.Semantics.Independent.cleanAttach_hasStandardGraphicalInterpretation",
+      "local_name": "cleanAttach_hasStandardGraphicalInterpretation",
+      "kind": "axiom",
+      "classification": "HIGH_RISK_TOPOLOGY_TO_GRAPHICAL_BRIDGE",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean",
+        "start_line": 224,
+        "end_line": 243,
+        "declaration_sha256": "321795cc45dac5fbbe612be9935abbb3c09a91e985093729fde7e27dd8190672",
+        "file_sha256": "f22187c3de302d47298caed4bdbe67e5988828a7e919065b7af5fb4a63c35bcb"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean::TwistedYetter.Semantics.Independent.cleanDetach_hasStandardGraphicalInterpretation",
+      "name": "TwistedYetter.Semantics.Independent.cleanDetach_hasStandardGraphicalInterpretation",
+      "local_name": "cleanDetach_hasStandardGraphicalInterpretation",
+      "kind": "axiom",
+      "classification": "HIGH_RISK_TOPOLOGY_TO_GRAPHICAL_BRIDGE",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean",
+        "start_line": 244,
+        "end_line": 268,
+        "declaration_sha256": "c5e29e176c554b5b87efe7233069410144effa30babd87e1aae3bbdf4d5d5954",
+        "file_sha256": "f22187c3de302d47298caed4bdbe67e5988828a7e919065b7af5fb4a63c35bcb"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean::TwistedYetter.Semantics.Independent.eno_globalDimension_ne_zero",
+      "name": "TwistedYetter.Semantics.Independent.eno_globalDimension_ne_zero",
+      "local_name": "eno_globalDimension_ne_zero",
+      "kind": "axiom",
+      "classification": "LITERATURE_CATEGORY_AXIOM_EXACT_REFERENCE_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean",
+        "start_line": 133,
+        "end_line": 146,
+        "declaration_sha256": "1e4569abc9229db3a221876d03a41ca0e2621efe7a1a989b3858a05857068280",
+        "file_sha256": "f22187c3de302d47298caed4bdbe67e5988828a7e919065b7af5fb4a63c35bcb"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean::TwistedYetter.Semantics.Independent.finiteCouponTransport_hasTypedGraphicalDerivation",
+      "name": "TwistedYetter.Semantics.Independent.finiteCouponTransport_hasTypedGraphicalDerivation",
+      "local_name": "finiteCouponTransport_hasTypedGraphicalDerivation",
+      "kind": "axiom",
+      "classification": "HIGH_RISK_TOPOLOGY_TO_GRAPHICAL_BRIDGE",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean",
+        "start_line": 269,
+        "end_line": 298,
+        "declaration_sha256": "3874a693519a238a13c54cd2959f1c59c2f5d2df8a6314029b1321e0a07c4ed8",
+        "file_sha256": "f22187c3de302d47298caed4bdbe67e5988828a7e919065b7af5fb4a63c35bcb"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean::TwistedYetter.Semantics.Independent.framedIsotopy_hasTypedGraphicalInterpretation",
+      "name": "TwistedYetter.Semantics.Independent.framedIsotopy_hasTypedGraphicalInterpretation",
+      "local_name": "framedIsotopy_hasTypedGraphicalInterpretation",
+      "kind": "axiom",
+      "classification": "HIGH_RISK_TOPOLOGY_TO_GRAPHICAL_BRIDGE",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean",
+        "start_line": 299,
+        "end_line": 331,
+        "declaration_sha256": "ad9d0f981df0a777e77f418e33f1ad3b3ea9cb4c3aa689b46c79fe939613d42f",
+        "file_sha256": "f22187c3de302d47298caed4bdbe67e5988828a7e919065b7af5fb4a63c35bcb"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean::TwistedYetter.Semantics.Independent.markedKirbyCerf_complete",
+      "name": "TwistedYetter.Semantics.Independent.markedKirbyCerf_complete",
+      "local_name": "markedKirbyCerf_complete",
+      "kind": "axiom",
+      "classification": "HIGH_RISK_MARKED_KIRBY_CERF_COMPLETENESS",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean",
+        "start_line": 446,
+        "end_line": 461,
+        "declaration_sha256": "c0e41b38baa1ad04967e6b91277fa3c9a89d3bc5e15dbb44d02c89ede6582519",
+        "file_sha256": "f22187c3de302d47298caed4bdbe67e5988828a7e919065b7af5fb4a63c35bcb"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean::TwistedYetter.Semantics.Independent.shum_framedRibbonCoherence",
+      "name": "TwistedYetter.Semantics.Independent.shum_framedRibbonCoherence",
+      "local_name": "shum_framedRibbonCoherence",
+      "kind": "axiom",
+      "classification": "LITERATURE_CATEGORY_AXIOM_EXACT_REFERENCE_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean",
+        "start_line": 67,
+        "end_line": 92,
+        "declaration_sha256": "ec656d9ba2c2e9088dd220984c20d3e09b571fd8a2a170782d797861b72525f4",
+        "file_sha256": "f22187c3de302d47298caed4bdbe67e5988828a7e919065b7af5fb4a63c35bcb"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean::TwistedYetter.Semantics.Independent.specialKirbyRepresentative_exists",
+      "name": "TwistedYetter.Semantics.Independent.specialKirbyRepresentative_exists",
+      "local_name": "specialKirbyRepresentative_exists",
+      "kind": "axiom",
+      "classification": "EXTERNAL_PRESENTATION_EXISTENCE_THEOREM",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean",
+        "start_line": 432,
+        "end_line": 445,
+        "declaration_sha256": "f597aaa13d0ad968c840d73ad70fcca00db2175d6b786218b378faa71d3c168e",
+        "file_sha256": "f22187c3de302d47298caed4bdbe67e5988828a7e919065b7af5fb4a63c35bcb"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean::TwistedYetter.Semantics.Independent.standardDottedCollarIncidenceNormalForm",
+      "name": "TwistedYetter.Semantics.Independent.standardDottedCollarIncidenceNormalForm",
+      "local_name": "standardDottedCollarIncidenceNormalForm",
+      "kind": "axiom",
+      "classification": "HIGH_RISK_TOPOLOGY_TO_GRAPHICAL_BRIDGE",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean",
+        "start_line": 93,
+        "end_line": 121,
+        "declaration_sha256": "6f6daa2e91c5950ff9311aa5abc7b4a52172ec4f4b6c52a2b1ed4e57612a22e4",
+        "file_sha256": "f22187c3de302d47298caed4bdbe67e5988828a7e919065b7af5fb4a63c35bcb"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean::TwistedYetter.Semantics.Independent.underlyingHomeomorphism",
+      "name": "TwistedYetter.Semantics.Independent.underlyingHomeomorphism",
+      "local_name": "underlyingHomeomorphism",
+      "kind": "axiom",
+      "classification": "FOUNDATIONAL_MANIFOLD_VOCABULARY",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean",
+        "start_line": 344,
+        "end_line": 349,
+        "declaration_sha256": "389a95fb08e5f966b15bdfd55d6d684cf0ee5902a7570e63bee1fa607d370373",
+        "file_sha256": "f22187c3de302d47298caed4bdbe67e5988828a7e919065b7af5fb4a63c35bcb"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean::TwistedYetter.Semantics.Independent.underlyingTopologicalSpace",
+      "name": "TwistedYetter.Semantics.Independent.underlyingTopologicalSpace",
+      "local_name": "underlyingTopologicalSpace",
+      "kind": "axiom",
+      "classification": "FOUNDATIONAL_MANIFOLD_VOCABULARY",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean",
+        "start_line": 335,
+        "end_line": 337,
+        "declaration_sha256": "4cc7eda8f1333b06f401ed196097a29754a74ed9e567a336417cfcd1e500ce2e",
+        "file_sha256": "f22187c3de302d47298caed4bdbe67e5988828a7e919065b7af5fb4a63c35bcb"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Evaluator.lean::TwistedYetter.Semantics.Independent.FiniteMorphismTrace",
+      "name": "TwistedYetter.Semantics.Independent.FiniteMorphismTrace",
+      "local_name": "FiniteMorphismTrace",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Evaluator.lean",
+        "start_line": 718,
+        "end_line": 724,
+        "declaration_sha256": "f627e61abf31f9d8a32311d852db7937baa8b7bb19b865f1f66ba59736095389",
+        "file_sha256": "d729d8d2ed57d7e6ae1497c725773135ead1862fa00b2ddc366a106a87a738f4"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.FiniteMorphismTrace.object",
+          "classification": "GRAPHICAL_TRACE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.FiniteMorphismTrace.edge",
+          "classification": "GRAPHICAL_TRACE_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Evaluator.lean::TwistedYetter.Semantics.Independent.canonicalRoleAwareGraphCompiler",
+      "name": "TwistedYetter.Semantics.Independent.canonicalRoleAwareGraphCompiler",
+      "local_name": "canonicalRoleAwareGraphCompiler",
+      "kind": "def",
+      "classification": "CENTRAL_EVALUATOR_DEFINITION_HUMAN_REVIEW_REQUIRED",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Evaluator.lean",
+        "start_line": 1092,
+        "end_line": 1115,
+        "declaration_sha256": "c5d8e6411053b651f4077170012846f1e858c5a477ed3f27b090f81cdda60ff2",
+        "file_sha256": "d729d8d2ed57d7e6ae1497c725773135ead1862fa00b2ddc366a106a87a738f4"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Evaluator.lean::TwistedYetter.Semantics.Independent.characterWeight",
+      "name": "TwistedYetter.Semantics.Independent.characterWeight",
+      "local_name": "characterWeight",
+      "kind": "def",
+      "classification": "CORE_DEFINITION_SEMANTIC_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Evaluator.lean",
+        "start_line": 40,
+        "end_line": 58,
+        "declaration_sha256": "3f2a75621a7784a67e1b5cf3598a03b546496db9d708abdfaad54cbeca18f896",
+        "file_sha256": "d729d8d2ed57d7e6ae1497c725773135ead1862fa00b2ddc366a106a87a738f4"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Evaluator.lean::TwistedYetter.Semantics.Independent.evaluateCoefficients",
+      "name": "TwistedYetter.Semantics.Independent.evaluateCoefficients",
+      "local_name": "evaluateCoefficients",
+      "kind": "def",
+      "classification": "CENTRAL_EVALUATOR_DEFINITION_HUMAN_REVIEW_REQUIRED",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Evaluator.lean",
+        "start_line": 1136,
+        "end_line": 1153,
+        "declaration_sha256": "52952c5f9c3a548c7a463e41d245d572440d3bfda8d91dfa3c3383706e487fef",
+        "file_sha256": "d729d8d2ed57d7e6ae1497c725773135ead1862fa00b2ddc366a106a87a738f4"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Evaluator.lean::TwistedYetter.Semantics.Independent.ordinaryKirbyWeight",
+      "name": "TwistedYetter.Semantics.Independent.ordinaryKirbyWeight",
+      "local_name": "ordinaryKirbyWeight",
+      "kind": "def",
+      "classification": "CORE_DEFINITION_SEMANTIC_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Evaluator.lean",
+        "start_line": 33,
+        "end_line": 39,
+        "declaration_sha256": "f08b1ebbe163a2dacfacb920fc15d7313c007c1a1d9dfd67937b45aea7cc6fb3",
+        "file_sha256": "d729d8d2ed57d7e6ae1497c725773135ead1862fa00b2ddc366a106a87a738f4"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Evaluator.lean::TwistedYetter.Semantics.Independent.rawCoefficientSum",
+      "name": "TwistedYetter.Semantics.Independent.rawCoefficientSum",
+      "local_name": "rawCoefficientSum",
+      "kind": "def",
+      "classification": "CORE_DEFINITION_SEMANTIC_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Evaluator.lean",
+        "start_line": 1122,
+        "end_line": 1135,
+        "declaration_sha256": "276226a6d87e52f319501cdc09d600e9b078bb45024b11e278ea09317d2c7e67",
+        "file_sha256": "d729d8d2ed57d7e6ae1497c725773135ead1862fa00b2ddc366a106a87a738f4"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Evaluator.lean::TwistedYetter.Semantics.Independent.thamDefinition511Normalization",
+      "name": "TwistedYetter.Semantics.Independent.thamDefinition511Normalization",
+      "local_name": "thamDefinition511Normalization",
+      "kind": "def",
+      "classification": "CENTRAL_NORMALIZATION_DEFINITION_HUMAN_REVIEW_REQUIRED",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Evaluator.lean",
+        "start_line": 1116,
+        "end_line": 1121,
+        "declaration_sha256": "a314f877215e10592fc080933d1ede5086c04e9f6a4443d14ff560b0fd0e3ebc",
+        "file_sha256": "d729d8d2ed57d7e6ae1497c725773135ead1862fa00b2ddc366a106a87a738f4"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Graphical.lean::TwistedYetter.Semantics.Independent.OrientedSimple",
+      "name": "TwistedYetter.Semantics.Independent.OrientedSimple",
+      "local_name": "OrientedSimple",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Graphical.lean",
+        "start_line": 40,
+        "end_line": 45,
+        "declaration_sha256": "f9486b9684324f58875f581025e54b64e0042194313cc1533e12704e68b3acd0",
+        "file_sha256": "32e9fd46597df6ce0f72c3612d7aaa626fc2b6b7a6df44816ebc10ffe9fe6da1"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.OrientedSimple.label",
+          "classification": "GRAPHICAL_LABEL_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.OrientedSimple.direction",
+          "classification": "GRAPHICAL_LABEL_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Graphical.lean::TwistedYetter.Semantics.Independent.induced",
+      "name": "TwistedYetter.Semantics.Independent.induced",
+      "local_name": "induced",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Graphical.lean",
+        "start_line": 981,
+        "end_line": 984,
+        "declaration_sha256": "b2a685082b59d04d5247ca6727b749a354c7caf9e6a1b9d7d304ad85438d05ec",
+        "file_sha256": "32e9fd46597df6ce0f72c3612d7aaa626fc2b6b7a6df44816ebc10ffe9fe6da1"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Homology.lean::TwistedYetter.Semantics.Independent.HomologicallyMarkedDiagram",
+      "name": "TwistedYetter.Semantics.Independent.HomologicallyMarkedDiagram",
+      "local_name": "HomologicallyMarkedDiagram",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Homology.lean",
+        "start_line": 217,
+        "end_line": 226,
+        "declaration_sha256": "dd98655a3d061b043ff4bb6f2bd0cf4d856adb912699be9c70b27564079c29fd",
+        "file_sha256": "f97de68ef268abff0e375033926ac9f275b063dc6c20c385c3bfaddb9d28f446"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.HomologicallyMarkedDiagram.diagram",
+          "classification": "MARKED_DIAGRAM_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.HomologicallyMarkedDiagram.cut",
+          "classification": "MARKED_DIAGRAM_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.HomologicallyMarkedDiagram.thamAlpha",
+          "classification": "MARKED_DIAGRAM_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Homology.lean::TwistedYetter.Semantics.Independent.ThamMarkingClass",
+      "name": "TwistedYetter.Semantics.Independent.ThamMarkingClass",
+      "local_name": "ThamMarkingClass",
+      "kind": "abbrev",
+      "classification": "CORE_DEFINITION_SEMANTIC_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Homology.lean",
+        "start_line": 205,
+        "end_line": 209,
+        "declaration_sha256": "7c8a501b293f41e85a12bd9490b70c292cd94c28c3b91779af8ff7bf76dcd60d",
+        "file_sha256": "f97de68ef268abff0e375033926ac9f275b063dc6c20c385c3bfaddb9d28f446"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Invariant.lean::TwistedYetter.Semantics.Independent.LocalMoveInvarianceStatement",
+      "name": "TwistedYetter.Semantics.Independent.LocalMoveInvarianceStatement",
+      "local_name": "LocalMoveInvarianceStatement",
+      "kind": "def",
+      "classification": "CORE_DEFINITION_SEMANTIC_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Invariant.lean",
+        "start_line": 23,
+        "end_line": 34,
+        "declaration_sha256": "006470cea77bd42e460470602ee4add8f05279f62719d13e0ee070f55ea8da3b",
+        "file_sha256": "b715d2c91d41c1b6765a4c4e1ab2ee82bc567e14c4b30dfbe9099d4f7ed2c602"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Invariant.lean::TwistedYetter.Semantics.Independent.evaluateMarking",
+      "name": "TwistedYetter.Semantics.Independent.evaluateMarking",
+      "local_name": "evaluateMarking",
+      "kind": "def",
+      "classification": "CORE_DEFINITION_SEMANTIC_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Invariant.lean",
+        "start_line": 35,
+        "end_line": 45,
+        "declaration_sha256": "b72d0355f9d7e389d9eb0c3848a85f8532f67734384811d056677f28f2332ce5",
+        "file_sha256": "b715d2c91d41c1b6765a4c4e1ab2ee82bc567e14c4b30dfbe9099d4f7ed2c602"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/KirbyDiagram.lean::TwistedYetter.Semantics.Independent.CombinatorialLinkTrace",
+      "name": "TwistedYetter.Semantics.Independent.CombinatorialLinkTrace",
+      "local_name": "CombinatorialLinkTrace",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/KirbyDiagram.lean",
+        "start_line": 233,
+        "end_line": 260,
+        "declaration_sha256": "83593be6d292b1aa638775920f4fcb7687ab28a1584ef1a74a4862f4b63e971b",
+        "file_sha256": "7c3497eadbca1d218b2ccc27f4cfcd2f86d5d23806d3a47a47e983d563047cf7"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.CombinatorialLinkTrace.componentCount",
+          "classification": "KIRBY_TRACE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CombinatorialLinkTrace.strandCount",
+          "classification": "KIRBY_TRACE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CombinatorialLinkTrace.eventCount",
+          "classification": "KIRBY_TRACE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CombinatorialLinkTrace.components",
+          "classification": "KIRBY_TRACE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CombinatorialLinkTrace.strands",
+          "classification": "KIRBY_TRACE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CombinatorialLinkTrace.events",
+          "classification": "KIRBY_TRACE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CombinatorialLinkTrace.activeOrder",
+          "classification": "KIRBY_TRACE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CombinatorialLinkTrace.initialBoundaryEmpty",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CombinatorialLinkTrace.finalBoundaryEmpty",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CombinatorialLinkTrace.transitionValid",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CombinatorialLinkTrace.activeWordsNoDuplicates",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CombinatorialLinkTrace.eventPortsAreDistinct",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CombinatorialLinkTrace.eventContinuationsAreWellFormed",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CombinatorialLinkTrace.everyStrandHasUniqueInputAndOutput",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CombinatorialLinkTrace.everyComponentIsConnected",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CombinatorialLinkTrace.framingEventsMatchIntegerFraming",
+          "classification": "KERNEL_CHECKED_COMBINATORIAL_CERTIFICATE"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/KirbyDiagram.lean::TwistedYetter.Semantics.Independent.Component",
+      "name": "TwistedYetter.Semantics.Independent.Component",
+      "local_name": "Component",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/KirbyDiagram.lean",
+        "start_line": 39,
+        "end_line": 44,
+        "declaration_sha256": "f476386a708c19bc4ada9d3663c1585e6ccc4ef72cdf629dfa8dcbd9019bea9c",
+        "file_sha256": "7c3497eadbca1d218b2ccc27f4cfcd2f86d5d23806d3a47a47e983d563047cf7"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.Component.role",
+          "classification": "KIRBY_COMPONENT_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.Component.orientation",
+          "classification": "KIRBY_COMPONENT_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.Component.integerFraming",
+          "classification": "KIRBY_COMPONENT_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/KirbyDiagram.lean::TwistedYetter.Semantics.Independent.SpecialHandleData",
+      "name": "TwistedYetter.Semantics.Independent.SpecialHandleData",
+      "local_name": "SpecialHandleData",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/KirbyDiagram.lean",
+        "start_line": 289,
+        "end_line": 305,
+        "declaration_sha256": "db7d531bb1efe9eeeded5d6cc902449a1e4b4d579d4ddc9d2ee18585e269cc97",
+        "file_sha256": "7c3497eadbca1d218b2ccc27f4cfcd2f86d5d23806d3a47a47e983d563047cf7"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.SpecialHandleData.hOne",
+          "classification": "KIRBY_HANDLE_COUNT_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.SpecialHandleData.hTwo",
+          "classification": "KIRBY_HANDLE_COUNT_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.SpecialHandleData.hThree",
+          "classification": "KIRBY_HANDLE_COUNT_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.SpecialHandleData.oneHandleIndex",
+          "classification": "SEMANTIC_INDEXING_DATA_NOT_A_PROOF"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.SpecialHandleData.twoHandleIndex",
+          "classification": "SEMANTIC_INDEXING_DATA_NOT_A_PROOF"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.SpecialHandleData.boundaryTwo",
+          "classification": "SEMANTIC_CHAIN_DATA_NOT_A_PROOF"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/KirbyDiagram.lean::TwistedYetter.Semantics.Independent.SpecialKirbyDiagram",
+      "name": "TwistedYetter.Semantics.Independent.SpecialKirbyDiagram",
+      "local_name": "SpecialKirbyDiagram",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/KirbyDiagram.lean",
+        "start_line": 306,
+        "end_line": 312,
+        "declaration_sha256": "b817dea42f07f4e01919d7146bc4093ac12a2c08c3e1b1308d8967a1cf229ef1",
+        "file_sha256": "7c3497eadbca1d218b2ccc27f4cfcd2f86d5d23806d3a47a47e983d563047cf7"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.SpecialKirbyDiagram.trace",
+          "classification": "KIRBY_TRACE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.SpecialKirbyDiagram.handles",
+          "classification": "KIRBY_HANDLE_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/KirbyDiagram.lean::TwistedYetter.Semantics.Independent.Strand",
+      "name": "TwistedYetter.Semantics.Independent.Strand",
+      "local_name": "Strand",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/KirbyDiagram.lean",
+        "start_line": 45,
+        "end_line": 56,
+        "declaration_sha256": "5054c8b5603a1752ac229dcbd7b1d54d548668a517e2af1691d4e2614f930482",
+        "file_sha256": "7c3497eadbca1d218b2ccc27f4cfcd2f86d5d23806d3a47a47e983d563047cf7"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.Strand.component",
+          "classification": "KIRBY_STRAND_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.Strand.orientation",
+          "classification": "KIRBY_STRAND_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/LocalReplacementSyntax.lean::TwistedYetter.Semantics.Independent.SerializedPuncture",
+      "name": "TwistedYetter.Semantics.Independent.SerializedPuncture",
+      "local_name": "SerializedPuncture",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/LocalReplacementSyntax.lean",
+        "start_line": 18,
+        "end_line": 26,
+        "declaration_sha256": "c91e374036d4392ecb63fd21ddade357a3859e5abc825698d6f6000749946084",
+        "file_sha256": "360185699523731fdea44d7520f2660866758a3843dcea31cd76d187c510116f"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.SerializedPuncture.dottedComponent",
+          "classification": "SERIALIZATION_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.SerializedPuncture.twoHandleComponent",
+          "classification": "SERIALIZATION_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.SerializedPuncture.inputStrand",
+          "classification": "SERIALIZATION_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.SerializedPuncture.outputStrand",
+          "classification": "SERIALIZATION_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.SerializedPuncture.direction",
+          "classification": "SERIALIZATION_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.SerializedPuncture.cutPosition",
+          "classification": "SERIALIZATION_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/LocalReplacementSyntax.lean::TwistedYetter.Semantics.Independent.SerializedStrand",
+      "name": "TwistedYetter.Semantics.Independent.SerializedStrand",
+      "local_name": "SerializedStrand",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/LocalReplacementSyntax.lean",
+        "start_line": 13,
+        "end_line": 17,
+        "declaration_sha256": "2eaf1ada3746d679c75304e821e1dfddf8fb662bbd3363146c0c706d1b882572",
+        "file_sha256": "360185699523731fdea44d7520f2660866758a3843dcea31cd76d187c510116f"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.SerializedStrand.component",
+          "classification": "SERIALIZATION_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.SerializedStrand.orientation",
+          "classification": "SERIALIZATION_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean::TwistedYetter.Semantics.Independent.AddedTwoHandleCoordinates",
+      "name": "TwistedYetter.Semantics.Independent.AddedTwoHandleCoordinates",
+      "local_name": "AddedTwoHandleCoordinates",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean",
+        "start_line": 224,
+        "end_line": 238,
+        "declaration_sha256": "42ea8b3b4b4bf3683b085ef522b7f9ae560489ad1a99288faa579ad8d9f799a1",
+        "file_sha256": "a11356f6c79339d4af6006cd2678619f07a345c6b59bf45c95702c6955475dc7"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.AddedTwoHandleCoordinates.indexEquiv",
+          "classification": "HOMOLOGY_COORDINATE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.AddedTwoHandleCoordinates.oldCoefficient",
+          "classification": "KERNEL_CHECKED_HOMOLOGY_TRANSPORT_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.AddedTwoHandleCoordinates.newCoefficientZero",
+          "classification": "KERNEL_CHECKED_HOMOLOGY_TRANSPORT_CERTIFICATE"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean::TwistedYetter.Semantics.Independent.CancellationScript",
+      "name": "TwistedYetter.Semantics.Independent.CancellationScript",
+      "local_name": "CancellationScript",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean",
+        "start_line": 155,
+        "end_line": 171,
+        "declaration_sha256": "edec3940389a628af69935551f1d58bbf927ec3b8daa09364f9a762db9059839",
+        "file_sha256": "a11356f6c79339d4af6006cd2678619f07a345c6b59bf45c95702c6955475dc7"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.CancellationScript.kind",
+          "classification": "KIRBY_MOVE_TAG_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CancellationScript.kind_is_cancellation",
+          "classification": "REDUNDANT_FINITE_TAG_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CancellationScript.handleCountChangeIsStandard",
+          "classification": "KERNEL_CHECKED_HANDLE_COUNT_CERTIFICATE"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean::TwistedYetter.Semantics.Independent.CleanBandSlide",
+      "name": "TwistedYetter.Semantics.Independent.CleanBandSlide",
+      "local_name": "CleanBandSlide",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean",
+        "start_line": 97,
+        "end_line": 110,
+        "declaration_sha256": "4f095291e69b46c467366904dbc52b3d0a1100781efe66695b30bdef3436a686",
+        "file_sha256": "a11356f6c79339d4af6006cd2678619f07a345c6b59bf45c95702c6955475dc7"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.CleanBandSlide.script",
+          "classification": "KIRBY_BAND_SLIDE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CleanBandSlide.decomposition",
+          "classification": "KIRBY_BAND_SLIDE_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean::TwistedYetter.Semantics.Independent.CleanBandSlideDecomposition",
+      "name": "TwistedYetter.Semantics.Independent.CleanBandSlideDecomposition",
+      "local_name": "CleanBandSlideDecomposition",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean",
+        "start_line": 81,
+        "end_line": 96,
+        "declaration_sha256": "a093bb73cdfeb31a34d7fa65ee4d5e7c6dc0377d5dc4908087594821d95f9720",
+        "file_sha256": "a11356f6c79339d4af6006cd2678619f07a345c6b59bf45c95702c6955475dc7"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.CleanBandSlideDecomposition.sourceCut",
+          "classification": "KIRBY_BAND_SLIDE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CleanBandSlideDecomposition.targetCut",
+          "classification": "KIRBY_BAND_SLIDE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CleanBandSlideDecomposition.transport",
+          "classification": "KIRBY_BAND_SLIDE_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean::TwistedYetter.Semantics.Independent.CleanBandSlideRealizesStandardKirbySlide",
+      "name": "TwistedYetter.Semantics.Independent.CleanBandSlideRealizesStandardKirbySlide",
+      "local_name": "CleanBandSlideRealizesStandardKirbySlide",
+      "kind": "axiom",
+      "classification": "EXTERNAL_KIRBY_TOPOLOGY_PREDICATE",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean",
+        "start_line": 111,
+        "end_line": 114,
+        "declaration_sha256": "b23a36c11aec43fc932c84fdaf9c6bb3cccab3256c9ed5cdc04e010b5b3aaf3c",
+        "file_sha256": "a11356f6c79339d4af6006cd2678619f07a345c6b59bf45c95702c6955475dc7"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean::TwistedYetter.Semantics.Independent.CleanBandSlideScript",
+      "name": "TwistedYetter.Semantics.Independent.CleanBandSlideScript",
+      "local_name": "CleanBandSlideScript",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean",
+        "start_line": 64,
+        "end_line": 80,
+        "declaration_sha256": "b8a23fda8abed6ea8e30bcc4f2aeacf51297d45b2e202ceac3c1ec1df3fb2cd8",
+        "file_sha256": "a11356f6c79339d4af6006cd2678619f07a345c6b59bf45c95702c6955475dc7"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.CleanBandSlideScript.movingSource",
+          "classification": "KIRBY_BAND_SLIDE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CleanBandSlideScript.stationarySource",
+          "classification": "KIRBY_BAND_SLIDE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CleanBandSlideScript.movingTarget",
+          "classification": "KIRBY_BAND_SLIDE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CleanBandSlideScript.stationaryTarget",
+          "classification": "KIRBY_BAND_SLIDE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.CleanBandSlideScript.orientation",
+          "classification": "KIRBY_BAND_SLIDE_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean::TwistedYetter.Semantics.Independent.FiniteCouponTransport",
+      "name": "TwistedYetter.Semantics.Independent.FiniteCouponTransport",
+      "local_name": "FiniteCouponTransport",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean",
+        "start_line": 49,
+        "end_line": 59,
+        "declaration_sha256": "428a9f9905aa542a44313221ec6131d343dd97f74528c033d4bf4104722c67b9",
+        "file_sha256": "a11356f6c79339d4af6006cd2678619f07a345c6b59bf45c95702c6955475dc7"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.FiniteCouponTransport.events",
+          "classification": "KIRBY_LOCAL_TRANSPORT_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean::TwistedYetter.Semantics.Independent.FiniteCouponTransportRealizesCompletePath",
+      "name": "TwistedYetter.Semantics.Independent.FiniteCouponTransportRealizesCompletePath",
+      "local_name": "FiniteCouponTransportRealizesCompletePath",
+      "kind": "axiom",
+      "classification": "EXTERNAL_KIRBY_TOPOLOGY_PREDICATE",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean",
+        "start_line": 60,
+        "end_line": 63,
+        "declaration_sha256": "51c377295ea235739ac3f1a688a966621e49680cf1a140bc67c73155b1d6d52d",
+        "file_sha256": "a11356f6c79339d4af6006cd2678619f07a345c6b59bf45c95702c6955475dc7"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean::TwistedYetter.Semantics.Independent.FramedIsotopyScript",
+      "name": "TwistedYetter.Semantics.Independent.FramedIsotopyScript",
+      "local_name": "FramedIsotopyScript",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean",
+        "start_line": 115,
+        "end_line": 128,
+        "declaration_sha256": "a12c9e9f07c9edb9001868355992bd65b486bbd4ddd72d10fe3f5104dfa954d6",
+        "file_sha256": "a11356f6c79339d4af6006cd2678619f07a345c6b59bf45c95702c6955475dc7"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.FramedIsotopyScript.componentReindexing",
+          "classification": "KIRBY_ISOTOPY_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.FramedIsotopyScript.strandReindexing",
+          "classification": "KIRBY_ISOTOPY_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean::TwistedYetter.Semantics.Independent.FramedIsotopyScriptRealizesFramedIsotopy",
+      "name": "TwistedYetter.Semantics.Independent.FramedIsotopyScriptRealizesFramedIsotopy",
+      "local_name": "FramedIsotopyScriptRealizesFramedIsotopy",
+      "kind": "axiom",
+      "classification": "EXTERNAL_KIRBY_TOPOLOGY_PREDICATE",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean",
+        "start_line": 129,
+        "end_line": 132,
+        "declaration_sha256": "287c22c0b1c975aa96436b638e8b60574100bace9545b79708739a879bd7c7bb",
+        "file_sha256": "a11356f6c79339d4af6006cd2678619f07a345c6b59bf45c95702c6955475dc7"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": true,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean::TwistedYetter.Semantics.Independent.KirbyMovie",
+      "name": "TwistedYetter.Semantics.Independent.KirbyMovie",
+      "local_name": "KirbyMovie",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean",
+        "start_line": 584,
+        "end_line": 598,
+        "declaration_sha256": "da07f32f16ccf1441cd1905b6cb8dd0b4b5f03e35fcc0efcea4e5eb6654b6690",
+        "file_sha256": "a11356f6c79339d4af6006cd2678619f07a345c6b59bf45c95702c6955475dc7"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.KirbyMovie.stageCount",
+          "classification": "KIRBY_MOVIE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.KirbyMovie.stages",
+          "classification": "KIRBY_MOVIE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.KirbyMovie.startsAtSource",
+          "classification": "KERNEL_CHECKED_PATH_ENDPOINT_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.KirbyMovie.endsAtTarget",
+          "classification": "KERNEL_CHECKED_PATH_ENDPOINT_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.KirbyMovie.elementary",
+          "classification": "KERNEL_CHECKED_PATH_STEP_CERTIFICATE"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean::TwistedYetter.Semantics.Independent.MoveHomologyTransport",
+      "name": "TwistedYetter.Semantics.Independent.MoveHomologyTransport",
+      "local_name": "MoveHomologyTransport",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean",
+        "start_line": 213,
+        "end_line": 223,
+        "declaration_sha256": "92c62ddcf5935068930fc88866e5675669d7f4ff82ae4a57a40764dd3ce49604",
+        "file_sha256": "a11356f6c79339d4af6006cd2678619f07a345c6b59bf45c95702c6955475dc7"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.MoveHomologyTransport.tham",
+          "classification": "HOMOLOGY_TRANSPORT_DATA"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean::TwistedYetter.Semantics.Independent.RemovedTwoHandleCoordinates",
+      "name": "TwistedYetter.Semantics.Independent.RemovedTwoHandleCoordinates",
+      "local_name": "RemovedTwoHandleCoordinates",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean",
+        "start_line": 293,
+        "end_line": 314,
+        "declaration_sha256": "8d5ed9db6399b8ce6fb81fdec9a822e7d3371b1df468fa001075a0b36398cce7",
+        "file_sha256": "a11356f6c79339d4af6006cd2678619f07a345c6b59bf45c95702c6955475dc7"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.RemovedTwoHandleCoordinates.indexEquiv",
+          "classification": "HOMOLOGY_COORDINATE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.RemovedTwoHandleCoordinates.safeCoefficients",
+          "classification": "HOMOLOGY_COORDINATE_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.RemovedTwoHandleCoordinates.safeCoefficients_sameClass",
+          "classification": "KERNEL_CHECKED_HOMOLOGY_TRANSPORT_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.RemovedTwoHandleCoordinates.safe_newCoefficientZero",
+          "classification": "KERNEL_CHECKED_HOMOLOGY_TRANSPORT_CERTIFICATE"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.RemovedTwoHandleCoordinates.transportedOldCoefficient",
+          "classification": "KERNEL_CHECKED_HOMOLOGY_TRANSPORT_CERTIFICATE"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean::TwistedYetter.Semantics.Independent.ThamHandleChainTransport",
+      "name": "TwistedYetter.Semantics.Independent.ThamHandleChainTransport",
+      "local_name": "ThamHandleChainTransport",
+      "kind": "structure",
+      "classification": "STRUCTURE_REQUIRES_FIELD_REVIEW",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/Semantics/Independent/Moves.lean",
+        "start_line": 172,
+        "end_line": 183,
+        "declaration_sha256": "b9334d576ef97bab9d5dfbee107a312f3544128edad4179b8160910e4428108f",
+        "file_sha256": "a11356f6c79339d4af6006cd2678619f07a345c6b59bf45c95702c6955475dc7"
+      },
+      "fields": [
+        {
+          "name": "TwistedYetter.Semantics.Independent.ThamHandleChainTransport.degreeThree",
+          "classification": "HOMOLOGY_TRANSPORT_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.ThamHandleChainTransport.degreeTwo",
+          "classification": "HOMOLOGY_TRANSPORT_DATA"
+        },
+        {
+          "name": "TwistedYetter.Semantics.Independent.ThamHandleChainTransport.commutesWithVisibleCoboundary",
+          "classification": "KERNEL_CHECKED_HOMOLOGY_TRANSPORT_CERTIFICATE"
+        }
+      ],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean::TwistedYetter.Kirby.Final.TwistedYetter",
+      "name": "TwistedYetter.Kirby.Final.TwistedYetter",
+      "local_name": "TwistedYetter",
+      "kind": "def",
+      "classification": "PUBLIC_INVARIANT_DEFINITION_HUMAN_REVIEW_REQUIRED",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean",
+        "start_line": 173,
+        "end_line": 188,
+        "declaration_sha256": "09f994f8b14fc25593c077669f6e5bba6c5849d72d286a8a75945c471e3d5f31",
+        "file_sha256": "bc6d89b775b1dfb0598049354a8241916d93b7dacaebc45108176ae11fc517a8"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    },
+    {
+      "id": "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean::TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
+      "name": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
+      "local_name": "TwistedYetter_diffeomorphism_invariant",
+      "kind": "theorem",
+      "classification": "PUBLIC_FINAL_THEOREM_STATEMENT_HUMAN_REVIEW_REQUIRED",
+      "source": {
+        "file": "lean/TwistedYetter/Kirby/Final/TwistedYetter.lean",
+        "start_line": 189,
+        "end_line": 213,
+        "declaration_sha256": "e96845a69489eedbe4579cb132cd8f6537edacc85a178faa726ab451d30ca397",
+        "file_sha256": "bc6d89b775b1dfb0598049354a8241916d93b7dacaebc45108176ae11fc517a8"
+      },
+      "fields": [],
+      "recorded_final_kernel_dependency": false,
+      "human_review": {
+        "decision": "UNREVIEWED",
+        "reviewed_declaration_sha256": null,
+        "reviewer": null,
+        "reviewed_at_utc": null,
+        "evidence": null,
+        "freshness": "UNREVIEWED"
+      }
+    }
+  ]
+}
