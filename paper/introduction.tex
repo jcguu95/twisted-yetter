@@ -68,19 +68,26 @@ Yetter--Crane--Yetter construction does not furnish an exotic-smoothness
 witness for simply connected closed four-manifolds
 (Corollary~\ref{cor:no-simply-connected-exotic-detection}).
 
-The restriction to simply connected manifolds enters through the stable
-classification and realization results used to pass from a marked
-intersection lattice to standard smooth blocks.  Wall's stable theorem and
-the one-stable realization theorem of Ruberman--Strle are stated in the simply
-connected setting \cite{Wall1964,RubermanStrle2022}.  If analogous marked
-stable realization and decomposition theorems were established for a
-non-simply-connected class of four-manifolds, the argument of this paper would
-extend to that class.  In their absence, our result makes no claim that this
-homological refinement fails to detect exotic smooth structures outside the
-simply connected setting.  However, we believe that the non-simply-connected
-case is the natural remaining setting in which this homological refinement may
-still detect exotic smooth structure; we state this expectation precisely in
-Conjecture~\ref{conj:non-simply-connected-detection}.
+Reutter's untwisted obstruction does not require simple connectivity.  If two
+closed oriented smooth four-manifolds are orientation-preservingly
+homeomorphic, an unmarked stable diffeomorphism is enough: the stabilization
+factor is nonzero and can therefore be cancelled \cite{Reutter2023}.  The
+marked theory requires strictly more.  Given a homeomorphism
+$g\colon X\to Y$ and a class $\alpha\in H_2(X;\mathbb Z)$, the cancellation
+argument requires a stable diffeomorphism $F$ satisfying
+\[
+  F_*(\alpha\oplus0)=(g_*\alpha)\oplus0.
+\]
+An arbitrary stable diffeomorphism need not satisfy this condition and may mix
+$\alpha$ with the new hyperbolic summands.
+
+In the simply connected setting, Wall's stable classification and the
+one-stable realization theorem of Ruberman--Strle provide precisely the
+required control \cite{Wall1964,RubermanStrle2022}.  This is where simple
+connectivity enters our argument.  No corresponding marked realization
+theorem is assumed here for general fundamental groups.  Consequently our
+result rules out exotic-smoothness detection in the simply connected case,
+while leaving the non-simply-connected marked case unresolved.
 
 The construction and the no-go calculation share the same concrete starting
 point: a handle formula that makes the homological twist visible.  It is
