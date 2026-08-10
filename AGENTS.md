@@ -52,6 +52,7 @@
 
 ## Git 與變更控制
 
+- 除 `AGENTS.md` 與 `paper/` 外，不得新增 prose-only 純文字檔（如 `.txt`、`.tex`、`.md`、`.org`）。
 - 不得刪除、覆寫、revert 或重排使用者及其他 agent 的既有改動；只能處理本任務
   必要範圍。不得使用 destructive Git commands。
 - Commit 必須對應單一、可理解、可驗證且可重現的研究狀態。Merge 一律使用
