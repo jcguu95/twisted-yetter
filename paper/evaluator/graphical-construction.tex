@@ -1,0 +1,159 @@
+\subsection{From a marked Kirby diagram to colored ribbon graphs}
+\label{subsec:graphical-construction}
+
+\begin{definition}[Twisted categorical input]
+\label{def:twisted-categorical-input}
+A twisted categorical input is a pair $(\cC,\eta)$ consisting of a
+premodular fusion category $\cC$ and a character
+\[
+  \eta\in A_{\cC}
+  =\operatorname{Aut}_{\otimes}(\operatorname{Id}_{\cC}).
+\]
+For every simple $i$, write
+$\eta_i=\chi_i(\eta)\operatorname{id}_i$ as in
+\cref{def:character,prop:characters-universal-grading}.
+\end{definition}
+
+\begin{definition}[Kirby colour]
+\label{def:kirby-colour}
+The Kirby colour of $\cC$ is the formal linear combination
+\[
+  \Omega_{\cC}:=
+    \sum_{i\in\operatorname{Irr}(\cC)}d_i\,i.
+\]
+Colouring a link component by $\Omega_{\cC}$ means expanding it into the
+displayed finite weighted sum of simple-coloured components.
+\end{definition}
+
+\begin{definition}[Tensor-unit projector]
+\label{def:tensor-unit-projector}
+Let $W$ be an object of $\cC$.  Choose a basis
+$u_\mu\colon\mathbf1\to W$ and the trace-dual basis
+$\widehat u_\mu\colon W\to\mathbf1$.  The projector onto the full
+tensor-unit isotypic summand is
+\[
+  P_{\mathbf1,W}:=\sum_\mu u_\mu\widehat u_\mu
+  \in\operatorname{End}_{\cC}(W).
+\]
+It is independent of the choice of dual bases.  In the dotted construction
+we use the normalized operator
+\[
+  \operatorname{Cut}_{\cC}(W)
+  :=\operatorname{Dim}(\cC)P_{\mathbf1,W}.
+\]
+\end{definition}
+
+\begin{definition}[Dotted-circle translation]
+\label{def:dotted-circle-translation}
+Let $\delta$ be a dotted circle in the dotted sublink
+$D_{\mathrm{dot}}$ of a special framed link.  Cut the three-dimensional
+picture along the chosen spanning disk of $\delta$.  The ordered ribbons
+meeting that disk determine an object $W$ of $\cC$.  In the Crane--Yetter
+graphical expansion, $\delta$ means the insertion
+\[
+  \operatorname{Cut}_{\cC}(W)
+  =\operatorname{Dim}(\cC)P_{\mathbf1,W}
+\]
+between the two cut boundary words, followed by regluing.  Thus the dotted
+circle acts by the normalized projection onto the tensor-unit channel.  It
+is not itself a coloured ribbon component and is never assigned the ordinary
+Kirby colour.  After every dotted circle has been translated in this way,
+the result is a finite linear combination of genuine closed
+$\cC$-coloured ribbon graphs in $S^3$, to which
+\cref{def:rt-graph-evaluation} applies.
+\end{definition}
+
+\begin{definition}[Admissible diagrammatic input]
+\label{def:admissible-diagrammatic-input}
+An admissible input for the Crane--Yetter evaluator consists of
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item\label{item:evaluator-category}
+  a twisted categorical input $(\cC,\eta)$;
+
+  \item\label{item:evaluator-diagram}
+  a special Kirby representative $D$ together with a dotted cut system;
+
+  \item\label{item:evaluator-marking}
+  a class $\alpha_D\in H_2(D)$; and
+
+  \item\label{item:evaluator-cycle}
+  a temporary integral handle-cycle representative $a=(a_k)$ of $\alpha_D$,
+  where $a_k\in\mathbb Z$ is the coefficient of the $k$th ordinary framed
+  component.
+\end{enumerate}
+The representative in \cref{item:evaluator-cycle} is auxiliary and will be
+removed by representative independence.
+\end{definition}
+
+\begin{definition}[Role-aware graphical expansion]
+\label{def:role-aware-graphical-expansion}
+Fix the input of \cref{def:admissible-diagrammatic-input}.  Its graphical
+expansion is constructed as follows.
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item\label{item:ordinary-kirby-expansion}
+  Every ordinary framed component is coloured by $\Omega_{\cC}$.  Thus a
+  state $\lambda$ chooses a simple label $\lambda_k$ for each such component
+  and has weight $\prod_k d_{\lambda_k}$.
+
+  \item\label{item:character-coupons}
+  On the $k$th ordinary component insert one coupon carrying
+  $\eta_{\lambda_k}^{a_k}$.  Its scalar is the corresponding integral power
+  of the simple character value.
+
+  \item\label{item:dotted-cut-projector}
+  Apply the dotted-circle translation of
+  \cref{def:dotted-circle-translation} simultaneously to every dotted
+  circle.
+
+  \item\label{item:graphical-regluing}
+  Expand the projectors using dual bases, interpret all crossings, extrema,
+  twists, and coupons by the ribbon graphical calculus, and reglue the cut
+  tangle.  Each choice of ordinary labels gives a finite linear combination
+  of closed $\cC$-coloured ribbon graphs in $S^3$; its coefficients include
+  the factors $\operatorname{Dim}(\cC)$ from the normalized projectors.
+\end{enumerate}
+For a fixed ordinary-label state $\lambda$, the resulting element of the
+free complex vector space on closed coloured ribbon graphs is denoted
+\[
+  \Gamma(D,a;\lambda).
+\]
+The orientation of a ribbon, not its direction through a dotted disk,
+determines whether its label is $X$ or $X^*$.  Graphical evaluation is
+extended linearly to $\Gamma(D,a;\lambda)$.
+\end{definition}
+
+\begin{definition}[Homologically twisted Crane--Yetter evaluator]
+\label{def:role-aware-handle-evaluator}
+For the chosen cycle $a$, define
+\[
+  \CY_{\cC,\eta}(D,a)
+  :=
+  \operatorname{Dim}(\cC)^{1-h_3(D)}
+  \sum_{\lambda}
+    \left(\prod_k d_{\lambda_k}\right)
+    \operatorname{RT}_{\cC}
+      \bigl(S^3,\Gamma(D,a;\lambda)\bigr).
+\]
+Here the character coupons are part of the graph
+$\Gamma(D,a;\lambda)$; equivalently their simple-component scalars
+$\eta_{\lambda_k}^{a_k}$ may be pulled outside the graphical evaluation.
+The power $1-h_3(D)$ uses primal handle names and the turned-over convention
+of \cref{conv:primal-turned-over}.
+\end{definition}
+
+\begin{remark}[A finite sum, not one graph]
+\label{rem:evaluator-finite-sum}
+The construction does not canonically produce one coloured graph.  It
+produces a finite weighted family of graphs because the Kirby colour and the
+tensor-unit projectors must be expanded.  Each summand is an honest closed
+$\cC$-coloured ribbon graph and is evaluated by
+\cref{def:rt-graph-evaluation}.
+\end{remark}
+
+\begin{remark}[Proof obligations]
+\label{rem:evaluator-proof-obligations}
+The preceding definitions do not assume that the scalar is independent of
+the cycle representative, cut system, dual bases, Kirby representative, or
+Kirby-move sequence.  These are theorem obligations.  In particular, no
+evaluation equality is included in the input data.
+\end{remark}

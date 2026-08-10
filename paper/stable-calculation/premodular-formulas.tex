@@ -1,0 +1,115 @@
+\subsection{Premodular formulas}
+\label{subsec:premodular-formulas}
+
+For $n\in\mathbb Z$, define the shifted Gauss sums
+\[
+  \tau_\eta^+(n)
+  :=\sum_{i\in\operatorname{Irr}(\cC)}d_i^2\theta_i\eta_i^n,
+  \qquad
+  \tau_\eta^-(n)
+  :=\sum_{i\in\operatorname{Irr}(\cC)}d_i^2\theta_i^{-1}\eta_i^n.
+\]
+
+\begin{proposition}[Odd premodular formula]
+\label{prop:odd-formula}
+Let $X$ be a closed, oriented, simply connected smooth four-manifold with
+odd intersection form.  Choose an integral diagonalization
+\[
+  Q_X\cong p\langle1\rangle\oplus q\langle-1\rangle
+\]
+and write $\alpha=(a_1,\ldots,a_p;b_1,\ldots,b_q)$ in these coordinates.
+Then
+\[
+  \widehat{\CY}_{\cC,\eta}(X,\alpha)
+  =\prod_{r=1}^{p}\tau_\eta^+(a_r)
+   \prod_{s=1}^{q}\tau_\eta^-(b_s).
+\]
+\end{proposition}
+
+\begin{proof}
+The diagonal lattice is represented by the connected sum of $p$ positively
+framed and $q$ negatively framed unknots.  For a component with marking
+$n$, the evaluator is respectively the shifted Gauss sum
+$\tau_\eta^+(n)$ or $\tau_\eta^-(n)$.  Apply normalized connected-sum
+multiplicativity.  If $X$ is not itself the standard connected sum, use
+\cref{cor:marked-stable-realization} and cancel the common nonzero
+hyperbolic stabilization factor by
+\cref{prop:marked-stabilization-formula}.
+\end{proof}
+
+For $(a,b)$ in the hyperbolic basis of $H_2(H;\mathbb Z)$, put
+\[
+  \mathcal H_{\cC,\eta}(a,b)
+  :=\sum_{i,j\in\operatorname{Irr}(\cC)}
+       d_i d_j\eta_i^a\eta_j^b
+       \operatorname{Hopf}_{\cC}^{+}(i,j),
+\]
+where $\operatorname{Hopf}_{\cC}^{+}(i,j)$ is the positive Hopf-link
+scalar.  For a marked standard block $(B,\beta)$ define
+\[
+  V_{\cC,\eta}(B,\beta)=
+  \begin{cases}
+    \widehat{\CY}_{\cC,\eta}(K3,\beta),&B=K3,\\
+    \widehat{\CY}_{\cC,\eta}(\overline{K3},\beta),
+      &B=\overline{K3},\\
+    \mathcal H_{\cC,\eta}(a,b),
+      &B=H\text{ and }\beta=(a,b).
+  \end{cases}
+\]
+
+\begin{proposition}[Even premodular formula]
+\label{prop:even-formula}
+Let $X$ be a closed, oriented, simply connected smooth four-manifold with
+even intersection form, and let $\alpha\in H_2(X;\mathbb Z)$.  Suppose that
+for some $s\geq0$ there is an isometry of marked lattices
+\[
+  \bigl(H_2(X\#sH;\mathbb Z),Q_{X\#sH},\alpha\oplus0\bigr)
+  \cong
+  \bigoplus_{r=1}^{N}
+    \bigl(H_2(B_r;\mathbb Z),Q_{B_r},\beta_r\bigr),
+\]
+where every $B_r$ is $K3$, $\overline{K3}$, or $H$.  Then
+\[
+  \widehat{\CY}_{\cC,\eta}(X,\alpha)
+  =\frac{\displaystyle\prod_{r=1}^{N}
+      V_{\cC,\eta}(B_r,\beta_r)}
+    {\mathcal H_{\cC,\eta}(0,0)^s}.
+\]
+\end{proposition}
+
+\begin{proof}
+The marked lattice isometry is realized after a common further hyperbolic
+stabilization by \cref{cor:marked-stable-realization}.  Apply
+\cref{prop:marked-stabilization-formula} to both sides.  Normalized
+connected-sum multiplicativity splits the standard side into the displayed
+$K3$, $\overline{K3}$, and hyperbolic factors.  The common additional
+stabilizations cancel.  Since
+$\mathcal H_{\cC,\eta}(0,0)=h_{\cC,\eta}\neq0$, the original $s$
+hyperbolic factors may be divided out, giving the formula.
+\end{proof}
+
+\begin{corollary}[Simply connected no-go theorem]
+\label{cor:no-simply-connected-exotic-detection}
+Let $X$ and $Y$ be homeomorphic closed, oriented, simply connected smooth
+four-manifolds, and let $f\colon X\to Y$ be an orientation-preserving
+homeomorphism.  Then, for every $\alpha\in H_2(X;\mathbb Z)$,
+\[
+  \CY_{\cC,\eta}(X,\alpha)
+  =\CY_{\cC,\eta}(Y,f_*\alpha).
+\]
+Thus the marked invariant does not distinguish exotic smooth structures on
+a simply connected topological four-manifold.
+\end{corollary}
+
+\begin{proof}
+By \cref{cor:marked-stable-realization}, for some $r$ there is a
+diffeomorphism
+\[
+  (X\#rH,\alpha\oplus0)
+  \cong(Y\#rH,f_*\alpha\oplus0).
+\]
+Marked diffeomorphism invariance identifies the stabilized values.  Applying
+\cref{prop:marked-stabilization-formula} to both sides gives a common factor
+$h_{\cC,\eta}^{,r}$.  Since this factor is nonzero, it cancels and yields
+the asserted equality.
+\end{proof}

@@ -1,0 +1,78 @@
+\subsection{Connected sums and stabilization}
+\label{subsec:connected-sums}
+
+\begin{definition}[Normalized invariant]
+\label{def:normalized-invariant}
+Set
+\[
+  \widehat{\CY}_{\cC,\eta}(X,\alpha)
+  :=\operatorname{Dim}(\cC)^{-1}
+    \CY_{\cC,\eta}(X,\alpha).
+\]
+\end{definition}
+
+\begin{proposition}[Marked connected-sum formula]
+\label{prop:connected-sum-formula}
+For marked closed oriented four-manifolds $(X,\alpha)$ and $(Y,\beta)$,
+\[
+  \CY_{\cC,\eta}(X\#Y,\alpha\oplus\beta)
+  =\operatorname{Dim}(\cC)^{-1}
+   \CY_{\cC,\eta}(X,\alpha)
+   \CY_{\cC,\eta}(Y,\beta).
+\]
+Equivalently,
+\[
+  \widehat{\CY}_{\cC,\eta}(X\#Y,\alpha\oplus\beta)
+  =\widehat{\CY}_{\cC,\eta}(X,\alpha)
+   \widehat{\CY}_{\cC,\eta}(Y,\beta).
+\]
+\end{proposition}
+
+\begin{proof}
+Take special Kirby representatives in disjoint $3$-balls and form their
+connected sum outside both diagrams.  Ordinary labels, character coupons,
+and dotted projectors split into independent choices.  The
+Reshetikhin--Turaev evaluation is multiplicative under disjoint union.  The
+single normalization associated with the connected $0$--$4$ handle pair
+accounts for the displayed factor $\operatorname{Dim}(\cC)^{-1}$.
+Dividing both sides by $\operatorname{Dim}(\cC)$ gives the normalized form.
+\end{proof}
+
+Put $H=S^2\times S^2$ and
+\[
+  h_{\cC,\eta}:=
+    \widehat{\CY}_{\cC,\eta}(H,0).
+\]
+
+\begin{proposition}[Marked stabilization formula]
+\label{prop:marked-stabilization-formula}
+For every $r\geq0$,
+\[
+  \widehat{\CY}_{\cC,\eta}
+    \bigl(X\#rH,\alpha\oplus0\bigr)
+  =h_{\cC,\eta}^{,r}
+    \widehat{\CY}_{\cC,\eta}(X,\alpha).
+\]
+Moreover $h_{\cC,\eta}\neq0$.  Consequently, if
+\[
+  (X\#rH,\alpha\oplus0)
+  \cong(M\#sH,\beta\oplus0),
+\]
+then
+\[
+  \widehat{\CY}_{\cC,\eta}(X,\alpha)
+  =\widehat{\CY}_{\cC,\eta}(M,\beta)
+   h_{\cC,\eta}^{,s-r}.
+\]
+\end{proposition}
+
+\begin{proof}
+The first identity follows by induction from
+\cref{prop:connected-sum-formula}.  At the zero marking the character
+coupons disappear, so \cref{thm:untwisted-comparison} identifies
+$h_{\cC,\eta}$ with the untwisted hyperbolic stabilization scalar.  Its
+nonvanishing is the semisimple stabilization result
+\cite[Theorem~3.5]{Reutter2023}.  Apply marked diffeomorphism invariance to
+the displayed stable diffeomorphism, substitute the first identity on both
+sides, and cancel the nonzero powers of $h_{\cC,\eta}$.
+\end{proof}

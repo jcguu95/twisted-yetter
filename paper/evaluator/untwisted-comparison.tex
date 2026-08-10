@@ -1,0 +1,36 @@
+\subsection{Comparison with the untwisted Crane--Yetter theory}
+\label{subsec:untwisted-comparison}
+
+Here ``untwisted'' means that the character is the identity monoidal natural
+automorphism.  It does not mean that the ribbon twist of $\cC$ is trivial.
+
+\begin{theorem}[Untwisted comparison]
+\label{thm:untwisted-comparison}
+Let $\operatorname{id}$ denote the identity character of $\cC$.  For every
+closed oriented smooth four-manifold $X$ and every
+$\alpha\in H_2(X;\mathbb Z)$,
+\[
+  \CY_{\cC,\operatorname{id}}(X,\alpha)
+  =Z^{\mathrm{sk}}_{\mathrm{CY},\cC}(X)
+  =Z_{\mathrm{CY},\cC}(X),
+\]
+where $Z^{\mathrm{sk}}_{\mathrm{CY},\cC}$ is Tham's closed skein
+Crane--Yetter theory and $Z_{\mathrm{CY},\cC}$ is the original state sum.
+In particular, the left-hand side is independent of $\alpha$.
+\end{theorem}
+
+\begin{proof}
+For the identity character every coupon
+$\eta_{\lambda_k}^{a_k}$ is an identity, for every marking and every simple
+label.  The remaining local operations agree term by term with Tham's
+handle operators: ordinary $2$-handles are expanded with the Kirby colour,
+while the turned-over operation corresponding to a primal dotted
+$1$-handle is the normalized projection to the tensor-unit channel.  The
+normalizing scalar is the same global dimension
+$\operatorname{Dim}(\cC)=\sum_i d_i^2$; compare
+\cite[Equation~(2.3), Definition~5.11, and the handle calculation on
+pp.~99--101]{Tham2021}.  Hence our diagrammatic sum equals Tham's closed
+skein evaluation.  Tham's comparison theorem identifies that skein theory
+with the original Crane--Yetter state sum
+\cite[Theorem~3.61]{Tham2021}.
+\end{proof}

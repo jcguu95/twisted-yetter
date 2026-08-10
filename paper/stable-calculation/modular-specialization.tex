@@ -1,0 +1,47 @@
+\subsection{Modular specialization}
+\label{subsec:modular-specialization}
+
+Suppose in this subsection that $\cC$ is modular.  Let $g_\eta$ be the
+invertible simple object representing the character defined by $\eta$, and
+put
+\[
+  \tau_+(\cC):=\tau_\eta^+(0),
+  \qquad
+  \tau_-(\cC):=\tau_\eta^-(0).
+\]
+
+\begin{theorem}[Modular closed formula]
+\label{prop:modular-formula}
+For every closed, oriented, simply connected smooth four-manifold $X$ and
+every $\alpha\in H_2(X;\mathbb Z)$,
+\[
+  \CY_{\cC,\eta}(X,\alpha)
+  =\operatorname{Dim}(\cC)\,
+   \tau_+(\cC)^{b_2^+(X)}
+   \tau_-(\cC)^{b_2^-(X)}
+   \theta_{g_\eta}^{-Q_X(\alpha,\alpha)}.
+\]
+\end{theorem}
+
+\begin{proof}
+For an odd form, apply \cref{prop:odd-formula}.  The character--object
+correspondence and shifted Gauss identities give
+\[
+  \tau_\eta^+(n)=\tau_+(\cC)\theta_{g_\eta}^{-n^2},
+  \qquad
+  \tau_\eta^-(n)=\tau_-(\cC)\theta_{g_\eta}^{n^2};
+\]
+these are the specialization of
+\cite[Lemma~8.15.3, Proposition~8.15.4, Corollary~8.15.5, and
+Lemma~8.22.9]{EGNO2015}.  Multiplying over a diagonal basis gives the stated
+power of $\theta_{g_\eta}$ and the exponents $b_2^\pm(X)$.
+
+For an even form, blow up once: $X\#\mathbb{CP}^2$ has odd intersection
+form.  Apply the odd calculation to the marking $\alpha\oplus0$ and compare
+it with the connected-sum formula.  The additional factor is
+$\tau_+(\cC)$, which is nonzero in a modular category
+\cite[Proposition~8.15.4]{EGNO2015}; cancelling it yields the same formula
+for $X$.
+\end{proof}
+
+\input{stable-calculation/modular-examples}

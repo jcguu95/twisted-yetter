@@ -1,0 +1,185 @@
+\subsection{Kirby-move invariance}
+\label{subsec:kirby-invariance}
+
+The character coupons disappear on the tensor-unit channel for a formal
+reason that will be used repeatedly.
+
+\begin{lemma}[Absorption by the tensor-unit projector]
+\label{lem:unit-projector-absorbs-character}
+For every object $W\in\cC$ and every $n\in\mathbb Z$,
+\[
+  P_{\mathbf1,W}\eta_W^n=P_{\mathbf1,W}
+  =\eta_W^nP_{\mathbf1,W}.
+\]
+The same identities hold after multiplying the projector by
+$\operatorname{Dim}(\cC)$.
+\end{lemma}
+
+\begin{proof}
+Write $P_{\mathbf1,W}=\sum_\mu u_\mu\widehat u_\mu$ as in
+\cref{def:tensor-unit-projector}.  Monoidality gives
+$\eta_{\mathbf1}=\operatorname{id}_{\mathbf1}$.  Naturality, first for
+$u_\mu\colon\mathbf1\to W$ and then for
+$\widehat u_\mu\colon W\to\mathbf1$, gives
+\[
+  \eta_W^n u_\mu=u_\mu,
+  \qquad
+  \widehat u_\mu\eta_W^n=\widehat u_\mu.
+\]
+Summing these identities proves both equalities.
+\end{proof}
+
+\begin{proposition}[Independence of graphical auxiliaries]
+\label{prop:graphical-auxiliary-independence}
+For a fixed marked diagram $(D,\alpha_D)$, the evaluator is independent of
+the trace-dual bases used to expand the tensor-unit projectors and of the
+dotted cut system used to display those projectors inside a cut-open tangle.
+\end{proposition}
+
+\begin{proof}
+The sum $\sum_\mu u_\mu\widehat u_\mu$ is the canonical projector onto the
+full tensor-unit isotypic summand, so a change of trace-dual bases does not
+change its morphism.  A dotted cut system is only a factorization of the
+same closed dotted-component operation into a cut-open exterior tangle and
+this canonical projector.  Moving the cut through a crossing, extremum,
+twist, or coupon changes that factorization by the corresponding ribbon or
+naturality identity; regluing returns the same closed morphism.  Two cut
+systems are related by a finite sequence of these local changes and ambient
+isotopies, as in the cutting calculus of
+\cite[Section~4.3]{BarenzBarrett2018}.  Induction over that sequence proves
+the claim.  No character exponent or $X$ versus $X^*$ choice is read from
+the direction of a dotted cut; those data remain fixed throughout, in
+accordance with \cref{conv:three-sign-sources}.
+\end{proof}
+
+\begin{proposition}[Representative independence]
+\label{prop:representative-independence}
+If two integral handle cycles $a$ and $a'$ represent the same class in
+$H_2(D)$, then
+\[
+  \CY_{\cC,\eta}(D,a)=\CY_{\cC,\eta}(D,a').
+\]
+Consequently the value depends only on the marked class
+$\alpha_D\in H_2(D)$.
+\end{proposition}
+
+\begin{proof}
+It is enough to treat $a'=a+\partial_3c$ for one degree-three generator and
+then induct on the finite integral combination $c$.  After turning the
+handle decomposition over as in \cref{conv:primal-turned-over}, the added
+boundary inserts powers of $\eta$ on precisely the strands passing through
+the associated dotted cut.  The cut operator factors through the
+tensor-unit summand, so every added power is absorbed by
+\cref{lem:unit-projector-absorbs-character}.  The ordinary labels,
+projector normalization, and exterior ribbon graph are otherwise unchanged.
+The same argument with the inverse powers treats negative coefficients.
+\end{proof}
+
+We therefore write $\CY_{\cC,\eta}(D,\alpha_D)$ for the value of any cycle
+representing $\alpha_D$.
+
+\begin{theorem}[Elementary Kirby-move invariance]
+\label{thm:elementary-kirby-invariance}
+Let
+\[
+  m\colon(D,\alpha_D)\longrightarrow(D',\alpha_{D'})
+\]
+be a marked elementary Kirby event in the sense of
+\cref{def:marked-kirby-event}.  Then
+\[
+  \CY_{\cC,\eta}(D,\alpha_D)
+  =\CY_{\cC,\eta}(D',\alpha_{D'}).
+\]
+\end{theorem}
+
+\begin{proof}
+We use the local forms of \cref{prop:local-movie-normal-forms}; the exterior
+graph and all labels not mentioned below remain fixed.
+
+\emph{Framed isotopy.}
+The two graphs represent the same colored framed ribbon graph.  Their
+evaluations agree by ribbon graphical coherence
+\cite[Theorem~2.6]{Shum1994}.
+
+\emph{$1/1$ and $2/1$ slides.}
+Cut the stationary dotted circle before the clean attachment.  Its
+normalized cut operator projects all incident strands to the tensor-unit
+channel.  Character coupons on that channel are removed by
+\cref{lem:unit-projector-absorbs-character}.  The moving strand may then be
+transported through the attachment, the finite list of crossings, extrema,
+twists, and coupons, and the detachment: the tensor unit is transparent and
+each individual passage is an instance of braiding, evaluation,
+coevaluation, twist, or coupon naturality.  Induction on the finite event
+list proves equality between the attached and detachable graphs.  Regluing
+the same normalized projector gives the target evaluator.
+
+\emph{$2/2$ slide.}
+At the clean attachment, resolve the moving and stationary simple labels by
+the complete set of fusion channels, including every multiplicity index.
+If the moving and stationary labels and exponents are $(x,a)$ and $(y,b)$,
+then our positive convention resolves channels
+$z\subset x\otimes y^*$, changes the moving exponent to $a+b$, and places
+$\eta_z^{-b}$ on the internal channel.  The negative convention resolves
+$z\subset x\otimes y$, changes the moving exponent to $a-b$, and places
+$\eta_z^b$ on that channel.  These formulas are exactly monoidal naturality
+of $\eta$ applied to the oriented fusion inclusion.  Move the internal
+coupon around the stationary
+component.  Each of the finitely many local events preserves the morphism by
+the same naturality identities as above, so induction gives invariance of
+the transport stage.  At the clean detachment, the trace-dual fusion bases
+recombine to the identity.  This recovers exactly the transported target
+labels and exponents.  Summing over the stationary label, fusion channel,
+multiplicity, and all exterior labels proves the stated equality for either
+band orientation.
+
+\emph{$1$--$2$ birth and death.}
+The new $2$-handle coordinate is zero under the induced handle-homology map,
+so its character coupon is $\eta^0=\operatorname{id}$.  Cutting the new
+dotted circle evaluates the cancelling local pair to the identity in the
+tensor-unit channel.  Both the raw graphical sum and the primal $3$-handle
+count are therefore unchanged.  Death is the reverse calculation.
+
+\emph{$2$--$3$ birth and death.}
+The standard cancelling pair contributes one factor
+$\operatorname{Dim}(\cC)$ to the unnormalized graphical sum.  In the primal
+handle convention, birth also increases $h_3$ by one, so the prefactor
+$\operatorname{Dim}(\cC)^{1-h_3}$ contributes its inverse.  The new
+homology coordinate is zero and hence contributes no character factor.
+Again, death is the reverse calculation.
+
+These are all eight directed events of
+\cref{def:marked-kirby-event}.
+\end{proof}
+
+\begin{definition}[Manifold-level evaluator]
+\label{def:manifold-level-evaluator}
+For a marked closed oriented smooth four-manifold $(X,\alpha)$, choose a
+special Kirby representative $(D,\alpha_D)$ as in
+\cref{prop:special-representative-existence} and set
+\[
+  \CY_{\cC,\eta}(X,\alpha)
+  :=\CY_{\cC,\eta}(D,\alpha_D).
+\]
+\end{definition}
+
+\begin{theorem}[Marked diffeomorphism invariance]
+\label{prop:diffeomorphism-invariance}
+Let $X$ and $Y$ be closed oriented smooth four-manifolds, let
+$f\colon X\to Y$ be an orientation-preserving diffeomorphism, and let
+$\alpha\in H_2(X;\mathbb Z)$.  Then
+\[
+  \CY_{\cC,\eta}(X,\alpha)
+  =\CY_{\cC,\eta}(Y,f_*\alpha).
+\]
+\end{theorem}
+
+\begin{proof}
+Choose special representatives of the two marked manifolds.  By marked
+Kirby--Cerf completeness, \cref{prop:marked-kirby-cerf}, they are connected
+by a finite sequence of the eight marked events.  Apply
+\cref{thm:elementary-kirby-invariance} at each step and induct on the length
+of the sequence.  Representative independence identifies the transported
+handle classes with $\alpha$ and $f_*\alpha$.  Thus
+\cref{def:manifold-level-evaluator} is independent of every choice and has
+the asserted diffeomorphism invariance.
+\end{proof}

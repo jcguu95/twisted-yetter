@@ -1,0 +1,56 @@
+\section{Future directions}
+\label{sec:future-directions}
+
+\begin{conjecture}[Non-simply-connected detection]
+\label{conj:non-simply-connected-detection}
+There exist a semisimple premodular fusion category $\cC$ over $\mathbb C$,
+a monoidal natural automorphism $\eta$ of its identity functor,
+homeomorphic but non-diffeomorphic closed oriented non-simply-connected
+smooth four-manifolds $X$ and $Y$, an orientation-preserving homeomorphism
+$f\colon X\to Y$, and a class $\alpha\in H_2(X;\mathbb Z)$ such that
+\[
+  \CY_{\cC,\eta}(X,\alpha)
+  \ne\CY_{\cC,\eta}(Y,f_*\alpha).
+\]
+\end{conjecture}
+
+The simply connected argument uses marked stable realization in an essential
+way.  We do not assume an analogue for arbitrary fundamental groups, so the
+preceding conjecture is not ruled out by
+\cref{cor:no-simply-connected-exotic-detection}.
+
+\begin{conjecture}[Full coefficient-group extension]
+\label{conj:full-coefficient-extension}
+Let
+\[
+  A_{\cC}=\operatorname{Aut}_{\otimes}(\operatorname{Id}_{\cC}).
+\]
+The fixed-character construction should extend to an invariant
+\[
+  \CY_{\cC}(X,-)\colon H_2(X;A_{\cC})\longrightarrow\mathbb C
+\]
+whose pullback along
+\[
+  H_2(X;\mathbb Z)\longrightarrow H_2(X;A_{\cC}),
+  \qquad n\longmapsto\eta^n,
+\]
+is the invariant $\CY_{\cC,\eta}$ constructed in this paper.
+\end{conjecture}
+
+The coefficient group $A_{\cC}$ and its action on simple objects are those
+of \cref{prop:characters-universal-grading}; this is also the coefficient
+system used in \cite[Definitions~1 and~9]{Yetter1993}.  Establishing the
+extension requires redoing representative independence and every
+character-aware attach--transport--detach calculation with arbitrary
+$A_{\cC}$-labels rather than powers of one fixed character.  In particular,
+the resulting numerical formulas would require the family of twisted Gauss
+sums
+\[
+  \tau^{\pm}(a)
+  :=\sum_{i\in\operatorname{Irr}(\cC)}
+       d_i^2\theta_i^{\pm1}\chi_i(a),
+  \qquad a\in A_{\cC},
+\]
+where $\chi_i(a)$ is the scalar by which $a$ acts on $i$.  Neither this full
+coefficient-group invariant nor its simply connected closed formulas are
+claimed or Lean-verified here.
