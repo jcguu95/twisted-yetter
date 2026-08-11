@@ -479,15 +479,15 @@ in the proof of the cited theorem.  Hence a cusp can create or cancel only an
 index-$(1,2)$ or index-$(2,3)$ pair, proving all three assertions.
 \end{proof}
 
-\begin{definition}[Exact special-link realization]
-\label{def:exact-special-link-realization}
-An \emph{exact special-link realization} of a relative Cerf homotopy between
-special handle decompositions $\mathcal H_0$ and $\mathcal H_1$ consists of
-the following category-neutral data:
+\begin{proposition}[Special Kirby completeness]
+\label{prop:exact-special-link-realization}
+Let $D$ and $D'$ be prescribed special Kirby representatives of closed
+connected oriented smooth four-manifolds $X$ and $Y$, and let
+$f\colon X\to Y$ be an orientation-preserving diffeomorphism.  There is a
+finite special-link realization of $f$ consisting of:
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item a finite sequence $D_0,\ldots,D_N$ of special Kirby
-  representatives of its regular stages, with $D_0$ and $D_N$ equal to the
-  prescribed endpoint representatives;
+  representatives, with $D_0=D$ and $D_N=D'$;
 
   \item for every $j<N$, one of the eight unmarked directed events of
   \cref{def:kirby-event} from $D_j$ to $D_{j+1}$;
@@ -495,50 +495,58 @@ the following category-neutral data:
   \item a ball or standard cancelling-pair neighborhood supporting that
   event, outside which the special framed link is unchanged; and
 
-  \item the equality between the event's declared handle-chain map and the
-  cellular continuation map of the corresponding local Cerf segment.
+  \item for every event, its canonical cellular continuation map, such that
+  the composite map agrees under the cellular--singular comparison with the
+  map induced by $f$.
 \end{enumerate}
 An index-$3$ slide is omitted from the finite sequence only after identifying
 the two stages by the induced integral change of the displayed $C_3$ basis.
 This is a silent equivalence of the data retained in
 \cref{def:special-kirby-representative}: it preserves $h_3$ and
 $\operatorname{im}(\partial_3)$, but is not the identity operation on the
-full handle decomposition.  The definition contains no category, character,
-graphical evaluation, or scalar equality.
-\end{definition}
+full handle decomposition.  No category, character, graphical evaluation,
+or scalar equality occurs in this statement.
+\end{proposition}
 
-\begin{topologyinput}[Exact special-link realization]
-\label{ass:exact-special-link-realization}
-For every pair of special handle decompositions as in
-\cref{prop:relative-fixed-extrema-cerf}, at least one relative Cerf homotopy
-with the properties stated there admits an exact special-link realization in
-the sense of \cref{def:exact-special-link-realization}.
-\end{topologyinput}
+\begin{proof}
+Choose the neighborhoods of the unique index-$0$ and index-$4$ critical
+points compatibly with $f$, remove their interiors, and pull the target
+decomposition back by $f$.  This gives two relative handle decompositions of
+the same cobordism from $S^3$ to $S^3$, containing only handles of indices
+$1$, $2$, and $3$.  Use the relative fixed-extrema movie of
+\cref{prop:relative-fixed-extrema-cerf}.
 
-\begin{remark}[Scope and classical evidence for the topology input]
-The standard one-parameter handle argument in the proof of
-\cite[Theorem~4.2.12]{GompfStipsicz1999} identifies regular intervals,
-same-index trajectories, and cusps with level isotopies, handle slides, and
-adjacent-index creations or cancellations.  Their special-link pictures are
-the $1/1$, $2/1$, and $2/2$ slides and the $1$--$2$ and $2$--$3$
-cancellations in \cite[Table~2 and pp.~22--23]{BarenzBarrett2018}.  The $2/1$
-picture is the dotted-link record of isotoping a $2$-handle attaching circle
-through a $1$-handle; see
-\cite[Figure~5.36 and the surrounding discussion]{GompfStipsicz1999}.
+Gompf--Stipsicz's relative Kirby theorem
+\cite[Theorem~5.5.3]{GompfStipsicz1999} converts this comparison into
+isotopies in $\mathbb R^3$, handle slides, and creations or annihilations of
+cancelling handle pairs.  Its proof is the Kirby-diagram form of the generic
+handle argument in \cite[Theorem~4.2.12]{GompfStipsicz1999}.  Here the
+incoming boundary is the standard $S^3$ with empty surgery diagram and its
+parameterization has already been fixed, so the boundary-diagram Rolfsen
+moves and insertions appearing in the general relative statement are absent.
+The fixed-extrema condition leaves only $1$--$2$ and $2$--$3$ births and
+deaths.
 
-These references establish the classical ingredients, but do not state the
-source-bound package in
-\cref{def:exact-special-link-realization} verbatim.  In particular, different
-gradient choices near a critical-value switch can produce different finite
-strings of slides \cite[Remark~3.3]{GayWehrheimWoodward2012}.  We therefore
-isolate existence of one exact finite realization as the sole remaining
-topology-to-special-link input.  It is also the single corresponding
-Kirby--Cerf entrance axiom in the Lean formalization.
-\end{remark}
+Section~5.4 of the same reference gives the required dotted-circle
+translation: Figure~5.36 is the $2/1$ move, Figure~5.38 is the cancelling
+$1$--$2$ pair, and Figure~5.39 is the $1/1$ slide; ordinary same-index
+$2$-handle slides give the $2/2$ move.  Together with framed isotopy and the
+unchanged $2$--$3$ cancellation picture, these are exactly the eight directed
+events of \cref{def:kirby-event}.  Each displayed move is local, so its
+standard ball or cancelling-pair neighborhood supplies (iii).
+
+For each step take the canonical cellular continuation map.  A slide gives
+the corresponding integral elementary basis change and a birth or death
+gives the standard acyclic expansion or collapse, as in
+\cref{lem:marked-handle-complex-naturality}.  Naturality of the
+cellular--singular comparison identifies their composite with the map induced
+by $f$.  Finally, an index-$3$ slide is an integral change of the $C_3$ basis
+and may be suppressed by \cref{lem:c3-basis-independence}.  This proves all
+four assertions.
+\end{proof}
 
 \begin{theorem}[Fixed-extrema marked Kirby--Cerf completeness]
 \label{prop:marked-kirby-cerf}
-Assume \cref{ass:exact-special-link-realization}.
 Let $(D,\xi_D)$ and $(D',\xi_{D'})$ represent $(X,\alpha)$ and
 $(Y,\alpha')$, respectively, and let $f\colon X\to Y$ be an
 orientation-preserving diffeomorphism such that $f_*\alpha=\alpha'$.  A
@@ -552,8 +560,8 @@ $\xi_{D'}$.
 Pull the target handle decomposition back along the specified
 diffeomorphism.  The comparison is then between two special handle
 decompositions of the same oriented manifold.  Apply
-\cref{ass:exact-special-link-realization} to obtain a relative Cerf homotopy
-and its finite unmarked eight-event realization.
+\cref{prop:exact-special-link-realization} to obtain its finite unmarked
+eight-event realization.
 
 Write $F_j$ for the cellular continuation map of the $j$th event and
 $T_j=(F_j^*)^{-1}$ for its source-to-target cohomology transport.  By
