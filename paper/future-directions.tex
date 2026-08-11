@@ -1,23 +1,37 @@
 \section{Future directions}
 \label{sec:future-directions}
 
-\begin{conjecture}[Non-simply-connected detection]
+\begin{question}[Non-simply-connected detection]
 \label{conj:non-simply-connected-detection}
-There exist a semisimple premodular fusion category $\cC$ over $\mathbb C$,
-a monoidal natural automorphism $\eta$ of its identity functor,
-homeomorphic but non-diffeomorphic closed oriented non-simply-connected
-smooth four-manifolds $X$ and $Y$, an orientation-preserving homeomorphism
-$f\colon X\to Y$, and a class $\alpha\in H_2(X;\mathbb Z)$ such that
+Do there exist a semisimple premodular fusion category $\cC$ over $\mathbb C$,
+a monoidal natural automorphism $\eta$ of its identity functor, homeomorphic
+but non-diffeomorphic closed oriented non-simply-connected smooth
+four-manifolds $X$ and $Y$, an orientation-preserving homeomorphism
+$f\colon X\to Y$, and a class $\alpha\in H_2(X;\mathbb Z)$ for which
 \[
   \CY_{\cC,\eta}(X,\alpha)
   \ne\CY_{\cC,\eta}(Y,f_*\alpha).
 \]
-\end{conjecture}
+\end{question}
 
-The simply connected argument uses marked stable realization in an essential
-way.  We do not assume an analogue for arbitrary fundamental groups, so the
-preceding conjecture is not ruled out by
-\cref{cor:no-simply-connected-exotic-detection}.
+Gompf proved that any two smoothings of a compact orientable four-manifold
+become diffeomorphic after connected sum with copies of $S^2\times S^2$
+\cite{Gompf1984}.  That unmarked theorem does not by itself identify the
+induced map on $H_2$.  The precise missing input for our argument is the
+following marked version: given $f\colon X\to Y$ as above, does there exist
+$r\geq0$ and an orientation-preserving diffeomorphism
+\[
+ F\colon X\#r(S^2\times S^2)\longrightarrow
+          Y\#r(S^2\times S^2)
+\]
+such that, under the canonical connected-sum decompositions,
+\[
+ F_*=f_*\oplus\operatorname{id}_{rH}
+ \quad\text{on }H_2?
+\]
+An affirmative answer would extend the stabilization-and-cancellation proof
+of \cref{cor:no-simply-connected-exotic-detection} to this setting and give a
+negative answer to the preceding question.  We make neither assertion here.
 
 \begin{conjecture}[Full coefficient-group extension]
 \label{conj:full-coefficient-extension}
@@ -28,13 +42,17 @@ Let
 The fixed-character construction should extend to an invariant
 \[
   \CY_{\cC}(X,-)\colon H_2(X;A_{\cC})\longrightarrow\mathbb C
-\]
-whose pullback along
+\].
+For the fixed character $\eta$, let
 \[
-  H_2(X;\mathbb Z)\longrightarrow H_2(X;A_{\cC}),
-  \qquad n\longmapsto\eta^n,
+  \varphi_\eta\colon\mathbb Z\longrightarrow A_{\cC},
+  \qquad \varphi_\eta(n)=\eta^n.
 \]
-is the invariant $\CY_{\cC,\eta}$ constructed in this paper.
+The pullback of $\CY_{\cC}(X,-)$ along the induced coefficient map
+\[
+  (\varphi_\eta)_*\colon H_2(X;\mathbb Z)\longrightarrow H_2(X;A_{\cC})
+\]
+should be the invariant $\CY_{\cC,\eta}(X,-)$ constructed in this paper.
 \end{conjecture}
 
 The coefficient group $A_{\cC}$ and its action on simple objects are those
