@@ -47,15 +47,20 @@ hyperbolic stabilization factor by
 \cref{prop:marked-stabilization-formula}.
 \end{proof}
 
-For $(a,b)$ in the hyperbolic basis of $H_2(H;\mathbb Z)$, put
+Fix a hyperbolic basis $e,f$ of $H_2(H;\mathbb Z)$, with
+$Q_H(e,f)=1$, and write $\alpha=ae+bf$.  Put
 \[
   \mathcal H_{\cC,\eta}(a,b)
   :=\sum_{i,j\in\operatorname{Irr}(\cC)}
-       d_i d_j\eta_i^a\eta_j^b
+       d_i d_j\eta_i^b\eta_j^a
        \operatorname{Hopf}_{\cC}^{+}(i,j),
 \]
 where $\operatorname{Hopf}_{\cC}^{+}(i,j)$ is the positive Hopf-link
-scalar.  For a marked standard block $(B,\beta)$ define
+scalar, with its first and second components representing $e$ and $f$,
+respectively.  The exchanged exponents occur because
+$\langle\operatorname{PD}(ae+bf),e\rangle=b$ and
+$\langle\operatorname{PD}(ae+bf),f\rangle=a$.
+For a marked standard block $(B,\beta)$ define
 \[
   V_{\cC,\eta}(B,\beta)=
   \begin{cases}
@@ -88,8 +93,12 @@ where every $B_r$ is $K3$, $\overline{K3}$, or $H$.  Then
 \end{proposition}
 
 \begin{proof}
-The marked lattice isometry is realized after a common further hyperbolic
-stabilization by \cref{cor:marked-stable-realization}.  Apply
+By \cref{thm:freedman-donaldson}, the stated marked lattice isometry is
+realized by an orientation-preserving homeomorphism from $X\#sH$ to the
+connected sum of the $B_r$, carrying $\alpha\oplus0$ to the connected sum
+of the $\beta_r$.  This marked homeomorphism is realized after a common
+further hyperbolic stabilization by
+\cref{cor:marked-stable-realization}.  Apply
 \cref{prop:marked-stabilization-formula} to both sides.  Normalized
 connected-sum multiplicativity splits the standard side into the displayed
 $K3$, $\overline{K3}$, and hyperbolic factors.  The common additional
