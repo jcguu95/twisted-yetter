@@ -651,23 +651,8 @@ $\operatorname{tr}_i(\operatorname{id}_i)=d_i$, so the second sum is
 $\sum_i d_i^2=\operatorname{Dim}(\cC)$.
 \end{proof}
 
-\begin{remark}[Outstanding proof interfaces in this draft]
-\label{rem:outstanding-invariance-interfaces}
-The local categorical calculations above do not by themselves complete the
-global invariance proof.  A complete proof must still supply one
-category-neutral topology interface: a fixed-extrema Cerf-to-Kirby bridge
-showing that the chosen generic homotopy expands into exactly the eight marked
-events of \cref{def:marked-kirby-event}, with the stated cellular $H^2$
-transport.  The exact source-bound $1/1$ and $2/1$ interfaces are
-\cref{lem:one-one-exact-interface,lem:two-one-exact-interface}.  Accordingly,
-the theorem statements below record the intended result, but their proofs are
-not complete in the present draft.
-\end{remark}
-
-\begin{theorem}[Conditional elementary Kirby-move invariance]
+\begin{theorem}[Elementary Kirby-move invariance]
 \label{thm:elementary-kirby-invariance}
-Assume the topology-to-graphical interface listed in
-\cref{rem:outstanding-invariance-interfaces}.
 Let
 \[
   m\colon(D,\xi_D)\longrightarrow(D',\xi_{D'})
@@ -730,8 +715,6 @@ These are all eight directed events of
 
 \begin{definition}[Manifold-level evaluator]
 \label{def:manifold-level-evaluator}
-Assume the topology-to-graphical interface listed in
-\cref{rem:outstanding-invariance-interfaces}.
 For a marked closed connected oriented smooth four-manifold $(X,\alpha)$, choose a
 special Kirby representative $(D,\xi_D)$ as in
 \cref{prop:special-representative-existence} and set
@@ -739,12 +722,14 @@ special Kirby representative $(D,\xi_D)$ as in
   \CY_{\cC,\eta}(X,\alpha)
   :=\CY_{\cC,\eta}(D,\xi_D).
 \]
+Before imposing \cref{ass:exact-special-link-realization}, this is an a priori
+presentation-chosen scalar.  The next theorem proves that it is independent
+of the choice under that topology input.
 \end{definition}
 
-\begin{theorem}[Conditional marked diffeomorphism invariance]
+\begin{theorem}[Marked diffeomorphism invariance]
 \label{prop:diffeomorphism-invariance}
-Assume the topology-to-graphical interface listed in
-\cref{rem:outstanding-invariance-interfaces}.
+Assume \cref{ass:exact-special-link-realization}.
 Let $X$ and $Y$ be closed connected oriented smooth four-manifolds, let
 $f\colon X\to Y$ be an orientation-preserving diffeomorphism, and let
 $\alpha\in H_2(X;\mathbb Z)$.  Then
@@ -759,8 +744,10 @@ Choose special representatives of the two marked manifolds.  By marked
 Kirby--Cerf completeness, \cref{prop:marked-kirby-cerf}, they are connected
 by a finite sequence of the eight marked events.  Apply
 \cref{thm:elementary-kirby-invariance} at each step and induct on the length
-of the sequence.  Representative independence identifies the transported
-handle classes with $\alpha$ and $f_*\alpha$.  Thus
+of the sequence.  Handle-cohomology naturality and Poincar\'e-duality
+naturality identify the two endpoint markings, while representative
+independence says that the evaluation on each fixed diagram does not depend
+on the cocycle chosen to display its handle-cohomology class.  Thus
 \cref{def:manifold-level-evaluator} is independent of every choice and has
 the asserted diffeomorphism invariance.
 \end{proof}

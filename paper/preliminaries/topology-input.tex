@@ -279,10 +279,10 @@ described in \cite[Section~4.2]{GompfStipsicz1999}; the evaluator convention
 is \cite[Definition~5.11]{Tham2021}.
 \end{convention}
 
-\begin{definition}[Marked elementary Kirby event]
-\label{def:marked-kirby-event}
-A marked elementary Kirby event is one of the following eight directed
-events:
+\begin{definition}[Elementary Kirby event]
+\label{def:kirby-event}
+An elementary Kirby event from a special Kirby diagram $D$ to a special
+Kirby diagram $D'$ is one of the following eight directed events:
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item\label{move:framed-isotopy} framed isotopy;
   \item\label{move:one-over-one} a $1/1$ slide;
@@ -294,12 +294,37 @@ events:
   \item\label{move:two-three-death} a $2$--$3$ death.
 \end{enumerate}
 For an $r/s$ slide, $r$ and $s$ record the roles of the moving and stationary
-handles.  Every marked event includes its induced handle-chain map and the
-dual map on handle cohomology, and carries $\xi_D$ to the corresponding
-class $\xi_{D'}$.  It contains no equality of state-sum evaluations.  The
-list is the directed form of
+handles.  Every event includes a chain-homotopy equivalence
+\[
+  F_m\colon C_*(D)\longrightarrow C_*(D')
+\]
+given by cellular continuation.  Since cohomology is contravariant, its
+pullback is
+\[
+  F_m^*\colon H^2(D')\longrightarrow H^2(D).
+\]
+We write
+\[
+  T_m:=(F_m^*)^{-1}\colon H^2(D)\longrightarrow H^2(D')
+\]
+for its source-to-target cohomology transport.  The event contains no
+marking and no equality of state-sum evaluations.  The list is the directed
+form of
 \cite[Table~2]{BarenzBarrett2018}; the dotted-circle slides are reviewed in
 \cite[Section~5.4]{GompfStipsicz1999}.
+\end{definition}
+
+\begin{definition}[Marked elementary Kirby event]
+\label{def:marked-kirby-event}
+A marked elementary Kirby event consists of an elementary event
+$m\colon D\to D'$ and classes $\xi_D\in H^2(D)$ and
+$\xi_{D'}\in H^2(D')$ such that
+\[
+  \xi_{D'}=T_m(\xi_D),
+  \qquad\text{equivalently}\qquad
+  F_m^*(\xi_{D'})=\xi_D.
+\]
+This adds marking compatibility, not an equality of state-sum evaluations.
 \end{definition}
 
 \begin{convention}[Auxiliary orientation reversal]
@@ -337,7 +362,7 @@ map; they do not assert an equality of graphical evaluations.
 \end{convention}
 
 The topology used in the descent from diagrams to manifolds is isolated in
-the following four propositions.
+the following statements.
 
 \begin{proposition}[Existence of special representatives]
 \label{prop:special-representative-existence}
@@ -371,7 +396,7 @@ immediately following \cite[Proposition~4.2.13]{GompfStipsicz1999}.
 
 \begin{lemma}[Naturality of the marked handle complex]
 \label{lem:marked-handle-complex-naturality}
-Every event in \cref{def:marked-kirby-event} determines a chain-homotopy
+Every event in \cref{def:kirby-event} determines a chain-homotopy
 equivalence of the associated handle complexes: a same-index slide is a based
 elementary change in the appropriate chain group, a $2/1$ move is continuation
 under an isotopy of a $2$-handle attaching map in the $1$-handlebody, and a
@@ -379,7 +404,11 @@ birth or death is an elementary expansion or collapse by an acyclic
 adjacent-degree summand.  Under the
 cellular comparison maps, the induced map on handle cohomology is the map on
 $H^2$ induced by the underlying diffeomorphism of the represented
-four-manifolds.
+four-manifolds.  More precisely, if
+$F_m\colon C_*(D)\to C_*(D')$ is the cellular continuation map, then the
+comparison maps intertwine the contravariant map
+$F_m^*\colon H^2(D')\to H^2(D)$ with singular-cohomology pullback.  Thus the
+source-to-target marking transport is $T_m=(F_m^*)^{-1}$.
 \end{lemma}
 
 \begin{proof}
@@ -394,48 +423,157 @@ summand.  Death is the inverse collapse.  Framed isotopy gives the canonical
 identification.  These are the cellular continuation maps of the two relative
 CW structures.  Naturality of cellular cohomology with respect to cellular
 continuation and its comparison with singular cohomology gives the stated
-commutative square.  In particular, this lemma records marking transport; it
-does not assert any equality of graphical evaluations.
+contravariant commutative square.  Each continuation map is a
+chain-homotopy equivalence, so $F_m^*$ is invertible and defines $T_m$.  In
+particular, this lemma records marking transport; it does not assert any
+equality of graphical evaluations.
 \end{proof}
 
-\begin{proposition}[Fixed-extrema marked Kirby--Cerf completeness]
-\label{prop:marked-kirby-cerf}
-Let $(D,\xi_D)$ and $(D',\xi_{D'})$ represent marked four-manifolds
-related by an orientation-preserving diffeomorphism carrying one marking to
-the other.  A finite sequence of the events in
-\cref{def:marked-kirby-event} joins the two diagrams, and the composite map
-on handle cohomology carries $\xi_D$ to $\xi_{D'}$.
+\begin{proposition}[Relative fixed-extrema Cerf movie]
+\label{prop:relative-fixed-extrema-cerf}
+Let $\mathcal H_0$ and $\mathcal H_1$ be special handle decompositions of the
+same closed connected oriented smooth four-manifold.  After isotopy, choose
+standard neighborhoods $B_-$ and $B_+$ of their unique minima and maxima.
+On
+\[
+  W=X\setminus\bigl(\operatorname{int}B_-\sqcup
+                     \operatorname{int}B_+\bigr),
+\]
+the two decompositions are joined by a finite relative Cerf movie with the
+following properties:
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item every regular level is connected;
+  \item every interior critical point has index $1$, $2$, or $3$; and
+  \item at each exceptional parameter there is either one critical-value
+  crossing or one birth or death of an adjacent-index pair, necessarily of
+  type $1$--$2$ or $2$--$3$.
+\end{enumerate}
+In particular, the movie contains no $0$--$1$ or $3$--$4$ birth or death.
 \end{proposition}
 
 \begin{proof}
+Choose ordered Morse functions for the two handle decompositions.  Their
+unique minima and maxima can be moved to fixed prescribed points by ambient
+isotopies and put into the same quadratic form on small coordinate balls.
+Removing the interiors of those balls leaves a cobordism from $S^3$ to
+$S^3$, and the restrictions satisfy the boundary minimum/maximum condition
+of \cite[Definition~2.1(i)]{GayWehrheimWoodward2012}.
+
+Every regular level is connected.  Indeed, levels begin connected; attaching
+index-$1$ or index-$2$ handles preserves connectedness.  An index-$3$ handle
+that disconnected a level could not be repaired by any later index-$3$
+handle, while the level immediately below the unique index-$4$ handle is the
+connected sphere $S^3$.  Thus the two restrictions are Morse data in the
+sense of \cite[Definition~2.1]{GayWehrheimWoodward2012}.
+
+Apply the relative connected Cerf theorem
+\cite[Theorem~3.6]{GayWehrheimWoodward2012}.  It gives a regular homotopy
+satisfying the boundary minimum/maximum condition, with connected levels and
+only finitely many special parameters, each a single critical-value crossing
+or cusp.  We do not require the homotopy to fix a prescribed quadratic
+collar pointwise; changes of the boundary collars are absorbed by the
+ambient isotopies at the ends.  The
+boundary minimum/maximum condition excludes interior critical points of
+index $0$ and $4$ throughout the homotopy; this exclusion is made explicit
+in the proof of the cited theorem.  Hence a cusp can create or cancel only an
+index-$(1,2)$ or index-$(2,3)$ pair, proving all three assertions.
+\end{proof}
+
+\begin{definition}[Exact special-link realization]
+\label{def:exact-special-link-realization}
+An \emph{exact special-link realization} of a relative Cerf homotopy between
+special handle decompositions $\mathcal H_0$ and $\mathcal H_1$ consists of
+the following category-neutral data:
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item a finite sequence $D_0,\ldots,D_N$ of special Kirby
+  representatives of its regular stages, with $D_0$ and $D_N$ equal to the
+  prescribed endpoint representatives;
+
+  \item for every $j<N$, one of the eight unmarked directed events of
+  \cref{def:kirby-event} from $D_j$ to $D_{j+1}$;
+
+  \item a ball or standard cancelling-pair neighborhood supporting that
+  event, outside which the special framed link is unchanged; and
+
+  \item the equality between the event's declared handle-chain map and the
+  cellular continuation map of the corresponding local Cerf segment.
+\end{enumerate}
+An index-$3$ slide is omitted from the finite sequence only after identifying
+the two stages by the induced integral change of the displayed $C_3$ basis.
+This is a silent equivalence of the data retained in
+\cref{def:special-kirby-representative}: it preserves $h_3$ and
+$\operatorname{im}(\partial_3)$, but is not the identity operation on the
+full handle decomposition.  The definition contains no category, character,
+graphical evaluation, or scalar equality.
+\end{definition}
+
+\begin{topologyinput}[Exact special-link realization]
+\label{ass:exact-special-link-realization}
+For every pair of special handle decompositions as in
+\cref{prop:relative-fixed-extrema-cerf}, at least one relative Cerf homotopy
+with the properties stated there admits an exact special-link realization in
+the sense of \cref{def:exact-special-link-realization}.
+\end{topologyinput}
+
+\begin{remark}[Scope and classical evidence for the topology input]
+The standard one-parameter handle argument in the proof of
+\cite[Theorem~4.2.12]{GompfStipsicz1999} identifies regular intervals,
+same-index trajectories, and cusps with level isotopies, handle slides, and
+adjacent-index creations or cancellations.  Their special-link pictures are
+the $1/1$, $2/1$, and $2/2$ slides and the $1$--$2$ and $2$--$3$
+cancellations in \cite[Table~2 and pp.~22--23]{BarenzBarrett2018}.  The $2/1$
+picture is the dotted-link record of isotoping a $2$-handle attaching circle
+through a $1$-handle; see
+\cite[Figure~5.36 and the surrounding discussion]{GompfStipsicz1999}.
+
+These references establish the classical ingredients, but do not state the
+source-bound package in
+\cref{def:exact-special-link-realization} verbatim.  In particular, different
+gradient choices near a critical-value switch can produce different finite
+strings of slides \cite[Remark~3.3]{GayWehrheimWoodward2012}.  We therefore
+isolate existence of one exact finite realization as the sole remaining
+topology-to-special-link input.  It is also the single corresponding
+Kirby--Cerf entrance axiom in the Lean formalization.
+\end{remark}
+
+\begin{theorem}[Fixed-extrema marked Kirby--Cerf completeness]
+\label{prop:marked-kirby-cerf}
+Assume \cref{ass:exact-special-link-realization}.
+Let $(D,\xi_D)$ and $(D',\xi_{D'})$ represent $(X,\alpha)$ and
+$(Y,\alpha')$, respectively, and let $f\colon X\to Y$ be an
+orientation-preserving diffeomorphism such that $f_*\alpha=\alpha'$.  A
+finite sequence of the events in
+\cref{def:marked-kirby-event} joins the two diagrams, and the composite of
+their source-to-target handle-cohomology transports carries $\xi_D$ to
+$\xi_{D'}$.
+\end{theorem}
+
+\begin{proof}
 Pull the target handle decomposition back along the specified
-diffeomorphism.  The comparison is then between two handle decompositions of
-the same oriented manifold, and the marking is the same class in
-$H^2(X;\mathbb Z)$.
+diffeomorphism.  The comparison is then between two special handle
+decompositions of the same oriented manifold.  Apply
+\cref{ass:exact-special-link-realization} to obtain a relative Cerf homotopy
+and its finite unmarked eight-event realization.
 
-Choose small neighborhoods of the unique minima and maxima and identify them
-by ambient isotopy.  Their complement is a connected cobordism from $S^3$ to
-$S^3$.  Connected Cerf theory gives a generic homotopy relative to these
-boundary components whose intermediate levels stay connected and whose
-critical points have only indices $1$, $2$, and $3$
-\cite[Definition~2.1, Theorems~3.4 and~3.6]{GayWehrheimWoodward2012}.
-Thus no $0/1$ or $3/4$ birth or death occurs.  The remaining critical-value
-crossings and cusps give level isotopies, handle slides, and births or deaths
-of cancelling $1$--$2$ and $2$--$3$ pairs.  In special framed-link notation
-these are exactly the moves in \cite[Table~2]{BarenzBarrett2018}; compare
-also \cite[Theorem~4.2.12]{GompfStipsicz1999}.  Directing each move and
-separating the special-link isotopy through a dotted component gives the
-eight events of \cref{def:marked-kirby-event}.
+Write $F_j$ for the cellular continuation map of the $j$th event and
+$T_j=(F_j^*)^{-1}$ for its source-to-target cohomology transport.  By
+\cref{lem:marked-handle-complex-naturality}, the cellular comparison maps to
+singular cohomology commute with each contravariant map $F_j^*$.  Hence
+$T_j$ carries the handle class corresponding to a fixed singular-cohomology
+class to the class corresponding to that same class in the next handle
+decomposition.  Starting with $\xi_D$, define each intermediate marking by
+$\xi_{j+1}:=T_j(\xi_j)$.  This turns the unmarked movie into a movie of marked
+events without adding any topology or evaluation assumption.  Induction
+shows that the composite of the $T_j$ carries $\xi_D$ to the marking of the
+pulled-back target.
 
-By \cref{lem:marked-handle-complex-naturality}, the cellular comparison maps
-to singular cohomology form a commutative square with the chain map of every
-event.  Hence the induced map on handle cohomology carries the class corresponding to
-$\operatorname{PD}_X(\alpha)$ to the same singular cohomology class.  By
-induction, the composite along the finite movie transports $\xi_D$ to the
-marking of the pulled-back target.  Undoing the pullback identifies this
-composite with the map induced by the original diffeomorphism.  Integral
-changes of the $C_3$ basis are invisible by
-\cref{lem:c3-basis-independence}.
+Undoing the pullback uses the naturality
+identity
+\[
+  f^*\operatorname{PD}_Y(f_*\alpha)=\operatorname{PD}_X(\alpha)
+\]
+for an orientation-preserving diffeomorphism $f$.  Hence the composite
+source-to-target transport carries $\xi_D$ to $\xi_{D'}$, as claimed.
 \end{proof}
 
 \begin{proposition}[Local movie normal forms]
