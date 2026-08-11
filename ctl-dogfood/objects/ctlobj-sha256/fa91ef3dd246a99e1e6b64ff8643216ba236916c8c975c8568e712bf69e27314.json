@@ -1,0 +1,88 @@
+{
+  "created_at": "2026-08-11T05:19:49Z",
+  "created_by": {
+    "actor_id": "actor:codex"
+  },
+  "kernel_profile": "ctl-kernel/1",
+  "logical_id": "claim:correspondence:2026-08-10-ruberman-nonsimply-connected-marked-stable-diffeomorphism",
+  "parents": [],
+  "payload": {
+    "conditional_project_consequence": {
+      "reason": "Homotopy to f summed with the identity gives exactly the H_2 transport required to compare the stabilized marked evaluations, after which the common nonzero stabilization factor can be cancelled.",
+      "statement": "If the proposed stronger stable-diffeomorphism statement is proved, and if marked diffeomorphism invariance, connected-sum multiplicativity, and nonvanishing of the S^2 x S^2 stabilization factor hold for the twisted Crane-Yetter evaluation, then the stabilization-and-cancellation argument extends the exotic-smoothness no-go result to non-simply-connected closed oriented smooth 4-manifolds.",
+      "status": "CONDITIONAL_INFERENCE"
+    },
+    "explicit_non_claims": [
+      "This correspondence is not a published theorem or a proof.",
+      "Ruberman's guess is not promoted to ESTABLISHED status.",
+      "The cited primary sources have not yet been checked for the exact homotopy-control statement.",
+      "The Kirby-Siebenmann obstruction argument is a proposed route, not a completed derivation.",
+      "The non-simply-connected twisted Crane-Yetter no-go theorem is not established by this note alone.",
+      "This private email must not be quoted or published without appropriate permission."
+    ],
+    "formal_theorem_claim_made": false,
+    "mathematical_status": "EXPERT_CONJECTURAL_GUIDANCE",
+    "note_id": "objective-note-2026-08-10-ruberman-nonsimply-connected-marked-stable-diffeomorphism-correspondence",
+    "preflight": {
+      "ctl_history_validity": "Valid",
+      "ctl_root_before_admission": "ctlobj-sha256:ea49c6f2e570820e072f35abfb744ea23140f5576dee62a0c2763d139b0a4d83",
+      "ctl_verify_before_admission": "PASS",
+      "source_repo_commit": "9931f5d7fd06b7817bc2f577892981daa91c82a6"
+    },
+    "proposed_stronger_statement": {
+      "implication_for_marking": "Such a homotopy implies F_*(alpha direct-sum 0) = f_*(alpha) direct-sum 0 for every alpha in H_2(X; Z), which is stronger than transport of one prescribed class.",
+      "statement": "Given an orientation-preserving homeomorphism f : X -> Y of closed oriented smooth 4-manifolds, after connected summing both sides with sufficiently many copies of S^2 x S^2, there is an orientation-preserving diffeomorphism F homotopic to f summed with the identity on the stabilizing summands.",
+      "status": "CONJECTURAL_ROUTE_SUGGESTED_IN_PRIVATE_CORRESPONDENCE"
+    },
+    "recorded_at": "2026-08-11T05:19:49Z",
+    "recorded_by": "actor:codex",
+    "references_as_supplied": [
+      "R. E. Gompf, Stable diffeomorphism of compact 4-manifolds, Topology Appl. 18 (1984), 115-120, MR0769285.",
+      "M. Kreck, Some closed 4-manifolds with exotic differentiable structure, Algebraic topology, Aarhus 1982, LNM 1051, 246-262, MR0764582.",
+      "T. C. Lawson, Trivializing 5-dimensional h-cobordisms by stabilization, Manuscripta Math. 29 (1979), 305-321, MR0545047.",
+      "F. S. Quinn III, The stable topology of 4-manifolds, Topology Appl. 15 (1983), 71-77, MR0676968."
+    ],
+    "relation_to_current_research": {
+      "does_not_supersede": true,
+      "reason": "The existing current claim concerns the simply connected marked realization route. This correspondence supplies a conjectural route for the unresolved non-simply-connected extension.",
+      "updates_context_for": "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal"
+    },
+    "schema": "twisted-yetter/private-correspondence-note/1",
+    "source": {
+      "medium": "private email",
+      "publication_status": "PRIVATE_CORRESPONDENCE_DO_NOT_PUBLISH_WITHOUT_PERMISSION",
+      "received_at": null,
+      "recipient": "Jin",
+      "sender": "Danny Ruberman",
+      "transcription_status": "USER_SUPPLIED_VERBATIM"
+    },
+    "source_assertions": [
+      {
+        "statement": "To Ruberman's knowledge, the requested homology-controlled non-simply-connected statement probably has not been addressed in the literature.",
+        "status": "EXPERT_SOURCE_REPORT_NOT_INDEPENDENTLY_VERIFIED"
+      },
+      {
+        "statement": "Gompf, and also Kreck, prove unmarked stable diffeomorphism for homeomorphic orientable 4-manifolds, but apparently do not track the induced action on homology.",
+        "status": "EXPERT_SOURCE_REPORT_REQUIRES_PRIMARY_SOURCE_CHECK"
+      },
+      {
+        "statement": "Ruberman guesses that the argument can probably be refined to obtain the requested homology control.",
+        "status": "EXPERT_CONJECTURAL_GUIDANCE"
+      }
+    ],
+    "suggested_route": [
+      "Form the mapping cylinder C_f of the homeomorphism f.",
+      "Regard C_f as a topological s-cobordism using topological invariance of torsion.",
+      "Track the map X -> C_f -> Y, which is homotopic to f.",
+      "Analyze the Kirby-Siebenmann smoothing obstruction in H^4(C_f, X union Y), identified in the email with H_1(X).",
+      "Modify C_f to kill that obstruction and obtain a smooth s-cobordism.",
+      "Apply the Lawson-Quinn stable s-cobordism theorem while retaining enough control to show that the resulting stable diffeomorphism is homotopic to f summed with the identity."
+    ],
+    "title": "Ruberman correspondence on homology-controlled stable diffeomorphism beyond the simply connected case",
+    "verbatim_message": "Dear Jin,\n\nThat’s an interesting question, which to my knowledge probably hasn’t been addressed in the literature. Gompf [G] (see also Kreck [K]) shows that homeomorphic orientable 4-manifolds are stably diffeomorphic. The proof uses smoothing theory along with some direct geometric constructions. I don’t think that either Gompf or Kreck tracks the effect on homology, but my guess is that with some care, one could do that to get the statement you asked about. \n\nIt’s possible that there’s an alternate way to phrase Gompf's argument along the following lines.  Consider the mapping cylinder of the given homeomorphism f, say C_f It is a topological s-cobordism (by the topological invariance of torsion). Note that the composition of the inclusion of X and the obvious deformation retraction of C_f onto Y is homotopic to f. There is a well-defined Kirby-Siebenmann obstruction to smoothing it, lying in H^4(C_f, X \\cup Y) \\cong H_1(X). I think that Gompf is arguing that you can change C_f to kill this obstruction, yielding a smooth s-cobordism. The stable s-cobordism theorem [L, Q] then produces a diffeomorphism.  I think what you’d want to show is that Gompf’s arguments produce a stable diffeomorphism that is homotopic to the original f (summed with the identity on the S^2xS^2 summands). That’s a somewhat stronger conclusion than you were asking for.\n\nHope this helps!\n\nWith best regards,\nDanny Ruberman\n\n[G] R.~E. Gompf, Stable diffeomorphism of compact $4$-manifolds, Topology Appl. {\\bf 18} (1984), no.~2-3, 115--120; MR0769285\n\n[K] M. Kreck, Some closed $4$-manifolds with exotic differentiable structure, in {\\it Algebraic topology, Aarhus 1982 (Aarhus, 1982)}, 246--262, Lecture Notes in Math., 1051, Springer, Berlin, ; MR0764582\n\n[L] T.~C. Lawson, Trivializing $5$-dimensional $h$-cobordisms by stabilization, Manuscripta Math. {\\bf 29} (1979), no.~2-4, 305--321; MR0545047\n\n[Q] F.~S. Quinn III, The stable topology of $4$-manifolds, Topology Appl. {\\bf 15} (1983), no.~1, 71--77; MR0676968"
+  },
+  "payload_profile": "ctl-data/opaque-json/1",
+  "profile": "ctl/revision/1",
+  "project_id": "project:twisted-yetter",
+  "revision_kind": "claim"
+}

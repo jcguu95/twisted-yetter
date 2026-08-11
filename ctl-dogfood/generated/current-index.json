@@ -1,6 +1,98 @@
 {
   "current_payload_summaries": [
     {
+      "cid": "ctlobj-sha256:fa91ef3dd246a99e1e6b64ff8643216ba236916c8c975c8568e712bf69e27314",
+      "logical_id": "claim:correspondence:2026-08-10-ruberman-nonsimply-connected-marked-stable-diffeomorphism",
+      "payload": {
+        "conditional_project_consequence": {
+          "reason": "Homotopy to f summed with the identity gives exactly the H_2 transport required to compare the stabilized marked evaluations, after which the common nonzero stabilization factor can be cancelled.",
+          "statement": "If the proposed stronger stable-diffeomorphism statement is proved, and if marked diffeomorphism invariance, connected-sum multiplicativity, and nonvanishing of the S^2 x S^2 stabilization factor hold for the twisted Crane-Yetter evaluation, then the stabilization-and-cancellation argument extends the exotic-smoothness no-go result to non-simply-connected closed oriented smooth 4-manifolds.",
+          "status": "CONDITIONAL_INFERENCE"
+        },
+        "explicit_non_claims": [
+          "This correspondence is not a published theorem or a proof.",
+          "Ruberman's guess is not promoted to ESTABLISHED status.",
+          "The cited primary sources have not yet been checked for the exact homotopy-control statement.",
+          "The Kirby-Siebenmann obstruction argument is a proposed route, not a completed derivation.",
+          "The non-simply-connected twisted Crane-Yetter no-go theorem is not established by this note alone.",
+          "This private email must not be quoted or published without appropriate permission."
+        ],
+        "formal_theorem_claim_made": false,
+        "mathematical_status": "EXPERT_CONJECTURAL_GUIDANCE",
+        "note_id": "objective-note-2026-08-10-ruberman-nonsimply-connected-marked-stable-diffeomorphism-correspondence",
+        "preflight": {
+          "ctl_history_validity": "Valid",
+          "ctl_root_before_admission": "ctlobj-sha256:ea49c6f2e570820e072f35abfb744ea23140f5576dee62a0c2763d139b0a4d83",
+          "ctl_verify_before_admission": "PASS",
+          "source_repo_commit": "9931f5d7fd06b7817bc2f577892981daa91c82a6"
+        },
+        "proposed_stronger_statement": {
+          "implication_for_marking": "Such a homotopy implies F_*(alpha direct-sum 0) = f_*(alpha) direct-sum 0 for every alpha in H_2(X; Z), which is stronger than transport of one prescribed class.",
+          "statement": "Given an orientation-preserving homeomorphism f : X -> Y of closed oriented smooth 4-manifolds, after connected summing both sides with sufficiently many copies of S^2 x S^2, there is an orientation-preserving diffeomorphism F homotopic to f summed with the identity on the stabilizing summands.",
+          "status": "CONJECTURAL_ROUTE_SUGGESTED_IN_PRIVATE_CORRESPONDENCE"
+        },
+        "recorded_at": "2026-08-11T05:19:49Z",
+        "recorded_by": "actor:codex",
+        "references_as_supplied": [
+          "R. E. Gompf, Stable diffeomorphism of compact 4-manifolds, Topology Appl. 18 (1984), 115-120, MR0769285.",
+          "M. Kreck, Some closed 4-manifolds with exotic differentiable structure, Algebraic topology, Aarhus 1982, LNM 1051, 246-262, MR0764582.",
+          "T. C. Lawson, Trivializing 5-dimensional h-cobordisms by stabilization, Manuscripta Math. 29 (1979), 305-321, MR0545047.",
+          "F. S. Quinn III, The stable topology of 4-manifolds, Topology Appl. 15 (1983), 71-77, MR0676968."
+        ],
+        "relation_to_current_research": {
+          "does_not_supersede": true,
+          "reason": "The existing current claim concerns the simply connected marked realization route. This correspondence supplies a conjectural route for the unresolved non-simply-connected extension.",
+          "updates_context_for": "claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal"
+        },
+        "schema": "twisted-yetter/private-correspondence-note/1",
+        "source": {
+          "medium": "private email",
+          "publication_status": "PRIVATE_CORRESPONDENCE_DO_NOT_PUBLISH_WITHOUT_PERMISSION",
+          "received_at": null,
+          "recipient": "Jin",
+          "sender": "Danny Ruberman",
+          "transcription_status": "USER_SUPPLIED_VERBATIM"
+        },
+        "source_assertions": [
+          {
+            "statement": "To Ruberman's knowledge, the requested homology-controlled non-simply-connected statement probably has not been addressed in the literature.",
+            "status": "EXPERT_SOURCE_REPORT_NOT_INDEPENDENTLY_VERIFIED"
+          },
+          {
+            "statement": "Gompf, and also Kreck, prove unmarked stable diffeomorphism for homeomorphic orientable 4-manifolds, but apparently do not track the induced action on homology.",
+            "status": "EXPERT_SOURCE_REPORT_REQUIRES_PRIMARY_SOURCE_CHECK"
+          },
+          {
+            "statement": "Ruberman guesses that the argument can probably be refined to obtain the requested homology control.",
+            "status": "EXPERT_CONJECTURAL_GUIDANCE"
+          }
+        ],
+        "suggested_route": [
+          "Form the mapping cylinder C_f of the homeomorphism f.",
+          "Regard C_f as a topological s-cobordism using topological invariance of torsion.",
+          "Track the map X -> C_f -> Y, which is homotopic to f.",
+          "Analyze the Kirby-Siebenmann smoothing obstruction in H^4(C_f, X union Y), identified in the email with H_1(X).",
+          "Modify C_f to kill that obstruction and obtain a smooth s-cobordism.",
+          "Apply the Lawson-Quinn stable s-cobordism theorem while retaining enough control to show that the resulting stable diffeomorphism is homotopic to f summed with the identity."
+        ],
+        "title": "Ruberman correspondence on homology-controlled stable diffeomorphism beyond the simply connected case",
+        "verbatim_message": "Dear Jin,\n\nThat\u2019s an interesting question, which to my knowledge probably hasn\u2019t been addressed in the literature. Gompf [G] (see also Kreck [K]) shows that homeomorphic orientable 4-manifolds are stably diffeomorphic. The proof uses smoothing theory along with some direct geometric constructions. I don\u2019t think that either Gompf or Kreck tracks the effect on homology, but my guess is that with some care, one could do that to get the statement you asked about. \n\nIt\u2019s possible that there\u2019s an alternate way to phrase Gompf's argument along the following lines.  Consider the mapping cylinder of the given homeomorphism f, say C_f It is a topological s-cobordism (by the topological invariance of torsion). Note that the composition of the inclusion of X and the obvious deformation retraction of C_f onto Y is homotopic to f. There is a well-defined Kirby-Siebenmann obstruction to smoothing it, lying in H^4(C_f, X \\cup Y) \\cong H_1(X). I think that Gompf is arguing that you can change C_f to kill this obstruction, yielding a smooth s-cobordism. The stable s-cobordism theorem [L, Q] then produces a diffeomorphism.  I think what you\u2019d want to show is that Gompf\u2019s arguments produce a stable diffeomorphism that is homotopic to the original f (summed with the identity on the S^2xS^2 summands). That\u2019s a somewhat stronger conclusion than you were asking for.\n\nHope this helps!\n\nWith best regards,\nDanny Ruberman\n\n[G] R.~E. Gompf, Stable diffeomorphism of compact $4$-manifolds, Topology Appl. {\\bf 18} (1984), no.~2-3, 115--120; MR0769285\n\n[K] M. Kreck, Some closed $4$-manifolds with exotic differentiable structure, in {\\it Algebraic topology, Aarhus 1982 (Aarhus, 1982)}, 246--262, Lecture Notes in Math., 1051, Springer, Berlin, ; MR0764582\n\n[L] T.~C. Lawson, Trivializing $5$-dimensional $h$-cobordisms by stabilization, Manuscripta Math. {\\bf 29} (1979), no.~2-4, 305--321; MR0545047\n\n[Q] F.~S. Quinn III, The stable topology of $4$-manifolds, Topology Appl. {\\bf 15} (1983), no.~1, 71--77; MR0676968"
+      },
+      "payload_profile": "ctl-data/opaque-json/1",
+      "revision": {
+        "cid": "ctlobj-sha256:fa91ef3dd246a99e1e6b64ff8643216ba236916c8c975c8568e712bf69e27314",
+        "created_at": "2026-08-11T05:19:49Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "logical_id": "claim:correspondence:2026-08-10-ruberman-nonsimply-connected-marked-stable-diffeomorphism",
+        "parents": [],
+        "payload_profile": "ctl-data/opaque-json/1",
+        "revision_kind": "claim"
+      },
+      "revision_kind": "claim"
+    },
+    {
       "cid": "ctlobj-sha256:1772bf7aae59dcc2f7c6a93108f49cde6b4efdfcca9e4e76eed88ce228489cb1",
       "logical_id": "claim:current-status:2026-07-15-yasui-character-twists-no-known-separation",
       "payload": {
@@ -22550,6 +22642,7 @@
   ],
   "discovery_index": {
     "active_bindings": {
+      "claim:correspondence:2026-08-10-ruberman-nonsimply-connected-marked-stable-diffeomorphism": "ctlobj-sha256:fa91ef3dd246a99e1e6b64ff8643216ba236916c8c975c8568e712bf69e27314",
       "claim:current-status:2026-07-15-yasui-character-twists-no-known-separation": "ctlobj-sha256:1772bf7aae59dcc2f7c6a93108f49cde6b4efdfcca9e4e76eed88ce228489cb1",
       "claim:equivalence:anyonwiki-fr-6-1-4-5-cat-1-3-1-cat-1-3-2-scalar-gauge-2026-07-06": "ctlobj-sha256:b590a760cf5ba0069fbae6289ec9b790d71ca6c45b7ef73845b8019ceaefd62f",
       "claim:graph:computation-first-v1": "ctlobj-sha256:cebff6437e498164292ea68270cf0ac6e47447a9869cbe6e225b19915c548419",
@@ -22917,6 +23010,9 @@
       "sys:policy": "ctlobj-sha256:c1ec81b7dbe81f9bdd4ed7a558611dc8a6a7574a7b0a3224058f8d1c96c433c1"
     },
     "by_logical_id": {
+      "claim:correspondence:2026-08-10-ruberman-nonsimply-connected-marked-stable-diffeomorphism": [
+        "ctlobj-sha256:fa91ef3dd246a99e1e6b64ff8643216ba236916c8c975c8568e712bf69e27314"
+      ],
       "claim:current-status:2026-07-15-yasui-character-twists-no-known-separation": [
         "ctlobj-sha256:1772bf7aae59dcc2f7c6a93108f49cde6b4efdfcca9e4e76eed88ce228489cb1",
         "ctlobj-sha256:382c9f045bba394d561dd73b78f4f59b4cd1895595f373746b34cfcada78a1fd"
@@ -24580,6 +24676,7 @@
         "ctlobj-sha256:f9bf33167ebb1e751f9d3327ce7b0895d811560eb40ce8ba313ed6c2edfc0268",
         "ctlobj-sha256:f9c7f1db4fe001e5a0a0f0d8b9790e9428c183c35680def86cd1fc9555df422e",
         "ctlobj-sha256:fa7738e1cf5422fc9a39441078edd192b0e329a2e886b59312201ec377febd2b",
+        "ctlobj-sha256:fa91ef3dd246a99e1e6b64ff8643216ba236916c8c975c8568e712bf69e27314",
         "ctlobj-sha256:fbe65adcfc82b6c81665fee8949b7a0a2f3a44736f493ef2035f4f0c50eddeb0",
         "ctlobj-sha256:fc3b31974828b8f5f4e96026dfea338848c954bcb7c0e39e361618064842dcd1",
         "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b",
@@ -24809,6 +24906,7 @@
         "ctlobj-sha256:f5519c0bf9f636f184e6e948b663c0c97b66e2bba9f8a117ed9ade8b2011acb5",
         "ctlobj-sha256:f8d642a74d38232616291f9effcdf6db102481c4a75dd0c06ce028992ef5f118",
         "ctlobj-sha256:f99e639d1963110b1a77655a8ef3c06a968f40209ebbcc4b2e449e6c888203aa",
+        "ctlobj-sha256:fa91ef3dd246a99e1e6b64ff8643216ba236916c8c975c8568e712bf69e27314",
         "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b",
         "ctlobj-sha256:fd3ceef9f96c0e3641963ee41ac739f7ec6dc18f44c0ccad16f1e9672d7c8644",
         "ctlobj-sha256:fd9f1cf66300979d1327713702829362296e39c72abc11f08202309b2da83a9a",
@@ -26717,6 +26815,15 @@
           "path": "$.local_reference_cids[1]",
           "source_cid": "ctlobj-sha256:f6e9930c15b01896b981c497ef42c75007b72dc328ac89ef367b99b5db71a355",
           "target_cid": "ctlobj-sha256:8b70ba3ab9e0a417255bc2c6248afc61d3f125427a78e02495e3b16571e51ed2"
+        }
+      ],
+      "ctlobj-sha256:fa91ef3dd246a99e1e6b64ff8643216ba236916c8c975c8568e712bf69e27314": [
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.preflight.ctl_root_before_admission",
+          "source_cid": "ctlobj-sha256:fa91ef3dd246a99e1e6b64ff8643216ba236916c8c975c8568e712bf69e27314",
+          "target_cid": "ctlobj-sha256:ea49c6f2e570820e072f35abfb744ea23140f5576dee62a0c2763d139b0a4d83"
         }
       ],
       "ctlobj-sha256:fce90eb9b380ea0a34e9970ee49f90d193cfb3b424a0ab0b0e90de63d891df0b": [
@@ -37685,6 +37792,23 @@
           "payload_file": null,
           "profile": null,
           "schema": "ctl-dogfood/bootstrap-manifest/1"
+        },
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:023550ae1ffb082b8c6d0a32731a59201618d3e0fca303623662bb68eb0579e8",
+          "generated_at": "2026-08-11T05:19:49Z",
+          "logical_id": "claim:correspondence:2026-08-10-ruberman-nonsimply-connected-marked-stable-diffeomorphism",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ea49c6f2e570820e072f35abfb744ea23140f5576dee62a0c2763d139b0a4d83",
+          "path": "manifests/correspondence-2026-08-10-ruberman-nonsimply-connected-marked-stable-diffeomorphism.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-08-10-ruberman-nonsimply-connected-marked-stable-diffeomorphism-correspondence.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
         },
         {
           "admission_batch_cid": null,
@@ -61636,6 +61760,26 @@
           "schema": "ctl-dogfood/admission-manifest/1"
         }
       ],
+      "ctlobj-sha256:fa91ef3dd246a99e1e6b64ff8643216ba236916c8c975c8568e712bf69e27314": [
+        {
+          "admission_batch_cid": null,
+          "child_root_cid": null,
+          "created_at": null,
+          "current_root_cid": "ctlobj-sha256:023550ae1ffb082b8c6d0a32731a59201618d3e0fca303623662bb68eb0579e8",
+          "generated_at": "2026-08-11T05:19:49Z",
+          "logical_id": "claim:correspondence:2026-08-10-ruberman-nonsimply-connected-marked-stable-diffeomorphism",
+          "manifest_kind": null,
+          "matched_by": [
+            "cid",
+            "logical_id"
+          ],
+          "parent_root_cid": "ctlobj-sha256:ea49c6f2e570820e072f35abfb744ea23140f5576dee62a0c2763d139b0a4d83",
+          "path": "manifests/correspondence-2026-08-10-ruberman-nonsimply-connected-marked-stable-diffeomorphism.json",
+          "payload_file": "ctl-dogfood/lab-notes/2026-08-10-ruberman-nonsimply-connected-marked-stable-diffeomorphism-correspondence.json",
+          "profile": null,
+          "schema": "ctl-dogfood/admission-manifest/1"
+        }
+      ],
       "ctlobj-sha256:fbe65adcfc82b6c81665fee8949b7a0a2f3a44736f493ef2035f4f0c50eddeb0": [
         {
           "admission_batch_cid": "ctlobj-sha256:7a5c7545c8be8ac74d4e184247ec12819e698319bb665f9fd43f377788f778e0",
@@ -76392,6 +76536,36 @@
         },
         "word_count": 9
       },
+      "ctlobj-sha256:fa91ef3dd246a99e1e6b64ff8643216ba236916c8c975c8568e712bf69e27314": {
+        "active_state": "active",
+        "cid": "ctlobj-sha256:fa91ef3dd246a99e1e6b64ff8643216ba236916c8c975c8568e712bf69e27314",
+        "created_at": "2026-08-11T05:19:49Z",
+        "created_by": {
+          "actor_id": "actor:codex"
+        },
+        "estimated_tokens": 2214,
+        "gist": "Ruberman correspondence on homology-controlled stable diffeomorphism beyond the simply connected case",
+        "logical_id": "claim:correspondence:2026-08-10-ruberman-nonsimply-connected-marked-stable-diffeomorphism",
+        "payload_profile": "ctl-data/opaque-json/1",
+        "preview_source": "generic-derived-preview",
+        "revision_kind": "claim",
+        "search_text": "{\"conditional_project_consequence\":{\"reason\":\"Homotopy to f summed with the identity gives exactly the H_2 transport required to compare the stabilized marked evaluations, after which the common nonzero stabilization factor can be cancelled.\",\"statement\":\"If the proposed stronger stable-diffeomorphism statement is proved, and if marked diffeomorphism invariance, connected-sum multiplicativity, and nonvanishing of the S^2 x S^2 stabilization factor hold for the twisted Crane-Yetter evaluation, then the stabilization-and-cancellation argument extends the exotic-smoothness no-go result to non-simply-connected closed oriented smooth 4-manifolds.\",\"status\":\"CONDITIONAL_INFERENCE\"},\"explicit_non_claims\":[\"This correspondence is not a published theorem or a proof.\",\"Ruberman's guess is not promoted to ESTABLISHED status.\",\"The cited primary sources have not yet been checked for the exact homotopy-control statement.\",\"The Kirby-Siebenmann obstruction argument is a proposed route, not a completed derivation.\",\"The non-simply-connected twisted Crane-Yetter no-go theorem is not established by this note alone.\",\"This private email must not be quoted or published without appropriate permission.\"],\"formal_theorem_claim_made\":false,\"mathematical_status\":\"EXPERT_CONJECTURAL_GUIDANCE\",\"note_id\":\"objective-note-2026-08-10-ruberman-nonsimply-connected-marked-stable-diffeomorphism-correspondence\",\"preflight\":{\"ctl_history_validity\":\"Valid\",\"ctl_root_before_admission\":\"ctlobj-sha256:ea49c6f2e570820e072f35abfb744ea23140f5576dee62a0c2763d139b0a4d83\",\"ctl_verify_before_admission\":\"PASS\",\"source_repo_commit\":\"9931f5d7fd06b7817bc2f577892981daa91c82a6\"},\"proposed_stronger_statement\":{\"implication_for_marking\":\"Such a homotopy implies F_*(alpha direct-sum 0) = f_*(alpha) direct-sum 0 for every alpha in H_2(X; Z), which is stronger than transport of one prescribed class.\",\"statement\":\"Given an orientation-preserving homeomorphism f : X -> Y of closed oriented smooth 4-manifolds, after connected summing both sides with sufficiently many copies of S^2 x S^2, there is an orientation-preserving diffeomorphism F homotopic to f summed with the identity on the stabilizing summands.\",\"status\":\"CONJECTURAL_ROUTE_SUGGESTED_IN_PRIVATE_CORRESPONDENCE\"},\"recorded_at\":\"2026-08-11T05:19:49Z\",\"recorded_by\":\"actor:codex\",\"references_as_supplied\":[\"R. E. Gompf, Stable diffeomorphism of compact 4-manifolds, Topology Appl. 18 (1984), 115-120, MR0769285.\",\"M. Kreck, Some closed 4-manifolds with exotic differentiable structure, Algebraic topology, Aarhus 1982, LNM 1051, 246-262, MR0764582.\",\"T. C. Lawson, Trivializing 5-dimensional h-cobordisms by stabilization, Manuscripta Math. 29 (1979), 305-321, MR0545047.\",\"F. S. Quinn III, The stable topology of 4-manifolds, Topology Appl. 15 (1983), 71-77, MR0676968.\"],\"relation_to_current_research\":{\"does_not_supersede\":true,\"reason\":\"The existing current claim concerns the simply connected marked realization route. This correspondence supplies a conjectural route for the unresolved non-simply-connected extension.\",\"updates_context_for\":\"claim:lab-note:2026-07-16-twisted-yetter-stable-no-go-argument-proposal\"},\"schema\":\"twisted-yetter/private-correspondence-note/1\",\"source\":{\"medium\":\"private email\",\"publication_status\":\"PRIVATE_CORRESPONDENCE_DO_NOT_PUBLISH_WITHOUT_PERMISSION\",\"received_at\":null,\"recipient\":\"Jin\",\"sender\":\"Danny Ruberman\",\"transcription_status\":\"USER_SUPPLIED_VERBATIM\"},\"source_assertions\":[{\"statement\":\"To Ruberman's knowledge, the requested homology-controlled non-simply-connected statement probably has not been addressed in the literature.\",\"status\":\"EXPERT_SOURCE_REPORT_NOT_INDEPENDENTLY_VERIFIED\"},{\"statement\":\"Gompf, and also Kreck, prove unmarked stable diffeomorphism for homeomorphic orientable 4-manifolds, but apparently do not track the induced action on homology.\",\"status\":\"EXPERT_SOURCE_REPORT_REQUIRES_PRIMARY_SOURCE_CHECK\"},{\"statement\":\"Ruberman guesses that the argument can probably be refined to obtain the requested homology control.\",\"status\":\"EXPERT_CONJECTURAL_GUIDANCE\"}],\"suggested_route\":[\"Form the mapping cylinder C_f of the homeomorphism f.\",\"Regard C_f as a topological s-cobordism using topological invariance of torsion.\",\"Track the map X -> C_f -> Y, which is homotopic to f.\",\"Analyze the Kirby-Siebenmann smoothing obstruction in H^4(C_f, X union Y), identified in the email with H_1(X).\",\"Modify C_f to kill that obstruction and obtain a smooth s-cobordism.\",\"Apply the Lawson-Quinn stable s-cobordism theorem while retaining enough control to show that the resulting stable diffeomorphism is homotopic to f summed with the identity.\"],\"title\":\"Ruberman correspondence on homology-controlled stable diffeomorphism beyond the simply connected case\",\"verbatim_message\":\"Dear Jin,\\n\\nThat\u2019s an interesting question, which to my knowledge probably hasn\u2019t been addressed in the literature. Gompf [G] (see also Kreck [K]) shows that homeomorphic orientable 4-manifolds are stably diffeomorphic. The proof uses smoothing theory along with some direct geometric constructions. I don\u2019t think that either Gompf or Kreck tracks the effect on homology, but my guess is that with some care, one could do that to get the statement you asked about. \\n\\nIt\u2019s possible that there\u2019s an alternate way to phrase Gompf's argument along the following lines.  Consider the mapping cylinder of the given homeomorphism f, say C_f It is a topological s-cobordism (by the topological invariance of torsion). Note that the composition of the inclusion of X and the obvious deformation retraction of C_f onto Y is homotopic to f. There is a well-defined Kirby-Siebenmann obstruction to smoothing it, lying in H^4(C_f, X \\\\cup Y) \\\\cong H_1(X). I think that Gompf is arguing that you can change C_f to kill this obstruction, yielding a smooth s-cobordism. The stable s-cobordism theorem [L, Q] then produces a diffeomorphism.  I think what you\u2019d want to show is that Gompf\u2019s arguments produce a stable diffeomorphism that is homotopic to the original f (summed with the identity on the S^2xS^2 summands). That\u2019s a somewhat stronger conclusion than you were asking for.\\n\\nHope this helps!\\n\\nWith best regards,\\nDanny Ruberman\\n\\n[G] R.~E. Gompf, Stable diffeomorphism of compact $4$-manifolds, Topology Appl. {\\\\bf 18} (1984), no.~2-3, 115--120; MR0769285\\n\\n[K] M. Kreck, Some closed $4$-manifolds with exotic differentiable structure, in {\\\\it Algebraic topology, Aarhus 1982 (Aarhus, 1982)}, 246--262, Lecture Notes in Math., 1051, Springer, Berlin, ; MR0764582\\n\\n[L] T.~C. Lawson, Trivializing $5$-dimensional $h$-cobordisms by stabilization, Manuscripta Math. {\\\\bf 29} (1979), no.~2-4, 305--321; MR0545047\\n\\n[Q] F.~S. Quinn III, The stable topology of $4$-manifolds, Topology Appl. {\\\\bf 15} (1983), no.~1, 71--77; MR0676968\"}",
+        "title": "Ruberman correspondence on homology-controlled stable diffeomorphism beyond the simply connected case",
+        "token_estimator_id": "ctl-conservative-unicode/1",
+        "token_metrics": {
+          "ascii_scalar_count": 6812,
+          "base_estimate": 1925,
+          "estimated_tokens": 2214,
+          "estimator_id": "ctl-conservative-unicode/1",
+          "is_exact_model_tokenizer": false,
+          "non_ascii_scalar_count": 8,
+          "safety_margin": 289,
+          "serialized_character_count": 6820,
+          "unicode_scalar_count": 6820,
+          "utf8_bytes": 6836
+        },
+        "word_count": 717
+      },
       "ctlobj-sha256:fbe65adcfc82b6c81665fee8949b7a0a2f3a44736f493ef2035f4f0c50eddeb0": {
         "active_state": "superseded",
         "cid": "ctlobj-sha256:fbe65adcfc82b6c81665fee8949b7a0a2f3a44736f493ef2035f4f0c50eddeb0",
@@ -78143,6 +78317,15 @@
           "target_cid": "ctlobj-sha256:e9b22117f359c2e2898fdb4a133c2f6da9bbc7ac1d0e3b64ac662a69742d8920"
         }
       ],
+      "ctlobj-sha256:ea49c6f2e570820e072f35abfb744ea23140f5576dee62a0c2763d139b0a4d83": [
+        {
+          "basis": "payload",
+          "edge_type": "payload-cid-reference",
+          "path": "$.preflight.ctl_root_before_admission",
+          "source_cid": "ctlobj-sha256:fa91ef3dd246a99e1e6b64ff8643216ba236916c8c975c8568e712bf69e27314",
+          "target_cid": "ctlobj-sha256:ea49c6f2e570820e072f35abfb744ea23140f5576dee62a0c2763d139b0a4d83"
+        }
+      ],
       "ctlobj-sha256:eddf6003a8dbd1d69809f3a82d8a3065fff8e7bc9f59a478d3671d0badcef078": [
         {
           "basis": "ctl/revision.parents",
@@ -78380,7 +78563,7 @@
   "estimator": {
     "id": "ctl-conservative-unicode/1"
   },
-  "generated_at": "2026-07-20T07:45:13Z",
+  "generated_at": "2026-08-11T05:31:02Z",
   "genesis_root_cid": "ctlobj-sha256:4c3059ae48ed9cc5b69d04052168dfec822b5f963b2618adaeebaa81415c1280",
   "project_id": "project:twisted-yetter",
   "resource_index": {
@@ -81267,17 +81450,17 @@
       }
     }
   },
-  "root_cid": "ctlobj-sha256:ea49c6f2e570820e072f35abfb744ea23140f5576dee62a0c2763d139b0a4d83",
+  "root_cid": "ctlobj-sha256:023550ae1ffb082b8c6d0a32731a59201618d3e0fca303623662bb68eb0579e8",
   "schema": "ctl-dogfood/generated-current-index/1",
   "source_state": "generated-non-canonical-current-view",
   "timing": {
-    "build_ms": 100410,
+    "build_ms": 205128,
     "context_source": "current-context-replay",
-    "current_context_ms": 94082,
-    "discovery_index_ms": 6173,
-    "payload_summaries_ms": 50,
-    "resource_index_ms": 50,
-    "write_ms": 53
+    "current_context_ms": 196287,
+    "discovery_index_ms": 8611,
+    "payload_summaries_ms": 94,
+    "resource_index_ms": 93,
+    "write_ms": 39
   },
-  "transition_cid": "ctlobj-sha256:c2d6c3280ffe1ecd506353ff22f316b138ea01a6d8c9fe6bd8872f681563a6c5"
+  "transition_cid": "ctlobj-sha256:9f654528eabcbcfd85197c04028de10ceb58c6895dd7c678a2bed65d53332988"
 }
