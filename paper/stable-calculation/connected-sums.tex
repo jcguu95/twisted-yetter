@@ -14,6 +14,12 @@ Set
 \begin{proposition}[Marked connected-sum formula]
 \label{prop:connected-sum-formula}
 For marked closed oriented four-manifolds $(X,\alpha)$ and $(Y,\beta)$,
+use the canonical splitting
+\[
+  H_2(X\#Y;\mathbb Z)
+  \cong H_2(X;\mathbb Z)\oplus H_2(Y;\mathbb Z)
+\]
+to regard $\alpha\oplus\beta$ as a marking on $X\#Y$.  Then
 \[
   \CY_{\cC,\eta}(X\#Y,\alpha\oplus\beta)
   =\operatorname{Dim}(\cC)^{-1}
@@ -30,12 +36,29 @@ Equivalently,
 
 \begin{proof}
 Take special Kirby representatives in disjoint $3$-balls and form their
-connected sum outside both diagrams.  Ordinary labels, character coupons,
-and dotted projectors split into independent choices.  The
-Reshetikhin--Turaev evaluation is multiplicative under disjoint union.  The
-single normalization associated with the connected $0$--$4$ handle pair
-accounts for the displayed factor $\operatorname{Dim}(\cC)^{-1}$.
-Dividing both sides by $\operatorname{Dim}(\cC)$ gives the normalized form.
+connected sum outside both diagrams.  This diagram realizes the displayed
+canonical splitting on $H_2$, so the cocycle representatives and hence the
+character coupons separate into the $X$- and $Y$-parts.  Ordinary labels
+and dotted-projector expansions separate in the same way, while the
+Reshetikhin--Turaev evaluation is multiplicative under disjoint union.
+
+Write the chosen diagrams as $D_X$ and $D_Y$.  Their connected-sum diagram
+$D_X\#D_Y$ has
+\[
+  h_3(D_X\#D_Y)=h_3(D_X)+h_3(D_Y).
+\]
+Consequently its normalization is
+\[
+  \operatorname{Dim}(\cC)^{1-h_3(D_X)-h_3(D_Y)}
+  =\operatorname{Dim}(\cC)^{-1}
+   \operatorname{Dim}(\cC)^{1-h_3(D_X)}
+   \operatorname{Dim}(\cC)^{1-h_3(D_Y)}.
+\]
+Multiplying the separated finite sums proves the first formula.  This is
+the marked extension of the same handle calculation in
+\cite[Proposition~5.14]{Tham2021}; the new coupons do not cross the
+connected-sum neck.  Dividing by $\operatorname{Dim}(\cC)$ gives the
+normalized formula.
 \end{proof}
 
 Put $H=S^2\times S^2$ and
