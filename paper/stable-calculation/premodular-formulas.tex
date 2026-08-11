@@ -17,20 +17,30 @@ odd intersection form.  Choose an integral diagonalization
 \[
   Q_X\cong p\langle1\rangle\oplus q\langle-1\rangle
 \]
-and write $\alpha=(a_1,\ldots,a_p;b_1,\ldots,b_q)$ in these coordinates.
+with basis $e_1^+,\ldots,e_p^+,e_1^-,\ldots,e_q^-$, and write
+\[
+  \alpha=\sum_{r=1}^p a_re_r^++\sum_{s=1}^q b_se_s^-.
+\]
 Then
 \[
   \widehat{\CY}_{\cC,\eta}(X,\alpha)
   =\prod_{r=1}^{p}\tau_\eta^+(a_r)
-   \prod_{s=1}^{q}\tau_\eta^-(b_s).
+   \prod_{s=1}^{q}\tau_\eta^-(-b_s).
 \]
 \end{proposition}
 
 \begin{proof}
 The diagonal lattice is represented by the connected sum of $p$ positively
-framed and $q$ negatively framed unknots.  For a component with marking
-$n$, the evaluator is respectively the shifted Gauss sum
-$\tau_\eta^+(n)$ or $\tau_\eta^-(n)$.  Apply normalized connected-sum
+framed and $q$ negatively framed unknots.  The evaluator exponent on a
+$2$-handle is the value of $\operatorname{PD}(\alpha)$ on its oriented
+generator.  Hence
+\[
+  \langle\operatorname{PD}(\alpha),e_r^+\rangle=a_r,
+  \qquad
+  \langle\operatorname{PD}(\alpha),e_s^-\rangle=-b_s.
+\]
+The corresponding one-component evaluations are therefore
+$\tau_\eta^+(a_r)$ and $\tau_\eta^-(-b_s)$.  Apply normalized connected-sum
 multiplicativity.  If $X$ is not itself the standard connected sum, use
 \cref{cor:marked-stable-realization} and cancel the common nonzero
 hyperbolic stabilization factor by
