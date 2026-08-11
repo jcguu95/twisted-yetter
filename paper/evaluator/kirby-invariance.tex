@@ -11,8 +11,6 @@ For every object $W\in\cC$ and every $n\in\mathbb Z$,
   P_{\mathbf1,W}\eta_W^n=P_{\mathbf1,W}
   =\eta_W^nP_{\mathbf1,W}.
 \]
-The same identities hold after multiplying the projector by
-$\operatorname{Dim}(\cC)$.
 \end{lemma}
 
 \begin{proof}
@@ -29,66 +27,626 @@ $\widehat u_\mu\colon W\to\mathbf1$, gives
 Summing these identities proves both equalities.
 \end{proof}
 
-\begin{proposition}[Independence of graphical auxiliaries]
+\begin{lemma}[Naturality of the tensor-unit projector]
+\label{lem:unit-projector-naturality}
+For every morphism $f\colon U\to V$ in $\cC$,
+\[
+  fP_{\mathbf1,U}=P_{\mathbf1,V}f.
+\]
+Consequently a tensor-unit projector may be moved through any finite
+composite of crossings, cups, caps, twists, and morphism coupons, with the
+source and target projectors changed according to the boundary objects.
+\end{lemma}
+
+\begin{proof}
+Finite semisimplicity decomposes every object as a direct sum of its simple
+isotypic summands.  By Schur's lemma, a morphism has no matrix entries
+between the tensor-unit isotypic summand and a nonisomorphic simple
+isotypic summand.  It therefore preserves the tensor-unit summand, which is
+exactly the displayed identity.  Applying the identity successively to the
+elementary morphisms in a ribbon expression gives the second assertion.
+Graphically, this is the tunnelling property of the completeness idempotent
+in \cite[Lemmas~2.27--2.28]{Tham2021}.
+\end{proof}
+
+\begin{lemma}[Oriented dotted-section factorization]
+\label{lem:dotted-collar-factorization}
+Fix an ordinary-label state $\lambda$, an oriented dotted component $\delta$,
+and a dotted cut presentation.  Its positive transverse section determines
+the signed word $w_\delta$ and the boundary-state object
+$B_\delta=|w_\delta|$ of \cref{def:dotted-circle-translation}.  After all
+other labels and dotted operations are fixed, a linear closure context
+\[
+  \mathcal E_\delta\colon
+  \operatorname{End}_{\cC}(B_\delta)\longrightarrow\mathbb C.
+\]
+The dotted operation in that term is exactly
+\[
+  \mathcal E_\delta(P_{\mathbf1,B_\delta}).
+  \tag{3.2}\label{eq:typed-dotted-section}
+\]
+For every puncture $p$ on the $k$th ordinary component, the following three
+pieces of data remain distinct.
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item The orientation of component $k$ fixes the ribbon label
+  $\lambda_k$ before the disk is chosen; this is the datum that distinguishes
+  $X$ from $X^*$.
+
+  \item The oriented arc and the disk coorientation determine the intersection
+  sign $\epsilon(p)$.  This is both its contribution to $\partial_2$ and the
+  variance of the corresponding boundary point in the signed cut word.
+
+  \item The marking representative supplies $a_k$ and hence the actual coupon
+  $(\eta^{a_k})_{\lambda_k}$.  The disk supplies neither this exponent nor its
+  sign.
+\end{enumerate}
+Thus disk intersection never chooses the oriented label or $a_k$.
+\end{lemma}
+
+\begin{proof}
+Read the punctures on the positive collar face.  The explicit realization
+$B_\delta=|w_\delta|$ uses the rigid dual for a negative boundary occurrence
+but does not change the label of the underlying oriented component.  The
+opposite face is the reversed rigid dual, exactly as in
+\cref{def:dotted-circle-translation}.  Regluing everything
+outside the section defines the linear context $\mathcal E_\delta$.
+
+Inside the product neighborhood, bunch the transverse ribbons and insert the
+dimension-weighted simple-channel resolution of
+\cite[Lemma~2.27]{Tham2021}.  Definition~5.11, $k=3$, sends a resulting simple
+channel $i$ to zero unless $i\cong\mathbf1$, in which case it removes that
+channel.  Summing the surviving multiplicity terms is precisely the canonical
+projector $P_{\mathbf1,B_\delta}$, so regluing gives
+\eqref{eq:typed-dotted-section}.  Notice that the projector is inserted on
+the through-channel before closure; no currying of the whole exterior tangle
+is involved.  The second item is the standard signed-intersection formula for
+the coefficient of a $1$-handle in the cellular boundary of a $2$-handle; the
+first and third items were fixed before the disk was chosen.
+\end{proof}
+
+\begin{proposition}[Independence of projector bases and graphical renderings]
 \label{prop:graphical-auxiliary-independence}
-For a fixed marked diagram $(D,\alpha_D)$, the evaluator is independent of
-the trace-dual bases used to expand the tensor-unit projectors and of the
-dotted cut system used to display those projectors inside a cut-open tangle.
+For a fixed marked diagram $(D,\xi_D)$, the evaluator is independent of the
+bases used to expand the tensor-unit projectors.  A dotted cut presentation is
+not an input to the evaluator: whenever one is used to render an intrinsic
+index-$3$ map, the resulting closed graphical term is the term obtained from
+that fixed map and is therefore independent of the chosen rendering.
 \end{proposition}
 
 \begin{proof}
 The sum $\sum_\mu u_\mu\widehat u_\mu$ is the canonical projector onto the
-full tensor-unit isotypic summand, so a change of trace-dual bases does not
-change its morphism.  A dotted cut system is only a factorization of the
-same closed dotted-component operation into a cut-open exterior tangle and
-this canonical projector.  Moving the cut through a crossing, extremum,
-twist, or coupon changes that factorization by the corresponding ribbon or
-naturality identity; regluing returns the same closed morphism.  Two cut
-systems are related by a finite sequence of these local changes and ambient
-isotopies, as in the cutting calculus of
-\cite[Section~4.3]{BarenzBarrett2018}.  Induction over that sequence proves
-the claim.  No character exponent or $X$ versus $X^*$ choice is read from
-the direction of a dotted cut; those data remain fixed throughout, in
-accordance with \cref{conv:three-sign-sources}.
+full tensor-unit isotypic summand, so a change of composition-dual bases does
+not change its morphism.  More importantly,
+\cref{prop:dotted-chart-realization} identifies every allowed cut chart with
+a transverse section of the same turned-over index-$3$ handle and connects
+two charts by a finite typed event sequence.  For an ambient isotopy or a
+collar reparameterization, ribbon coherence gives the same morphism.  At a
+crossing, cup, cap, twist, or ordinary coupon,
+\cref{lem:unit-projector-naturality} moves the projector through the matching
+typed morphism.  A cup--cap birth or death cancels by the rigidity triangle
+identities.  Thus each elementary chart change preserves the closed term
+$\mathcal E_\delta(P_{\mathbf1,B_\delta})$; induction proves independence of
+the chart.
+
+For several dotted handles, perform this argument one disjoint region at a
+time.  Exchanging two such steps is the interchange law for tensor products
+of morphisms.  This also proves independence of the order in which the
+simultaneous cut charts are evaluated.
+\end{proof}
+
+\begin{proposition}[Independence of auxiliary orientations]
+\label{prop:orientation-choice-independence}
+The evaluator is unchanged when any auxiliary oriented handle generator and
+its tied Kirby component orientation are reversed as in
+\cref{conv:orientation-reversal}.
+\end{proposition}
+
+\begin{proof}
+For an ordinary component, reindex its simple-label sum by
+$i\leftrightarrow i^*$.  Ribbon orientation reversal is precisely the
+standard dual-label convention, $d_{i^*}=d_i$, and
+\[
+  (\eta^{-a})_{i^*}
+  =\eta_{i^*}^{-a}\operatorname{id}_{i^*}
+  =\eta_i^a\operatorname{id}_{i^*}.
+\]
+Thus every reindexed summand gives the same RT morphism under the canonical
+orientation--duality identification and has the same coefficient.  For a
+dotted component, reversing the $1$-handle generator also reverses the disk
+coorientation.  The signed boundary word is replaced by its rigid dual, with
+reversed order; pivotal duality carries the canonical projector onto the
+tensor-unit summand to the canonical projector on the dual boundary object,
+and the exterior closure is carried to its pivotal transpose.  Spherical
+graphical evaluation is unchanged.  The incidence
+coefficient and the dual $1$-cochain generator both reverse, so the
+representative calculation below is covariant.  A $C_3$ orientation change
+is covered by \cref{lem:c3-basis-independence}.
+\end{proof}
+
+For an ordered signed boundary word
+$w=((X_1,\sigma_1),\ldots,(X_r,\sigma_r))$, with
+$\sigma_j\in\{+1,-1\}$, set
+\[
+  \chi_\eta(w):=\prod_{j=1}^r\eta_{X_j}^{\sigma_j}
+  \in\mathbb C^\times.
+\]
+Here $X_j$ is the label of the already oriented ribbon.  The sign records the
+variance of its boundary occurrence; categorically a negative occurrence is
+interpreted by rigidity, and
+$\eta_{X_j^*}=\eta_{X_j}^{-1}$.  It does not recolour the component.
+
+\begin{lemma}[Dotted-incidence character identity]
+\label{lem:dotted-incidence-character}
+Let $e_\delta^*$ be the cellular $1$-cochain dual to a dotted primal
+$1$-handle, and let $w_\delta$ be the signed boundary word of
+\cref{lem:dotted-collar-factorization}.  For every $m\in\mathbb Z$,
+\[
+  \prod_k\eta_{\lambda_k}^{m(\delta^1e_\delta^*)_k}
+  =
+  \chi_\eta(w_\delta)^m.
+  \tag{3.3}\label{eq:dotted-incidence-character}
+\]
+Moreover the scalar on either side acts trivially on the closed term
+$\mathcal E_\delta(P_{\mathbf1,B_\delta})$.
+\end{lemma}
+
+\begin{proof}
+The coefficient $(\delta^1e_\delta^*)_k$ is the coefficient of the dotted
+$1$-handle in the cellular boundary of the $k$th $2$-handle.  In the collar
+normal form, the signed-intersection formula in
+\cref{lem:dotted-collar-factorization} gives
+\[
+  (\delta^1e_\delta^*)_k
+  =\sum_{p:\,k(p)=k}\epsilon(p).
+\]
+The puncture $p$ contributes
+$\eta_{\lambda_{k(p)}}^{m\epsilon(p)}$.  Multiplying these contributions and
+grouping equal component labels proves
+\eqref{eq:dotted-incidence-character}.  This bookkeeping uses the disk only
+to record the signed boundary occurrence; the ordinary component was already
+coloured by $\lambda_{k(p)}$, and the disk supplies neither that colour nor
+the exponent $a_{k(p)}$.
+
+By rigidity and \cref{lem:character-identities}, the component of $\eta^m$
+on the boundary-state object $B_\delta=|w_\delta|$ is exactly the scalar
+$\chi_\eta(w_\delta)^m$: a contravariant occurrence is interpreted on the
+dual object and hence inverts its character value.  Therefore the scalar
+introduced by the coboundary is $(\eta^m)_{B_\delta}$.  It is absorbed on
+either side of $P_{\mathbf1,B_\delta}$ by
+\cref{lem:unit-projector-absorbs-character}.  Applying the exterior context
+$\mathcal E_\delta$ proves the final assertion.
 \end{proof}
 
 \begin{proposition}[Representative independence]
 \label{prop:representative-independence}
-If two integral handle cycles $a$ and $a'$ represent the same class in
-$H_2(D)$, then
+If two integral cellular $2$-cocycles $a$ and $a'$ represent the same class
+in $H^2(D)$, then
 \[
   \CY_{\cC,\eta}(D,a)=\CY_{\cC,\eta}(D,a').
 \]
 Consequently the value depends only on the marked class
-$\alpha_D\in H_2(D)$.
+$\xi_D\in H^2(D)$.
 \end{proposition}
 
 \begin{proof}
-It is enough to treat $a'=a+\partial_3c$ for one degree-three generator and
-then induct on the finite integral combination $c$.  After turning the
-handle decomposition over as in \cref{conv:primal-turned-over}, the added
-boundary inserts powers of $\eta$ on precisely the strands passing through
-the associated dotted cut.  The cut operator factors through the
-tensor-unit summand, so every added power is absorbed by
-\cref{lem:unit-projector-absorbs-character}.  The ordinary labels,
-projector normalization, and exterior ribbon graph are otherwise unchanged.
-The same argument with the inverse powers treats negative coefficients.
+Since $a$ and $a'$ represent the same cellular cohomology class, there is a
+$1$-cochain $b\in C^1(D)$ such that
+\[
+  a'-a=\delta^1b.
+\]
+The group $C^1(D)$ is freely generated by the primal $1$-handles, so it is
+enough to prove the assertion when $b=m e^*_{\delta}$ for one dotted
+component $\delta$ and one integer $m$, and then induct over the finite
+support of $b$.
+
+Fix an ordinary-label state $\lambda$.  Replacing $a$ by
+$a+m\delta^1e_\delta^*$ multiplies its character weight by
+\[
+  \prod_k\eta_{\lambda_k}^{m(\delta^1e_\delta^*)_k}.
+\]
+By \cref{lem:dotted-incidence-character}, this is the component of $\eta^m$
+on the exact through-channel $B_\delta$ carrying the dotted projector, and
+hence is absorbed by that projector before the exterior is closed.  The
+Kirby-colour weights and all other local morphisms are
+unchanged.  Therefore the two fixed-label summands are equal.  Summing over
+$\lambda$, and then applying the argument successively to the finitely many
+generators in the support of $b$, proves the claim.
 \end{proof}
 
-We therefore write $\CY_{\cC,\eta}(D,\alpha_D)$ for the value of any cycle
-representing $\alpha_D$.
+We therefore write $\CY_{\cC,\eta}(D,\xi_D)$ for the value of any cellular
+$2$-cocycle representing $\xi_D$.
 
-\begin{theorem}[Elementary Kirby-move invariance]
+\begin{lemma}[Typed finite character transport]
+\label{lem:finite-coupon-transport}
+Let $n\in\mathbb Z$.
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item For every morphism $f\colon U\to V$,
+  \[
+    (\eta^n)_Vf=f(\eta^n)_U.
+  \]
+  This moves the automorphism of the \emph{whole} input word through a
+  multivalent coupon; it does not route one coupon through an arbitrary leg.
+
+  \item The same naturality identity applies to braidings and twists.
+
+  \item At a dual bend the transported component is its mate:
+  \[
+    \operatorname{ev}_X
+      (\operatorname{id}_{X^*}\otimes(\eta^n)_X)
+    =
+    \operatorname{ev}_X
+      ((\eta^{-n})_{X^*}\otimes\operatorname{id}_X),
+  \]
+  with the analogous coevaluation identity.  Thus the local exponent changes
+  sign when the oriented route is expressed on the dual strand.
+\end{enumerate}
+Consequently a character decoration may be transported through a finite
+typed event sequence provided every event uses the matching rule above and
+the final boundary words are identified by the framed isotopy.
+\end{lemma}
+
+\begin{proof}
+The first statement is naturality of the monoidal natural automorphism
+$\eta^n$; braiding and twist are particular morphisms.  Naturality for
+$\operatorname{ev}_X$ gives
+\[
+ \operatorname{ev}_X
+ ((\eta^n)_{X^*}\otimes(\eta^n)_X)=\operatorname{ev}_X.
+\]
+Precompose with $(\eta^{-n})_{X^*}\otimes\operatorname{id}_X$ to obtain the
+displayed bend identity; the coevaluation formula is dual.  These prove one
+typed event.  Induction on the finite event list proves the final assertion.
+\end{proof}
+
+\begin{lemma}[Exact typed interface for a $2/1$ slide]
+\label{lem:two-one-exact-interface}
+Put a $2/1$ slide into the clean local form of
+\cref{prop:local-movie-normal-forms}, cut the stationary dotted handle, and
+write $B=|w_\delta|$ for its through-object, $x$ for the moving oriented
+ribbon label, and $a\in\mathbb Z$ for the moving character exponent.  There
+is one fixed exterior linear context on
+$\operatorname{Hom}_{\cC}(B\otimes x,x\otimes B)$ in which the positive
+source and target local tangles are respectively the two sides of
+\[
+  c_{B,x}\bigl(P_{\mathbf1,B}\otimes(\eta^a)_x\bigr)
+  =
+  \bigl((\eta^a)_x\otimes P_{\mathbf1,B}\bigr)c_{B,x}.
+  \tag{3.4}\label{eq:positive-two-one-interface}
+\]
+For the opposite crossing orientation they are the two sides of
+\[
+  c_{x,B}^{-1}\bigl(P_{\mathbf1,B}\otimes(\eta^a)_x\bigr)
+  =
+  \bigl((\eta^a)_x\otimes P_{\mathbf1,B}\bigr)c_{x,B}^{-1}.
+  \tag{3.5}\label{eq:negative-two-one-interface}
+\]
+The clean attaching collar is the left factorization, the band transport is
+the displayed braiding followed by the finite typed route along the
+stationary component, and the clean detaching collar is the right
+factorization.  The source and target regluing maps agree outside the
+supporting ball.
+\end{lemma}
+
+\begin{proof}
+In the pair-of-balls model for the stationary $1$-handle, a $2/1$ slide
+pulls the moving attaching arc through one ball and returns it through the
+other.  Cutting at the positive face of
+\cref{prop:dotted-chart-realization} turns the standard before picture into
+the left composite of \eqref{eq:positive-two-one-interface} and the standard
+after picture into the right composite.  Reversing the local crossing gives
+\eqref{eq:negative-two-one-interface}.  The blackboard push-off of the band
+fixes the ribbon framing, and a change of local orientation is expressed by
+the rigid mate at the corresponding cup or cap.  Thus the equations name the
+actual source and target tangles, not merely abstract morphisms with the same
+type.
+
+Both equalities are the naturality square for the braiding, applied to
+$P_{\mathbf1,B}\colon B\to B$ and
+$(\eta^a)_x\colon x\to x$.  Every event between the two clean collars is
+handled by \cref{lem:finite-coupon-transport}; the exterior is fixed by
+\cref{item:fixed-exterior}.  Applying the common exterior context proves the
+local evaluation equality.
+\end{proof}
+
+\begin{lemma}[Dotted-handle slides]
+\label{lem:dotted-handle-slides}
+The marked evaluator is unchanged under a $1/1$ slide and under a $2/1$
+slide.
+\end{lemma}
+
+\begin{proof}
+Put the slide into the clean local form of
+\cref{prop:local-movie-normal-forms} and keep the exterior fixed.
+
+For a $1/1$ slide, cut both involved dotted components.  Each index-$3$
+operator factors through its full tensor-unit isotypic summand.  Retain bases
+$u_\mu\in\operatorname{Hom}(\mathbf1,W)$ and their composition-dual
+projections for both projectors.  Attachment tensors the two multiplicity
+spaces and the two unit factors; detachment contracts the same dual basis
+indices.  Between them, the unit factors move only by unitors and associators,
+so monoidal coherence gives the identity on the retained multiplicity
+spaces.  This is the $k=3$ local handle-independence calculation in
+\cite[Proposition~5.13]{Tham2021}.  No ordinary $2$-handle generator changes;
+all character coupons on ordinary exterior strands are held fixed.
+
+For a $2/1$ slide, \cref{lem:two-one-exact-interface} identifies the exact
+source and target local tangles with the two sides of projector and character
+naturality, for either crossing orientation.  During the finite route, the
+moving character decoration is transported only by the typed rules of
+\cref{lem:finite-coupon-transport}; any bend uses the dual mate and any
+multivalent coupon uses whole-word naturality.  Since the route returns to
+the same oriented moving component, the final coupon is again
+$(\eta^{a})_x$.  Applying the common exterior context therefore gives the
+target marked local morphism with no appeal to modular killing.
+
+For both moves the ordinary $2$-handle generators are canonically identified
+before and after the move.  Choose the target cocycle to be the image of the
+source cocycle under the induced cochain map; corresponding ordinary
+components then carry the same exponents and the same character coupons.
+The preceding graphical equality is therefore already an equality of marked
+summands.  Any other cocycle representing the transported target class gives
+the same answer by \cref{prop:representative-independence}.  Summing over all
+ordinary labels proves the lemma.
+\end{proof}
+
+\begin{lemma}[Weighted Kirby-colour slide]
+\label{lem:weighted-kirby-colour-slide}
+Let $A$ be a fixed exterior ribbon tangle and let an $x$-coloured ribbon be
+band-summed with a component coloured by
+$\Omega_{\cC}=\sum_y d_y y$.  Before inserting character coupons, the
+weighted sum of the resulting local morphisms is unchanged by transporting
+the band once along the stationary component and detaching it.  The statement
+holds for either orientation of the band and inside every fixed exterior
+context.
+\end{lemma}
+
+\begin{proof}
+Expand the stationary Kirby colour.  For each simple $y$, insert the
+dimension-weighted trace-dual resolution through all simple channels
+$z\subset x\otimes y^*$ (or $z\subset x\otimes y$ for the opposite
+orientation), including every multiplicity index.  The expanded coefficient
+is the product $d_y d_z$.  Move the inclusion around the stationary
+component by braiding naturality.  Taking its pivotal mate gives a bijection
+between the attaching and detaching fusion bases; sphericality says that
+this bijection preserves the trace-dual pairing.  The inverse weighted
+resolution then recombines the $y$-sum into the target Kirby colour.  Thus
+the source and target sums, including all quantum-dimension coefficients,
+are equal.  This is the insertion and sliding calculation of
+\cite[Lemmas~3.2--3.4]{BarenzBarrett2018}.  The factors $d_y d_z$ and the
+pivotal mate are displayed in Equations~(3.1.3)--(3.1.8), while preservation
+of the trace-dual pairing is proved in Equations~(3.1.9)--(3.1.11), with the
+pivotal functor specialized to the identity.  The displayed calculation is
+the positive band orientation.  Reversing the stationary orientation,
+replacing every label by its dual, and using
+$\Omega_{\cC}^*=\Omega_{\cC}$ gives the negative orientation; spherical
+duality preserves $d_y d_z$ and every multiplicity index.
+\end{proof}
+
+\begin{lemma}[Character-aware fusion attachment]
+\label{lem:character-aware-fusion-attachment}
+Let $x$ and $y$ be simple labels and let $a,b\in\mathbb Z$.  Choose, for
+every simple summand $z$ and multiplicity index $\mu$, trace-dual maps
+\[
+  \iota_{z,\mu}\colon z\longrightarrow x\otimes y^{\varepsilon},
+  \qquad
+  \pi_{z,\mu}\colon x\otimes y^{\varepsilon}\longrightarrow z,
+  \qquad
+  \pi_{z,\mu}\iota_{z,\nu}
+    =\frac{\delta_{\mu\nu}}{d_z}\operatorname{id}_z,
+  \qquad
+  \sum_{z,\mu}d_z\,\iota_{z,\mu}\pi_{z,\mu}
+    =\operatorname{id}_{x\otimes y^{\varepsilon}}.
+\]
+Here $\varepsilon=-1$ means $y^*$ and $\varepsilon=+1$ means $y$.
+The exact source/channel/target data are
+\begin{center}
+\begin{tabular}{c|c|c|c|c}
+band & attaching channel & target stationary label & target coordinates
+  & target character \\
+\hline
+positive & $z\subset x\otimes y^*$ & $z^*$ & $(a+b,b)$
+  & $\eta_x^{a+b}\eta_{z^*}^{b}$ \\
+negative & $z\subset x\otimes y$ & $z$ & $(a-b,b)$
+  & $\eta_x^{a-b}\eta_z^{b}$
+\end{tabular}
+\end{center}
+For the positive band, the pivotal mate
+\[
+  \operatorname{Hom}(z,x\otimes y^*)
+  \cong\operatorname{Hom}(y,z^*\otimes x)
+\]
+is the detaching basis.  Suppressing associators, it sends
+$\iota\colon z\to x\otimes y^*$ to
+\[
+  \iota^\sharp
+  :=(\operatorname{id}_{z^*}\otimes\operatorname{id}_x
+       \otimes\operatorname{ev}_y)
+    (\operatorname{id}_{z^*}\otimes\iota\otimes\operatorname{id}_y)
+    (\operatorname{coev}_z\otimes\operatorname{id}_y)
+  \colon y\longrightarrow z^*\otimes x.
+\]
+Thus the first output ribbon at detachment is literally labelled $z^*$; this
+is the stationary target strand in the positive convention, while the second
+output is the moving $x$-strand.  The negative row is obtained by conjugating the positive slide by
+reversal of the auxiliary orientation of the stationary handle, both before
+and after the slide.  In the reversed coordinates
+\[
+  \bar e_y=-e_y,\qquad \bar b=-b,\qquad \bar y=y^*,
+\]
+the geometric negative slide is the positive slide
+$e_x'=e_x+\bar e_y$.  Its attaching channels are
+$z\subset x\otimes\bar y^*=x\otimes y$, and the positive calculation gives
+the target label $z^*$ with respect to the reversed target orientation.
+Reversing that target orientation back changes $z^*$ to $z$ and
+$\bar b$ to $b$.  The multiplicity index is transported by the same pivotal
+mate.  Thus both rows name the actual oriented target label, not merely an
+abstract scalar identity.
+\end{lemma}
+
+\begin{proof}
+The displayed normalization is the spherical trace-dual resolution
+\cite[Lemma~2.37, Equation~(2.2.5)]{BarenzBarrett2018}; the factor $d_z$
+occurs exactly once.  Naturality and monoidality of $\eta$ give
+\[
+  (\eta_x^n\otimes\eta_{y^{\varepsilon}}^n)\iota_{z,\mu}
+  =\iota_{z,\mu}\eta_z^n
+\]
+for every $n\in\mathbb Z$.  Since
+$\eta_{y^*}=\eta_y^{-1}$, the positive channels satisfy
+$\eta_z=\eta_x\eta_y^{-1}$ and therefore
+\[
+  \eta_x^{a+b}\eta_{z^*}^{b}
+  =\eta_x^{a+b}\eta_z^{-b}
+  =\eta_x^{a+b}(\eta_x\eta_y^{-1})^{-b}
+  =\eta_x^a\eta_y^b.
+\]
+The negative channels satisfy $\eta_z=\eta_x\eta_y$, so
+\[
+  \eta_x^{a-b}\eta_z^b
+  =\eta_x^{a-b}(\eta_x\eta_y)^b
+  =\eta_x^a\eta_y^b.
+\]
+For the negative row, apply the already proved positive identity after replacing
+$(e_y,b,y)$ by $(\bar e_y,\bar b,\bar y)=(-e_y,-b,y^*)$.  Its target character
+factor is
+\[
+  \eta_x^{a+\bar b}\eta_{z^*}^{\bar b}
+  =\eta_x^{a-b}\eta_{z^*}^{-b}
+  =\eta_x^{a-b}\eta_z^b.
+\]
+Now reverse the auxiliary target orientation back.  By
+\cref{prop:orientation-choice-independence}, this changes neither the RT term
+nor its coefficient, and it converts the target label and coordinate to the
+negative row of the table.  Spherical duality preserves the trace-dual pairing,
+$d_{y^*}=d_y$, and $d_{z^*}=d_z$, so every multiplicity term and the single
+$d_z$ factor are carried unchanged.  Multiplying each term of the weighted
+identity resolution by the corresponding character equality proves both rows.
+\end{proof}
+
+\begin{lemma}[Character-aware $2/2$ slide]
+\label{lem:character-aware-two-two}
+The marked evaluator is unchanged under either orientation of a $2/2$
+slide.
+\end{lemma}
+
+\begin{proof}
+Fix all labels outside the two participating components.  Write $a$ and $b$
+for the moving and stationary character exponents, and expand their Kirby
+colours into simple labels $x$ and $y$.  Apply the complete
+weighted sliding calculation of
+\cref{lem:weighted-kirby-colour-slide}.  It includes every stationary label
+$y$, every internal channel $z$, every multiplicity index, and the required
+quantum-dimension coefficients.  On each of these summands apply
+\cref{lem:character-aware-fusion-attachment}.  The source character factor
+then becomes exactly the positive or negative transported factor fixed in
+\cref{conv:two-two-coordinates}, without changing any categorical weight.
+
+Move the internal coupon from the attaching collar to the detaching collar.
+The route is finite by \cref{prop:local-movie-normal-forms}, and its value is
+unchanged by the event-by-event typed rules of
+\cref{lem:finite-coupon-transport}; at every dual bend the coupon is replaced
+by its mate and its local exponent changes sign.  At a fusion coupon we use
+whole-word naturality, not a choice of one outgoing leg.  At detachment,
+compose the fusion inclusions with their trace-dual projections.
+Orthogonality removes unequal channels and basis indices, and the weighted
+completeness relation
+$\sum_{z,\mu}d_z\iota_{z,\mu}\pi_{z,\mu}=\operatorname{id}$ recombines the
+remaining sum.  The factor $d_z$ here is the same factor already present in
+the $d_y d_z$ expansion of \cref{lem:weighted-kirby-colour-slide}; it is not
+inserted a second time.  The oriented target identifications and identities in
+\cref{lem:character-aware-fusion-attachment} identify the recombined
+character factor with the target marking.  Finally sum over $z$, its
+multiplicity basis, $x$, $y$, and the fixed exterior labels.  This gives the
+source and target state sums, with their full Kirby-colour coefficients, for
+the positive and negative slides, respectively.
+\end{proof}
+
+\begin{lemma}[Cochain normal forms for cancelling pairs]
+\label{lem:cancellation-cochain-normal-forms}
+For an isolated standard $1$--$2$ birth, extension by zero on the new primal
+$2$-handle sends a source $2$-cocycle to a target $2$-cocycle representing
+the transported class.  Conversely, every target $2$-cocycle is cohomologous
+to one whose new $2$-handle coordinate is zero.  The same statement applies
+to an isolated $1$--$2$ death after the slide reduction in
+\cref{item:cancellation-normal-form}.  For a standard $2$--$3$ birth or
+death, every cocycle on the side containing the pair has zero coordinate on
+the added $2$-handle.
+\end{lemma}
+
+\begin{proof}
+After the other incidence entries have been cleared by the $2/2$ slides in
+\cref{item:cancellation-normal-form}, the handle cochain complex of the
+isolated cancelling $1$--$2$ pair contains a direct
+summand
+\[
+  \mathbb Z\xrightarrow{\,\pm1\,}\mathbb Z
+\]
+in degrees $1$ and $2$.  Extension by zero is the inclusion of the
+complementary cochain complex.  Subtracting the coboundary of the appropriate
+multiple of the new degree-$1$ basis cochain makes the new degree-$2$
+coordinate zero, without changing its cohomology class.
+
+For a cancelling $2$--$3$ pair the corresponding direct summand lies in
+degrees $2$ and $3$, again with differential $\pm1$.  The cocycle equation
+in degree $3$ therefore forces the new degree-$2$ coordinate itself to be
+zero.  These are precisely the two isolated local cancellation complexes.
+We do not claim that an arbitrary, non-isolated presentation already splits
+before the slide reduction.
+\end{proof}
+
+\begin{lemma}[Local cancellation sums]
+\label{lem:local-cancellation-sums}
+For the simple-label set of $\cC$,
+\[
+  \sum_i d_i\,\operatorname{tr}_i(P_{\mathbf1,i})=1,
+  \qquad
+  \sum_i d_i\,\operatorname{tr}_i(\operatorname{id}_i)
+  =\operatorname{Dim}(\cC).                  \tag{3.6}\label{eq:local-cancellation-sums}
+\]
+\end{lemma}
+
+\begin{proof}
+If $i$ is simple, then $P_{\mathbf1,i}$ is the identity for
+$i\cong\mathbf1$ and zero otherwise.  Since $d_{\mathbf1}=1$, the first sum
+is $1$.  Spherical trace gives
+$\operatorname{tr}_i(\operatorname{id}_i)=d_i$, so the second sum is
+$\sum_i d_i^2=\operatorname{Dim}(\cC)$.
+\end{proof}
+
+\begin{remark}[Outstanding proof interfaces in this draft]
+\label{rem:outstanding-invariance-interfaces}
+The local categorical calculations above do not by themselves complete the
+global invariance proof.  A complete proof must still supply the following
+topology-to-graphical interfaces.
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item a simultaneous-disk comparison proving that every allowed dotted cut
+  presentation renders the same collection of dual index-$3$ co-core maps;
+  \item explicit typed before/attach/transport/detach/after local diagrams for
+  the $1/1$ and $2/1$ moves, including framing, orientation, and all rigid
+  mates, whose endpoints are the actual Kirby source and target;
+  \item a fixed-extrema Cerf-to-Kirby bridge showing that the chosen generic
+  homotopy expands into exactly the eight marked events of
+  \cref{def:marked-kirby-event}, with the stated cellular $H^2$ transport.
+\end{enumerate}
+The existing projector, character, $2/2$, and cancellation computations are
+conditional on these interfaces.  Accordingly, the two theorem statements
+below record the intended result, but their proofs are not complete in the
+present draft.
+\end{remark}
+
+\begin{theorem}[Conditional elementary Kirby-move invariance]
 \label{thm:elementary-kirby-invariance}
+Assume the three topology-to-graphical interfaces listed in
+\cref{rem:outstanding-invariance-interfaces}.
 Let
 \[
-  m\colon(D,\alpha_D)\longrightarrow(D',\alpha_{D'})
+  m\colon(D,\xi_D)\longrightarrow(D',\xi_{D'})
 \]
 be a marked elementary Kirby event in the sense of
 \cref{def:marked-kirby-event}.  Then
 \[
-  \CY_{\cC,\eta}(D,\alpha_D)
-  =\CY_{\cC,\eta}(D',\alpha_{D'}).
+  \CY_{\cC,\eta}(D,\xi_D)
+  =\CY_{\cC,\eta}(D',\xi_{D'}).
 \]
 \end{theorem}
 
@@ -99,53 +657,42 @@ graph and all labels not mentioned below remain fixed.
 \emph{Framed isotopy.}
 The two graphs represent the same colored framed ribbon graph.  Their
 evaluations agree by ribbon graphical coherence
-\cite[Theorem~2.6]{Shum1994}.
+\cite[Theorem~6.1]{Shum1994}.
 
 \emph{$1/1$ and $2/1$ slides.}
-Cut the stationary dotted circle before the clean attachment.  Its
-normalized cut operator projects all incident strands to the tensor-unit
-channel.  Character coupons on that channel are removed by
-\cref{lem:unit-projector-absorbs-character}.  The moving strand may then be
-transported through the attachment, the finite list of crossings, extrema,
-twists, and coupons, and the detachment: the tensor unit is transparent and
-each individual passage is an instance of braiding, evaluation,
-coevaluation, twist, or coupon naturality.  Induction on the finite event
-list proves equality between the attached and detachable graphs.  Regluing
-the same normalized projector gives the target evaluator.
+These are \cref{lem:dotted-handle-slides}.
 
 \emph{$2/2$ slide.}
-At the clean attachment, resolve the moving and stationary simple labels by
-the complete set of fusion channels, including every multiplicity index.
-If the moving and stationary labels and exponents are $(x,a)$ and $(y,b)$,
-then our positive convention resolves channels
-$z\subset x\otimes y^*$, changes the moving exponent to $a+b$, and places
-$\eta_z^{-b}$ on the internal channel.  The negative convention resolves
-$z\subset x\otimes y$, changes the moving exponent to $a-b$, and places
-$\eta_z^b$ on that channel.  These formulas are exactly monoidal naturality
-of $\eta$ applied to the oriented fusion inclusion.  Move the internal
-coupon around the stationary
-component.  Each of the finitely many local events preserves the morphism by
-the same naturality identities as above, so induction gives invariance of
-the transport stage.  At the clean detachment, the trace-dual fusion bases
-recombine to the identity.  This recovers exactly the transported target
-labels and exponents.  Summing over the stationary label, fusion channel,
-multiplicity, and all exterior labels proves the stated equality for either
-band orientation.
+This is \cref{lem:character-aware-two-two}.
 
 \emph{$1$--$2$ birth and death.}
-The new $2$-handle coordinate is zero under the induced handle-homology map,
-so its character coupon is $\eta^0=\operatorname{id}$.  Cutting the new
-dotted circle evaluates the cancelling local pair to the identity in the
-tensor-unit channel.  Both the raw graphical sum and the primal $3$-handle
-count are therefore unchanged.  Death is the reverse calculation.
+For birth, and for death after the explicit $2/2$ slide reduction of
+\cref{item:cancellation-normal-form}, the pair is isolated from the exterior.
+By \cref{lem:cancellation-cochain-normal-forms}, the standard coordinate
+inclusion extends a source cocycle by zero on the new $2$-handle.  Hence its
+character coupon is
+$\eta^0=\operatorname{id}$.  For each fixed exterior labeling, the new
+dotted circle and its ordinary meridian contribute the first sum in
+\eqref{eq:local-cancellation-sums}, hence the raw state sum is multiplied by
+$1$.  A $1$--$2$ birth does not change $h_3$, so the normalization is also
+unchanged.  For death, the preceding $2/2$ slides preserve the marked
+evaluator by \cref{lem:character-aware-two-two}; representative independence
+then replaces the cocycle by the zero-coordinate representative supplied by
+\cref{lem:cancellation-cochain-normal-forms}, and the isolated calculation
+is read backwards.
 
 \emph{$2$--$3$ birth and death.}
-The standard cancelling pair contributes one factor
-$\operatorname{Dim}(\cC)$ to the unnormalized graphical sum.  In the primal
-handle convention, birth also increases $h_3$ by one, so the prefactor
-$\operatorname{Dim}(\cC)^{1-h_3}$ contributes its inverse.  The new
-homology coordinate is zero and hence contributes no character factor.
-Again, death is the reverse calculation.
+The cocycle equation in \cref{lem:cancellation-cochain-normal-forms} forces
+the exponent on the new ordinary $0$-framed component to be zero, so it
+contributes no character factor.  For each fixed exterior labeling its
+Kirby-colour sum is the second sum in
+\eqref{eq:local-cancellation-sums}; hence the raw state sum is multiplied by
+$\operatorname{Dim}(\cC)$.  Birth increases the primal $3$-handle count by
+one, and therefore multiplies
+$\operatorname{Dim}(\cC)^{1-h_3}$ by
+$\operatorname{Dim}(\cC)^{-1}$.  The factors cancel.  For death, first use
+the same cocycle equation, rather than a change of representative, and read
+the calculation backwards.
 
 These are all eight directed events of
 \cref{def:marked-kirby-event}.
@@ -153,18 +700,22 @@ These are all eight directed events of
 
 \begin{definition}[Manifold-level evaluator]
 \label{def:manifold-level-evaluator}
-For a marked closed oriented smooth four-manifold $(X,\alpha)$, choose a
-special Kirby representative $(D,\alpha_D)$ as in
+Assume the three topology-to-graphical interfaces listed in
+\cref{rem:outstanding-invariance-interfaces}.
+For a marked closed connected oriented smooth four-manifold $(X,\alpha)$, choose a
+special Kirby representative $(D,\xi_D)$ as in
 \cref{prop:special-representative-existence} and set
 \[
   \CY_{\cC,\eta}(X,\alpha)
-  :=\CY_{\cC,\eta}(D,\alpha_D).
+  :=\CY_{\cC,\eta}(D,\xi_D).
 \]
 \end{definition}
 
-\begin{theorem}[Marked diffeomorphism invariance]
+\begin{theorem}[Conditional marked diffeomorphism invariance]
 \label{prop:diffeomorphism-invariance}
-Let $X$ and $Y$ be closed oriented smooth four-manifolds, let
+Assume the three topology-to-graphical interfaces listed in
+\cref{rem:outstanding-invariance-interfaces}.
+Let $X$ and $Y$ be closed connected oriented smooth four-manifolds, let
 $f\colon X\to Y$ be an orientation-preserving diffeomorphism, and let
 $\alpha\in H_2(X;\mathbb Z)$.  Then
 \[

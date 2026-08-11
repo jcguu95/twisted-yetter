@@ -10,8 +10,10 @@ premodular fusion category $\cC$ and a character
   =\operatorname{Aut}_{\otimes}(\operatorname{Id}_{\cC}).
 \]
 For every simple $i$, write
-$\eta_i=\chi_i(\eta)\operatorname{id}_i$ as in
-\cref{def:character,prop:characters-universal-grading}.
+$(\eta)_i=\eta_i\operatorname{id}_i$ as in
+\cref{def:character}.  Thus $\eta_i\in\mathbb C^\times$ is a scalar, while
+the coupon on an $i$-coloured ribbon is the endomorphism
+$\eta_i^n\operatorname{id}_i=(\eta^n)_i$.
 \end{definition}
 
 \begin{definition}[Kirby colour]
@@ -28,36 +30,82 @@ displayed finite weighted sum of simple-coloured components.
 \begin{definition}[Tensor-unit projector]
 \label{def:tensor-unit-projector}
 Let $W$ be an object of $\cC$.  Choose a basis
-$u_\mu\colon\mathbf1\to W$ and the trace-dual basis
-$\widehat u_\mu\colon W\to\mathbf1$.  The projector onto the full
+$u_\mu\colon\mathbf1\to W$ and its composition-dual basis
+$\widehat u_\mu\colon W\to\mathbf1$, characterized by
+$\widehat u_\mu u_\nu=\delta_{\mu\nu}\operatorname{id}_{\mathbf1}$.
+Because $d_{\mathbf1}=1$, this is also the spherical trace-dual basis.  The
+projector onto the full
 tensor-unit isotypic summand is
 \[
   P_{\mathbf1,W}:=\sum_\mu u_\mu\widehat u_\mu
   \in\operatorname{End}_{\cC}(W).
 \]
 It is independent of the choice of dual bases.  In the dotted construction
-we use the normalized operator
+we write
 \[
-  \operatorname{Cut}_{\cC}(W)
-  :=\operatorname{Dim}(\cC)P_{\mathbf1,W}.
+  \operatorname{Cut}_{\cC}(W):=P_{\mathbf1,W}.
 \]
+No global-dimension factor is included in this operator.
 \end{definition}
 
-\begin{definition}[Dotted-circle translation]
+\begin{definition}[Intrinsic dotted-circle operation]
 \label{def:dotted-circle-translation}
 Let $\delta$ be a dotted circle in the dotted sublink
-$D_{\mathrm{dot}}$ of a special framed link.  Cut the three-dimensional
-picture along the chosen spanning disk of $\delta$.  The ordered ribbons
-meeting that disk determine an object $W$ of $\cC$.  In the Crane--Yetter
-graphical expansion, $\delta$ means the insertion
+$D_{\mathrm{dot}}$ of a special framed link.  In the Crane--Yetter
+graphical expansion, $\delta$ means, by definition, the index-$3$ handle
+operation of \cite[Definition~5.11, $k=3$]{Tham2021}.  On the boundary-state
+object $B_\delta$ of that handle, after resolving the incident ribbons into
+simple channels, this operation is
 \[
-  \operatorname{Cut}_{\cC}(W)
-  =\operatorname{Dim}(\cC)P_{\mathbf1,W}
+  \operatorname{Cut}_{\cC}(B_\delta)=P_{\mathbf1,B_\delta}.
 \]
-between the two cut boundary words, followed by regluing.  Thus the dotted
-circle acts by the normalized projection onto the tensor-unit channel.  It
-is not itself a coloured ribbon component and is never assigned the ordinary
-Kirby colour.  After every dotted circle has been translated in this way,
+Thus the dotted circle acts by projection onto the tensor-unit
+channel.  It is not itself a
+coloured ribbon component and is never assigned the ordinary Kirby colour.
+In a modular category the same operation can alternatively be drawn by
+encircling with $\operatorname{Dim}(\cC)^{-1}\Omega_{\cC}$, but that
+modular replacement is not used here; compare
+\cite[Definition~5.11 and Lemma~2.31]{Tham2021}.
+
+A dotted cut presentation from \cref{def:dotted-cut-system} is only a way to
+display this intrinsic map in a ribbon diagram.  Fix an ordinary-label state
+and read the positive collar face as $(p_1,\ldots,p_r)$.  Let $X_j$ be the
+label already carried by the oriented ribbon through $p_j$, and put
+\[
+  X^{[+1]}:=X,\qquad X^{[-1]}:=X^*,
+\]
+\[
+  w_\delta:=((X_1,\sigma_1),\ldots,(X_r,\sigma_r)),
+  \qquad
+  B_\delta:=|w_\delta|
+  :=X_1^{[\sigma_1]}\otimes\cdots\otimes X_r^{[\sigma_r]}.
+\]
+On the opposite collar face the word is reversed and rigidly dualized, so
+canonically
+\[
+  |w_\delta^{\mathrm{op}}|\cong |w_\delta|^*.
+\]
+The disk therefore does not change the underlying component label $X_j$;
+its sign only specifies how that fixed oriented ribbon occurs in the typed
+boundary object.
+
+After all data outside the cut section are fixed, regluing the exterior gives
+a linear closure context
+\[
+  \mathcal E_\delta\colon
+  \operatorname{End}_{\cC}(B_\delta)\longrightarrow\mathbb C.
+\]
+The dotted contribution is
+\[
+  \mathcal E_\delta(P_{\mathbf1,B_\delta}).
+  \tag{3.1}\label{eq:intrinsic-dotted-context}
+\]
+The projector is therefore applied to the actual through-channel crossing the
+co-core, before the exterior is closed.  It is not postcomposed with a
+morphism out of $\mathbf1$: such a postcomposition would be vacuous.  In
+particular, if the bunched through-channel is a non-unit simple object $i$,
+then $P_{\mathbf1,i}=0$, exactly as required by the index-$3$ operation.
+After every dotted circle has been translated in this way,
 the result is a finite linear combination of genuine closed
 $\cC$-coloured ribbon graphs in $S^3$, to which
 \cref{def:rt-graph-evaluation} applies.
@@ -71,17 +119,22 @@ An admissible input for the Crane--Yetter evaluator consists of
   a twisted categorical input $(\cC,\eta)$;
 
   \item\label{item:evaluator-diagram}
-  a special Kirby representative $D$ together with a dotted cut system;
+  a special Kirby representative $D$.  A dotted cut presentation may be
+  chosen to draw the intrinsic dotted operations, but it is not evaluator
+  input;
 
   \item\label{item:evaluator-marking}
-  a class $\alpha_D\in H_2(D)$; and
+  the handle-cohomology class
+  $\xi_D\in H^2(D)$ corresponding to
+  $\operatorname{PD}_X(\alpha)$; and
 
   \item\label{item:evaluator-cycle}
-  a temporary integral handle-cycle representative $a=(a_k)$ of $\alpha_D$,
-  where $a_k\in\mathbb Z$ is the coefficient of the $k$th ordinary framed
-  component.
+  a temporary integral cellular $2$-cocycle
+  $a=(a_k)\in\ker(\delta^2)\subset C^2(D)$ representing $\xi_D$, where
+  $a_k\in\mathbb Z$ is its value on the $k$th primal $2$-handle, represented
+  by the $k$th ordinary framed component.
 \end{enumerate}
-The representative in \cref{item:evaluator-cycle} is auxiliary and will be
+The cocycle in \cref{item:evaluator-cycle} is auxiliary and will be
 removed by representative independence.
 \end{definition}
 
@@ -93,12 +146,13 @@ expansion is constructed as follows.
   \item\label{item:ordinary-kirby-expansion}
   Every ordinary framed component is coloured by $\Omega_{\cC}$.  Thus a
   state $\lambda$ chooses a simple label $\lambda_k$ for each such component
-  and has weight $\prod_k d_{\lambda_k}$.
+  and has the external scalar weight $\prod_k d_{\lambda_k}$.
 
   \item\label{item:character-coupons}
   On the $k$th ordinary component insert one coupon carrying
-  $\eta_{\lambda_k}^{a_k}$.  Its scalar is the corresponding integral power
-  of the simple character value.
+  the actual endomorphism
+  $(\eta^{a_k})_{\lambda_k}
+   =\eta_{\lambda_k}^{a_k}\operatorname{id}_{\lambda_k}$.
 
   \item\label{item:dotted-cut-projector}
   Apply the dotted-circle translation of
@@ -110,7 +164,7 @@ expansion is constructed as follows.
   twists, and coupons by the ribbon graphical calculus, and reglue the cut
   tangle.  Each choice of ordinary labels gives a finite linear combination
   of closed $\cC$-coloured ribbon graphs in $S^3$; its coefficients include
-  the factors $\operatorname{Dim}(\cC)$ from the normalized projectors.
+  the fusion-basis coefficients from the tensor-unit projectors.
 \end{enumerate}
 For a fixed ordinary-label state $\lambda$, the resulting element of the
 free complex vector space on closed coloured ribbon graphs is denoted
@@ -119,12 +173,16 @@ free complex vector space on closed coloured ribbon graphs is denoted
 \]
 The orientation of a ribbon, not its direction through a dotted disk,
 determines whether its label is $X$ or $X^*$.  Graphical evaluation is
-extended linearly to $\Gamma(D,a;\lambda)$.
+extended linearly to $\Gamma(D,a;\lambda)$.  By convention,
+$\Gamma(D,a;\lambda)$ contains the projector/fusion expansion coefficients
+and all coupon morphisms, but it does \emph{not} contain the external
+Kirby-colour coefficient $\prod_kd_{\lambda_k}$; that factor occurs exactly
+once in \cref{def:role-aware-handle-evaluator}.
 \end{definition}
 
 \begin{definition}[Homologically twisted Crane--Yetter evaluator]
 \label{def:role-aware-handle-evaluator}
-For the chosen cycle $a$, define
+For the chosen cocycle $a$, define
 \[
   \CY_{\cC,\eta}(D,a)
   :=
@@ -153,7 +211,8 @@ $\cC$-coloured ribbon graph and is evaluated by
 \begin{remark}[Proof obligations]
 \label{rem:evaluator-proof-obligations}
 The preceding definitions do not assume that the scalar is independent of
-the cycle representative, cut system, dual bases, Kirby representative, or
-Kirby-move sequence.  These are theorem obligations.  In particular, no
-evaluation equality is included in the input data.
+the cocycle representative, dual bases, graphical presentation of an
+intrinsic dotted map, Kirby representative, or Kirby-move sequence.  These
+are theorem obligations.  In particular, no evaluation equality is included
+in the input data.
 \end{remark}

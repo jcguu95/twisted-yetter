@@ -19,11 +19,22 @@ premodular fusion category $\cC$,\footnote{Yetter's terminology was an
 called a ribbon category.  With the finite set of simple isomorphism classes,
 finite semisimplicity, rigidity, and simple tensor unit assumed here, this is
 precisely a ribbon fusion category, equivalently a premodular fusion category.}
-his sketch constructed state-sum invariants of a $D$-manifold $M$
-valued in the complex-valued functions on $H_{D-2}(M;\operatorname{Gr}(\cC))$,
-where $\operatorname{Gr}(\cC)$ is the abelian group of monoidal natural
-automorphisms of the identity functor \cite{Yetter1993}. In dimension four this gives a
-homologically twisted Crane--Yetter state sum. Yetter's note does not provide
+his sketch used the abelian coefficient group
+\[
+  A_{\cC}:=\operatorname{Aut}_{\otimes}(\operatorname{Id}_{\cC})
+  \cong\operatorname{Hom}\bigl(U(\cC),\mathbb C^\times\bigr),
+\]
+    where $U(\cC)$ is the universal grading group
+    \cite[Definitions~1 and~3 and Proposition~4]{Yetter1993}.  To avoid the
+notation clash in that note, we reserve $U(\cC)$ for the universal grading
+    group and $A_{\cC}$ for the coefficient group.  Yetter proposes homological
+    twisting with coefficients in $A_{\cC}$, but the four-dimensional state sum
+    actually displayed in Definition~6 and proved invariant in Theorem~8 is
+    written for $H_2(M;\mathbb Z_2)$.  We instead fix
+    $\eta\in A_{\cC}$ and use the coefficient homomorphism
+    $\mathbb Z\to A_{\cC}$, $n\mapsto\eta^n$.  This is a cyclic integral
+    specialization of the general proposal, not a direct restatement of
+    Yetter's Theorem~8.  Yetter's note does not provide
 a Kirby-diagram handle formula, nor does it determine whether the refinement
 detects exotic smooth structure. We address these two questions for the
 four-dimensional Crane--Yetter theory; we do not consider the twisted
@@ -34,19 +45,24 @@ monoidal natural automorphism
   \eta\colon \operatorname{Id}_{\cC}\Longrightarrow
   \operatorname{Id}_{\cC}.
 \]
-For a closed oriented smooth four-manifold $X$ and $\alpha\in H_2(X;\mathbb Z)$, we
+For a closed connected oriented smooth four-manifold $X$ and
+$\alpha\in H_2(X;\mathbb Z)$, we
 define a scalar $\CY_{\cC,\eta}(X,\alpha)$ from a Kirby diagram presenting
-$(X,\alpha)$. Our first main result is that this scalar is an invariant of the
-oriented diffeomorphism class of the marked pair $(X,\alpha)$. Thus the
-construction gives a genuine premodular, homologically twisted four-manifold
-invariant rather than only a formal modification of the state sum.  Motivated
+$(X,\alpha)$.  We prove the local projector, character, fusion, and
+normalization identities required for Kirby invariance.  Three
+category-neutral topology-to-graphical comparison statements remain to be
+supplied: simultaneous dotted-cut comparison, exact $1/1$ and $2/1$ local
+movies, and the marked Cerf-to-Kirby bridge.  Conditional on these explicitly
+isolated statements, the scalar is an invariant of the oriented
+diffeomorphism class of the marked pair $(X,\alpha)$.  Motivated
 by Tham's handle description of Crane--Yetter theory
 \cite[Definition~5.11]{Tham2021}, we expect this invariant
 to agree with the four-dimensional state sum sketched by Yetter; that
 identification is not needed for, and is not claimed as part of, our results.
 
-The motivating question nevertheless has a negative answer in the simply
-connected case.  We prove that $\CY_{\cC,\eta}(X,\alpha)$ depends only on the
+Conditional on the same comparison statements, the motivating question has
+a negative answer in the simply connected case:
+$\CY_{\cC,\eta}(X,\alpha)$ depends only on the
 marked integral intersection lattice
 \[
   \bigl(H_2(X;\mathbb Z),Q_X,\alpha\bigr),
@@ -95,26 +111,31 @@ inspired by the turned-over handle description in Tham's Definition~5.11
 \cite{Tham2021}.  Let $D$ be a Kirby diagram with one $0$-handle and one
 $4$-handle, with dotted circles representing the $1$-handles, ordinary
 framed components representing the $2$-handles, and with the boundary after
-the $2$-handles closed by $h_3(D)$ $3$-handles.  For a two-handle representative
-$a=(a_k)$ of $\alpha$, it has the form
+the $2$-handles closed by $h_3(D)$ $3$-handles.  Let $a=(a_k)$ be a cellular
+$2$-cocycle representing the handle-cohomology class corresponding to
+$\operatorname{PD}_X(\alpha)$.  The formula has the form
 \[
   \CY_{\cC,\eta}(D,a)
-  = \frac{\operatorname{Dim}(\cC)}
-          {\operatorname{Dim}(\cC)^{h_3(D)}}
+  = \operatorname{Dim}(\cC)^{1-h_3(D)}
     \sum_{\lambda}
       \left(\prod_k d_{\lambda_k}\right)
-      \left(\prod_k \eta_{\lambda_k}^{a_k}\right)
-      \bigl\langle G_{D,\lambda}\bigr\rangle_{\cC}.
+      \operatorname{RT}_{\cC}
+        \bigl(S^3,\Gamma(D,a;\lambda)\bigr).
 \]
 Here $\lambda$ ranges over simple labels of the ordinary framed
-$2$-handle components, while every dotted $1$-handle is evaluated by the
-normalized projector onto the tensor-unit channel.  The closed ribbon graph
-$G_{D,\lambda}$ is the resulting role-aware graphical evaluation.  When
+$2$-handle components.  The graph sum $\Gamma(D,a;\lambda)$ contains the
+actual character coupons $(\eta^{a_k})_{\lambda_k}$ and, at each dotted
+$1$-handle, the canonical projector onto the tensor-unit channel.  That
+projector carries no additional global-dimension factor.  The external
+Kirby-colour coefficient $\prod_kd_{\lambda_k}$ therefore occurs exactly
+once.  When
 $\alpha=0$, the character factor is trivial and the formula recovers the
 untwisted Crane--Yetter handle evaluation of
 \cite[Definition~5.11]{Tham2021}.  Proposition~\ref{prop:diffeomorphism-invariance}
-states the resulting marked diffeomorphism invariant.  Its proof is direct:
-we verify invariance under each of the eight elementary Kirby moves.
+states the resulting conditional marked diffeomorphism-invariance theorem.
+The categorical part of its proof verifies the local equality for each of the
+eight elementary Kirby moves; the remaining comparison interfaces are listed
+in Remark~\ref{rem:outstanding-invariance-interfaces}.
 
 As in Reutter's calculation of semisimple four-dimensional field theories,
 stabilization turns this invariant into an effective computational tool
