@@ -1,44 +1,50 @@
 \subsection{Direct-evaluator cost estimates}
 \label{app:computational-cost}
 
-We tested the shortcut-free projector evaluator on deliberately elementary
-categorical data, $SU(2)_2$, and on a familiar simply connected manifold,
-$E(2)=K3$.  The diagram was a draft transcription of the $n=2$ specialization
-of Gompf--Stipsicz Figure~8.15 \cite[Figure~8.15]{GompfStipsicz1999}.  It has
-$22$ ordinary components and therefore $3^{22}=31{,}381{,}059{,}609$
-simple-label sectors.  The transcription passed recorded link-level checks
-but was not certified against the printed figure, and no $E(2)$ invariant was
-completed.
+We probed a historical direct sectorwise evaluator with the elementary
+category $SU(2)_2$ and the familiar simply connected manifold $E(2)=K3$.
+The diagram was a draft transcription of the $n=2$ specialization of
+Gompf--Stipsicz Figure~8.15 \cite[Figure~8.15]{GompfStipsicz1999}.  It has $22$
+ordinary components and therefore
+$3^{22}=31{,}381{,}059{,}609$ simple-label sectors.  The transcription passed
+recorded link-level checks but was not certified against the printed figure,
+and no $E(2)$ invariant was completed.
 
 An early informal extrapolation was roughly $350$ serial years, but we do not
 use that number: no current reproducible artifact records its assumptions.
-The retained version-1 runtime-floor artifact instead makes assumptions
-chosen to be unrealistically favourable: sampled fast strata are extrapolated,
-fast sectors cost zero, and every remaining sector costs exactly $0.01$
-seconds.  Even under those assumptions the total is
+The retained record is
+\nolinkurl{experiments/results/gompf-stipsicz/figure815-k3-e2-su2-2-optimistic-runtime-floor-v1.json}.
+It labels itself
+\texttt{HEURISTIC\_OPTIMISTIC\_RUNTIME\_FLOOR\_NOT\_RIGOROUS\_BOUND}; it also
+records the hashes of its generator and probe, but was generated in a dirty
+worktree.  Its deliberately favourable toy model extrapolates sampled fast
+strata, charges fast sectors zero time, and charges every remaining sector
+exactly $0.01$ seconds.  The resulting estimate is
 $313{,}809{,}868.7$ worker-seconds, or $87{,}169.4$ worker-hours and
-$9.94$ worker-years.  It gives $30.27$ days on $120$ perfectly utilized
+$9.944$ worker-years.  It gives $30.27$ days on $120$ perfectly utilized
 workers.  Ideal linear scaling would require approximately $3{,}633$ workers
-for one day, $87{,}170$ for one hour, or $5.23$ million for one minute.  In
-the formal limit of one worker per sector, the toy model reaches $0.01$
-seconds only by using approximately $31.38$ billion workers and ignoring
-scheduling, communication, memory, and the hard tail.  Thus the outer sum is
-embarrassingly parallel, but the contraction inside a hard sector is not
-automatically so.
+for one day, $87{,}170$ for one hour, or $5.23$ million for one minute.  In the
+formal limit of one worker per sector, the toy model reaches $0.01$ seconds
+only by using approximately $31.38$ billion workers and ignoring scheduling,
+communication, memory, and the hard tail.  Thus the outer sum is embarrassingly
+parallel, but the contraction inside a hard sector is not automatically so.
 
 For a reproducible cloud-price scale, consider Hetzner's European CCX43
-instance: $16$ dedicated AMD vCPUs and $64$ GB RAM.  Hetzner's price schedule
-effective June~15, 2026 lists €0.4423 per hour and a €275.99 monthly cap,
-excluding VAT and IPv4 \cite{HetznerCloudPricing2026}.  Identifying one
-perfectly utilized worker with one dedicated vCPU converts the optimistic
-work volume into $5{,}448.1$ CCX43-hours, or €2,409.69 at the uncapped hourly
-rate.  A concrete $120$-worker deployment requires eight such instances
-($128$ vCPUs); running them for $30.27$ days costs €2,570.34 at the hourly
-rate, or approximately €2,207.92 if all eight instances receive exactly one
-monthly cap.  These figures exclude VAT, IPv4, storage, excess traffic,
-orchestration, failures, imperfect scaling, and the unmeasured hard tail.
-They are therefore pricing illustrations for the optimistic toy model, not
-quotes or upper bounds for completing the computation.
+instance, listed with $16$ dedicated AMD vCPUs and $64$ GB RAM
+\cite{HetznerCloudGeneralPurpose2026}.  Hetzner's price schedule effective
+June~15, 2026 lists €0.4423 per hour and a €275.99 monthly cap, excluding VAT
+and IPv4 \cite{HetznerCloudPricing2026}.  Identifying one perfectly utilized
+worker with one dedicated vCPU converts the optimistic work volume into
+$5{,}448.1$ CCX43-hours.  Eight fully utilized instances ($128$ workers) would
+finish the toy workload in $28.38$ days.  The uncapped hourly arithmetic is
+€2,409.69; if each instance reaches one monthly cap without entering a second
+billing period, the corresponding capped arithmetic is €2,207.92.  Hetzner
+actually bills the lesser of hourly usage and the applicable monthly cap for
+each server \cite{HetznerCloudBilling2026}, so calendar placement matters.
+These figures exclude VAT, IPv4, storage, excess traffic, orchestration,
+failures, imperfect scaling, and the unmeasured hard tail.  They are therefore
+pricing illustrations for the optimistic toy model, not quotes or upper bounds
+for completing the computation.
 
 A quantum computer does not presently turn this into a defensible runtime
 estimate.  If every sector contribution could be implemented as a bounded,
