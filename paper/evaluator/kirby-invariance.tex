@@ -291,6 +291,49 @@ displayed bend identity; the coevaluation formula is dual.  These prove one
 typed event.  Induction on the finite event list proves the final assertion.
 \end{proof}
 
+\begin{lemma}[Exact source-bound interface for a $1/1$ slide]
+\label{lem:one-one-exact-interface}
+Let $D\to D'$ be a $1/1$ slide in the clean local form of
+\cref{prop:local-movie-normal-forms}.  Turn the handle decompositions over,
+and denote the two involved dual index-$3$ handles before the slide by
+$H_m^\vee,H_s^\vee$ and after the slide by
+$H_m^{\vee\prime},H_s^{\vee\prime}$.  After identifying the incoming and
+outgoing level boundaries outside the supporting ball, let
+\(\mathsf H^{(3)}_{\mathrm{src}}\) and
+\(\mathsf H^{(3)}_{\mathrm{tgt}}\) be the composites of the two intrinsic
+index-$3$ handle maps on the source and target sides.  Then, for every
+decorated incoming skein $\Gamma$,
+\[
+  \mathsf H^{(3)}_{\mathrm{src}}([\Gamma])
+  =
+  \mathsf H^{(3)}_{\mathrm{tgt}}([\Gamma]).
+  \tag{3.4}\label{eq:one-one-index-three-interface}
+\]
+In dotted co-core charts, each side is expanded using the full
+composition-dual resolution of the tensor-unit isotypic summand for each of
+the two handles.  Equation~\eqref{eq:one-one-index-three-interface} retains
+every multiplicity index separately: it does \emph{not} replace two
+projectors by a single projector on the tensor product of their
+through-objects.
+\end{lemma}
+
+\begin{proof}
+By \cref{prop:dotted-chart-realization}, the two chart projectors are the
+coordinate expressions of the actual dual index-$3$ handle maps.  The final
+handle-slide relation in the proof of
+\cite[Proposition~5.13, pp.~53--54]{Tham2021} identifies the composites of
+two index-$3$ handle maps before and after sliding one index-$3$ handle over
+the other.  Its input is an arbitrary skein, so $\Gamma$ may already contain
+all character coupons and all uninvolved local morphisms.  Expanding each
+index-$3$ operation by
+\cite[Definition~5.11, $k=3$]{Tham2021} gives the two complete dual-basis
+resolutions claimed above; the proof of the cited relation pairs the same
+inclusion and projection indices and therefore preserves the unit
+multiplicity spaces.  The supporting-ball model and
+\cref{item:fixed-exterior} identify the relation's endpoints with the actual
+Kirby source and target and leave the exterior unchanged.
+\end{proof}
+
 \begin{lemma}[Exact typed interface for a $2/1$ slide]
 \label{lem:two-one-exact-interface}
 Put a $2/1$ slide into the clean local form of
@@ -304,20 +347,22 @@ source and target local tangles are respectively the two sides of
   c_{B,x}\bigl(P_{\mathbf1,B}\otimes(\eta^a)_x\bigr)
   =
   \bigl((\eta^a)_x\otimes P_{\mathbf1,B}\bigr)c_{B,x}.
-  \tag{3.4}\label{eq:positive-two-one-interface}
+  \tag{3.5}\label{eq:positive-two-one-interface}
 \]
 For the opposite crossing orientation they are the two sides of
 \[
   c_{x,B}^{-1}\bigl(P_{\mathbf1,B}\otimes(\eta^a)_x\bigr)
   =
   \bigl((\eta^a)_x\otimes P_{\mathbf1,B}\bigr)c_{x,B}^{-1}.
-  \tag{3.5}\label{eq:negative-two-one-interface}
+  \tag{3.6}\label{eq:negative-two-one-interface}
 \]
 The clean attaching collar is the left factorization, the band transport is
 the displayed braiding followed by the finite typed route along the
 stationary component, and the clean detaching collar is the right
-factorization.  The source and target regluing maps agree outside the
-supporting ball.
+factorization.  Positive orientation gives $c_{B,x}$, negative orientation
+gives $c_{x,B}^{-1}$, the blackboard push-off fixes the band framing, and a
+bend transports the coupon by its rigid mate.  The source and target
+regluing maps agree outside the supporting ball.
 \end{lemma}
 
 \begin{proof}
@@ -335,10 +380,14 @@ type.
 
 Both equalities are the naturality square for the braiding, applied to
 $P_{\mathbf1,B}\colon B\to B$ and
-$(\eta^a)_x\colon x\to x$.  Every event between the two clean collars is
-handled by \cref{lem:finite-coupon-transport}; the exterior is fixed by
-\cref{item:fixed-exterior}.  Applying the common exterior context proves the
-local evaluation equality.
+$(\eta^a)_x\colon x\to x$.  Equivalently, expand $P_{\mathbf1,B}$ as the full
+composition-dual resolution and specialize the tunnelling identity
+\cite[Lemma~2.28, Equation~(2.17), p.~8]{Tham2021} to the morphism
+$f=(\eta^a)_x$; every unit multiplicity index remains in the sum.  Every
+event between the two clean collars is handled by
+\cref{lem:finite-coupon-transport}; cups and caps use the displayed mate
+identity there.  The exterior is fixed by \cref{item:fixed-exterior}.
+Applying that common exterior context proves the local evaluation equality.
 \end{proof}
 
 \begin{lemma}[Dotted-handle slides]
@@ -351,16 +400,12 @@ slide.
 Put the slide into the clean local form of
 \cref{prop:local-movie-normal-forms} and keep the exterior fixed.
 
-For a $1/1$ slide, cut both involved dotted components.  Each index-$3$
-operator factors through its full tensor-unit isotypic summand.  Retain bases
-$u_\mu\in\operatorname{Hom}(\mathbf1,W)$ and their composition-dual
-projections for both projectors.  Attachment tensors the two multiplicity
-spaces and the two unit factors; detachment contracts the same dual basis
-indices.  Between them, the unit factors move only by unitors and associators,
-so monoidal coherence gives the identity on the retained multiplicity
-spaces.  This is the $k=3$ local handle-independence calculation in
-\cite[Proposition~5.13]{Tham2021}.  No ordinary $2$-handle generator changes;
-all character coupons on ordinary exterior strands are held fixed.
+For a $1/1$ slide, \cref{lem:one-one-exact-interface} identifies the exact
+source and target composites of the two dual index-$3$ maps.  Because the
+identity is an equality on every decorated input skein, it retains all
+character coupons already present on ordinary strands.  It also retains the
+two full unit-projector resolutions separately, including all multiplicity
+indices.  No ordinary $2$-handle generator changes.
 
 For a $2/1$ slide, \cref{lem:two-one-exact-interface} identifies the exact
 source and target local tangles with the two sides of projector and character
@@ -594,7 +639,7 @@ For the simple-label set of $\cC$,
   \sum_i d_i\,\operatorname{tr}_i(P_{\mathbf1,i})=1,
   \qquad
   \sum_i d_i\,\operatorname{tr}_i(\operatorname{id}_i)
-  =\operatorname{Dim}(\cC).                  \tag{3.6}\label{eq:local-cancellation-sums}
+  =\operatorname{Dim}(\cC).                  \tag{3.7}\label{eq:local-cancellation-sums}
 \]
 \end{lemma}
 
@@ -609,25 +654,19 @@ $\sum_i d_i^2=\operatorname{Dim}(\cC)$.
 \begin{remark}[Outstanding proof interfaces in this draft]
 \label{rem:outstanding-invariance-interfaces}
 The local categorical calculations above do not by themselves complete the
-global invariance proof.  A complete proof must still supply the following
-two topology-to-graphical interfaces.
-\begin{enumerate}[label=(\roman*),ref=\roman*]
-  \item explicit typed before/attach/transport/detach/after local diagrams for
-  the $1/1$ and $2/1$ moves, including framing, orientation, and all rigid
-  mates, whose endpoints are the actual Kirby source and target;
-  \item a fixed-extrema Cerf-to-Kirby bridge showing that the chosen generic
-  homotopy expands into exactly the eight marked events of
-  \cref{def:marked-kirby-event}, with the stated cellular $H^2$ transport.
-\end{enumerate}
-The existing projector, character, $2/2$, and cancellation computations are
-conditional on these interfaces.  Accordingly, the two theorem statements
-below record the intended result, but their proofs are not complete in the
-present draft.
+global invariance proof.  A complete proof must still supply one
+category-neutral topology interface: a fixed-extrema Cerf-to-Kirby bridge
+showing that the chosen generic homotopy expands into exactly the eight marked
+events of \cref{def:marked-kirby-event}, with the stated cellular $H^2$
+transport.  The exact source-bound $1/1$ and $2/1$ interfaces are
+\cref{lem:one-one-exact-interface,lem:two-one-exact-interface}.  Accordingly,
+the theorem statements below record the intended result, but their proofs are
+not complete in the present draft.
 \end{remark}
 
 \begin{theorem}[Conditional elementary Kirby-move invariance]
 \label{thm:elementary-kirby-invariance}
-Assume the two topology-to-graphical interfaces listed in
+Assume the topology-to-graphical interface listed in
 \cref{rem:outstanding-invariance-interfaces}.
 Let
 \[
@@ -691,7 +730,7 @@ These are all eight directed events of
 
 \begin{definition}[Manifold-level evaluator]
 \label{def:manifold-level-evaluator}
-Assume the two topology-to-graphical interfaces listed in
+Assume the topology-to-graphical interface listed in
 \cref{rem:outstanding-invariance-interfaces}.
 For a marked closed connected oriented smooth four-manifold $(X,\alpha)$, choose a
 special Kirby representative $(D,\xi_D)$ as in
@@ -704,7 +743,7 @@ special Kirby representative $(D,\xi_D)$ as in
 
 \begin{theorem}[Conditional marked diffeomorphism invariance]
 \label{prop:diffeomorphism-invariance}
-Assume the two topology-to-graphical interfaces listed in
+Assume the topology-to-graphical interface listed in
 \cref{rem:outstanding-invariance-interfaces}.
 Let $X$ and $Y$ be closed connected oriented smooth four-manifolds, let
 $f\colon X\to Y$ be an orientation-preserving diffeomorphism, and let
