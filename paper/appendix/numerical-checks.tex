@@ -3,7 +3,9 @@
 
 The comparisons in this subsection were made with earlier versions of the
 diagrammatic evaluator.  They are evidence for conventions and normalization,
-not ingredients in the proof of \cref{prop:modular-formula}.
+not ingredients in the proof of \cref{prop:modular-formula}, and do not by
+themselves certify the role-aware evaluator constructed in this paper.  Every
+record cited below is a repository-relative, machine-readable artifact.
 
 \begin{example}[$D(\mathrm{Dic}_3)$ on $\mathbb{CP}^2$]
 \label{ex:dic3-cp2-numerical}
@@ -25,7 +27,7 @@ Yasui's Figure~2 \cite{Yasui2008} returned, for $n=0,1,2,3$,
 \]
 The largest discrepancy from the corresponding standard-presentation value
 was $2.13\times10^{-14}$.  These numbers are from
-\texttt{figure2-cp2-a1-r1-dic12-omega0-range-combined-aggregate-v1}.
+\nolinkurl{experiments/results/yasui/figure2-cp2-a1-r1-dic12-omega0-range-combined-aggregate-v1.json}.
 \end{example}
 
 \begin{example}[$D(A_4)$ on a nonseparated presentation]
@@ -52,8 +54,9 @@ putting the generator character on the component corresponding to the first
 exceptional class leaves the predicted phase equal to $1$.  The same
 $2744$-sector evaluator returned normalized value
 $12.000000000000483-1.60\times10^{-13}i$.  The two records are respectively
-\texttt{da4-omega0-untwisted-singleton-aggregate-check-v1} and
-\texttt{da4-c3w1-twisted-component-a-singleton-aggregate-v1}.
+\nolinkurl{experiments/results/yasui/figure3-a1-r1-normalized-da4-omega0-untwisted-singleton-aggregate-check-v1.json}
+and
+\nolinkurl{experiments/results/yasui/figure3-a1-r1-normalized-da4-c3w1-twisted-component-a-singleton-aggregate-v1.json}.
 \end{example}
 
 \begin{example}[A visible $D(\mathrm{Dic}_3)$ character phase]
@@ -70,8 +73,9 @@ historical evaluator returned
 \]
 The observed ratio differed from $-1$ by approximately $6.1\times10^{-15}$;
 the absolute normalized difference between twisted and untwisted values was
-$24$ up to roundoff.  The compact trace is version~1 of
-\texttt{figure3-a1-r1-normalized-dic12-witness-g-component-a-twist}.
+$24$ up to roundoff.  The legacy artifact name uses \texttt{dic12} for this
+order-$12$ group; the compact trace is
+\nolinkurl{experiments/results/yasui/figure3-a1-r1-normalized-dic12-witness-g-component-a-twist-compact-trace-v1.jsonl}.
 \end{example}
 
 \begin{example}[$SU(3)_2$ and a cubic phase]
@@ -82,8 +86,9 @@ component-A marking multiplies the untwisted Figure~3 value by
 \[
  e^{4\pi i/3}=-\frac12-\frac{\sqrt3}{2}i.
 \]
-The version-1 artifact
-\nolinkurl{figure3-a1-r1-normalized-su3-2-anyonwiki-aggregate} found ratio
+The artifact
+\nolinkurl{experiments/results/yasui/figure3-a1-r1-normalized-su3-2-anyonwiki-aggregate-v1.json}
+found ratio
 \[
  -0.499999999999998-0.866025403784436i,
 \]
@@ -101,7 +106,8 @@ change between the Figure~3 and split-presentation functions after the
 recorded coordinate identification.  Version~3 of the all-marking comparison
 checked eight marking rows, each containing $9^3=729$ fixed-label sectors;
 the maximum absolute difference was
-$1.3235946575869639\times10^{-12}$.
+$1.3235946575869639\times10^{-12}$.  The record is
+\nolinkurl{experiments/results/yasui/figure3-a1-r1-normalized-su2-8-all-alpha-raw-comparison-v3.json}.
 \end{example}
 
 \begin{example}[Akbulut--Yasui Figure~21]
@@ -122,11 +128,14 @@ distributions matched the split standard presentation; $13$ matched without
 correction, while the two semion rows required the same correction $-1$.
 This is only a distribution-level check: the Figure~21 transcription has not
 been certified against the printed diagram, and no certified pointwise
-$H_2$ coordinate map was available.
+$H_2$ coordinate map was available.  The fail-closed normalization record is
+\nolinkurl{experiments/results/akbulut-yasui/figure21-pointed-ordinary-normalization-audit-v1.json}.
 \end{example}
 
 As a broader implementation check, the native Morse evaluator recorded
 $23$ successful cross-presentation comparisons for
 $SU(2)_k$ at $k=2,3,4,5,6,8$, $SU(3)_2$, $D(A_4)$, a cocycle-twisted
 $D(A_4)$, and $D(\mathrm{Dic}_3)$.  This finite matrix tests the conventions
-used above but does not replace the proof of \cref{prop:modular-formula}.
+used above but does not replace the proof of \cref{prop:modular-formula}.  Its
+record is
+\nolinkurl{experiments/results/morse/native-morse-figure2-cross-category-matrix-v1.json}.
