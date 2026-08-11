@@ -52,7 +52,7 @@ in \cite[Lemmas~2.27--2.28]{Tham2021}.
 \begin{lemma}[Oriented dotted-section factorization]
 \label{lem:dotted-collar-factorization}
 Fix an ordinary-label state $\lambda$, an oriented dotted component $\delta$,
-and a dotted cut presentation.  Its positive transverse section determines
+and a dotted co-core chart.  Its positive transverse section determines
 the signed word $w_\delta$ and the boundary-state object
 $B_\delta=|w_\delta|$ of \cref{def:dotted-circle-translation}.  After all
 other labels and dotted operations are fixed, a linear closure context
@@ -104,34 +104,27 @@ the coefficient of a $1$-handle in the cellular boundary of a $2$-handle; the
 first and third items were fixed before the disk was chosen.
 \end{proof}
 
-\begin{proposition}[Independence of projector bases and graphical renderings]
+\begin{proposition}[Independence of projector bases and graphical representatives]
 \label{prop:graphical-auxiliary-independence}
 For a fixed marked diagram $(D,\xi_D)$, the evaluator is independent of the
-bases used to expand the tensor-unit projectors.  A dotted cut presentation is
-not an input to the evaluator: whenever one is used to render an intrinsic
-index-$3$ map, the resulting closed graphical term is the term obtained from
-that fixed map and is therefore independent of the chosen rendering.
+bases used to expand the tensor-unit projectors.  A dotted co-core chart is
+not an input to the evaluator: whenever one is used, it is a graphical
+representative of the intrinsic index-$3$ maps already fixed by the handle
+decomposition.
 \end{proposition}
 
 \begin{proof}
 The sum $\sum_\mu u_\mu\widehat u_\mu$ is the canonical projector onto the
 full tensor-unit isotypic summand, so a change of composition-dual bases does
-not change its morphism.  More importantly,
-\cref{prop:dotted-chart-realization} identifies every allowed cut chart with
-a transverse section of the same turned-over index-$3$ handle and connects
-two charts by a finite typed event sequence.  For an ambient isotopy or a
-collar reparameterization, ribbon coherence gives the same morphism.  At a
-crossing, cup, cap, twist, or ordinary coupon,
-\cref{lem:unit-projector-naturality} moves the projector through the matching
-typed morphism.  A cup--cap birth or death cancels by the rigidity triangle
-identities.  Thus each elementary chart change preserves the closed term
-$\mathcal E_\delta(P_{\mathbf1,B_\delta})$; induction proves independence of
-the chart.
-
-For several dotted handles, perform this argument one disjoint region at a
-time.  Exchanging two such steps is the interchange law for tensor products
-of morphisms.  This also proves independence of the order in which the
-simultaneous cut charts are evaluated.
+not change its morphism.  The evaluator itself was defined by composing the
+intrinsic index-handle maps, before choosing any graphical chart.
+By \cref{prop:dotted-chart-realization}, a dotted co-core chart is a diagram of
+those fixed maps.  Two drawings of the same intrinsic composite have the same
+morphism by ribbon graphical coherence \cite[Theorem~6.1]{Shum1994}; no
+comparison theorem for arbitrary spanning-disk systems is required.  For
+several dotted handles, their actual handle neighborhoods are disjoint, so
+their maps tensor independently.  Exchanging their written order is the
+interchange law for tensor products of morphisms.
 \end{proof}
 
 \begin{proposition}[Independence of auxiliary orientations]
@@ -617,10 +610,8 @@ $\sum_i d_i^2=\operatorname{Dim}(\cC)$.
 \label{rem:outstanding-invariance-interfaces}
 The local categorical calculations above do not by themselves complete the
 global invariance proof.  A complete proof must still supply the following
-topology-to-graphical interfaces.
+two topology-to-graphical interfaces.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
-  \item a simultaneous-disk comparison proving that every allowed dotted cut
-  presentation renders the same collection of dual index-$3$ co-core maps;
   \item explicit typed before/attach/transport/detach/after local diagrams for
   the $1/1$ and $2/1$ moves, including framing, orientation, and all rigid
   mates, whose endpoints are the actual Kirby source and target;
@@ -636,7 +627,7 @@ present draft.
 
 \begin{theorem}[Conditional elementary Kirby-move invariance]
 \label{thm:elementary-kirby-invariance}
-Assume the three topology-to-graphical interfaces listed in
+Assume the two topology-to-graphical interfaces listed in
 \cref{rem:outstanding-invariance-interfaces}.
 Let
 \[
@@ -700,7 +691,7 @@ These are all eight directed events of
 
 \begin{definition}[Manifold-level evaluator]
 \label{def:manifold-level-evaluator}
-Assume the three topology-to-graphical interfaces listed in
+Assume the two topology-to-graphical interfaces listed in
 \cref{rem:outstanding-invariance-interfaces}.
 For a marked closed connected oriented smooth four-manifold $(X,\alpha)$, choose a
 special Kirby representative $(D,\xi_D)$ as in
@@ -713,7 +704,7 @@ special Kirby representative $(D,\xi_D)$ as in
 
 \begin{theorem}[Conditional marked diffeomorphism invariance]
 \label{prop:diffeomorphism-invariance}
-Assume the three topology-to-graphical interfaces listed in
+Assume the two topology-to-graphical interfaces listed in
 \cref{rem:outstanding-invariance-interfaces}.
 Let $X$ and $Y$ be closed connected oriented smooth four-manifolds, let
 $f\colon X\to Y$ be an orientation-preserving diffeomorphism, and let

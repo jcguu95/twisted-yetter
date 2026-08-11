@@ -121,16 +121,23 @@ is identical.  The cellular comparison is natural for this based chain
 isomorphism, and a basis change does not alter the rank of $C_3$.
 \end{proof}
 
-\begin{definition}[Dotted cut presentation]
+\begin{definition}[Dotted co-core chart]
 \label{def:dotted-cut-system}
-A dotted cut presentation for $D$ consists of
+A \emph{dotted co-core chart} for $D$ is obtained from the actual handle
+decomposition carried by the special Kirby representative, as follows.  For
+each dotted component $\delta$, choose standard pair-of-balls coordinates on
+the corresponding primal $1$-handle and turn those coordinates over to the
+dual index-$3$ handle.  The choices for distinct handles have disjoint
+supports.  A generic ribbon-diagram projection of these fixed local handle
+models consists of
 \begin{enumerate}[label=(\roman*),ref=\roman*]
-  \item\label{item:cut-disks}
-  one cooriented spanning disk for every oriented dotted circle, with the
-  coorientation tied to the oriented primal $1$-handle generator, and with
-  all disks pairwise disjoint and transverse to the framed $2$-handle link.
-  A product collar $\Delta_\delta\times[-1,1]$ is chosen so that
-  $\Delta_\delta^+:=\Delta_\delta\times\{+1\}$ is the face selected by the
+\item\label{item:cut-disks}
+  the cooriented spanning disk that displays each chosen pair-of-balls model,
+  with coorientation tied to the oriented primal $1$-handle generator.  The
+  displaying disks have pairwise disjoint product neighborhoods and are
+  transverse to the framed $2$-handle link.  Write
+  $\Delta_\delta\times[-1,1]$ for the product collar, and put
+  $\Delta_\delta^+:=\Delta_\delta\times\{+1\}$ for the face selected by the
   coorientation;
 
   \item\label{item:cut-punctures}
@@ -152,12 +159,15 @@ A dotted cut presentation for $D$ consists of
   a boundary-state object and does not recolour the component; and
 
   \item\label{item:cut-regluing}
-  the regluing identification that reconstructs the original Kirby diagram
-  from the simultaneously cut-open tangle.
+  the coordinate regluing that reconstructs the original local handle models
+  and hence the original Kirby diagram.
 \end{enumerate}
 The puncture order in \cref{item:cut-order} is part of the cut-open tangle;
 it is not replaced by an unordered incidence count.
-This is an auxiliary graphical chart, not additional data in the evaluator.
+This is not an arbitrary spanning-disk system.  It is a graphical coordinate
+chart on the actual handles already present in
+\cref{def:special-kirby-representative}.  It is neither additional evaluator
+input nor a second realization of the Kirby diagram.
 The positive face and the opposite-face reversal agree with the pair-of-balls
 description of a $1$-handle in
 \cite[Section~2.3.2 and Definition~4.12]{BarenzBarrett2018}.  Its relation to
@@ -166,24 +176,26 @@ the turned-over index-$3$ operation is proved in
 evaluation equality.
 \end{definition}
 
-\begin{lemma}[Existence of dotted cut presentations]
+\begin{lemma}[Existence of dotted co-core charts]
 \label{lem:dotted-cut-presentation-existence}
-Every special Kirby representative admits a dotted cut presentation.
+Every special Kirby representative admits a dotted co-core chart.
 \end{lemma}
 
 \begin{proof}
-The dotted sublink is an unlink, so its components bound pairwise disjoint
-embedded disks.  After a perturbation relative to their boundaries, these
-disks are transverse to the compact framed $2$-handle link and hence have
-finitely many punctures.  Product neighborhoods of the disks supply the two
-ordered collar faces, and the original embedding supplies the regluing map.
+The handle decomposition already supplies pairwise disjoint local models for
+its $1$-handles.  Choose standard pair-of-balls coordinates in those models.
+In dotted-circle notation their displaying disks form the standard dotted
+unlink.  After a perturbation supported inside the chosen coordinate
+neighborhoods, the disks are transverse to the compact framed $2$-handle link
+and hence have finitely many punctures.  The coordinates supply the product
+collars, the ordered faces, and the regluing maps.
 \end{proof}
 
-\begin{proposition}[Dotted charts model the dual $3$-handle co-core word]
+\begin{proposition}[Co-core charts render the intrinsic index-$3$ maps]
 \label{prop:dotted-chart-realization}
 Let $\delta$ be a dotted component of a special Kirby representative.
 In the standard pair-of-balls model of its primal $1$-handle, the positive
-collar face of a dotted cut presentation records the ordered signed ribbon
+collar face of a dotted co-core chart records the ordered signed ribbon
 word carried by the strands traversing that handle.  After turning the handle
 decomposition over, this word presents the ribbons made transverse to the
 \emph{co-core} of the dual index-$3$ handle, which is the locus used by the
@@ -191,11 +203,11 @@ index-$3$ operation of \cite[Definition~5.11, $k=3$]{Tham2021}.  The
 two-dimensional collar face is a graphical chart for that word; it is not
 being identified with the one-dimensional co-core itself.
 
-If the spanning disks, collars, or local parameters are changed, the two
-resulting sections are related by a finite sequence of ambient ribbon
-isotopies, changes of product collar, crossings, cup--cap births or deaths,
-twists, and interchanges of disjoint local regions.  No categorical scalar or
-evaluation equality is part of this topological statement.
+Consequently the projector drawn in this chart is a rendering of the fixed
+intrinsic index-$3$ handle map, not a map defined by the chart.  For all dotted
+components at once, the disjoint handle neighborhoods render the tensor
+product of the corresponding intrinsic maps; changing their written order is
+only the interchange law for disjoint morphisms.
 \end{proposition}
 
 \begin{proof}
@@ -214,19 +226,11 @@ or equivalently attaching the dual $3$-handles, applies Definition~5.11 after
 the ribbons through each $1$-handle have been bunched using Lemma~2.27.
 Thus the collar chart records the typed boundary word of the co-core
 transverse graph without identifying the disk face with the co-core.
-
-For independence of the chart, use the standard uniqueness, up to ambient
-isotopy relative to the dotted unlink, of a complete system of spanning disks
-for an unlink.  Make such an isotopy generic with respect to the compact
-framed $2$-handle link.  It has only finitely many exceptional times.  Away
-from them it is an ambient ribbon isotopy; at an exceptional time the local
-change is a crossing, a cup--cap tangency, or a change of collar parameter.
-Framing records the possible twist.  For several dotted components, perform
-the isotopies one disk at a time and interchange moves with disjoint support.
-The isotopy extension theorem carries the product collars and regluing maps
-through the same finite sequence.  This proves the stated topological
-comparison of sections; its categorical invariance is proved separately in
-\cref{prop:graphical-auxiliary-independence}.
+Definition~5.11, $k=3$, assigns the intrinsic handle map to this actual
+co-core; the chart merely draws it.  Since the local handle neighborhoods are
+disjoint, their maps tensor independently, and the interchange law compares
+different written orders.  No uniqueness theorem for arbitrary systems of
+spanning disks is used.
 \end{proof}
 
 \begin{convention}[Three independent sources of signs]
@@ -248,7 +252,7 @@ The following information must not be conflated.
 \end{enumerate}
 In particular, \cref{item:cut-direction-sign} determines neither
 \cref{item:strand-dual-sign} nor \cref{item:character-exponent-source}.
-The cut system is auxiliary to the proof and is not an additional input to
+The co-core chart is auxiliary to the proof and is not an additional input to
 the manifold-level invariant.
 The first convention is the standard orientation-duality convention for
 colored ribbon graphs \cite[Chapter~2, Section~2.2]{BakalovKirillov2001};

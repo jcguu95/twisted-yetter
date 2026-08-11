@@ -67,7 +67,7 @@ encircling with $\operatorname{Dim}(\cC)^{-1}\Omega_{\cC}$, but that
 modular replacement is not used here; compare
 \cite[Definition~5.11 and Lemma~2.31]{Tham2021}.
 
-A dotted cut presentation from \cref{def:dotted-cut-system} is only a way to
+A dotted co-core chart from \cref{def:dotted-cut-system} is only a way to
 display this intrinsic map in a ribbon diagram.  Fix an ordinary-label state
 and read the positive collar face as $(p_1,\ldots,p_r)$.  Let $X_j$ be the
 label already carried by the oriented ribbon through $p_j$, and put
@@ -119,7 +119,7 @@ An admissible input for the Crane--Yetter evaluator consists of
   a twisted categorical input $(\cC,\eta)$;
 
   \item\label{item:evaluator-diagram}
-  a special Kirby representative $D$.  A dotted cut presentation may be
+  a special Kirby representative $D$.  A dotted co-core chart may be
   chosen to draw the intrinsic dotted operations, but it is not evaluator
   input;
 
@@ -140,8 +140,10 @@ removed by representative independence.
 
 \begin{definition}[Role-aware graphical expansion]
 \label{def:role-aware-graphical-expansion}
-Fix the input of \cref{def:admissible-diagrammatic-input}.  Its graphical
-expansion is constructed as follows.
+Fix the input of \cref{def:admissible-diagrammatic-input}.  First compose the
+intrinsic handle maps belonging to the actual handle decomposition.  A dotted
+co-core chart may then be chosen to display those maps.  The resulting
+graphical expansion is constructed as follows.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item\label{item:ordinary-kirby-expansion}
   Every ordinary framed component is coloured by $\Omega_{\cC}$.  Thus a
@@ -155,9 +157,9 @@ expansion is constructed as follows.
    =\eta_{\lambda_k}^{a_k}\operatorname{id}_{\lambda_k}$.
 
   \item\label{item:dotted-cut-projector}
-  Apply the dotted-circle translation of
-  \cref{def:dotted-circle-translation} simultaneously to every dotted
-  circle.
+  Apply the intrinsic dotted-circle operation of
+  \cref{def:dotted-circle-translation} to every dotted circle.  In a co-core
+  chart these disjoint maps are drawn simultaneously.
 
   \item\label{item:graphical-regluing}
   Expand the projectors using dual bases, interpret all crossings, extrema,
@@ -166,11 +168,14 @@ expansion is constructed as follows.
   of closed $\cC$-coloured ribbon graphs in $S^3$; its coefficients include
   the fusion-basis coefficients from the tensor-unit projectors.
 \end{enumerate}
-For a fixed ordinary-label state $\lambda$, the resulting element of the
-free complex vector space on closed coloured ribbon graphs is denoted
+For a fixed ordinary-label state $\lambda$, let
 \[
   \Gamma(D,a;\lambda).
 \]
+denote the class of this finite linear combination in the complex-linearized
+ribbon graphical category.  Thus it is the intrinsic composite modulo the
+ribbon graphical relations, not a chosen planar representative or a chosen
+spanning-disk system.
 The orientation of a ribbon, not its direction through a dotted disk,
 determines whether its label is $X$ or $X^*$.  Graphical evaluation is
 extended linearly to $\Gamma(D,a;\lambda)$.  By convention,
