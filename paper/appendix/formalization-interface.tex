@@ -588,3 +588,184 @@ This audit unit therefore establishes that the planar trace and its
 closed-circle conditions are transparent.  It does not yet certify the
 topological meaning of the stored handle boundary, the omitted closing
 $3$-handle data, or the relation between this syntax and a four-manifold.
+
+\subsection{Dotted cut-open data}
+\label{app:lean-dotted-cut-input}
+
+This subsection audits the second combinatorial layer.  Its objects are
+cut-open tangles associated with one fixed \texttt{SpecialKirbyDiagram}; they
+are not themselves Kirby diagrams.  In particular, the categorical projector
+inserted later by the evaluator must not be confused with the combinatorial
+\texttt{projectorHole} marker described below.
+
+\begin{enumerate}[label=\textbf{C\arabic*.},leftmargin=*]
+
+\item \textbf{One dotted puncture.}
+
+\emph{Human statement.}
+A puncture records a dotted component, an ordinary $2$-handle component, the
+strand segment entering the cut, the strand segment leaving it, the signed
+direction of intersection with the cooriented dotted disk, and its position
+in the ordered puncture word.  The two strand segments belong to the stated
+ordinary component and have the same local ribbon orientation.
+
+\emph{Lean declaration.}
+The structure \texttt{DottedPuncture}, in
+\nolinkurl{lean/TwistedYetter/Kirby/Final/Semantics/Independent/CutOpen.lean},
+lines 38--55, contains six data fields and five displayed role, incidence, and
+orientation proofs.  The two values of \texttt{PunctureDirection} are mapped
+by \texttt{incidenceSide} to outbound and inbound occurrences, respectively,
+at lines 13--36.
+
+\emph{Classification and judgment.}
+All five proof fields are short transparent equalities or inequalities.  The
+disk-intersection direction decides only whether the occurrence belongs to
+the local domain or codomain.  It does \emph{not} choose whether a ribbon is
+labelled by $X$ or $X^*$ and does not create a character exponent.  Component
+labels are assigned before cutting.  Status:
+\texttt{MATCH\_WITH\_DISK\_DIRECTION\_SEPARATED\_FROM\_DUALITY}.
+
+\item \textbf{Cut-open event syntax.}
+
+\emph{Human statement.}
+The cut-open tangle uses the same cups, caps, crossings, framing twists, and
+planar continuations as the closed link trace, together with one new marker
+\texttt{projectorHole}.  Such a marker names one dotted component and carries
+the complete ordered list of punctures at that hole.  Its input ports are the
+recorded input strands and its output ports are the recorded output strands.
+
+\emph{Lean declaration.}
+This is \texttt{CutOpenEvent}, lines 119--169.  The two transparent predicates
+\begin{verbatim}
+StrandContinuationsAreWellFormed
+CutOpenEventTransition
+\end{verbatim}
+at lines 179--223 check local component, orientation, and exact-word
+continuity.
+
+\emph{Classification and judgment.}
+The hole is finite syntax only.  It contains no category object, projector
+morphism, Kirby colour, character, scalar, or evaluation equality.  Status:
+\texttt{MATCH}.
+
+\item \textbf{The complete cut-open exterior.}
+
+\emph{Human statement.}
+The exterior is a finite closed event trace with a left-to-right active strand
+order.  Every transition is locally exact; continuations preserve component
+and orientation; event ports and active words have no repetitions; every
+strand has one input occurrence and one output occurrence; and every active
+strand belongs to an ordinary $2$-handle component.
+
+\emph{Lean declaration.}
+These data and proofs are the complete fields of
+\texttt{CutOpenExteriorTrace}, lines 273--298.
+
+\emph{Classification and judgment.}
+The correctness fields are transparent finite propositions analogous to K3
+and K4.  They describe how the exterior tangle is wired, but do not themselves
+assert that it is obtained by cutting the original embedded Kirby link.
+That geometric realization is a separate external boundary.  Status:
+\texttt{MATCH\_AS\_COMBINATORIAL\_CUT\_SYNTAX\_ONLY}.
+
+\item \textbf{Exactly one projector marker per dotted component.}
+
+\emph{Human statement.}
+For every dotted component, the cut-open trace designates one projector-hole
+event.  The designated event carries a puncture list belonging to that dotted
+component and numbered in list order.  Conversely, every projector-hole event
+is one of these designated events, so an ordinary component cannot create an
+extra hole.
+
+\emph{Lean declaration.}
+The structure \texttt{DottedCutData}, lines 312--340, stores the exterior,
+the designated event index, and three transparent correctness proofs:
+\begin{verbatim}
+projectorEvent_is_for
+everyProjectorEvent_is_indexed
+projectorPunctures_are_indexed
+\end{verbatim}
+
+\emph{Classification and judgment.}
+These fields synchronize one event trace; they do not compare two separately
+supplied puncture tables.  Their contents are purely finite and contain no
+evaluation assertion.  Status: \texttt{MATCH}.
+
+\item \textbf{The puncture word and completeness theorems.}
+
+\emph{Human statement.}
+The ordered puncture word of a dotted component is defined by reading the list
+inside its unique designated projector event.  Consequently every dotted
+component has exactly one event carrying exactly that word, every projector
+event uses such a word, and the word appears as one contiguous block in an
+otherwise unchanged active-order context.
+
+\emph{Lean declaration.}
+\texttt{DottedCutData.punctureWord} is a noncomputable definition at lines
+347--355.  Projector completeness, recorded order, exact ports, and unchanged
+exterior context are theorems proved at lines 357--574, notably
+\texttt{projectorEventsExactlyMatchDottedComponents}.
+
+\emph{Classification and judgment.}
+These consequences are kernel-checked theorems of C3--C4, not axioms or
+additional proof fields.  Thus the evaluator cannot silently choose a second
+puncture order.  Status: \texttt{DERIVED}.
+
+\item \textbf{Signed incidence.}
+
+\emph{Human statement.}
+For a fixed dotted component and ordinary component, the signed incidence
+coefficient is
+\[
+ N_{\mathrm{out}}-N_{\mathrm{in}},
+\]
+where $N_{\mathrm{out}}$ and $N_{\mathrm{in}}$ count, respectively, the
+outbound and inbound punctures lying on that ordinary component.  Equivalently,
+it is the fold over the ordered puncture word that adds $1$ at each outbound
+occurrence, subtracts $1$ at each inbound occurrence, and ignores other
+ordinary components.
+
+\emph{Lean declaration.}
+This is the definition \texttt{dottedCutBoundaryCoefficient}, lines 368--386.
+
+\emph{Classification and judgment.}
+This integer is computed solely from disk-intersection incidence.  It is not a
+choice of $X$ versus $X^*$ and is not itself the character exponent attached
+to the ordinary component by the evaluator.  Status: \texttt{MATCH}.
+
+\item \textbf{Binding cut incidence to the handle boundary.}
+
+\emph{Human statement.}
+For every primal $1$-handle $i$ and primal $2$-handle $j$, the $(i,j)$ matrix
+entry of the stored cellular boundary
+$\partial_2\colon C_2\to C_1$ equals the signed incidence from C6 between the
+corresponding dotted and ordinary components.
+
+\emph{Lean declaration.}
+The full second-layer package is
+\begin{verbatim}
+structure DottedCutPresentation (diagram : SpecialKirbyDiagram) where
+  cut : DottedCutData diagram.trace
+  incidence_agrees_with_handle_boundary :
+    for every one-handle i and two-handle j,
+    boundaryTwo(e_j)(i) = dottedCutBoundaryCoefficient(i,j)
+\end{verbatim}
+This is a notation-normalized transcription of lines 589--604.
+
+\emph{Classification and judgment.}
+The equality is a proof field, but its entire mathematical statement is the
+single familiar handle-incidence equation above.  It closes the K6 gap by
+preventing an arbitrary stored \texttt{boundaryTwo} from disagreeing with the
+cut data.  It does not prove that the combinatorial cut is topologically
+realizable; existence of realizable data remains an external topology input.
+Status: \texttt{MATCH\_AS\_EXPLICIT\_INCIDENCE\_BINDING}.
+
+\end{enumerate}
+
+The cut-open data therefore fixes one ordered puncture word and one exterior
+trace, and it explicitly binds their aggregate incidence to $\partial_2$.
+What remains unaudited is the topology-to-graphical assertion that these data
+arise from a genuine dotted-handle collar and that plugging the resulting
+local morphism into its exterior yields the intended ribbon expression.  That
+assertion is not hidden in \texttt{DottedCutPresentation}; it is an explicit
+entrance axiom and will be reviewed in the axiom subsection.
