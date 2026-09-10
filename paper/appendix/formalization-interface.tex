@@ -171,6 +171,218 @@ the paper's marked input.
 
 \end{enumerate}
 
-The next audit unit is the transitive category-law boundary hidden behind I2.
-It must expand every inherited class and distinguish domain-defining fusion and
-ribbon laws from project-specific correctness claims.
+\subsection{Transitive algebraic input}
+\label{app:lean-category-input}
+
+This subsection expands the category-theoretic content hidden behind I2.  The
+purpose is not to reproduce Mathlib's definitions of category, abelian
+category, monoidal category, braiding, or rigidity.  It is to expose every
+project-defined layer between those standard interfaces and the public pair
+$(\cC,\eta)$, so that no evaluator-correctness statement can hide inside the
+word ``premodular.''
+
+\begin{enumerate}[label=\textbf{A\arabic*.},leftmargin=*]
+
+\item \textbf{The first-class bundle.}
+
+\emph{Human statement.}
+The object $\cC$ packages one category together with compatible instances
+making it abelian, $K$-linear, monoidal, rigid, braided, monoidally additive,
+monoidally $K$-linear, and premodular.
+
+\emph{Lean declaration.}
+The structure \texttt{BundledPremodularCategory} has precisely the fields
+\begin{verbatim}
+C, category, abelian, linear, monoidal,
+rigid, braided, monoidalPreadditive,
+monoidalLinear, premodular
+\end{verbatim}
+Its complete declaration is in
+\nolinkurl{lean/TwistedYetter/CategoryTheory/Premodular/Bundled.lean}, lines
+19--37.
+
+\emph{Classification and judgment.}
+The first nine fields install standard Mathlib structures and their coherence
+laws.  The last field is expanded in A2.  None mentions Kirby diagrams,
+graphical evaluation, homology markings, or invariance.  Status:
+\texttt{MATCH}, subject to A2--A6.
+
+\item \textbf{Premodularity.}
+
+\emph{Human statement.}
+A premodular category over $K$ is a braided ribbon fusion category over an
+algebraically closed field of characteristic zero.
+
+\emph{Lean declaration.}
+After listing the ambient Mathlib instances, the complete project-specific
+class body is
+\begin{verbatim}
+class PremodularCategory ...
+    extends FusionCategory K C, RibbonCategory C
+\end{verbatim}
+in \nolinkurl{lean/TwistedYetter/CategoryTheory/Premodular/Basic.lean}, lines
+25--31.
+
+\emph{Classification and judgment.}
+This is a domain-defining class, not a theorem assumption about the proposed
+invariant.  It agrees with the paper's use of a premodular fusion category and
+with the convention of \cite[Definition~8.13.1]{EGNO2015}.  Its two parents are
+expanded next.  Status: \texttt{MATCH}.
+
+\item \textbf{Fusion structure.}
+
+\emph{Human statement.}
+A fusion category is a finite semisimple $K$-linear rigid monoidal category
+whose tensor unit is simple.
+
+\emph{Lean declaration.}
+The class \texttt{FusionCategory} extends
+\texttt{FiniteSemisimpleCategory K C} and has the single additional field
+\begin{verbatim}
+tensorUnit_simple : Simple (tensor unit)
+\end{verbatim}
+in \nolinkurl{lean/TwistedYetter/CategoryTheory/Fusion/Basic.lean}, lines
+25--32.  Here ``tensor unit'' is the source expression \texttt{(one\_ C)}
+written without its Unicode glyph.
+
+\emph{Classification and judgment.}
+Simplicity of the tensor unit is part of the definition of a fusion category,
+not a project-specific proof shortcut.  The class assumes the standard
+Mathlib linear, rigid, and monoidal interfaces rather than redefining their
+coherence equations.  Status: \texttt{MATCH}.
+
+\item \textbf{Finite semisimplicity and its witnesses.}
+
+\emph{Human statement.}
+Every morphism space is finite-dimensional over $K$; there are finitely many
+isomorphism classes of simple objects; and every object is a finite direct sum
+of simple objects.
+
+\emph{Lean declaration.}
+The class \texttt{FiniteSemisimpleCategory} has exactly three fields:
+\begin{verbatim}
+hom_finite
+finite_simple_skeleton
+finite_simple_decomposition
+\end{verbatim}
+in
+\nolinkurl{lean/TwistedYetter/CategoryTheory/FiniteSemisimple/Basic.lean},
+lines 20--26.  The skeleton witness consists of a finite index type, a family
+of simple objects, pairwise nonisomorphism, and completeness among all simple
+objects.  For every object $X$, the decomposition witness supplies finitely
+many simple summands with inclusions and projections satisfying
+\[
+ p_i\iota_i=\operatorname{id},
+ \qquad p_j\iota_i=0\quad(i\ne j),
+ \qquad \sum_i\iota_i p_i=\operatorname{id}_X,
+\]
+with the composition order translated from Lean's diagrammatic convention.
+These witness structures are declared in
+\nolinkurl{lean/TwistedYetter/CategoryTheory/FiniteSemisimple/Chosen.lean},
+lines 17--52.
+
+\emph{Classification and judgment.}
+The displayed equations are the ordinary finite-biproduct coordinate laws.
+They are proof fields because they certify that the supplied inclusions and
+projections really form a simple decomposition; they do not assert any
+Twisted Yetter calculation.  The public caller does not choose these
+coordinates: Lean obtains them noncomputably from the existential class
+fields.  Status: \texttt{MATCH}.
+
+\item \textbf{Ribbon structure.}
+
+\emph{Human statement.}
+A balancing is a natural automorphism
+$\theta\colon\operatorname{Id}_{\cC}\Rightarrow
+\operatorname{Id}_{\cC}$ satisfying
+\[
+ \theta_{X\otimes Y}
+ =(\theta_X\otimes\theta_Y)\circ c_{Y,X}\circ c_{X,Y}.
+\]
+It is ribbon when it is compatible with right duality:
+\[
+ (\theta_X)^*=\theta_{X^*}.
+\]
+
+\emph{Lean declaration.}
+The structure \texttt{Balancing} contains the natural isomorphism
+\texttt{twist} and the displayed tensor equation.  The structure
+\texttt{RibbonStructure} extends it by the displayed duality equation, and
+\texttt{RibbonCategory} contains one such ribbon structure.  The declarations
+are in \nolinkurl{lean/TwistedYetter/CategoryTheory/Ribbon/Basic.lean}, lines
+25--49.
+
+\emph{Classification and judgment.}
+These are precisely domain-defining ribbon laws.  Pivotal and spherical
+structures are not supplied as independent fields: they are constructed from
+the ribbon structure, with the spherical identity proved in
+\texttt{Ribbon/CanonicalSpherical.lean}.  This prevents callers from supplying
+an incompatible pivotal structure.  Status: \texttt{MATCH}; the cited
+convention is \cite[Definition~8.10.1 and Proposition~8.10.12]{EGNO2015}.
+
+\item \textbf{The character.}
+
+\emph{Human statement.}
+The twist parameter is a monoidal natural automorphism
+\[
+ \eta\colon\operatorname{Id}_{\cC}\Longrightarrow
+ \operatorname{Id}_{\cC}.
+\]
+Thus every object $X$ has an invertible endomorphism $\eta_X$, natural in
+$X$, with
+\[
+ \eta_{X\otimes Y}=\eta_X\otimes\eta_Y,
+ \qquad \eta_{\mathbf 1}=\operatorname{id}_{\mathbf 1}.
+\]
+
+\emph{Lean declaration.}
+\begin{verbatim}
+structure TensorIdentityCharacter where
+  iso : identity functor is naturally isomorphic to itself
+  monoidal : the forward natural transformation is monoidal
+\end{verbatim}
+This is a notation-normalized transcription of the complete two-field
+structure in
+\nolinkurl{lean/TwistedYetter/CategoryTheory/Monoidal/IdentityCharacter.lean},
+lines 19--22.
+
+\emph{Classification and judgment.}
+Naturality and invertibility are carried by the natural isomorphism;
+monoidality supplies the tensor and unit equations.  The action on duals and
+the scalar action on simple objects are proved later as theorems, rather than
+being extra character fields.  No universal-grading-group presentation is
+assumed.  Status: \texttt{MATCH}.
+
+\item \textbf{Derived choices and dimensions.}
+
+\emph{Human statement.}
+After receiving $\cC$, Lean may noncomputably choose representatives of simple
+objects and decompositions.  Quantum dimensions are canonical ribbon traces,
+and the global dimension is
+\[
+ \operatorname{Dim}(\cC)
+ =\sum_{i\in\operatorname{Irr}(\cC)} d_i^2.
+\]
+
+\emph{Lean declaration.}
+The definitions \texttt{simpleSkeleton}, \texttt{decomposition},
+\texttt{chosenSimpleFamily}, \texttt{quantumDimension}, and
+\texttt{globalDimension} occur in
+\nolinkurl{lean/TwistedYetter/CategoryTheory/Premodular/Bundled.lean}.  They are
+all definitions or noncomputable choices derived from A3--A5; none is a field
+of \texttt{TwistedPremodularCategory}.
+
+\emph{Classification and judgment.}
+These choices affect coordinates used to write finite sums, but not the
+public algebraic input.  The only additional literature axiom used by the
+final route is the nonvanishing of global dimension; it will be listed in the
+separate explicit-axiom subsection.  Status:
+\texttt{MATCH\_WITH\_EXPLICIT\_NONVANISHING\_BOUNDARY}.
+
+\end{enumerate}
+
+The transitive project-defined algebraic input therefore contains no
+evaluator equality, Kirby-move invariance, representative independence, or
+four-manifold realization claim.  The proof fields exposed above define the
+standard algebraic domain itself.  The next audit unit is the combinatorial
+special Kirby diagram supplied to the evaluator.
