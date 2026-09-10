@@ -8,8 +8,8 @@ of the manifold-level invariant.  Later subsections must separately flatten
 the category laws, topology axioms, derived proof obligations, public outputs,
 and final axiom closures.
 
-The source snapshot inspected here is commit
-\texttt{aa5ce6c5713dc95e3f80e748d3ea245e0bfdbb8f}.  A source-only red-team scan
+The Lean source snapshot inspected here is commit \texttt{dfa0c61}.  A
+source-only red-team scan
 of
 \nolinkurl{lean/TwistedYetter/Kirby/Final/Semantics/Independent}
 reported $19$ explicit axioms and $33$ possible proof fields.  These counts are
@@ -386,3 +386,205 @@ evaluator equality, Kirby-move invariance, representative independence, or
 four-manifold realization claim.  The proof fields exposed above define the
 standard algebraic domain itself.  The next audit unit is the combinatorial
 special Kirby diagram supplied to the evaluator.
+
+\subsection{Combinatorial special Kirby diagrams}
+\label{app:lean-kirby-diagram-input}
+
+The Lean object in this subsection is deliberately lower-level than the
+paper's \emph{special Kirby representative}: it is the finite combinatorial
+diagram before a manifold realization, dotted co-core chart, degree-three
+closing datum, or homology marking is attached.  Those later layers must be
+audited separately.  This distinction is essential when comparing the two
+interfaces.
+
+\begin{enumerate}[label=\textbf{K\arabic*.},leftmargin=*]
+
+\item \textbf{Component and strand records.}
+
+\emph{Human statement.}
+There are finitely many link components and finitely many strand segments.
+Each component is declared either ordinary or dotted, is assigned an
+auxiliary orientation, and stores an integer.  Each strand segment records
+the component to which it belongs and its local orientation.
+
+\emph{Lean declarations.}
+\begin{verbatim}
+inductive ComponentRole | ordinary | dotted
+
+structure Component where
+  role : ComponentRole
+  orientation : StrandOrientation
+  integerFraming : Int
+
+structure Strand (componentCount : Nat) where
+  component : Fin componentCount
+  orientation : StrandOrientation
+\end{verbatim}
+These occur in
+\nolinkurl{lean/TwistedYetter/Kirby/Final/Semantics/Independent/KirbyDiagram.lean},
+lines 24--48.
+
+\emph{Classification and judgment.}
+These are finite data, not proof fields.  Two details require later review.
+First, the record assigns an integer framing even to a dotted component,
+whereas the paper assigns framings only to ordinary $2$-handle components.
+Second, this record does not itself say that every local strand orientation
+agrees with the auxiliary orientation of its component.  Status:
+\texttt{REVIEW\_REQUIRED\_REDUNDANT\_FRAMING\_AND\_ORIENTATION\_BINDING}.
+
+\item \textbf{Finite link-diagram events.}
+
+\emph{Human statement.}
+A vertical sweep of the planar link diagram encounters only five kinds of
+combinatorial events: a cup, a cap, a signed crossing, a signed framing twist,
+or a planar-isotopy continuation.  A crossing records all four incident
+strand segments, including which branch is over and which is under.  General
+category-theoretic coupons do not occur in a Kirby link diagram.
+
+\emph{Lean declaration.}
+This is the inductive type \texttt{DiagramEvent} in the same file, lines
+57--68.  The transparent definitions \texttt{beforeWord},
+\texttt{afterWord}, and \texttt{continuationPairs}, lines 70--104, specify the
+ordered boundary strands and the continuation of each branch through an
+event.
+
+\emph{Classification and judgment.}
+This is explicit finite syntax, not an axiom.  Its birth and death constructors
+are planar cups and caps, not Kirby $1$--$2$ births and deaths.  Status:
+\texttt{MATCH}.
+
+\item \textbf{The ordered sweep.}
+
+\emph{Human statement.}
+At every height of the sweep, Lean records the left-to-right ordered list of
+active strand segments.  Passing one event replaces one exact contiguous
+subword by that event's output word and leaves a common prefix and suffix
+unchanged.  The bottom and top boundary words are empty.
+
+\emph{Lean declaration.}
+\texttt{CombinatorialLinkTrace} stores
+\begin{verbatim}
+activeOrder : Fin (eventCount + 1) -> List (Fin strandCount)
+initialBoundaryEmpty
+finalBoundaryEmpty
+transitionValid
+activeWordsNoDuplicates
+\end{verbatim}
+at lines 233--249.  The predicate \texttt{EventTransition} expanded at lines
+110--115 is exactly the common-prefix/common-suffix equation.
+
+\emph{Classification and judgment.}
+The ordered words are actual data; all four displayed conditions are
+transparent finite propositions.  They certify a closed planar sweep rather
+than merely naming a parser certificate.  Status: \texttt{MATCH}.
+
+\item \textbf{Closed-circle incidence.}
+
+\emph{Human statement.}
+The local ports of an event are distinct; a continuation remains on the same
+component; the two branches of a cup or cap have opposite local orientations,
+while a crossing, twist, or isotopy preserves orientation along each branch;
+every strand segment occurs exactly once immediately below some event and
+exactly once immediately above some event; and all segments carrying one
+component ID form one connected component.
+
+\emph{Lean declaration.}
+These are the four proof fields
+\begin{verbatim}
+eventPortsAreDistinct
+eventContinuationsAreWellFormed
+everyStrandHasUniqueInputAndOutput
+everyComponentIsConnected
+\end{verbatim}
+of \texttt{CombinatorialLinkTrace}, lines 250--257.  Their full propositions
+are transparent definitions at lines 144--202.
+
+\emph{Classification and judgment.}
+These are correctness proof fields, but their mathematical contents are
+fully visible and decidable from the finite syntax in principle.  Together
+they say that every declared component is one closed circle.  They do not,
+however, repair the missing comparison between strand orientation and the
+separately stored component orientation noted in K1.  Status:
+\texttt{MATCH\_AS\_FINITE\_INCIDENCE}, subject to K1.
+
+\item \textbf{Framing coherence.}
+
+\emph{Human statement.}
+For every declared component, its stored integer is the signed sum of all
+explicit framing-twist events lying on that component.
+
+\emph{Lean declaration.}
+The transparent predicate \texttt{FramingEventsMatchIntegerFramings} is
+\[
+ f(c)=\sum_e \operatorname{twistContribution}(c,e),
+\]
+and the field \texttt{framingEventsMatchIntegerFraming} supplies its proof;
+see lines 204--231 and 258--259.
+
+\emph{Classification and judgment.}
+This visibly binds the stored integer to the diagram syntax, so it is not an
+opaque framing certificate.  It currently applies to dotted components as
+well as ordinary ones.  Unless downstream definitions prove that the dotted
+integer is irrelevant, this is stronger and more data-dependent than the
+paper's Kirby input.  Status:
+\texttt{REVIEW\_REQUIRED\_DOTTED\_FRAMING}.
+
+\item \textbf{Visible handle data.}
+
+\emph{Human statement.}
+The diagram records finite numbers $h_1,h_2,h_3$.  It identifies the $h_1$
+primal $1$-handles bijectively with dotted components and the $h_2$ primal
+$2$-handles bijectively with ordinary components.  It also stores a homomorphism
+\[
+ \partial_2\colon \mathbb Z^{h_2}\longrightarrow\mathbb Z^{h_1}.
+\]
+
+\emph{Lean declaration.}
+This is the complete structure \texttt{SpecialHandleData}, lines 289--300:
+\begin{verbatim}
+hOne : Nat
+hTwo : Nat
+hThree : Nat
+oneHandleIndex : Fin hOne equiv dotted components
+twoHandleIndex : Fin hTwo equiv non-dotted components
+boundaryTwo : (Fin hTwo -> Int) ->+ (Fin hOne -> Int)
+\end{verbatim}
+
+\emph{Classification and judgment.}
+The counts, bijections, and boundary map are data, not propositions.  The
+bijections force the displayed component roles to have the advertised handle
+counts.  By contrast, \texttt{boundaryTwo} is not constrained inside
+\texttt{SpecialKirbyDiagram} to equal the signed dotted-link incidence map.
+That comparison is deferred to the cut-open layer and must be audited there.
+Status: \texttt{INCONCLUSIVE\_UNTIL\_INCIDENCE\_BINDING\_IS\_AUDITED}.
+
+\item \textbf{The diagram object and its deliberate omissions.}
+
+\emph{Human statement.}
+A \texttt{SpecialKirbyDiagram} is exactly one finite closed link trace together
+with the visible handle data of K6.  ``Special'' means that the surrounding
+handle decomposition has one $0$-handle and one $4$-handle, so those two counts
+are not stored.
+
+\emph{Lean declaration.}
+\begin{verbatim}
+structure SpecialKirbyDiagram where
+  trace : CombinatorialLinkTrace
+  handles : SpecialHandleData trace
+\end{verbatim}
+This is lines 302--308.
+
+\emph{Classification and judgment.}
+No manifold, $H_2$ class, dotted co-core chart, $\partial_3$ map, closing
+certificate, or evaluation appears in this two-field structure.  Therefore it
+does not by itself claim to be the paper's complete special Kirby
+representative.  Faithfulness of the full input depends on the subsequent
+cut-open, homology, and realization layers.  Status:
+\texttt{MATCH\_AS\_LOWER\_LEVEL\_COMBINATORIAL\_SYNTAX\_ONLY}.
+
+\end{enumerate}
+
+This audit unit therefore establishes that the planar trace and its
+closed-circle conditions are transparent.  It does not yet certify the
+topological meaning of the stored handle boundary, the omitted closing
+$3$-handle data, or the relation between this syntax and a four-manifold.
