@@ -17,6 +17,7 @@ $(MAIN).pdf: $(MAIN).tex abstract.tex contents.tex introduction.tex preliminarie
 		stable-calculation/modular-examples.tex future-directions.tex \
 		appendix.tex appendix/numerical-checks.tex \
 		appendix/computational-cost.tex \
+		appendix/formalization-interface.tex \
 		references.tex references.bib $(BUILD_INFO)
 	$(LATEXMK) -pdf -interaction=nonstopmode -halt-on-error $(MAIN).tex
 

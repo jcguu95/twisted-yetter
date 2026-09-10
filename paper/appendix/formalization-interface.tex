@@ -1,0 +1,179 @@
+\section{Lean interface and trust boundary}
+\label{app:lean-interface}
+
+This appendix is intended to make the Lean formalization auditable through a
+human mathematical interface.  It records exact Lean declarations rather than
+merely matching names.  The present subsection covers only the public inputs
+of the manifold-level invariant.  Later subsections must separately flatten
+the category laws, topology axioms, derived proof obligations, public outputs,
+and final axiom closures.
+
+The source snapshot inspected here is commit
+\texttt{aa5ce6c5713dc95e3f80e748d3ea245e0bfdbb8f}.  A source-only red-team scan
+of
+\nolinkurl{lean/TwistedYetter/Kirby/Final/Semantics/Independent}
+reported $19$ explicit axioms and $33$ possible proof fields.  These counts are
+conservative syntactic findings, not the axiom closure of the final theorem and
+not a judgment that every field is improper.  No kernel audit is claimed in
+this subsection.  Its current terminal status is
+\texttt{INCONCLUSIVE\_HUMAN\_REVIEW\_REQUIRED}.
+
+\subsection{Public final-theorem inputs}
+\label{app:lean-public-inputs}
+
+\begin{enumerate}[label=\textbf{I\arabic*.},leftmargin=*]
+
+\item \textbf{Coefficient field.}
+
+\emph{Human statement.}
+The Lean construction is parametrized by an algebraically closed field $K$ of
+characteristic zero.  The mathematical results in this paper specialize to
+$K=\mathbb C$.
+
+\emph{Lean declaration.}
+Every public declaration carries the ambient parameters
+\begin{verbatim}
+{K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
+\end{verbatim}
+
+\emph{Classification and judgment.}
+These are typeclass assumptions, not project-specific axioms.  The Lean
+statement is more general than the paper statement.  Thus this is a faithful
+specialization at $K=\mathbb C$, but not a literal statement match.
+
+\item \textbf{Twisted premodular category.}
+
+\emph{Human statement.}
+The algebraic input is a premodular fusion category $\cC$ over $K$, together
+with a monoidal natural automorphism
+$\eta\colon\operatorname{Id}_{\cC}\Rightarrow
+\operatorname{Id}_{\cC}$.
+
+\emph{Lean declaration.}
+\begin{verbatim}
+structure TwistedPremodularCategory
+    (K : Type uK) [Field K] [IsAlgClosed K] [CharZero K] where
+  category : CategoryTheory.BundledPremodularCategory.{v, uK, uC, uI} K
+  character : TensorIdentityCharacter (C := category.C)
+\end{verbatim}
+The declaration occurs in
+\nolinkurl{lean/TwistedYetter/CategoryTheory/Premodular/Bundled.lean},
+lines 446--449.
+
+\emph{Classification and judgment.}
+This is a two-field data structure.  Its immediate human meaning agrees with
+the paper.  This does not yet certify the claim: the inherited laws inside
+\texttt{BundledPremodularCategory} and \texttt{TensorIdentityCharacter} must be
+flattened and reviewed in the category-law subsection.
+
+\item \textbf{Four-manifold vocabulary.}
+
+\emph{Human statement.}
+The intended input $X$ is a closed, connected, oriented smooth
+four-manifold, and it has an underlying topological space.
+
+\emph{Lean declarations.}
+\begin{verbatim}
+axiom ClosedOrientedSmoothFourManifold : Type
+
+axiom underlyingTopologicalSpace :
+  ClosedOrientedSmoothFourManifold → TopCat
+\end{verbatim}
+They occur in \texttt{EntranceAxioms.lean}, lines 332--336, under
+\nolinkurl{lean/TwistedYetter/Kirby/Final/Semantics/Independent}.
+
+\emph{Classification and judgment.}
+These are explicit foundational vocabulary axioms; Lean does not construct
+smooth four-manifolds from more primitive objects.  There is, however, a
+semantic mismatch requiring review: neither the type nor a separate predicate
+records connectedness, although the paper and the special-handle convention
+require it.  The later special-representative existence axiom appears intended
+to enforce this scope indirectly, but it does not make the public input itself
+say ``connected.''  Status:
+\texttt{MISMATCH\_REQUIRES\_REVIEW}.
+
+\item \textbf{Oriented diffeomorphism.}
+
+\emph{Human statement.}
+For four-manifolds $X$ and $Y$, an input $f$ is an orientation-preserving
+diffeomorphism $X\to Y$.  Forgetting smooth structure gives a homeomorphism of
+their underlying topological spaces.
+
+\emph{Lean declarations.}
+\begin{verbatim}
+axiom OrientedDiffeomorphism :
+  ClosedOrientedSmoothFourManifold →
+  ClosedOrientedSmoothFourManifold →
+  Type
+
+axiom underlyingHomeomorphism
+    {X Y : ClosedOrientedSmoothFourManifold} :
+    OrientedDiffeomorphism X Y →
+    (underlyingTopologicalSpace X ≅ underlyingTopologicalSpace Y)
+\end{verbatim}
+The source is \nolinkurl{EntranceAxioms.lean}, lines 338--347.
+
+\emph{Classification and judgment.}
+Both are explicit foundational axioms.  Their intended meaning matches the
+paper at the level currently stated, but groupoid operations and orientation
+compatibility are not visible in these declarations.  Whether downstream
+proofs require more than the displayed forgetting map remains part of the
+topology-boundary audit.
+
+\item \textbf{Integral second homology and its transport.}
+
+\emph{Human statement.}
+For a four-manifold $X$,
+\[
+  \operatorname{ManifoldH}_2(X)=H_2(X;\mathbb Z).
+\]
+An oriented diffeomorphism $f\colon X\to Y$ induces the usual
+additive-group isomorphism
+\[
+  f_*\colon H_2(X;\mathbb Z)\longrightarrow H_2(Y;\mathbb Z).
+\]
+
+\emph{Lean declarations.}
+\begin{verbatim}
+noncomputable def ManifoldH₂
+    (X : ClosedOrientedSmoothFourManifold) : AddCommGrpCat :=
+  integralSingularH₂Functor.obj (underlyingTopologicalSpace X)
+
+noncomputable def inducedH₂
+    {X Y : ClosedOrientedSmoothFourManifold}
+    (f : OrientedDiffeomorphism X Y) :
+    ManifoldH₂ X ≃+ ManifoldH₂ Y :=
+  CategoryTheory.Iso.addCommGroupIsoToAddEquiv
+    (integralSingularH₂Functor.mapIso (underlyingHomeomorphism f))
+\end{verbatim}
+The source is \nolinkurl{EntranceAxioms.lean}, lines 350--366.
+
+\emph{Classification and judgment.}
+These are derived noncomputable definitions, not new axioms.  They use
+Mathlib's integral singular-homology functor and the explicitly supplied
+underlying homeomorphism.  This matches the paper's $H_2(X;\mathbb Z)$ input.
+
+\item \textbf{The marked public input.}
+
+\emph{Human statement.}
+The manifold-side argument of the invariant is exactly a pair
+$(X,\alpha)$ with
+$\alpha\in H_2(X;\mathbb Z)$; no Kirby diagram, evaluator, compiler, or proof
+certificate is supplied by the caller.
+
+\emph{Lean declaration as used by the public definition.}
+\begin{verbatim}
+(Xα : Σ X : ClosedOrientedSmoothFourManifold, ManifoldH₂ X)
+\end{verbatim}
+This is the dependent sum used in
+\nolinkurl{lean/TwistedYetter/Kirby/Final/TwistedYetter.lean}, lines 173--177.
+
+\emph{Classification and judgment.}
+This is ordinary dependent-pair data, not an axiom or proof field.  Apart from
+the unresolved connectedness issue in I3, it matches the paper's marked input.
+
+\end{enumerate}
+
+The next audit unit is the transitive category-law boundary hidden behind I2.
+It must expand every inherited class and distinguish domain-defining fusion and
+ribbon laws from project-specific correctness claims.
