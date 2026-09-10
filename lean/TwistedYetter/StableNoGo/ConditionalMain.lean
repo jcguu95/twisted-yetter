@@ -36,10 +36,10 @@ The intended future instantiation is:
 -/
 theorem premodularMarkedIntersectionFormInvariance_of_stable_inputs
     (𝒞η : TwistedPremodularCategory K)
-    (stabilize : ClosedOrientedSmoothFourManifold →
-      Nat → ClosedOrientedSmoothFourManifold)
+    (stabilize : ClosedConnectedOrientedSmoothFourManifold →
+      Nat → ClosedConnectedOrientedSmoothFourManifold)
     (stabilizedMarking :
-      ∀ (X : ClosedOrientedSmoothFourManifold),
+      ∀ (X : ClosedConnectedOrientedSmoothFourManifold),
         ManifoldH₂ X →
         ∀ n : Nat, ManifoldH₂ (stabilize X n))
     (lambda : K)
@@ -47,7 +47,7 @@ theorem premodularMarkedIntersectionFormInvariance_of_stable_inputs
     (stabilizationFormula :
       MarkedStabilizationFormula 𝒞η stabilize stabilizedMarking lambda)
     (markedStableRealization :
-      ∀ (X Y : ClosedOrientedSmoothFourManifold),
+      ∀ (X Y : ClosedConnectedOrientedSmoothFourManifold),
         IsSimplyConnected X →
         IsSimplyConnected Y →
         ∀ (f : IntegralIntersectionFormIsometry X Y)

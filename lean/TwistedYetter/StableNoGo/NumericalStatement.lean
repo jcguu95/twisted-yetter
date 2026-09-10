@@ -25,7 +25,7 @@ def standardOddPairing (p q : ℕ)
 
 /-- A coordinate choice identifying an odd intersection form with `p⟨1⟩ ⊕ q⟨-1⟩`. -/
 structure OddDiagonalization
-    (X : ClosedOrientedSmoothFourManifold) where
+    (X : ClosedConnectedOrientedSmoothFourManifold) where
   positiveRank : ℕ
   negativeRank : ℕ
   coordinates :
@@ -45,13 +45,13 @@ inductive K3HBlock
   | negativeK3
   | hyperbolic
 
-def K3HBlock.manifold : K3HBlock → ClosedOrientedSmoothFourManifold
+def K3HBlock.manifold : K3HBlock → ClosedConnectedOrientedSmoothFourManifold
   | .positiveK3 => k3Surface
   | .negativeK3 => reversedK3Surface
   | .hyperbolic => sphereTwoProduct
 
 /-- The connected sum represented by an unmarked finite block list. -/
-def connectedSumK3HBlocks : List K3HBlock → ClosedOrientedSmoothFourManifold
+def connectedSumK3HBlocks : List K3HBlock → ClosedConnectedOrientedSmoothFourManifold
   | [] => fourSphere
   | block :: blocks =>
       connectedSum block.manifold (connectedSumK3HBlocks blocks)
@@ -78,7 +78,7 @@ count, standard marked blocks, an integral intersection-form isometry, and the
 exact transported marking.  It contains no category or evaluator equality.
 -/
 structure EvenStableK3HDecomposition
-    (X : ClosedOrientedSmoothFourManifold) (alpha : ManifoldH₂ X) where
+    (X : ClosedConnectedOrientedSmoothFourManifold) (alpha : ManifoldH₂ X) where
   stabilizationCount : ℕ
   blocks : List K3HBlock
   markings : K3HBlockMarkings blocks

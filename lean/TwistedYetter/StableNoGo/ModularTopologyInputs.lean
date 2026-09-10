@@ -28,52 +28,52 @@ noncomputable section
 
 /-- The positive index `b2Plus(X)` of the real intersection form. -/
 axiom positiveSecondBettiNumber :
-    ClosedOrientedSmoothFourManifold -> ℕ
+    ClosedConnectedOrientedSmoothFourManifold -> ℕ
 
 /-- The negative index `b2Minus(X)` of the real intersection form. -/
 axiom negativeSecondBettiNumber :
-    ClosedOrientedSmoothFourManifold -> ℕ
+    ClosedConnectedOrientedSmoothFourManifold -> ℕ
 
 /-- An odd integral diagonalization has exactly `b2Plus(X)` positive entries. -/
 axiom OddDiagonalization.positiveRank_eq_b2Plus
-    {X : ClosedOrientedSmoothFourManifold}
+    {X : ClosedConnectedOrientedSmoothFourManifold}
     (diagonalization : OddDiagonalization X) :
     diagonalization.positiveRank = positiveSecondBettiNumber X
 
 /-- An odd integral diagonalization has exactly `b2Minus(X)` negative entries. -/
 axiom OddDiagonalization.negativeRank_eq_b2Minus
-    {X : ClosedOrientedSmoothFourManifold}
+    {X : ClosedConnectedOrientedSmoothFourManifold}
     (diagonalization : OddDiagonalization X) :
     diagonalization.negativeRank = negativeSecondBettiNumber X
 
 /-- The real intersection form is definite exactly when one of its two indices vanishes. -/
 def HasDefiniteIntersectionForm
-    (X : ClosedOrientedSmoothFourManifold) : Prop :=
+    (X : ClosedConnectedOrientedSmoothFourManifold) : Prop :=
   positiveSecondBettiNumber X = 0 ∨
     negativeSecondBettiNumber X = 0
 
 /-- The real intersection form is indefinite exactly when both indices are nonzero. -/
 def HasIndefiniteIntersectionForm
-    (X : ClosedOrientedSmoothFourManifold) : Prop :=
+    (X : ClosedConnectedOrientedSmoothFourManifold) : Prop :=
   positiveSecondBettiNumber X ≠ 0 ∧
     negativeSecondBettiNumber X ≠ 0
 
 /-- A symmetric integral form is odd when some vector has odd square. -/
 def HasOddIntersectionForm
-    (X : ClosedOrientedSmoothFourManifold) : Prop :=
+    (X : ClosedConnectedOrientedSmoothFourManifold) : Prop :=
   ∃ alpha : ManifoldH₂ X,
     Odd (integralIntersectionPairing X alpha alpha)
 
 /-- A symmetric integral form is even when every vector has even square. -/
 def HasEvenIntersectionForm
-    (X : ClosedOrientedSmoothFourManifold) : Prop :=
+    (X : ClosedConnectedOrientedSmoothFourManifold) : Prop :=
   ∀ alpha : ManifoldH₂ X,
     Even (integralIntersectionPairing X alpha alpha)
 
 /-- Every integral intersection form is either odd or even, in the literal
 parity sense fixed by the two preceding definitions. -/
 theorem odd_or_even_intersectionForm
-    (X : ClosedOrientedSmoothFourManifold) :
+    (X : ClosedConnectedOrientedSmoothFourManifold) :
     HasOddIntersectionForm X ∨ HasEvenIntersectionForm X := by
   by_cases odd : HasOddIntersectionForm X
   · exact Or.inl odd
@@ -85,7 +85,7 @@ theorem odd_or_even_intersectionForm
 
 /-- The definite/indefinite dichotomy, expressed through the two indices. -/
 theorem not_definite_iff_indefinite
-    (X : ClosedOrientedSmoothFourManifold) :
+    (X : ClosedConnectedOrientedSmoothFourManifold) :
     ¬ HasDefiniteIntersectionForm X ↔
       HasIndefiniteIntersectionForm X := by
   simp [HasDefiniteIntersectionForm, HasIndefiniteIntersectionForm]
@@ -101,7 +101,7 @@ four-dimensional topology*, JDG 18 (1983), Theorem A.  The opposite-definite
 case is the same statement after reversing the orientation of the manifold.
 -/
 axiom donaldson_definiteIntersectionForm_diagonalization
-    (X : ClosedOrientedSmoothFourManifold)
+    (X : ClosedConnectedOrientedSmoothFourManifold)
     (simplyConnectedX : IsSimplyConnected X)
     (definite : HasDefiniteIntersectionForm X) :
     Nonempty (OddDiagonalization X)
@@ -120,7 +120,7 @@ smooth structure.  See C. Peters, *Symmetric and Quadratic Forms*, Theorem
 of `<1>` and `<-1>`.
 -/
 axiom oddIndefiniteUnimodularForm_diagonalization
-    (X : ClosedOrientedSmoothFourManifold)
+    (X : ClosedConnectedOrientedSmoothFourManifold)
     (simplyConnectedX : IsSimplyConnected X)
     (odd : HasOddIntersectionForm X)
     (indefinite : HasIndefiniteIntersectionForm X) :
@@ -131,7 +131,7 @@ integral diagonalization: Donaldson handles the definite branch and the
 arithmetic classification of odd unimodular lattices handles the indefinite
 branch. -/
 theorem oddIntersectionForm_diagonalization
-    (X : ClosedOrientedSmoothFourManifold)
+    (X : ClosedConnectedOrientedSmoothFourManifold)
     (simplyConnectedX : IsSimplyConnected X)
     (odd : HasOddIntersectionForm X) :
     Nonempty (OddDiagonalization X) := by
@@ -201,7 +201,7 @@ forcing this source stabilization count to be zero is the stronger statement
 equivalent to `11/8`.
 -/
 axiom evenIntersectionForm_stableK3H_isometry
-    (X : ClosedOrientedSmoothFourManifold)
+    (X : ClosedConnectedOrientedSmoothFourManifold)
     (simplyConnectedX : IsSimplyConnected X)
     (even : HasEvenIntersectionForm X) :
     Σ stabilizationCount : ℕ, Σ blocks : List K3HBlock,
@@ -212,7 +212,7 @@ axiom evenIntersectionForm_stableK3H_isometry
 isometry by transporting `alpha` and splitting its image across the standard
 blocks.  No marked-realization axiom is added. -/
 theorem evenStableK3HDecomposition_exists
-    (X : ClosedOrientedSmoothFourManifold)
+    (X : ClosedConnectedOrientedSmoothFourManifold)
     (simplyConnectedX : IsSimplyConnected X)
     (even : HasEvenIntersectionForm X)
     (alpha : ManifoldH₂ X) :
@@ -234,19 +234,19 @@ theorem evenStableK3HDecomposition_exists
 
 /-- Positive index under one positive blow-up. -/
 axiom positiveSecondBettiNumber_cp2Blowup
-    (X : ClosedOrientedSmoothFourManifold) :
+    (X : ClosedConnectedOrientedSmoothFourManifold) :
     positiveSecondBettiNumber (connectedSum X complexProjectivePlane) =
       positiveSecondBettiNumber X + 1
 
 /-- Negative index under one positive blow-up. -/
 axiom negativeSecondBettiNumber_cp2Blowup
-    (X : ClosedOrientedSmoothFourManifold) :
+    (X : ClosedConnectedOrientedSmoothFourManifold) :
     negativeSecondBettiNumber (connectedSum X complexProjectivePlane) =
       negativeSecondBettiNumber X
 
 /-- A positive blow-up has an odd intersection form, witnessed by the `CP2` generator. -/
 theorem cp2Blowup_hasOddIntersectionForm
-    (X : ClosedOrientedSmoothFourManifold) :
+    (X : ClosedConnectedOrientedSmoothFourManifold) :
     HasOddIntersectionForm
       (connectedSum X complexProjectivePlane) := by
   refine ⟨connectedSumMarking 0 positiveProjectivePlaneGenerator, ?_⟩
@@ -260,7 +260,7 @@ diagonalizable.  The proof separates the definite Donaldson branch from the
 indefinite odd-unimodular arithmetic branch.
 -/
 theorem cp2Blowup_oddDiagonalization
-    (X : ClosedOrientedSmoothFourManifold)
+    (X : ClosedConnectedOrientedSmoothFourManifold)
     (simplyConnectedX : IsSimplyConnected X) :
     Nonempty (OddDiagonalization
       (connectedSum X complexProjectivePlane)) := by
@@ -278,13 +278,13 @@ theorem cp2Blowup_oddDiagonalization
 
 /-- The integral self-intersection `Q_X(alpha, alpha)`. -/
 def selfIntersection
-    (X : ClosedOrientedSmoothFourManifold)
+    (X : ClosedConnectedOrientedSmoothFourManifold)
     (alpha : ManifoldH₂ X) : ℤ :=
   integralIntersectionPairing X alpha alpha
 
 @[simp]
 theorem selfIntersection_cp2Blowup_zero
-    (X : ClosedOrientedSmoothFourManifold)
+    (X : ClosedConnectedOrientedSmoothFourManifold)
     (alpha : ManifoldH₂ X) :
     selfIntersection (connectedSum X complexProjectivePlane)
         (connectedSumMarking alpha 0) =

@@ -58,7 +58,7 @@ def fourSphereCoordinates : ManifoldH₂ fourSphere ≃+ (Fin 0 → ℤ) where
     exact Fin.elim0 index
 
 /-- `p` positive rank-one blocks, with `S⁴` as the rank-zero base. -/
-def positiveDiagonalManifold : ℕ → ClosedOrientedSmoothFourManifold
+def positiveDiagonalManifold : ℕ → ClosedConnectedOrientedSmoothFourManifold
   | 0 => fourSphere
   | p + 1 => connectedSum complexProjectivePlane (positiveDiagonalManifold p)
 
@@ -101,7 +101,7 @@ def positiveDiagonalCoordinates :
   rfl
 
 /-- `q` negative rank-one blocks, with `S⁴` as the rank-zero base. -/
-def negativeDiagonalManifold : ℕ → ClosedOrientedSmoothFourManifold
+def negativeDiagonalManifold : ℕ → ClosedConnectedOrientedSmoothFourManifold
   | 0 => fourSphere
   | q + 1 =>
       connectedSum reversedComplexProjectivePlane (negativeDiagonalManifold q)
@@ -213,7 +213,7 @@ theorem negativeDiagonal_pairing
       ring
 
 /-- The standard manifold realizing `p⟨1⟩ ⊕ q⟨-1⟩`. -/
-def oddDiagonalManifold (p q : ℕ) : ClosedOrientedSmoothFourManifold :=
+def oddDiagonalManifold (p q : ℕ) : ClosedConnectedOrientedSmoothFourManifold :=
   connectedSum (positiveDiagonalManifold p) (negativeDiagonalManifold q)
 
 /-- Canonical coordinates on the full odd standard model. -/
@@ -270,7 +270,7 @@ theorem oddDiagonal_pairing
 
 theorem normalizedTwistedYetter_connectedSum
     (𝒞η : TwistedPremodularCategory K)
-    (X Y : ClosedOrientedSmoothFourManifold)
+    (X Y : ClosedConnectedOrientedSmoothFourManifold)
     (alpha : ManifoldH₂ X) (beta : ManifoldH₂ Y) :
     NormalizedTwistedYetter 𝒞η
         ⟨connectedSum X Y, connectedSumMarking alpha beta⟩ =
@@ -443,7 +443,7 @@ theorem twistedYetter_oddDiagonal
 
 /-- The intersection-form isometry canonically induced by odd coordinates. -/
 def oddDiagonalIntersectionFormIsometry
-    {X : ClosedOrientedSmoothFourManifold}
+    {X : ClosedConnectedOrientedSmoothFourManifold}
     (diagonalization : OddDiagonalization X) :
     IntegralIntersectionFormIsometry X
       (oddDiagonalManifold diagonalization.positiveRank

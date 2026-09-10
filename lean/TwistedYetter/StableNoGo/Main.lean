@@ -36,7 +36,7 @@ theorem premodularMarkedIntersectionFormInvariance_of_core_obligations
     (stabilizationMultiplier_ne_zero :
       stabilizationMultiplier 𝒞η globalDimension ≠ 0)
     (markedStableRealization :
-      ∀ (X Y : ClosedOrientedSmoothFourManifold),
+      ∀ (X Y : ClosedConnectedOrientedSmoothFourManifold),
         IsSimplyConnected X →
         IsSimplyConnected Y →
         ∀ (f : IntegralIntersectionFormIsometry X Y)

@@ -74,23 +74,20 @@ four-manifold, and it has an underlying topological space.
 
 \emph{Lean declarations.}
 \begin{verbatim}
-axiom ClosedOrientedSmoothFourManifold : Type
+axiom ClosedConnectedOrientedSmoothFourManifold : Type
 
 axiom underlyingTopologicalSpace :
-  ClosedOrientedSmoothFourManifold → TopCat
+  ClosedConnectedOrientedSmoothFourManifold → TopCat
 \end{verbatim}
 They occur in \texttt{EntranceAxioms.lean}, lines 332--336, under
 \nolinkurl{lean/TwistedYetter/Kirby/Final/Semantics/Independent}.
 
 \emph{Classification and judgment.}
 These are explicit foundational vocabulary axioms; Lean does not construct
-smooth four-manifolds from more primitive objects.  There is, however, a
-semantic mismatch requiring review: neither the type nor a separate predicate
-records connectedness, although the paper and the special-handle convention
-require it.  The later special-representative existence axiom appears intended
-to enforce this scope indirectly, but it does not make the public input itself
-say ``connected.''  Status:
-\texttt{MISMATCH\_REQUIRES\_REVIEW}.
+smooth four-manifolds from more primitive objects.  Connectedness is now part
+of the primitive type's stated meaning and name, rather than being inferred
+indirectly from a later presentation-existence axiom.  This exactly matches
+the manifold scope of the paper.  Status: \texttt{MATCH}.
 
 \item \textbf{Oriented diffeomorphism.}
 
@@ -102,12 +99,12 @@ their underlying topological spaces.
 \emph{Lean declarations.}
 \begin{verbatim}
 axiom OrientedDiffeomorphism :
-  ClosedOrientedSmoothFourManifold →
-  ClosedOrientedSmoothFourManifold →
+  ClosedConnectedOrientedSmoothFourManifold →
+  ClosedConnectedOrientedSmoothFourManifold →
   Type
 
 axiom underlyingHomeomorphism
-    {X Y : ClosedOrientedSmoothFourManifold} :
+    {X Y : ClosedConnectedOrientedSmoothFourManifold} :
     OrientedDiffeomorphism X Y →
     (underlyingTopologicalSpace X ≅ underlyingTopologicalSpace Y)
 \end{verbatim}
@@ -136,11 +133,11 @@ additive-group isomorphism
 \emph{Lean declarations.}
 \begin{verbatim}
 noncomputable def ManifoldH₂
-    (X : ClosedOrientedSmoothFourManifold) : AddCommGrpCat :=
+    (X : ClosedConnectedOrientedSmoothFourManifold) : AddCommGrpCat :=
   integralSingularH₂Functor.obj (underlyingTopologicalSpace X)
 
 noncomputable def inducedH₂
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     (f : OrientedDiffeomorphism X Y) :
     ManifoldH₂ X ≃+ ManifoldH₂ Y :=
   CategoryTheory.Iso.addCommGroupIsoToAddEquiv
@@ -163,14 +160,14 @@ certificate is supplied by the caller.
 
 \emph{Lean declaration as used by the public definition.}
 \begin{verbatim}
-(Xα : Σ X : ClosedOrientedSmoothFourManifold, ManifoldH₂ X)
+(Xα : Σ X : ClosedConnectedOrientedSmoothFourManifold, ManifoldH₂ X)
 \end{verbatim}
 This is the dependent sum used in
 \nolinkurl{lean/TwistedYetter/Kirby/Final/TwistedYetter.lean}, lines 173--177.
 
 \emph{Classification and judgment.}
-This is ordinary dependent-pair data, not an axiom or proof field.  Apart from
-the unresolved connectedness issue in I3, it matches the paper's marked input.
+This is ordinary dependent-pair data, not an axiom or proof field.  It matches
+the paper's marked input.
 
 \end{enumerate}
 

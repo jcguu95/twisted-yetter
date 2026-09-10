@@ -37,14 +37,14 @@ pure field calculation from masquerading as a connected-sum theorem.
 -/
 def MarkedStabilizationFormula
     (𝒞η : TwistedPremodularCategory K)
-    (stabilize : ClosedOrientedSmoothFourManifold →
-      Nat → ClosedOrientedSmoothFourManifold)
+    (stabilize : ClosedConnectedOrientedSmoothFourManifold →
+      Nat → ClosedConnectedOrientedSmoothFourManifold)
     (stabilizedMarking :
-      ∀ (X : ClosedOrientedSmoothFourManifold),
+      ∀ (X : ClosedConnectedOrientedSmoothFourManifold),
         ManifoldH₂ X →
         ∀ n : Nat, ManifoldH₂ (stabilize X n))
     (lambda : K) : Prop :=
-  ∀ (X : ClosedOrientedSmoothFourManifold)
+  ∀ (X : ClosedConnectedOrientedSmoothFourManifold)
     (alpha : ManifoldH₂ X) (n : Nat),
       TwistedYetter 𝒞η ⟨stabilize X n, stabilizedMarking X alpha n⟩ =
         lambda ^ n * TwistedYetter 𝒞η ⟨X, alpha⟩
@@ -57,13 +57,13 @@ diffeomorphism whose induced map sends the stabilized source marking to the
 stabilized target marking.  It does not assert why such data exist.
 -/
 def MarkedStableRealization
-    (stabilize : ClosedOrientedSmoothFourManifold →
-      Nat → ClosedOrientedSmoothFourManifold)
+    (stabilize : ClosedConnectedOrientedSmoothFourManifold →
+      Nat → ClosedConnectedOrientedSmoothFourManifold)
     (stabilizedMarking :
-      ∀ (X : ClosedOrientedSmoothFourManifold),
+      ∀ (X : ClosedConnectedOrientedSmoothFourManifold),
         ManifoldH₂ X →
         ∀ n : Nat, ManifoldH₂ (stabilize X n))
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     (alpha : ManifoldH₂ X) (beta : ManifoldH₂ Y) : Prop :=
   ∃ (n : Nat)
     (F : OrientedDiffeomorphism (stabilize X n) (stabilize Y n)),
@@ -79,17 +79,17 @@ realization, and cancellation by the nonzero scalar `lambda ^ n`.
 -/
 theorem twistedYetter_eq_of_stable_realization
     (𝒞η : TwistedPremodularCategory K)
-    (stabilize : ClosedOrientedSmoothFourManifold →
-      Nat → ClosedOrientedSmoothFourManifold)
+    (stabilize : ClosedConnectedOrientedSmoothFourManifold →
+      Nat → ClosedConnectedOrientedSmoothFourManifold)
     (stabilizedMarking :
-      ∀ (X : ClosedOrientedSmoothFourManifold),
+      ∀ (X : ClosedConnectedOrientedSmoothFourManifold),
         ManifoldH₂ X →
         ∀ n : Nat, ManifoldH₂ (stabilize X n))
     (lambda : K)
     (lambda_ne_zero : lambda ≠ 0)
     (stabilizationFormula :
       MarkedStabilizationFormula 𝒞η stabilize stabilizedMarking lambda)
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     (alpha : ManifoldH₂ X) (beta : ManifoldH₂ Y)
     (stableRealization :
       MarkedStableRealization stabilize stabilizedMarking alpha beta) :

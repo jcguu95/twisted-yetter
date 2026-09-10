@@ -329,20 +329,25 @@ can remain the human statement in `𝒞η`, `f`, and `α` without hiding ambient
 parameters.
 -/
 
-axiom ClosedOrientedSmoothFourManifold : Type
+/--
+Foundational vocabulary for the paper's manifold domain: closed, connected,
+oriented smooth four-manifolds.  The project treats this domain as primitive
+instead of rebuilding smooth-manifold foundations.
+-/
+axiom ClosedConnectedOrientedSmoothFourManifold : Type
 
-/-- The underlying topological space of a smooth oriented four-manifold. -/
+/-- The underlying topological space of a closed connected oriented smooth four-manifold. -/
 axiom underlyingTopologicalSpace :
-  ClosedOrientedSmoothFourManifold → TopCat
+  ClosedConnectedOrientedSmoothFourManifold → TopCat
 
 axiom OrientedDiffeomorphism :
-  ClosedOrientedSmoothFourManifold →
-  ClosedOrientedSmoothFourManifold →
+  ClosedConnectedOrientedSmoothFourManifold →
+  ClosedConnectedOrientedSmoothFourManifold →
   Type
 
 /-- An oriented diffeomorphism supplies its underlying homeomorphism. -/
 axiom underlyingHomeomorphism
-    {X Y : ClosedOrientedSmoothFourManifold} :
+    {X Y : ClosedConnectedOrientedSmoothFourManifold} :
     OrientedDiffeomorphism X Y →
     (underlyingTopologicalSpace X ≅ underlyingTopologicalSpace Y)
 
@@ -354,12 +359,12 @@ noncomputable def integralSingularH₂Functor :
 
 /-- The second integral singular homology group of a four-manifold. -/
 noncomputable def ManifoldH₂
-    (X : ClosedOrientedSmoothFourManifold) : AddCommGrpCat :=
+    (X : ClosedConnectedOrientedSmoothFourManifold) : AddCommGrpCat :=
   integralSingularH₂Functor.obj (underlyingTopologicalSpace X)
 
 /-- Functoriality of integral singular homology under an oriented diffeomorphism. -/
 noncomputable def inducedH₂
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     (f : OrientedDiffeomorphism X Y) :
     ManifoldH₂ X ≃+ ManifoldH₂ Y :=
   CategoryTheory.Iso.addCommGroupIsoToAddEquiv
@@ -378,7 +383,7 @@ certificate containing attaching spheres.  It mentions no category,
 character, evaluator, scalar, homology comparison, or invariance conclusion.
 -/
 axiom PresentsClosedFourManifold :
-  SpecialKirbyDiagram → ClosedOrientedSmoothFourManifold → Prop
+  SpecialKirbyDiagram → ClosedConnectedOrientedSmoothFourManifold → Prop
 
 /--
 `RepresentsPoincareDualClass presentation beta alpha` means that the ambient
@@ -394,19 +399,19 @@ which arise from the stated manifold homology class.
 -/
 axiom RepresentsPoincareDualClass
     {diagram : SpecialKirbyDiagram}
-    {X : ClosedOrientedSmoothFourManifold}
+    {X : ClosedConnectedOrientedSmoothFourManifold}
     (_presentation : PresentsClosedFourManifold diagram X) :
     ThamMarkingClass diagram → ManifoldH₂ X → Prop
 
 structure SpecialKirbyRepresentativeOf
-    (X : ClosedOrientedSmoothFourManifold) where
+    (X : ClosedConnectedOrientedSmoothFourManifold) where
   diagram : SpecialKirbyDiagram
   cut : DottedCutPresentation diagram
   presents : PresentsClosedFourManifold diagram X
   thamAlpha : ThamMarkingClass diagram
 
 noncomputable def SpecialKirbyRepresentativeOf.toHomologicallyMarkedDiagram
-    {X : ClosedOrientedSmoothFourManifold}
+    {X : ClosedConnectedOrientedSmoothFourManifold}
     (representative : SpecialKirbyRepresentativeOf X) :
     HomologicallyMarkedDiagram :=
   { diagram := representative.diagram
@@ -414,7 +419,7 @@ noncomputable def SpecialKirbyRepresentativeOf.toHomologicallyMarkedDiagram
     thamAlpha := representative.thamAlpha }
 
 def SpecialKirbyRepresentativeOf.representsHomologyClass
-    {X : ClosedOrientedSmoothFourManifold}
+    {X : ClosedConnectedOrientedSmoothFourManifold}
     (alpha : ManifoldH₂ X)
     (representative : SpecialKirbyRepresentativeOf X) : Prop :=
   RepresentsPoincareDualClass
@@ -430,7 +435,7 @@ a diagram, a three-handle attachment, or a coefficient vector, and it does not
 assert an evaluator equality.
 -/
 axiom specialKirbyRepresentative_exists
-    (X : ClosedOrientedSmoothFourManifold)
+    (X : ClosedConnectedOrientedSmoothFourManifold)
     (alpha : ManifoldH₂ X) :
     ∃ representative : SpecialKirbyRepresentativeOf X,
       representative.representsHomologyClass alpha
@@ -444,7 +449,7 @@ THAM markings.  The endpoints are constrained by
 `RepresentsPoincareDualClass`; no caller may choose unrelated markings.
 -/
 axiom markedKirbyCerf_complete
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     (f : OrientedDiffeomorphism X Y)
     (alpha : ManifoldH₂ X)
     (left : SpecialKirbyRepresentativeOf X)
@@ -462,7 +467,7 @@ been proved.  The target is a definition, not an entrance axiom.
 def TwistedYetterDiffeomorphismInvarianceTarget
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
     (𝒞η : TwistedPremodularCategory K) : Prop :=
-  ∀ (X Y : ClosedOrientedSmoothFourManifold)
+  ∀ (X Y : ClosedConnectedOrientedSmoothFourManifold)
     (f : OrientedDiffeomorphism X Y)
     (alpha : ManifoldH₂ X)
     (left : SpecialKirbyRepresentativeOf X)

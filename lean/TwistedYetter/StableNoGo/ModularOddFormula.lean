@@ -63,7 +63,7 @@ theorem product_negativeShiftedGaussSum
 theorem oddFormula_eq_explicitModularFormula
     {𝒞η : TwistedModularCategory K}
     (g : ModularCharacterObject 𝒞η)
-    {X : ClosedOrientedSmoothFourManifold}
+    {X : ClosedConnectedOrientedSmoothFourManifold}
     (diagonalization : OddDiagonalization X)
     (alpha : ManifoldH₂ X) :
     oddFormula 𝒞η.toPremodular diagonalization alpha =
@@ -101,7 +101,7 @@ theorem oddFormula_eq_explicitModularFormula
 theorem twistedYetter_eq_explicitModularFormula_of_oddDiagonalization
     {𝒞η : TwistedModularCategory K}
     (g : ModularCharacterObject 𝒞η)
-    {X : ClosedOrientedSmoothFourManifold}
+    {X : ClosedConnectedOrientedSmoothFourManifold}
     (simplyConnectedX : IsSimplyConnected X)
     (diagonalization : OddDiagonalization X)
     (alpha : ManifoldH₂ X) :

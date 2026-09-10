@@ -98,7 +98,7 @@ The exact category-neutral syntax saying that one certified presentation is the
 split union of two others in disjoint three-balls.
 -/
 structure SplitSpecialKirbyPresentation
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     (left : SpecialKirbyRepresentativeOf X)
     (right : SpecialKirbyRepresentativeOf Y) where
   target : SpecialKirbyRepresentativeOf (connectedSum X Y)
@@ -149,7 +149,7 @@ The chain-level form of connected-sum naturality needed by the character
 exponents.  Every coordinate equation is stated independently of any category.
 -/
 structure SplitMarkingNaturality
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (alpha : ManifoldH₂ X)
@@ -184,7 +184,7 @@ disjoint three-balls give a certified presentation of the manifold connected
 sum, with the exact transparent syntax recorded above.
 -/
 axiom splitSpecialKirbyPresentation_exists
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     (left : SpecialKirbyRepresentativeOf X)
     (right : SpecialKirbyRepresentativeOf Y) :
     Nonempty (SplitSpecialKirbyPresentation left right)
@@ -195,7 +195,7 @@ admit coefficient representatives whose restrictions are the two original
 representatives and whose target class represents the connected-sum marking.
 -/
 axiom splitSpecialKirbyPresentation_marking_natural
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (alpha : ManifoldH₂ X)
@@ -214,7 +214,7 @@ The direct-sum map on second homology, transported through the fixed
 Mayer--Vietoris identifications for connected sums.
 -/
 def connectedSumH₂Map
-    {X X' Y Y' : ClosedOrientedSmoothFourManifold}
+    {X X' Y Y' : ClosedConnectedOrientedSmoothFourManifold}
     (f : ManifoldH₂ X ≃+ ManifoldH₂ X')
     (g : ManifoldH₂ Y ≃+ ManifoldH₂ Y') :
     ManifoldH₂ (connectedSum X Y) ≃+
@@ -224,7 +224,7 @@ def connectedSumH₂Map
 
 @[simp]
 theorem connectedSumH₂Map_apply
-    {X X' Y Y' : ClosedOrientedSmoothFourManifold}
+    {X X' Y Y' : ClosedConnectedOrientedSmoothFourManifold}
     (f : ManifoldH₂ X ≃+ ManifoldH₂ X')
     (g : ManifoldH₂ Y ≃+ ManifoldH₂ Y')
     (alpha : ManifoldH₂ X) (beta : ManifoldH₂ Y) :
@@ -238,19 +238,19 @@ theorem connectedSumH₂Map_apply
 /-! ### Standard simply connected four-manifolds -/
 
 /-- The standard oriented complex projective plane. -/
-axiom complexProjectivePlane : ClosedOrientedSmoothFourManifold
+axiom complexProjectivePlane : ClosedConnectedOrientedSmoothFourManifold
 
 /-- The complex projective plane with reversed orientation. -/
-axiom reversedComplexProjectivePlane : ClosedOrientedSmoothFourManifold
+axiom reversedComplexProjectivePlane : ClosedConnectedOrientedSmoothFourManifold
 
 /-- The oriented four-sphere. -/
-axiom fourSphere : ClosedOrientedSmoothFourManifold
+axiom fourSphere : ClosedConnectedOrientedSmoothFourManifold
 
 /-- The standard oriented `K3` surface. -/
-axiom k3Surface : ClosedOrientedSmoothFourManifold
+axiom k3Surface : ClosedConnectedOrientedSmoothFourManifold
 
 /-- The `K3` surface with reversed orientation. -/
-axiom reversedK3Surface : ClosedOrientedSmoothFourManifold
+axiom reversedK3Surface : ClosedConnectedOrientedSmoothFourManifold
 
 /-- `CP²` is simply connected. -/
 axiom complexProjectivePlane_simplyConnected :
@@ -317,7 +317,7 @@ theorem fourSphere_intersectionForm_eq_zero
 An oriented diffeomorphism preserves the integral intersection pairing.
 -/
 axiom orientedDiffeomorphism_preservesIntersectionPairing
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     (g : OrientedDiffeomorphism X Y)
     (a b : ManifoldH₂ X) :
     integralIntersectionPairing Y (inducedH₂ g a) (inducedH₂ g b) =
@@ -329,7 +329,7 @@ axiom sphereTwoProduct_simplyConnected :
 
 /-- Connected sum preserves simple connectivity. -/
 axiom connectedSum_simplyConnected
-    {X Y : ClosedOrientedSmoothFourManifold} :
+    {X Y : ClosedConnectedOrientedSmoothFourManifold} :
     IsSimplyConnected X →
       IsSimplyConnected Y →
         IsSimplyConnected (connectedSum X Y)
@@ -339,7 +339,7 @@ The Mayer--Vietoris splitting identifies the connected-sum intersection form
 with the orthogonal direct sum of the two original intersection forms.
 -/
 axiom connectedSumH₂_preservesIntersectionPairing
-    (X Y : ClosedOrientedSmoothFourManifold)
+    (X Y : ClosedConnectedOrientedSmoothFourManifold)
     (a a' : ManifoldH₂ X) (b b' : ManifoldH₂ Y) :
     integralIntersectionPairing (connectedSum X Y)
         (connectedSumMarking a b) (connectedSumMarking a' b') =
@@ -348,18 +348,18 @@ axiom connectedSumH₂_preservesIntersectionPairing
 
 /-- Identity orientation-preserving diffeomorphism. -/
 axiom identityOrientedDiffeomorphism
-    (X : ClosedOrientedSmoothFourManifold) :
+    (X : ClosedConnectedOrientedSmoothFourManifold) :
     OrientedDiffeomorphism X X
 
 /-- The identity diffeomorphism induces the identity on integral `H₂`. -/
 axiom inducedH₂_identityOrientedDiffeomorphism
-    (X : ClosedOrientedSmoothFourManifold) :
+    (X : ClosedConnectedOrientedSmoothFourManifold) :
     inducedH₂ (identityOrientedDiffeomorphism X) =
       AddEquiv.refl (ManifoldH₂ X)
 
 /-- The intersection-form isometry induced by an oriented diffeomorphism. -/
 def intersectionFormIsometryOfDiffeomorphism
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     (g : OrientedDiffeomorphism X Y) :
     IntegralIntersectionFormIsometry X Y where
   toAddEquiv := inducedH₂ g
@@ -368,14 +368,14 @@ def intersectionFormIsometryOfDiffeomorphism
 
 /-- Composition of orientation-preserving diffeomorphisms. -/
 axiom composeOrientedDiffeomorphism
-    {X Y Z : ClosedOrientedSmoothFourManifold}
+    {X Y Z : ClosedConnectedOrientedSmoothFourManifold}
     (g : OrientedDiffeomorphism X Y)
     (h : OrientedDiffeomorphism Y Z) :
     OrientedDiffeomorphism X Z
 
 /-- The homology action of a composite is the composite homology action. -/
 axiom inducedH₂_composeOrientedDiffeomorphism
-    {X Y Z : ClosedOrientedSmoothFourManifold}
+    {X Y Z : ClosedConnectedOrientedSmoothFourManifold}
     (g : OrientedDiffeomorphism X Y)
     (h : OrientedDiffeomorphism Y Z) :
     inducedH₂ (composeOrientedDiffeomorphism g h) =
@@ -383,7 +383,7 @@ axiom inducedH₂_composeOrientedDiffeomorphism
 
 /-- Connected sum of orientation-preserving diffeomorphisms. -/
 axiom connectedSumOrientedDiffeomorphism
-    {X X' Y Y' : ClosedOrientedSmoothFourManifold}
+    {X X' Y Y' : ClosedConnectedOrientedSmoothFourManifold}
     (g : OrientedDiffeomorphism X X')
     (h : OrientedDiffeomorphism Y Y') :
     OrientedDiffeomorphism (connectedSum X Y) (connectedSum X' Y')
@@ -393,7 +393,7 @@ Under the fixed Mayer--Vietoris splittings, the homology action of `g # h` is
 exactly `g_* ⊕ h_*`.
 -/
 axiom inducedH₂_connectedSumOrientedDiffeomorphism
-    {X X' Y Y' : ClosedOrientedSmoothFourManifold}
+    {X X' Y Y' : ClosedConnectedOrientedSmoothFourManifold}
     (g : OrientedDiffeomorphism X X')
     (h : OrientedDiffeomorphism Y Y') :
     inducedH₂ (connectedSumOrientedDiffeomorphism g h) =
@@ -411,7 +411,7 @@ No claim is made here about the induced homology action of the resulting
 diffeomorphism.
 -/
 axiom wall_stableClassification
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     (simplyConnectedX : IsSimplyConnected X)
     (simplyConnectedY : IsSimplyConnected Y)
     (f : IntegralIntersectionFormIsometry X Y) :
@@ -427,7 +427,7 @@ The displayed equality is the complete homology action under the fixed
 Mayer--Vietoris splitting, not merely its restriction to the old summand.
 -/
 axiom rubermanStrle_oneStableRealization
-    {Z : ClosedOrientedSmoothFourManifold}
+    {Z : ClosedConnectedOrientedSmoothFourManifold}
     (simplyConnectedZ : IsSimplyConnected Z)
     (A : IntegralIntersectionFormIsometry Z Z) :
     ∃ h : OrientedDiffeomorphism

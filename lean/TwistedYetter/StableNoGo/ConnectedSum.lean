@@ -25,39 +25,39 @@ variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
 
 /-- Oriented connected sum of closed oriented smooth four-manifolds. -/
 axiom connectedSum :
-  ClosedOrientedSmoothFourManifold →
-  ClosedOrientedSmoothFourManifold →
-  ClosedOrientedSmoothFourManifold
+  ClosedConnectedOrientedSmoothFourManifold →
+  ClosedConnectedOrientedSmoothFourManifold →
+  ClosedConnectedOrientedSmoothFourManifold
 
 /-- The closed oriented smooth four-manifold `S^2 \times S^2`. -/
-axiom sphereTwoProduct : ClosedOrientedSmoothFourManifold
+axiom sphereTwoProduct : ClosedConnectedOrientedSmoothFourManifold
 
 /--
 The canonical Mayer--Vietoris identification
 `H₂(X # Y; ℤ) ≃ H₂(X; ℤ) ⊕ H₂(Y; ℤ)`.
 -/
 axiom connectedSumH₂
-    (X Y : ClosedOrientedSmoothFourManifold) :
+    (X Y : ClosedConnectedOrientedSmoothFourManifold) :
     ManifoldH₂ (connectedSum X Y) ≃+
       ManifoldH₂ X × ManifoldH₂ Y
 
 /-- The class `alpha \oplus beta` in the connected sum. -/
 def connectedSumMarking
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     (alpha : ManifoldH₂ X) (beta : ManifoldH₂ Y) :
     ManifoldH₂ (connectedSum X Y) :=
   (connectedSumH₂ X Y).symm (alpha, beta)
 
 /-- Iterated stabilization by `S^2 \times S^2`, with fixed parenthesization. -/
 def stabilize :
-    ClosedOrientedSmoothFourManifold →
-    Nat → ClosedOrientedSmoothFourManifold
+    ClosedConnectedOrientedSmoothFourManifold →
+    Nat → ClosedConnectedOrientedSmoothFourManifold
   | X, 0 => X
   | X, n + 1 => connectedSum (stabilize X n) sphereTwoProduct
 
 /-- The marking `alpha \oplus 0` under every stabilization. -/
 def stabilizedMarking
-    (X : ClosedOrientedSmoothFourManifold)
+    (X : ClosedConnectedOrientedSmoothFourManifold)
     (alpha : ManifoldH₂ X) :
     ∀ n : Nat, ManifoldH₂ (stabilize X n)
   | 0 => alpha
@@ -75,7 +75,7 @@ evaluator multiplicativity, and the THAM normalization.
 def MarkedConnectedSumFormula
     (𝒞η : TwistedPremodularCategory K)
     (globalDimension : K) : Prop :=
-  ∀ (X Y : ClosedOrientedSmoothFourManifold)
+  ∀ (X Y : ClosedConnectedOrientedSmoothFourManifold)
     (alpha : ManifoldH₂ X) (beta : ManifoldH₂ Y),
     TwistedYetter 𝒞η
         ⟨connectedSum X Y, connectedSumMarking alpha beta⟩ =

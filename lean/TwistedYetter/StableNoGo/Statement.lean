@@ -24,7 +24,7 @@ variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
 
 /-- The ordinary topological meaning of simply connected. -/
 abbrev IsSimplyConnected
-    (X : ClosedOrientedSmoothFourManifold) : Prop :=
+    (X : ClosedConnectedOrientedSmoothFourManifold) : Prop :=
   SimplyConnectedSpace (underlyingTopologicalSpace.{0} X)
 
 /--
@@ -35,7 +35,7 @@ machinery needed to construct this pairing.  This is therefore an explicit
 foundational topology boundary.  It contains no category or evaluator data.
 -/
 axiom integralIntersectionPairing
-    (X : ClosedOrientedSmoothFourManifold) :
+    (X : ClosedConnectedOrientedSmoothFourManifold) :
     ManifoldH₂ X →+ ManifoldH₂ X →+ ℤ
 
 /--
@@ -43,7 +43,7 @@ An isometry of integral intersection lattices: an additive equivalence that
 preserves the pairing on every ordered pair of homology classes.
 -/
 structure IntegralIntersectionFormIsometry
-    (X Y : ClosedOrientedSmoothFourManifold) where
+    (X Y : ClosedConnectedOrientedSmoothFourManifold) where
   toAddEquiv : ManifoldH₂ X ≃+ ManifoldH₂ Y
   preservesPairing :
     ∀ a b : ManifoldH₂ X,
@@ -52,7 +52,7 @@ structure IntegralIntersectionFormIsometry
 
 namespace IntegralIntersectionFormIsometry
 
-instance {X Y : ClosedOrientedSmoothFourManifold} :
+instance {X Y : ClosedConnectedOrientedSmoothFourManifold} :
     CoeFun (IntegralIntersectionFormIsometry X Y)
       (fun _ => ManifoldH₂ X → ManifoldH₂ Y) where
   coe f := f.toAddEquiv
@@ -67,7 +67,7 @@ Twisted Yetter value depends only on the marked integral intersection lattice.
 -/
 def PremodularMarkedIntersectionFormInvariance
     (𝒞η : TwistedPremodularCategory K) : Prop :=
-  ∀ (X Y : ClosedOrientedSmoothFourManifold),
+  ∀ (X Y : ClosedConnectedOrientedSmoothFourManifold),
     IsSimplyConnected X →
     IsSimplyConnected Y →
     ∀ (f : IntegralIntersectionFormIsometry X Y)

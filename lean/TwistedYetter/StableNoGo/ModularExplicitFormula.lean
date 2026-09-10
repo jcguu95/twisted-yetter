@@ -46,7 +46,7 @@ For a closed simply connected oriented smooth four-manifold,
 -/
 theorem TwistedYetter_modular_explicit_formula
     (𝒞η : TwistedModularCategory K)
-    {X : ClosedOrientedSmoothFourManifold}
+    {X : ClosedConnectedOrientedSmoothFourManifold}
     (simplyConnectedX : IsSimplyConnected X)
     (alpha : ManifoldH₂ X) :
     TwistedYetter 𝒞η.toPremodular ⟨X, alpha⟩ =
@@ -54,7 +54,7 @@ theorem TwistedYetter_modular_explicit_formula
         positiveGaussSum 𝒞η.toPremodular ^ positiveSecondBettiNumber X *
         negativeGaussSum 𝒞η.toPremodular ^ negativeSecondBettiNumber X *
         ((((characterTwist 𝒞η) ^ (-selfIntersection X alpha) : Kˣ) : K)) := by
-  let blowup : ClosedOrientedSmoothFourManifold :=
+  let blowup : ClosedConnectedOrientedSmoothFourManifold :=
     connectedSum X complexProjectivePlane
   let blowupAlpha : ManifoldH₂ blowup :=
     connectedSumMarking alpha (0 : ManifoldH₂ complexProjectivePlane)
@@ -108,7 +108,7 @@ theorem TwistedYetter_modular_explicit_formula
 /-- The zero-marked modular baseline. -/
 theorem TwistedYetter_modular_zero_formula
     (𝒞η : TwistedModularCategory K)
-    {X : ClosedOrientedSmoothFourManifold}
+    {X : ClosedConnectedOrientedSmoothFourManifold}
     (simplyConnectedX : IsSimplyConnected X) :
     TwistedYetter 𝒞η.toPremodular ⟨X, 0⟩ =
       𝒞η.category.globalDimension *
@@ -120,7 +120,7 @@ theorem TwistedYetter_modular_zero_formula
 /-- The quadratic correction relative to the zero-marked value. -/
 theorem TwistedYetter_modular_quadratic_ratio
     (𝒞η : TwistedModularCategory K)
-    {X : ClosedOrientedSmoothFourManifold}
+    {X : ClosedConnectedOrientedSmoothFourManifold}
     (simplyConnectedX : IsSimplyConnected X)
     (alpha : ManifoldH₂ X) :
     TwistedYetter 𝒞η.toPremodular ⟨X, alpha⟩ =

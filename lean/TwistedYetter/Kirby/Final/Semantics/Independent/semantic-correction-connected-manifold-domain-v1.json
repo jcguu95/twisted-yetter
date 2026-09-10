@@ -1,0 +1,40 @@
+{
+  "schema": "twisted-yetter/semantic-correction-connected-manifold-domain/1",
+  "recorded_at_utc": "2026-09-10T20:15:10Z",
+  "parent_commit": "4194585c91d27d4c6bb3ccf351dedd2fefe66e25",
+  "status": "ESTABLISHED",
+  "semantic_change": {
+    "old_vocabulary": "ClosedOrientedSmoothFourManifold",
+    "new_vocabulary": "ClosedConnectedOrientedSmoothFourManifold",
+    "human_meaning": "The public manifold domain consists of closed connected oriented smooth four-manifolds.",
+    "reason": "Connectedness is part of the paper's theorem scope and must be visible at the public type boundary rather than inferred indirectly from presentation existence.",
+    "new_fields": [],
+    "new_axioms": [],
+    "changed_mathematical_data": false,
+    "final_theorem_signature_change": "The manifold type name now states connectedness explicitly; the mathematical arguments remain (C, eta), f, and alpha."
+  },
+  "verification": {
+    "lean_command": "LEAN_NUM_THREADS=1 lake build",
+    "lean_result": "PASS_8316_JOBS",
+    "paper_command": "make",
+    "paper_result": "PASS_NO_LAYOUT_OR_REFERENCE_WARNINGS",
+    "old_vocabulary_remaining_occurrences": 0,
+    "project_axiom_count_in_final_theorem_closure": 19,
+    "project_axiom_count_changed": false,
+    "source_red_team_status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "source_red_team_explicit_axioms": 19,
+    "source_red_team_likely_proof_fields": 33,
+    "source_red_team_json": "/private/tmp/twisted-yetter-connected-source-audit.json",
+    "source_red_team_markdown": "/private/tmp/twisted-yetter-connected-source-audit.zh-TW.md"
+  },
+  "source_hashes": {
+    "lean/TwistedYetter/Kirby/Final/Semantics/Independent/EntranceAxioms.lean": "ef8f5bef41a3f30334782f2fefac07e3269765766a16e14439ee4068d468d344",
+    "paper/appendix/formalization-interface.tex": "19f05bd8639d22339825f6c4495160c0f1f0909518dbee3fb7f5792461847716"
+  },
+  "historical_freeze_note": {
+    "latest_numbered_manifest": "semantic-freeze-combinatorial-v27.json",
+    "latest_numbered_manifest_was_already_pending_reseal": true,
+    "historical_manifest_rewritten": false,
+    "current_prefix_seal_claimed": false
+  }
+}

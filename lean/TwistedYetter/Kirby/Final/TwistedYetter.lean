@@ -173,7 +173,7 @@ parameter or `sorry`.
 noncomputable def TwistedYetter
     (𝒞η : TwistedPremodularCategory K)
     (Xα :
-      Σ X : ClosedOrientedSmoothFourManifold,
+      Σ X : ClosedConnectedOrientedSmoothFourManifold,
         ManifoldH₂ X) : K :=
   let representative :=
     (specialKirbyRepresentative_exists Xα.1 Xα.2).choose
@@ -188,7 +188,7 @@ from the frozen frontend itself.
 -/
 theorem TwistedYetter_diffeomorphism_invariant
     (𝒞η : TwistedPremodularCategory K)
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     (f : OrientedDiffeomorphism X Y)
     (alpha : ManifoldH₂ X) :
     TwistedYetter 𝒞η ⟨X, alpha⟩ =

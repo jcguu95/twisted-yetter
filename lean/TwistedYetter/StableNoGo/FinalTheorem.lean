@@ -43,7 +43,7 @@ recovers the original value on `X`.
 -/
 theorem TwistedYetter_stable_calculation
     (𝒞η : TwistedPremodularCategory K)
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     (simplyConnectedX : IsSimplyConnected X)
     (simplyConnectedY : IsSimplyConnected Y)
     (f : IntegralIntersectionFormIsometry X Y)
@@ -78,7 +78,7 @@ marked integral intersection lattice.
 -/
 theorem TwistedYetter_eq_of_integralIntersectionFormIsometry
     (𝒞η : TwistedPremodularCategory K)
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     (simplyConnectedX : IsSimplyConnected X)
     (simplyConnectedY : IsSimplyConnected Y)
     (f : IntegralIntersectionFormIsometry X Y)
@@ -200,7 +200,7 @@ theorem explicitK3HBlockProduct_eq_standardK3HBlockProduct
 /-- The explicit shifted-Gauss-sum expression for an odd diagonalization. -/
 noncomputable def oddFormula
     (𝒞η : TwistedPremodularCategory K)
-    {X : ClosedOrientedSmoothFourManifold}
+    {X : ClosedConnectedOrientedSmoothFourManifold}
     (diagonalization : OddDiagonalization X)
     (alpha : ManifoldH₂ X) : K :=
   let coordinates := diagonalization.coordinates alpha
@@ -211,7 +211,7 @@ noncomputable def oddFormula
 /-- The connected-sum-normalized odd expression. -/
 noncomputable def normalizedOddFormula
     (𝒞η : TwistedPremodularCategory K)
-    {X : ClosedOrientedSmoothFourManifold}
+    {X : ClosedConnectedOrientedSmoothFourManifold}
     (diagonalization : OddDiagonalization X)
     (alpha : ManifoldH₂ X) : K :=
   let coordinates := diagonalization.coordinates alpha
@@ -221,7 +221,7 @@ noncomputable def normalizedOddFormula
 /-- The stabilized `K3/H` block expression for a marked even decomposition. -/
 noncomputable def evenFormula
     (𝒞η : TwistedPremodularCategory K)
-    {X : ClosedOrientedSmoothFourManifold}
+    {X : ClosedConnectedOrientedSmoothFourManifold}
     {alpha : ManifoldH₂ X}
     (decomposition : EvenStableK3HDecomposition X alpha) : K :=
   explicitK3HBlockProduct 𝒞η decomposition.blocks decomposition.markings /
@@ -231,7 +231,7 @@ noncomputable def evenFormula
 /-- The odd numerical formula for one simply connected four-manifold. -/
 def SatisfiesOddFormula
     (𝒞η : TwistedPremodularCategory K)
-    (X : ClosedOrientedSmoothFourManifold) : Prop :=
+    (X : ClosedConnectedOrientedSmoothFourManifold) : Prop :=
   IsSimplyConnected X →
     ∀ (diagonalization : OddDiagonalization X) (alpha : ManifoldH₂ X),
       TwistedYetter 𝒞η ⟨X, alpha⟩ = oddFormula 𝒞η diagonalization alpha
@@ -239,7 +239,7 @@ def SatisfiesOddFormula
 /-- The even stable numerical formula for one simply connected four-manifold. -/
 def SatisfiesEvenFormula
     (𝒞η : TwistedPremodularCategory K)
-    (X : ClosedOrientedSmoothFourManifold) : Prop :=
+    (X : ClosedConnectedOrientedSmoothFourManifold) : Prop :=
   IsSimplyConnected X →
     ∀ (alpha : ManifoldH₂ X)
       (decomposition : EvenStableK3HDecomposition X alpha),
@@ -284,7 +284,7 @@ theorem connectedSumBlocks_simplyConnected
 
 theorem normalizedTwistedYetter_stabilize
     (𝒞η : TwistedPremodularCategory K)
-    (X : ClosedOrientedSmoothFourManifold)
+    (X : ClosedConnectedOrientedSmoothFourManifold)
     (alpha : ManifoldH₂ X) (n : ℕ) :
     NormalizedTwistedYetter 𝒞η
         ⟨stabilize X n, stabilizedMarking X alpha n⟩ =
@@ -299,7 +299,7 @@ theorem normalizedTwistedYetter_stabilize
 
 theorem satisfiesEvenFormula
     (𝒞η : TwistedPremodularCategory K)
-    (X : ClosedOrientedSmoothFourManifold) :
+    (X : ClosedConnectedOrientedSmoothFourManifold) :
     SatisfiesEvenFormula 𝒞η X := by
   intro simplyConnectedX alpha decomposition
   have invariantEquality :=
@@ -335,7 +335,7 @@ theorem satisfiesEvenFormula
 
 theorem satisfiesOddFormula
     (𝒞η : TwistedPremodularCategory K)
-    (X : ClosedOrientedSmoothFourManifold) :
+    (X : ClosedConnectedOrientedSmoothFourManifold) :
     SatisfiesOddFormula 𝒞η X := by
   intro simplyConnectedX diagonalization alpha
   let standardIsometry := oddDiagonalIntersectionFormIsometry diagonalization
@@ -352,7 +352,7 @@ theorem satisfiesOddFormula
 /-- The normalized form of the odd numerical formula. -/
 theorem normalizedTwistedYetter_eq_normalizedOddFormula
     (𝒞η : TwistedPremodularCategory K)
-    {X : ClosedOrientedSmoothFourManifold}
+    {X : ClosedConnectedOrientedSmoothFourManifold}
     (simplyConnectedX : IsSimplyConnected X)
     (diagonalization : OddDiagonalization X)
     (alpha : ManifoldH₂ X) :
@@ -391,7 +391,7 @@ explicit stabilized block quotient.
 -/
 theorem TwistedYetter_premodular_numerical_formula
     (𝒞η : TwistedPremodularCategory K)
-    {X : ClosedOrientedSmoothFourManifold}
+    {X : ClosedConnectedOrientedSmoothFourManifold}
     (simplyConnectedX : IsSimplyConnected X)
     (alpha : ManifoldH₂ X) :
     (HasOddIntersectionForm X ∧

@@ -638,7 +638,7 @@ theorem TraceEmbedding.compileContextualMorphism_heq
 
 /-- A target labeling is uniquely a pair of left and right labelings. -/
 def splitTwoHandleLabelingEquiv
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -651,7 +651,7 @@ def splitTwoHandleLabelingEquiv
 
 @[simp]
 theorem splitTwoHandleLabelingEquiv_left
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -664,7 +664,7 @@ theorem splitTwoHandleLabelingEquiv_left
 
 @[simp]
 theorem splitTwoHandleLabelingEquiv_right
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -677,7 +677,7 @@ theorem splitTwoHandleLabelingEquiv_right
 
 /-- The left strand keeps its index in the split target trace. -/
 def splitLeftStrand
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right) :
@@ -690,7 +690,7 @@ def splitLeftStrand
 
 /-- The right strand is shifted past all left strands in the split target trace. -/
 def splitRightStrand
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right) :
@@ -703,7 +703,7 @@ def splitRightStrand
 
 @[simp]
 theorem splitLeftStrand_value
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -713,7 +713,7 @@ theorem splitLeftStrand_value
 
 @[simp]
 theorem splitRightStrand_value
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -724,7 +724,7 @@ theorem splitRightStrand_value
 
 /-- A left strand has exactly the same serialized component and orientation in the target. -/
 theorem splitLeftStrand_serialization
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -745,7 +745,7 @@ theorem splitLeftStrand_serialization
 
 /-- A right strand has the shifted component and unchanged orientation in the target. -/
 theorem splitRightStrand_serialization
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -768,7 +768,7 @@ theorem splitRightStrand_serialization
   simpa [splitRightStrand] using atIndex
 
 theorem splitLeftStrand_component_value
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -780,7 +780,7 @@ theorem splitLeftStrand_component_value
   simpa [serializeStrand] using congrArg SerializedStrand.component serialized
 
 theorem splitLeftStrand_orientation
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -792,7 +792,7 @@ theorem splitLeftStrand_orientation
   simpa [serializeStrand] using congrArg SerializedStrand.orientation serialized
 
 theorem splitRightStrand_component_value
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -806,7 +806,7 @@ theorem splitRightStrand_component_value
     congrArg SerializedStrand.component serialized
 
 theorem splitRightStrand_orientation
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -820,7 +820,7 @@ theorem splitRightStrand_orientation
 
 /-- The left component keeps its index in the split target diagram. -/
 def splitLeftComponent
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right) :
@@ -833,7 +833,7 @@ def splitLeftComponent
 
 /-- The right component is shifted past all left components. -/
 def splitRightComponent
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right) :
@@ -845,7 +845,7 @@ def splitRightComponent
       omega⟩
 
 theorem splitLeftComponent_data
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -866,7 +866,7 @@ theorem splitLeftComponent_data
   exact atIndex
 
 theorem splitRightComponent_data
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -888,7 +888,7 @@ theorem splitRightComponent_data
   simpa [splitRightComponent] using atIndex
 
 theorem splitLeftStrand_component
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -901,7 +901,7 @@ theorem splitLeftStrand_component
   exact splitLeftStrand_component_value split strand
 
 theorem splitRightStrand_component
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -914,7 +914,7 @@ theorem splitRightStrand_component
   exact splitRightStrand_component_value split strand
 
 def splitLeftTraceEmbedding
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right) :
@@ -926,7 +926,7 @@ def splitLeftTraceEmbedding
   strand_orientation := splitLeftStrand_orientation split
 
 def splitRightTraceEmbedding
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right) :
@@ -939,7 +939,7 @@ def splitRightTraceEmbedding
 
 /-- The target label on an embedded left strand is the original left label. -/
 theorem splitLeft_exteriorStrandLabel
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -989,7 +989,7 @@ theorem splitLeft_exteriorStrandLabel
 
 /-- The target label on an embedded right strand is the original right label. -/
 theorem splitRight_exteriorStrandLabel
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1039,7 +1039,7 @@ theorem splitRight_exteriorStrandLabel
     rw [dif_neg sourceRole, dif_neg targetRole]
 
 theorem splitLeft_orientedExteriorStrand
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1058,7 +1058,7 @@ theorem splitLeft_orientedExteriorStrand
       (splitLeftStrand_orientation split strand))
 
 theorem splitRight_orientedExteriorStrand
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1077,7 +1077,7 @@ theorem splitRight_orientedExteriorStrand
       (splitRightStrand_orientation split strand))
 
 theorem splitLeft_exteriorWord
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1095,7 +1095,7 @@ theorem splitLeft_exteriorWord
         (splitLeft_orientedExteriorStrand split 𝒞 labeling strand) ih
 
 theorem splitRight_exteriorWord
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1113,7 +1113,7 @@ theorem splitRight_exteriorWord
         (splitRight_orientedExteriorStrand split 𝒞 labeling strand) ih
 
 theorem split_eventCount
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right) :
@@ -1137,7 +1137,7 @@ theorem serializedActiveOrders_lookup
 
 /-- A state in the left trace keeps its state index in the target trace. -/
 def splitLeftState
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right) :
@@ -1148,7 +1148,7 @@ def splitLeftState
 
 /-- Every left active word is literally the corresponding prefix state of the target. -/
 theorem splitLeft_activeOrder
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1186,7 +1186,7 @@ theorem splitLeft_activeOrder
   exact atIndex.trans embeddedValues
 
 theorem splitLeft_exteriorWord_atState
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1204,7 +1204,7 @@ theorem splitLeft_exteriorWord_atState
 
 /-- A state in the right trace is shifted past all left events. -/
 def splitRightState
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right) :
@@ -1217,7 +1217,7 @@ def splitRightState
 
 /-- Every right active word is the corresponding shifted suffix state of the target. -/
 theorem splitRight_activeOrder
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1283,7 +1283,7 @@ theorem splitRight_activeOrder
     exact atIndex.trans embeddedValues
 
 theorem splitRight_exteriorWord_atState
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1300,7 +1300,7 @@ theorem splitRight_exteriorWord_atState
   exact splitRight_exteriorWord split 𝒞 labeling _
 
 def splitLeftEvent
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right) :
@@ -1310,7 +1310,7 @@ def splitLeftEvent
     ⟨event.1, by rw [split_eventCount split]; omega⟩
 
 def splitRightEvent
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right) :
@@ -1322,7 +1322,7 @@ def splitRightEvent
       omega⟩
 
 theorem splitLeftEvent_serialization
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1343,7 +1343,7 @@ theorem splitLeftEvent_serialization
   exact atIndex
 
 theorem splitRightEvent_serialization
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1368,7 +1368,7 @@ theorem splitRightEvent_serialization
   simpa [splitRightEvent] using atIndex
 
 theorem splitLeftTraceEmbedding_event_serialization
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1381,7 +1381,7 @@ theorem splitLeftTraceEmbedding_event_serialization
       serializeCutOpenEvent, serializePuncture, List.map_map]
 
 theorem splitRightTraceEmbedding_event_serialization
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1399,7 +1399,7 @@ theorem splitRightTraceEmbedding_event_serialization
       Nat.add_assoc]
 
 theorem splitLeftEvent_eq_mapped
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1413,7 +1413,7 @@ theorem splitLeftEvent_eq_mapped
     (splitLeftTraceEmbedding_event_serialization split _).symm
 
 theorem splitRightEvent_eq_mapped
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1427,7 +1427,7 @@ theorem splitRightEvent_eq_mapped
     (splitRightTraceEmbedding_event_serialization split _).symm
 
 theorem splitLeft_contextualMorphism
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1455,7 +1455,7 @@ theorem splitLeft_contextualMorphism
       splitLeft_activeOrder split event.succ
 
 theorem splitRight_contextualMorphism
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1483,7 +1483,7 @@ theorem splitRight_contextualMorphism
       splitRight_activeOrder split event.succ
 
 noncomputable def splitTargetTrace
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1496,7 +1496,7 @@ noncomputable def splitTargetTrace
     (compiledExteriorTrace 𝒞 split.target.diagram split.target.cut labeling)
 
 theorem splitTargetTrace_takePrefix
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1513,7 +1513,7 @@ theorem splitTargetTrace_takePrefix
     exact splitLeft_contextualMorphism split 𝒞 labeling event
 
 theorem splitTargetTrace_dropPrefix
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1530,7 +1530,7 @@ theorem splitTargetTrace_dropPrefix
     exact splitRight_contextualMorphism split 𝒞 labeling event
 
 theorem splitTargetTrace_composeAll
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1624,7 +1624,7 @@ theorem splitTargetTrace_composeAll
 
 /-- The closed graphical morphism of a split presentation is the composite of both factors. -/
 theorem split_compileCutOpenExteriorMorphism
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1654,7 +1654,7 @@ theorem split_compileCutOpenExteriorMorphism
       (splitTargetTrace_composeAll split 𝒞 labeling))
 
 theorem split_canonicalRibbonGraphicalEvaluation
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1680,7 +1680,7 @@ theorem split_canonicalRibbonGraphicalEvaluation
 
 /-- Ordinary Kirby-colour dimensions multiply across the split union. -/
 theorem split_ordinaryKirbyWeight
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     (split : SplitSpecialKirbyPresentation left right)
@@ -1702,7 +1702,7 @@ theorem split_ordinaryKirbyWeight
 
 /-- Homological character weights multiply across the split marking. -/
 theorem split_characterWeight
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     {alpha : ManifoldH₂ X}
@@ -1758,7 +1758,7 @@ theorem split_thamNormalization
   field_simp
 
 theorem split_rawEvaluatorSummand
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     {alpha : ManifoldH₂ X}
@@ -1787,7 +1787,7 @@ theorem split_rawEvaluatorSummand
   ring
 
 theorem split_rawCoefficientSum
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     {alpha : ManifoldH₂ X}
@@ -1814,7 +1814,7 @@ theorem split_rawCoefficientSum
     (split_rawEvaluatorSummand split marking 𝒞η)
 
 theorem split_evaluateCoefficients
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     {left : SpecialKirbyRepresentativeOf X}
     {right : SpecialKirbyRepresentativeOf Y}
     {alpha : ManifoldH₂ X}
@@ -1845,7 +1845,7 @@ theorem split_evaluateCoefficients
       marking.rightCoefficients)
 
 theorem evaluateRepresentative_eq_coefficients
-    {X : ClosedOrientedSmoothFourManifold}
+    {X : ClosedConnectedOrientedSmoothFourManifold}
     (𝒞η : TwistedPremodularCategory K)
     (representative : SpecialKirbyRepresentativeOf X)
     (coefficients : ThamTwoHandleCoefficients representative.diagram)
@@ -1863,7 +1863,7 @@ theorem evaluateRepresentative_eq_coefficients
       coefficientsClass.symm)
 
 theorem TwistedYetter_eq_evaluateRepresentative
-    {X : ClosedOrientedSmoothFourManifold}
+    {X : ClosedConnectedOrientedSmoothFourManifold}
     (𝒞η : TwistedPremodularCategory K)
     (alpha : ManifoldH₂ X)
     (representative : SpecialKirbyRepresentativeOf X)

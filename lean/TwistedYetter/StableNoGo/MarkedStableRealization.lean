@@ -17,7 +17,7 @@ noncomputable section
 namespace IntegralIntersectionFormIsometry
 
 /-- Identity isometry of an integral intersection form. -/
-def refl (X : ClosedOrientedSmoothFourManifold) :
+def refl (X : ClosedConnectedOrientedSmoothFourManifold) :
     IntegralIntersectionFormIsometry X X where
   toAddEquiv := AddEquiv.refl (ManifoldH₂ X)
   preservesPairing := by
@@ -25,7 +25,7 @@ def refl (X : ClosedOrientedSmoothFourManifold) :
     rfl
 
 /-- Inverse of an integral intersection-form isometry. -/
-def symm {X Y : ClosedOrientedSmoothFourManifold}
+def symm {X Y : ClosedConnectedOrientedSmoothFourManifold}
     (f : IntegralIntersectionFormIsometry X Y) :
     IntegralIntersectionFormIsometry Y X where
   toAddEquiv := f.toAddEquiv.symm
@@ -36,7 +36,7 @@ def symm {X Y : ClosedOrientedSmoothFourManifold}
         (f.toAddEquiv.symm a) (f.toAddEquiv.symm b)).symm
 
 /-- Composite of two integral intersection-form isometries. -/
-def trans {X Y Z : ClosedOrientedSmoothFourManifold}
+def trans {X Y Z : ClosedConnectedOrientedSmoothFourManifold}
     (f : IntegralIntersectionFormIsometry X Y)
     (g : IntegralIntersectionFormIsometry Y Z) :
     IntegralIntersectionFormIsometry X Z where
@@ -52,7 +52,7 @@ def trans {X Y Z : ClosedOrientedSmoothFourManifold}
 
 /-- Orthogonal direct sum of two intersection-form isometries. -/
 def connectedSum
-    {X X' Y Y' : ClosedOrientedSmoothFourManifold}
+    {X X' Y Y' : ClosedConnectedOrientedSmoothFourManifold}
     (f : IntegralIntersectionFormIsometry X X')
     (g : IntegralIntersectionFormIsometry Y Y') :
     IntegralIntersectionFormIsometry
@@ -76,7 +76,7 @@ end IntegralIntersectionFormIsometry
 
 /-- Every finite `S² × S²` stabilization of a simply connected manifold is simply connected. -/
 theorem stabilize_simplyConnected
-    (X : ClosedOrientedSmoothFourManifold)
+    (X : ClosedConnectedOrientedSmoothFourManifold)
     (simplyConnectedX : IsSimplyConnected X) :
     ∀ n : Nat, IsSimplyConnected (stabilize X n)
   | 0 => simplyConnectedX
@@ -87,7 +87,7 @@ theorem stabilize_simplyConnected
 
 /-- The requested isometry extended by identity over every stabilization summand. -/
 def stabilizedIntersectionFormIsometry
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     (f : IntegralIntersectionFormIsometry X Y) :
     ∀ n : Nat,
       IntegralIntersectionFormIsometry (stabilize X n) (stabilize Y n)
@@ -98,7 +98,7 @@ def stabilizedIntersectionFormIsometry
 
 /-- The stabilized isometry sends `alpha ⊕ 0` to `f(alpha) ⊕ 0`. -/
 theorem stabilizedIntersectionFormIsometry_apply_marking
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     (f : IntegralIntersectionFormIsometry X Y)
     (alpha : ManifoldH₂ X) :
     ∀ n : Nat,
@@ -123,7 +123,7 @@ homology action after one further stabilization, producing the exact marking
 transport needed by the invariant argument.
 -/
 theorem markedStableRealization_of_wall_rubermanStrle
-    {X Y : ClosedOrientedSmoothFourManifold}
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
     (simplyConnectedX : IsSimplyConnected X)
     (simplyConnectedY : IsSimplyConnected Y)
     (f : IntegralIntersectionFormIsometry X Y)

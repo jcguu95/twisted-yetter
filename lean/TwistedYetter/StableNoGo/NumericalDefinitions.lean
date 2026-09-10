@@ -23,7 +23,7 @@ variable {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]
 /-- The normalization for which connected sum is exactly multiplicative. -/
 noncomputable def NormalizedTwistedYetter
     (𝒞η : TwistedPremodularCategory K)
-    (Xα : Σ X : ClosedOrientedSmoothFourManifold, ManifoldH₂ X) : K :=
+    (Xα : Σ X : ClosedConnectedOrientedSmoothFourManifold, ManifoldH₂ X) : K :=
   𝒞η.category.globalDimension⁻¹ * TwistedYetter 𝒞η Xα
 
 /-
