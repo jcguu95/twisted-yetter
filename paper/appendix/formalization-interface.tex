@@ -1155,3 +1155,525 @@ proof uses only the admitted trust boundary is audited below.  Status:
 \texttt{OBLIGATION\_NOT\_ASSUMPTION}.
 
 \end{enumerate}
+
+\subsection{Eight elementary moves and local proofs}
+\label{app:lean-eight-moves}
+
+Every move below has exact source and target marked diagrams, an explicit
+THAM-side chain transport, and a proof that the target marking is the induced
+image of the source marking.  No move constructor contains an evaluation
+equality.
+
+\begin{enumerate}[label=\textbf{M\arabic*.},leftmargin=*]
+
+\item \textbf{Framed isotopy.}
+
+\emph{Human statement.}
+A framed-isotopy move supplies reindexings of components and strands, an
+external topology proof that these exact diagrams are related by framed
+ambient isotopy preserving roles, framings, cut words, and exterior data, and
+the marked chain transport.
+
+\emph{Lean declaration.}
+This is the \texttt{ElementaryMove.framedIsotopy} constructor, using
+\texttt{FramedIsotopyScriptRealizesFramedIsotopy}; see
+\nolinkurl{Moves.lean}, lines 129--145 and 570--578.
+
+\emph{Proof and judgment.}
+The axiom \texttt{framedIsotopy\_hasTypedGraphicalInterpretation} supplies a
+framed-ribbon isotopy between the two exact normalized expressions; Shum
+coherence then proves equal morphisms and hence equal scalar evaluations.
+The final equality is theorem
+\texttt{framedIsotopy\_preserves\_evaluation}.  Status:
+\texttt{PROVED\_FROM\_EXPLICIT\_TOPOLOGY\_BOUNDARIES}.
+
+\item \textbf{The $1/1$ slide.}
+
+\emph{Human statement.}
+Both moving and stationary components are dotted.  The move is supplied as a
+clean band slide with a clean attachment, a finite complete route along the
+stationary component, and a clean detachment.  Its marked homology transport
+is explicit.
+
+\emph{Lean declaration.}
+This is \texttt{ElementaryMove.oneOverOne}, lines 579--594.  The two role
+proofs require both source components to be dotted.
+
+\emph{Proof and judgment.}
+It is an instance of \texttt{cleanBandSlide\_preserves\_evaluation}: attach,
+resolve the identity into all fusion channels, transport the character coupon
+through finitely many naturality events, recombine the channels, and detach.
+The dotted role enters through the role-aware endpoint interpretation rather
+than an ordinary Kirby-colour replacement.  Status:
+\texttt{PROVED\_CONDITIONALLY\_ON\_CLEAN\_SLIDE\_INPUTS}.
+
+\item \textbf{The $2/1$ slide.}
+
+\emph{Human statement.}
+The moving component is ordinary and the stationary component is dotted; the
+same clean attach--finite transport--detach data and exact marking transport
+are supplied.
+
+\emph{Lean declaration.}
+This is \texttt{ElementaryMove.twoOverOne}, lines 595--610.
+
+\emph{Proof and judgment.}
+The same source-bound clean-band theorem proves the equality.  No conversion
+of the dotted component into an ordinary Kirby-coloured component occurs.
+Status: \texttt{PROVED\_CONDITIONALLY\_ON\_CLEAN\_SLIDE\_INPUTS}.
+
+\item \textbf{The $2/2$ slide.}
+
+\emph{Human statement.}
+Both moving and stationary components are ordinary.  A clean band is attached,
+the attaching coupon travels through a finite complete sequence of local
+events on the stationary component, and the band is detached.  Fusion-channel
+resolution and the character morphism are retained throughout.
+
+\emph{Lean declaration.}
+This is \texttt{ElementaryMove.twoOverTwo}, lines 611--626.
+
+\emph{Proof and judgment.}
+The theorem \texttt{cleanBandSlide\_preserves\_evaluation} explicitly factors
+the proof into attach, fusion resolution, finite coupon transport, inverse
+fusion resolution, and detach.  The equality of scalar evaluations is derived
+after morphism equality; it is not an entrance axiom.  Status:
+\texttt{PROVED\_CONDITIONALLY\_ON\_CLEAN\_SLIDE\_INPUTS}.
+
+\item \textbf{The $1$--$2$ birth.}
+
+\emph{Human statement.}
+The target appends one dotted component and one zero-framed ordinary meridian.
+The cut-open local trace is exactly a cup, one tensor-unit-projector hole with
+one puncture, and a cap.  The new $2$-handle coefficient is zero, while all old
+coefficients and components retain their coordinates.
+
+\emph{Lean declaration.}
+The transparent predicate is \texttt{IsStandardOneTwoBirth} in
+\nolinkurl{LocalReplacementSyntax.lean}, lines 105--183.  The corresponding
+constructor of \texttt{CancellationLocalNormalForm} is at
+\nolinkurl{Moves.lean}, lines 533--541.
+
+\emph{Proof and judgment.}
+The local projector calculation makes the canceling meridian sum equal to
+one; the new exponent is zero, and the handle-count normalization is unchanged
+in the turned-over convention.  The resulting theorem is
+\texttt{oneTwoBirth\_preserves\_evaluation}.  Status: \texttt{PROVED}.
+
+\item \textbf{The $1$--$2$ death.}
+
+\emph{Human statement.}
+This is the reverse of M5.  Before removing the canceling coordinate, one may
+replace the source coefficient vector by a homologous representative on which
+that coordinate is zero.
+
+\emph{Lean declaration.}
+\texttt{IsStandardOneTwoDeath} is definitionally the reversed birth normal
+form.  The death constructor carries
+\texttt{RemovedTwoHandleCoordinates} and its exact meridian binding.
+
+\emph{Proof and judgment.}
+Representative independence is used before and after the local death
+calculation to justify the safe zero-coordinate representative.  The theorem
+is \texttt{oneTwoDeath\_preserves\_evaluation}.  Status: \texttt{PROVED}.
+
+\item \textbf{The $2$--$3$ birth.}
+
+\emph{Human statement.}
+The target appends one isolated zero-framed ordinary $2$-handle and increases
+the primal $3$-handle count by one.  Its finite local ribbon trace is a cup,
+an identity continuation, and a cap.  The new $2$-handle coefficient is zero.
+
+\emph{Lean declaration.}
+This is \texttt{IsStandardTwoThreeBirth} in
+\nolinkurl{LocalReplacementSyntax.lean}, lines 191--254.  The actual list
+\texttt{twoThreeLocalEvents} is
+\texttt{birth, planarIsotopy, death}.
+
+\emph{Proof and judgment.}
+Summing the isolated ordinary loop over simple labels contributes
+$\operatorname{Dim}(\cC)$; this cancels the extra denominator caused by the
+new primal $3$-handle.  The theorem is
+\texttt{twoThreeBirth\_preserves\_evaluation}.  The source comment at lines
+231--238 incorrectly says ``positive framing twist,'' while the transparent
+definition and theorem use planar identity continuation.  This is a comment
+error to correct, not an ambiguity in the term checked by Lean.  Status:
+\texttt{PROVED\_WITH\_SOURCE\_COMMENT\_MISMATCH}.
+
+\item \textbf{The $2$--$3$ death.}
+
+\emph{Human statement.}
+This is the reverse of M7.  A homologous representative with zero disappearing
+coefficient is chosen, the isolated Kirby-coloured loop is removed, and the
+normalization factor changes inversely.
+
+\emph{Lean declaration.}
+\texttt{IsStandardTwoThreeDeath} is the reversed birth normal form; the move
+carries removed-handle coordinates bound to the isolated component.
+
+\emph{Proof and judgment.}
+The proof combines representative independence, the ordinary-loop global
+dimension theorem, and field cancellation using
+$\operatorname{Dim}(\cC)\ne0$.  The result is
+\texttt{twoThreeDeath\_preserves\_evaluation}.  Status: \texttt{PROVED}.
+
+\item \textbf{Exhaustive local theorem.}
+
+\emph{Human statement.}
+For every constructor among M1--M8 and every source coefficient vector $a$,
+\[
+ \operatorname{Eval}(D,P,a)
+ =\operatorname{Eval}(D',P',T_2a).
+\]
+
+\emph{Lean declaration.}
+This is \texttt{frozenFrontendLocalMoveInvariance}, a theorem proving
+\texttt{LocalMoveInvarianceStatement}, in
+\nolinkurl{Proofs/FrozenFrontendLocalMoves.lean}, lines 96--134.
+
+\emph{Classification and judgment.}
+The proof performs an explicit case split over framed isotopy, the three slide
+constructors, and the four cancellation normal forms.  There is no default
+case and no local-invariance axiom.  Status: \texttt{DERIVED}.
+
+\end{enumerate}
+
+\subsection{Representative independence and four-manifold descent}
+\label{app:lean-descent}
+
+\begin{enumerate}[label=\textbf{D\arabic*.},leftmargin=*]
+
+\item \textbf{One visible coboundary is invisible.}
+
+\emph{Human statement.}
+For $a\in\mathbb Z^{h_2}$ and
+$b\in\mathbb Z^{h_1}$,
+\[
+ \operatorname{Eval}(D,P,a+(\partial_2^{\rm pr})^Tb)
+ =\operatorname{Eval}(D,P,a).
+\]
+The proof expands the character factor contributed by the coboundary as a
+product over dotted $1$-handles.  For each dotted handle, the standard collar
+normal form identifies that factor with the monoidal character action on its
+incidence morphism; naturality and the unit projector absorb it.
+
+\emph{Lean declaration.}
+The theorem is
+\texttt{dotted\_evaluateCoefficients\_add\_thamVisibleCoboundary}, in
+\nolinkurl{Proofs/DottedRepresentativeIndependence.lean}, lines 310--348.
+
+\emph{Classification and judgment.}
+This is a kernel-checked theorem.  Its topology-to-graphical input is exactly
+\texttt{standardDottedCollarIncidenceNormalForm}; puncture direction is used
+only to form the aggregate incidence row and never to choose $X^*$ or a
+character exponent.  Status: \texttt{DERIVED\_FROM\_ONE\_EXPLICIT\_COLLAR\_AXIOM}.
+
+\item \textbf{Representative independence.}
+
+\emph{Human statement.}
+If $[a]=[a']$ in $Q_{\rm vis}(D)$, then
+$\operatorname{Eval}(D,P,a)=\operatorname{Eval}(D,P,a')$.
+
+\emph{Lean declaration.}
+This is \texttt{frozenFrontendRepresentativeIndependence}, exported from
+\nolinkurl{Proofs/RepresentativeIndependence.lean}, lines 23--35.  Its proof
+unpacks equality in the quotient into $a'=a+(\partial_2^{\rm pr})^Tb$ and
+applies D1.
+
+\emph{Classification and judgment.}
+This is a theorem, not a proof field or axiom.  Status: \texttt{DERIVED}.
+
+\item \textbf{Evaluation of a marking.}
+
+\emph{Human statement.}
+For a marked diagram $(D,P,[a])$, choose any representative $a$ and evaluate
+it.  D2 proves that this choice does not affect the result.
+
+\emph{Lean declaration.}
+\texttt{evaluateMarking} is defined using \texttt{Quotient.out} in
+\nolinkurl{Invariant.lean}, lines 35--41.  The choice-independence theorem used
+downstream is D2.
+
+\emph{Classification and judgment.}
+This is a noncomputable definition plus a separate theorem; choice
+independence is not hidden in the definition.  Status: \texttt{MATCH}.
+
+\item \textbf{One move preserves a marked evaluation.}
+
+\emph{Human statement.}
+Apply the exact chain map to a chosen source representative.  Local invariance
+compares that transported representative with the source; representative
+independence then compares it with the representative chosen by
+\texttt{Quotient.out} for the target marking.
+
+\emph{Lean declaration.}
+This is \texttt{elementaryMove\_preserves\_frontend\_evaluation}, in
+\nolinkurl{TwistedYetter.lean}, lines 43--79.
+
+\emph{Classification and judgment.}
+This theorem combines D2, M9, and the move's explicit marking-transport
+equation.  Status: \texttt{DERIVED}.
+
+\item \textbf{A finite Kirby movie preserves evaluation.}
+
+\emph{Human statement.}
+If
+\[
+ (D_0,P_0,\beta_0)\longrightarrow\cdots\longrightarrow
+ (D_n,P_n,\beta_n)
+\]
+is a finite sequence of elementary marked moves, then the evaluations of the
+first and last stages agree.
+
+\emph{Lean declaration.}
+\texttt{KirbyMovie} stores a finite indexed sequence and one
+\texttt{ElementaryMove} between each consecutive pair.  The theorem
+\texttt{kirbyMovie\_preserves\_frontend\_evaluation}, in
+\nolinkurl{TwistedYetter.lean}, lines 81--130, is proved by induction on the
+finite stage index.
+
+\emph{Classification and judgment.}
+This is a theorem.  No movie-invariance axiom is present.  Status:
+\texttt{DERIVED}.
+
+\item \textbf{Marked Kirby--Cerf descent.}
+
+\emph{Human statement.}
+Suppose two special representatives encode $(X,\alpha)$ and
+$(Y,f_*\alpha)$ for an oriented diffeomorphism $f\colon X\to Y$.  Marked
+Kirby--Cerf completeness supplies a finite marked movie between them; D5 then
+proves equal evaluations.
+
+\emph{Lean declaration.}
+The external topology input is \texttt{markedKirbyCerf\_complete}; the
+internal assembly theorem is
+\texttt{ConditionalDescent.diffeomorphism\_invariant\_of\_descent\_data}, in
+\nolinkurl{TwistedYetter.lean}, lines 132--158.
+
+\emph{Classification and judgment.}
+The existence of the movie is an explicit topology axiom.  Equality along the
+movie is derived.  Status: \texttt{DERIVED\_FROM\_KIRBY--CERF\_COMPLETENESS}.
+
+\end{enumerate}
+
+\subsection{Public output}
+\label{app:lean-public-output}
+
+\begin{enumerate}[label=\textbf{O\arabic*.},leftmargin=*]
+
+\item \textbf{The manifold-level invariant.}
+
+\emph{Human statement.}
+For a twisted premodular category $(\cC,\eta)$ and a marked closed connected
+oriented smooth four-manifold $(X,\alpha)$, choose a special Kirby
+representative of $(X,\alpha)$ and evaluate it:
+\[
+ \operatorname{TwistedYetter}_{\cC,\eta}(X,\alpha)
+ =\operatorname{Eval}_{\cC,\eta}(D,P,\beta).
+\]
+The descent theorem proves independence of the chosen representative.
+
+\emph{Lean declaration.}
+\begin{verbatim}
+noncomputable def TwistedYetter
+    (Ceta : TwistedPremodularCategory K)
+    (Xalpha : Sigma X, ManifoldH2 X) : K
+\end{verbatim}
+The source definition uses
+\texttt{specialKirbyRepresentative\_exists} and appears in
+\nolinkurl{TwistedYetter.lean}, lines 161--180.  The displayed names are
+ASCII-normalized; the Lean source uses the corresponding Unicode identifiers.
+
+\emph{Classification and judgment.}
+The public inputs are only $(\cC,\eta)$ and $(X,\alpha)$.  No evaluator,
+compiler, normalization, local-invariance proof, presentation, or topology
+package is a public parameter.  Status: \texttt{MATCH}.
+
+\item \textbf{The final diffeomorphism-invariance theorem.}
+
+\emph{Human statement.}
+For every twisted premodular category $(\cC,\eta)$ over $K$, every
+orientation-preserving diffeomorphism $f\colon X\to Y$ of closed connected
+oriented smooth four-manifolds, and every
+$\alpha\in H_2(X;\mathbb Z)$,
+\[
+ \operatorname{TwistedYetter}_{\cC,\eta}(X,\alpha)
+ =
+ \operatorname{TwistedYetter}_{\cC,\eta}(Y,f_*\alpha).
+\]
+
+\emph{Lean declaration.}
+\begin{verbatim}
+theorem TwistedYetter_diffeomorphism_invariant
+    (Ceta : TwistedPremodularCategory K)
+    {X Y : ClosedConnectedOrientedSmoothFourManifold}
+    (f : OrientedDiffeomorphism X Y)
+    (alpha : ManifoldH2 X) :
+    TwistedYetter Ceta <X, alpha> =
+      TwistedYetter Ceta <Y, inducedH2 f alpha>
+\end{verbatim}
+This is an ASCII-normalized transcription of
+\nolinkurl{TwistedYetter.lean}, lines 182--209.
+
+\emph{Classification and judgment.}
+This is the public kernel-checked theorem.  Its signature is clean and matches
+the paper's connected-manifold invariance statement.  The theorem's trust is
+determined by its flattened axiom closure, listed next; compilation alone is
+not treated as semantic validation.  Status:
+\texttt{ESTABLISHED\_RELATIVE\_TO\_THE\_EXPLICIT\_TRUST\_BOUNDARY}.
+
+\end{enumerate}
+
+\subsection{Complete explicit-axiom ledger}
+\label{app:lean-explicit-axioms}
+
+The active independent mainline contains exactly the following nineteen
+explicit Lean axioms.  This list counts primitive vocabulary declarations as
+well as mathematical propositions, because all of them appear in the kernel
+trust closure.  It does not count standard Lean axioms such as choice.
+
+\subsubsection*{Finite Kirby-move topology}
+
+\begin{enumerate}[label=\textbf{X\arabic*.},leftmargin=*]
+
+\item \texttt{FiniteCouponTransportRealizesCompletePath}.
+A finite list of crossing, cup, cap, twist, and coupon events is declared to
+be the complete path traversed by the attaching coupon along the stationary
+component: no local event on that path is omitted.  This is a
+category-neutral proposition on \texttt{FiniteCouponTransport}.  Judgment:
+\texttt{EXTERNAL\_COMPACTNESS/GENERIC\_POSITION\_INPUT}.
+
+\item \texttt{CleanBandSlideRealizesStandardKirbySlide}.
+The exact source and target diagrams, component roles, orientation, framing
+push-off, clean attaching site, common exterior, transport window, and clean
+detaching site stored in a \texttt{CleanBandSlide} realize one standard
+oriented Kirby band slide.  It mentions no category or evaluation.  Judgment:
+\texttt{EXTERNAL\_HANDLE\_TOPOLOGY\_INPUT}.
+
+\item \texttt{FramedIsotopyScriptRealizesFramedIsotopy}.
+The exact source and target diagrams and displayed component/strand
+reindexings are related by framed ambient isotopy preserving roles,
+orientations, framings, dotted cut words, and common exterior.  Judgment:
+\texttt{EXTERNAL\_HANDLE\_TOPOLOGY\_INPUT}.
+
+\subsubsection*{Ribbon graphical coherence and dotted collars}
+
+\item \texttt{FramedRibbonIsotopyWitness}.
+For two typed ribbon expressions with the same source and target, this
+primitive type is the vocabulary of a framed-ribbon isotopy witness between
+them.  It asserts no equality by itself.  Judgment:
+\texttt{FOUNDATIONAL\_GRAPHICAL\_VOCABULARY}.
+
+\item \texttt{shum\_framedRibbonCoherence}.
+If two typed ribbon expressions are related by a witness from X4, then their
+interpreted categorical morphisms are equal.  This is the formal interface to
+Shum's coherence theorem for tortile/ribbon categories
+\cite[Theorem~2.6]{Shum1994}.  Judgment:
+\texttt{LITERATURE\_CATEGORY\_INPUT}.
+
+\item \texttt{standardDottedCollarIncidenceNormalForm}.
+Fix a labelled diagram and one dotted component.  Cutting a standard collar
+around its disk exposes a morphism from the ordered tensor product of inbound
+incidences to the ordered tensor product of outbound incidences, together with
+one linear exterior context.  Plugging that morphism into the context is
+framed-ribbon isotopic to the exact closed graph compiled from the cut-open
+presentation.  The statement contains no character exponent, projector
+formula, scalar equality, or invariance conclusion.  Judgment:
+\texttt{HIGH\_RISK\_TOPOLOGY--GRAPHICAL\_BRIDGE}.
+
+\item \texttt{eno\_globalDimension\_ne\_zero}.
+For every bundled fusion category over an algebraically closed field of
+characteristic zero,
+$\operatorname{Dim}(\cC)\ne0$.  This is the interface to
+Etingof--Nikshych--Ostrik's nonvanishing theorem.  Judgment:
+\texttt{LITERATURE\_CATEGORY\_INPUT}; the exact bibliographic locator should
+be checked independently against the cited edition.
+
+\subsubsection*{Clean slide: topology to typed graphical expressions}
+
+\item \texttt{cleanAttach\_hasStandardGraphicalInterpretation}.
+For a realized clean band slide and a source coefficient vector, there exists
+a standard endpoint normal form such that the exact normalized source
+expression is framed-ribbon isotopic to the identity stage of that normal
+form.  The normal form visibly contains the moving and stationary simple
+labels and one exterior context.  Judgment:
+\texttt{HIGH\_RISK\_ATTACH\_BRIDGE}.
+
+\item \texttt{cleanDetach\_hasStandardGraphicalInterpretation}.
+For the same slide, its exact chain transport, and the source coefficient
+vector, there exists a standard endpoint normal form whose identity stage is
+framed-ribbon isotopic to the exact normalized target expression evaluated at
+the transported coefficient vector.  Judgment:
+\texttt{HIGH\_RISK\_DETACH\_BRIDGE}.
+
+\item \texttt{finiteCouponTransport\_hasTypedGraphicalDerivation}.
+Given complete finite transport data and chosen attach/detach normal forms,
+there is a typed \texttt{CharacterCouponTransport} from the fusion-resolved
+attach stage to the fusion-resolved detach stage.  The resulting equality of
+interpreted morphisms is proved from this derivation.  Judgment:
+\texttt{HIGH\_RISK\_FINITE\_TRANSPORT\_BRIDGE}.
+
+\item \texttt{framedIsotopy\_hasTypedGraphicalInterpretation}.
+A realized framed isotopy and its exact THAM chain transport give a
+framed-ribbon isotopy between the normalized source expression and the
+normalized target expression at the transported coefficient vector.
+Judgment: \texttt{HIGH\_RISK\_ISOTOPY--GRAPHICAL\_BRIDGE}.
+
+\subsubsection*{Four-manifold vocabulary and classical topology}
+
+\item \texttt{ClosedConnectedOrientedSmoothFourManifold}.
+This primitive type is the domain of closed, connected, oriented smooth
+four-manifolds.  Judgment: \texttt{FOUNDATIONAL\_VOCABULARY}.
+
+\item \texttt{underlyingTopologicalSpace}.
+Every object of X12 has an underlying topological space.  Judgment:
+\texttt{FOUNDATIONAL\_VOCABULARY}.
+
+\item \texttt{OrientedDiffeomorphism}.
+For two objects of X12, this primitive type is the vocabulary of
+orientation-preserving diffeomorphisms between them.  Judgment:
+\texttt{FOUNDATIONAL\_VOCABULARY}.
+
+\item \texttt{underlyingHomeomorphism}.
+Every oriented diffeomorphism determines an isomorphism between the two
+underlying topological spaces.  This is the only datum needed to obtain the
+induced map on Mathlib singular homology.  Judgment:
+\texttt{FOUNDATIONAL\_FORGETFUL\_MAP}.
+
+\item \texttt{PresentsClosedFourManifold}.
+The proposition \texttt{PresentsClosedFourManifold D X} means that the visible
+$0$-, $1$-, and $2$-handle data of $D$ can be completed by exactly the stored
+number of unrecorded $3$-handles and the unique $4$-handle to a closed oriented
+smooth four-manifold orientation-preservingly diffeomorphic to $X$.  Judgment:
+\texttt{PRIMITIVE\_CLASSICAL\_TOPOLOGY\_RELATION}.
+
+\item \texttt{RepresentsPoincareDualClass}.
+If $D$ presents $X$, this relation says that
+$\beta\in Q_{\rm vis}(D)$ is the turned-over handle-coordinate class of
+$\operatorname{PD}(\alpha)$ for
+$\alpha\in H_2(X;\mathbb Z)$.  It does not claim that every ambient class is
+genuine cohomology.  Judgment:
+\texttt{PRIMITIVE\_POINCARE\_DUALITY/REALIZATION\_RELATION}.
+
+\item \texttt{specialKirbyRepresentative\_exists}.
+For every $(X,\alpha)$ there exists a special Kirby representative $D$ with
+cut-open data and a THAM class $\beta$ such that $D$ presents $X$ and $\beta$
+represents $\operatorname{PD}(\alpha)$.  It does not compute the representative
+or state evaluation equality.  Judgment:
+\texttt{EXTERNAL\_PRESENTATION\_EXISTENCE\_THEOREM}.
+
+\item \texttt{markedKirbyCerf\_complete}.
+If two special representatives encode $(X,\alpha)$ and
+$(Y,f_*\alpha)$ for an oriented diffeomorphism $f\colon X\to Y$, then there
+exists a finite \texttt{KirbyMovie} between their exact marked diagrams.  Every
+stage is one of M1--M8 and carries its explicit marking transport.  It does not
+state evaluation equality.  Judgment:
+\texttt{HIGH\_RISK\_MARKED\_KIRBY--CERF\_COMPLETENESS}.
+
+\end{enumerate}
+
+The most consequential human checks are X6, X8--X11, and X19.  X1--X3 and
+X16--X18 are classical handle-topology boundaries; X4 and X12--X15 are
+primitive vocabulary; X5 and X7 are category-literature inputs.  None of the
+nineteen axioms directly states representative independence, local evaluation
+invariance, movie invariance, or the final manifold theorem.
