@@ -1,0 +1,151 @@
+{
+  "schema": "twisted-yetter/lean-explicit-trust-boundary/16",
+  "recorded_at_utc": "2026-09-24T16:17:44Z",
+  "supersedes": "explicit-trust-boundary-v15.json",
+  "status": "KERNEL_CLOSURE_VERIFIED_HUMAN_INTERFACE_COMPLETE_EXTERNAL_BOUNDARIES_REQUIRE_REVIEW",
+  "scope": "End-to-end human audit interface for the active TwistedYetter diffeomorphism-invariance route",
+  "baseline_git_commit": "147a434c3c3bb70d059365e4ae376e5eb57beab1",
+  "recorded_from_dirty_worktree": true,
+  "human_audit_document": "paper/appendix/formalization-interface.tex",
+  "human_audit_pdf_pages": "36--62",
+  "independent_mainline_explicit_axiom_count": 19,
+  "source_red_team_likely_proof_field_count": 33,
+  "final_theorem": "TwistedYetter.Kirby.Final.TwistedYetter_diffeomorphism_invariant",
+  "final_theorem_project_axiom_count": 19,
+  "standard_lean_axiom_count": 3,
+  "final_theorem_total_axiom_count": 22,
+  "standard_lean_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "final_theorem_project_axioms": [
+    "CleanBandSlideRealizesStandardKirbySlide",
+    "ClosedConnectedOrientedSmoothFourManifold",
+    "FiniteCouponTransportRealizesCompletePath",
+    "FramedIsotopyScriptRealizesFramedIsotopy",
+    "FramedRibbonIsotopyWitness",
+    "OrientedDiffeomorphism",
+    "PresentsClosedFourManifold",
+    "RepresentsPoincareDualClass",
+    "cleanAttach_hasStandardGraphicalInterpretation",
+    "cleanDetach_hasStandardGraphicalInterpretation",
+    "eno_globalDimension_ne_zero",
+    "finiteCouponTransport_hasTypedGraphicalDerivation",
+    "framedIsotopy_hasTypedGraphicalInterpretation",
+    "markedKirbyCerf_complete",
+    "shum_framedRibbonCoherence",
+    "specialKirbyRepresentative_exists",
+    "standardDottedCollarIncidenceNormalForm",
+    "underlyingHomeomorphism",
+    "underlyingTopologicalSpace"
+  ],
+  "kernel_closures": {
+    "representative_independence_project_axioms": [
+      "FramedRibbonIsotopyWitness",
+      "shum_framedRibbonCoherence",
+      "standardDottedCollarIncidenceNormalForm"
+    ],
+    "local_move_invariance_project_axioms": [
+      "CleanBandSlideRealizesStandardKirbySlide",
+      "FiniteCouponTransportRealizesCompletePath",
+      "FramedIsotopyScriptRealizesFramedIsotopy",
+      "FramedRibbonIsotopyWitness",
+      "cleanAttach_hasStandardGraphicalInterpretation",
+      "cleanDetach_hasStandardGraphicalInterpretation",
+      "eno_globalDimension_ne_zero",
+      "finiteCouponTransport_hasTypedGraphicalDerivation",
+      "framedIsotopy_hasTypedGraphicalInterpretation",
+      "shum_framedRibbonCoherence",
+      "standardDottedCollarIncidenceNormalForm"
+    ]
+  },
+  "proof_field_groups": {
+    "dotted_puncture": [
+      "DottedPuncture.dotted_role",
+      "DottedPuncture.input_on_two_handle",
+      "DottedPuncture.output_on_two_handle",
+      "DottedPuncture.orientation_preserved"
+    ],
+    "cut_open_exterior_trace": [
+      "CutOpenExteriorTrace.initialBoundaryEmpty",
+      "CutOpenExteriorTrace.finalBoundaryEmpty",
+      "CutOpenExteriorTrace.transitionValid",
+      "CutOpenExteriorTrace.strandContinuationsAreWellFormed",
+      "CutOpenExteriorTrace.eventPortsAreDistinct",
+      "CutOpenExteriorTrace.everyStrandHasUniqueInputAndOutput",
+      "CutOpenExteriorTrace.activeWordsNoDuplicates",
+      "CutOpenExteriorTrace.activeStrandsAreTwoHandles"
+    ],
+    "projector_hole_indexing": [
+      "DottedCutData.projectorEventIndex",
+      "DottedCutData.projectorEvent_is_for",
+      "DottedCutData.everyProjectorEvent_is_indexed",
+      "DottedCutData.projectorPunctures_are_indexed"
+    ],
+    "cut_incidence": [
+      "DottedCutPresentation.incidence_agrees_with_handle_boundary"
+    ],
+    "closed_link_trace": [
+      "CombinatorialLinkTrace.initialBoundaryEmpty",
+      "CombinatorialLinkTrace.finalBoundaryEmpty",
+      "CombinatorialLinkTrace.transitionValid",
+      "CombinatorialLinkTrace.activeWordsNoDuplicates",
+      "CombinatorialLinkTrace.everyStrandHasUniqueInputAndOutput"
+    ],
+    "handle_data": [
+      "SpecialHandleData.oneHandleIndex",
+      "SpecialHandleData.boundaryTwo"
+    ],
+    "chain_transport": [
+      "ThamHandleChainTransport.commutesWithVisibleCoboundary"
+    ],
+    "added_coordinates": [
+      "AddedTwoHandleCoordinates.oldCoefficient",
+      "AddedTwoHandleCoordinates.newCoefficientZero"
+    ],
+    "removed_coordinates": [
+      "RemovedTwoHandleCoordinates.safeCoefficients_sameClass",
+      "RemovedTwoHandleCoordinates.safe_newCoefficientZero",
+      "RemovedTwoHandleCoordinates.transportedOldCoefficient"
+    ],
+    "finite_movie": [
+      "KirbyMovie.startsAtSource",
+      "KirbyMovie.endsAtTarget",
+      "KirbyMovie.elementary"
+    ]
+  },
+  "verification": {
+    "full_build_command": "env LAKE_JOBS=1 lake build",
+    "full_build_started_at_utc": "2026-09-24T15:48:12Z",
+    "full_build_finished_at_utc": "2026-09-24T16:14:20Z",
+    "full_build": "PASS_8316_JOBS_SINGLE_WORKER",
+    "final_axiom_audit_command": "env LAKE_JOBS=1 lake build TwistedYetter.Kirby.Final.FinalAxiomAudit",
+    "final_theorem_kernel_axiom_audit": "PASS_NO_SORRYAX",
+    "source_red_team_command": "python3 /Users/jin/.codex/skills/lean-red-team-audit/scripts/source_audit.py lean/TwistedYetter/Kirby/Final/Semantics/Independent --output-json /private/tmp/twisted-yetter-final-interface-audit.json --output-markdown /private/tmp/twisted-yetter-final-interface-audit.zh-TW.md",
+    "source_red_team_status": "INCONCLUSIVE_HUMAN_REVIEW_REQUIRED",
+    "source_red_team_timestamp_utc": "2026-09-24T16:17:44.153238+00:00",
+    "source_tree_sha256": "b53dab7459e62276bc5b22a3cd987acfad1dde975aa5378ae0e8f8c20f174814",
+    "red_team_json_sha256": "19348bd315b54f9aecba43c633fbbddb56173fa088247ef0d75cde285d976714",
+    "paper_build_command": "make all",
+    "paper_build": "PASS_63_PAGES_NO_LATEX_WARNINGS",
+    "paper_pdf_sha256_before_final_clean_metadata_rebuild": "d617f76bb0026cb757f1d293b216a8109e8a903599ce246384f5f0b873b0a617"
+  },
+  "environment": {
+    "lean": "4.29.1 commit f72c35b3f637c8c6571d353742168ab66cc22c00",
+    "lake": "5.0.0-src+f72c35b",
+    "python": "3.14.7",
+    "os": "macOS 15.7.2 build 24G325 arm64"
+  },
+  "literature_locator_updates": [
+    "ENO, On fusion categories, Theorem 2.3 and Corollary 2.10 for nonvanishing of the spherical categorical global dimension",
+    "Shum, Tortile tensor categories, Theorem 2.6 for framed-ribbon coherence"
+  ],
+  "non_claims": [
+    "Kernel compilation does not certify the intended human meaning of the nineteen explicit project axioms.",
+    "The conservative source red-team scan remains mechanically inconclusive because it cannot judge proposition-valued structure fields.",
+    "The appendix supplies a human translation and classification of all thirty-three flagged fields, but this record does not replace expert review of the high-risk topology-to-graphical bridges.",
+    "No axiom directly states representative independence, local evaluation invariance, finite-movie invariance, or the final diffeomorphism theorem.",
+    "The artifact does not claim that the formal evaluator equals every historical Crane--Yetter state-sum convention or that legacy numerical computations are recertified."
+  ]
+}
