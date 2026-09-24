@@ -126,9 +126,10 @@ theorem standard_tensorUnitQuantumDimension
   𝒞.simples.tensorUnit_quantumDimension
 
 /--
-Etingof--Nikshych--Ostrik, *On fusion categories*, Theorem 2.3:
-the global dimension of a fusion category over an algebraically closed field
-of characteristic zero is nonzero.
+Etingof--Nikshych--Ostrik, *On fusion categories*, Theorem 2.3 and
+Corollary 2.10: the global dimension, defined in a spherical fusion category as
+the sum of the squares of the categorical dimensions of its simple objects, is
+nonzero over an algebraically closed field of characteristic zero.
 -/
 axiom eno_globalDimension_ne_zero
     {K : Type uK} [Field K] [IsAlgClosed K] [CharZero K]

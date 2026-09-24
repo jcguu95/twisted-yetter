@@ -233,9 +233,10 @@ The exact finite combinatorial normal form of a two--three birth.
 
 The target is the source exterior preceded by one isolated zero-framed
 ordinary loop.  Its finite ribbon trace is recorded explicitly as birth,
-positive framing twist, and death; the twist must not be silently identified
-with the identity on a general simple object.  The final handle equations
-record the corresponding primal 2--3 cancellation pair.
+planar identity continuation, and death.  The absence of a twist records the
+zero framing rather than silently identifying a nontrivial twist with the
+identity.  The final handle equations record the corresponding primal 2--3
+cancellation pair.
 -/
 def IsStandardTwoThreeBirth
     (source target : SpecialKirbyDiagram)
