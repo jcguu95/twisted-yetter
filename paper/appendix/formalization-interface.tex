@@ -769,3 +769,184 @@ arise from a genuine dotted-handle collar and that plugging the resulting
 local morphism into its exterior yields the intended ribbon expression.  That
 assertion is not hidden in \texttt{DottedCutPresentation}; it is an explicit
 entrance axiom and will be reviewed in the axiom subsection.
+
+\subsection{Homology marking and realization}
+\label{app:lean-homology-marking}
+
+The evaluator is written in the handle decomposition turned upside down, as
+in Tham's Definition~5.11.  The public manifold class, however, lies in
+ordinary singular homology.  The following list makes the intervening
+coordinate layer explicit.
+
+\begin{enumerate}[label=\textbf{H\arabic*.},leftmargin=*]
+
+\item \textbf{The visible primal boundary and its transpose.}
+
+\emph{Human statement.}
+For a diagram $D$, let
+\[
+ C_2^{\rm pr}(D)=\mathbb Z^{h_2(D)},\qquad
+ C_1^{\rm pr}(D)=\mathbb Z^{h_1(D)}.
+\]
+The diagram stores the cellular boundary
+$\partial_2^{\rm pr}\colon C_2^{\rm pr}\to C_1^{\rm pr}$.
+With respect to the displayed finite handle bases, Lean defines its transpose
+\[
+ (\partial_2^{\rm pr})^T\colon
+ \mathbb Z^{h_1(D)}\longrightarrow\mathbb Z^{h_2(D)}
+\]
+and proves the usual adjointness identity for the integral coordinate pairing.
+
+\emph{Lean declaration.}
+These are \texttt{primalBoundaryTwo}, \texttt{transposeAddHom},
+\texttt{transposeAddHom\_adjoint}, and \texttt{thamVisibleCoboundary} in
+\nolinkurl{Homology.lean}, lines 70--193.
+
+\emph{Classification and judgment.}
+All are transparent definitions or kernel-checked finite-sum theorems.  No
+$3$-handle attaching map is inserted.  Status: \texttt{DERIVED}.
+
+\item \textbf{The visible THAM coefficient space.}
+
+\emph{Human statement.}
+The evaluator assigns one integral exponent to every primal $2$-handle.  Thus
+its raw coefficient vectors form
+\[
+ C^2_{\rm vis}(D)=\mathbb Z^{h_2(D)}.
+\]
+Changing a representative by a visible coboundary gives the quotient
+\[
+ Q_{\rm vis}(D)=
+ \mathbb Z^{h_2(D)}/\operatorname{im}\bigl((\partial_2^{\rm pr})^T\bigr).
+\]
+
+\emph{Lean declaration.}
+The types are \texttt{ThamTwoHandleCoefficients} and
+\texttt{ThamMarkingClass}; the quotient map is \texttt{thamMarkingClass}, in
+\nolinkurl{Homology.lean}, lines 195--214.
+
+\emph{Classification and judgment.}
+These are definitions.  Crucially, Lean does \emph{not} identify
+$Q_{\rm vis}(D)$ with $H^2(X;\mathbb Z)$.  Because the closing $3$-handle
+attaching data are intentionally absent, $Q_{\rm vis}(D)$ may be larger than
+the genuine cocycle group.  Status:
+\texttt{MATCH\_AS\_AMBIENT\_COORDINATE\_QUOTIENT}.
+
+\item \textbf{A marked cut-open diagram.}
+
+\emph{Human statement.}
+A diagram-level marked input consists of a special Kirby diagram $D$, one
+cut-open presentation $P$ of $D$, and one class
+$\beta\in Q_{\rm vis}(D)$.
+
+\emph{Lean declaration.}
+\begin{verbatim}
+structure HomologicallyMarkedDiagram where
+  diagram : SpecialKirbyDiagram
+  cut : DottedCutPresentation diagram
+  thamAlpha : ThamMarkingClass diagram
+\end{verbatim}
+This is \nolinkurl{Homology.lean}, lines 216--220.
+
+\emph{Classification and judgment.}
+This is data only.  It does not claim that $\beta$ is the Poincaré dual of a
+manifold homology class.  Status: \texttt{MATCH\_AS\_DIAGRAM\_LEVEL\_DATA}.
+
+\item \textbf{Selecting the genuine Poincaré-dual classes.}
+
+\emph{Human statement.}
+If $D$ presents $X$, the external relation
+\[
+ \operatorname{RepresentsPoincareDualClass}(D,\beta,\alpha)
+\]
+means that $\beta\in Q_{\rm vis}(D)$ is the turned-over handle-coordinate
+class of $\operatorname{PD}(\alpha)$ for
+$\alpha\in H_2(X;\mathbb Z)$.  It does not say that every element of
+$Q_{\rm vis}(D)$ is genuine cohomology.
+
+\emph{Lean declaration.}
+This is the explicit axiom \texttt{RepresentsPoincareDualClass} in
+\nolinkurl{EntranceAxioms.lean}, lines 388--404.
+
+\emph{Classification and judgment.}
+This is a category-neutral topology boundary, necessitated by the deliberate
+omission of $3$-handle attaching spheres.  It is an axiom and will reappear in
+the complete axiom ledger.  Status: \texttt{EXTERNAL\_TOPOLOGY\_INPUT}.
+
+\item \textbf{A representative of a marked manifold.}
+
+\emph{Human statement.}
+A special Kirby representative of $X$ consists of a diagram $D$, cut-open
+data $P$, a proof that $D$ presents $X$, and an ambient THAM class
+$\beta\in Q_{\rm vis}(D)$.  Relative to a chosen
+$\alpha\in H_2(X;\mathbb Z)$, correctness is the separate proposition that
+$\beta$ represents $\operatorname{PD}(\alpha)$.
+
+\emph{Lean declaration.}
+This is \texttt{SpecialKirbyRepresentativeOf X} and the predicate
+\texttt{representsHomologyClass}, in \nolinkurl{EntranceAxioms.lean}, lines
+406--426.
+
+\emph{Classification and judgment.}
+The structure contains no hidden correctness field beyond the explicitly
+named presentation relation.  Correctness for $\alpha$ is not baked into the
+structure and must be supplied separately.  Status: \texttt{MATCH}.
+
+\item \textbf{Transport under an elementary move.}
+
+\emph{Human statement.}
+For a move $D\to D'$, Lean stores homomorphisms
+\[
+ T_1\colon\mathbb Z^{h_1(D)}\to\mathbb Z^{h_1(D')},\qquad
+ T_2\colon\mathbb Z^{h_2(D)}\to\mathbb Z^{h_2(D')}
+\]
+satisfying
+\[
+ T_2(\partial_2(D))^T=(\partial_2(D'))^T T_1.
+\]
+Therefore $T_2$ descends to a homomorphism
+$Q_{\rm vis}(D)\to Q_{\rm vis}(D')$.  The target marking carried by the move
+must equal the image of the source marking under this quotient map.
+
+\emph{Lean declaration.}
+This is \texttt{ThamHandleChainTransport}, its derived
+\texttt{inducedMarking}, and the \texttt{markingTransport} field of every
+\texttt{ElementaryMove}; see \nolinkurl{Moves.lean}, lines 239--290 and
+570--656.
+
+\emph{Classification and judgment.}
+The commuting square and endpoint equality are proof fields.  Their complete
+statements are visible and contain no evaluator equality.  They certify the
+marked move rather than derive it from a raw unmarked move.  Status:
+\texttt{MATCH\_AS\_MARKED\_MOVE\_DATA}.
+
+\item \textbf{Birth and death coordinates.}
+
+\emph{Human statement.}
+When a move adds one primal $2$-handle, Lean identifies the target basis with
+the old basis plus one new coordinate, preserves every old coefficient, and
+assigns coefficient zero to the new handle.  When a move removes a
+$2$-handle, it first chooses a homologous representative whose disappearing
+coordinate is zero, then transports the surviving coordinates.
+
+\emph{Lean declaration.}
+These are \texttt{AddedTwoHandleCoordinates} and
+\texttt{RemovedTwoHandleCoordinates}, in \nolinkurl{Moves.lean}, lines
+291--387.  Their later \texttt{Matches...Component} predicates bind the
+abstract coordinate equivalence to the literal newly added or removed
+component.
+
+\emph{Classification and judgment.}
+These are proof-bearing coordinate normal forms carried by cancellation
+moves.  The death structure's \texttt{safeCoefficients\_sameClass} is exactly
+the representative replacement that must later invoke representative
+independence of the evaluator; it is not itself an evaluation equality.
+Status: \texttt{MATCH\_WITH\_VISIBLE\_COORDINATE\_CERTIFICATES}.
+
+\end{enumerate}
+
+The homology layer therefore does not replace manifold $H_2$ by a fixed copy
+of $\mathbb Z$, nor does it mistake the visible quotient for all of $H^2$.
+The two genuinely external statements are the realization of a diagram as a
+closed four-manifold and the identification of the selected THAM class with
+$\operatorname{PD}(\alpha)$; both will be listed explicitly below.
