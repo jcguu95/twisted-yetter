@@ -162,6 +162,22 @@ models consists of
   the coordinate regluing that reconstructs the original local handle models
   and hence the original Kirby diagram.
 \end{enumerate}
+For later use, define the signed incidence number
+\[
+  I_\delta(k)
+  :=\sum_{j:\,k(p_j)=k}\epsilon(p_j)\in\mathbb Z.
+  \tag{2.1}\label{eq:dotted-incidence-number}
+\]
+If $e_k\in C_2(D)$ is the generator represented by the $k$th ordinary
+component and $e_\delta\in C_1(D)$ is the generator represented by the
+dotted component $\delta$, then the cellular attaching map is
+\[
+  \partial_2(e_k)=\sum_\delta I_\delta(k)e_\delta.
+  \tag{2.2}\label{eq:dotted-cellular-boundary}
+\]
+Thus the ordered word retains the full cut-open boundary state, whereas
+$I_\delta(k)$ is only its algebraic incidence count.  The former is used by
+the graphical operator and the latter by the handle cochain complex.
 The puncture order in \cref{item:cut-order} is part of the cut-open tangle;
 it is not replaced by an unordered incidence count.
 This is not an arbitrary spanning-disk system.  It is a graphical coordinate
@@ -313,6 +329,50 @@ form of
 \cite[Table~2]{BarenzBarrett2018}; the dotted-circle slides are reviewed in
 \cite[Section~5.4]{GompfStipsicz1999}.
 \end{definition}
+
+\begin{convention}[Referenced local topology dictionary]
+\label{conv:referenced-kirby-dictionary}
+The eight names in \cref{def:kirby-event} refer to the following standard
+local models.  This dictionary fixes the topological source and target of
+each event; it contains no categorical decoration and asserts no equality of
+evaluations.
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item A framed isotopy is an ambient isotopy of the framed link, preserving
+  the ordinary/dotted roles of its components.
+
+  \item A $1/1$ slide is the dotted-circle move of
+  \cite[Figure~5.39]{GompfStipsicz1999}: one primal $1$-handle is slid over
+  another.  Algebraically it is an elementary change of the $C_1$ basis,
+  together with the induced rewriting of $\partial_2$; no ordinary
+  $2$-handle is created or deleted.
+
+  \item A $2/1$ slide is the move of
+  \cite[Figure~5.36]{GompfStipsicz1999}: an attaching arc of a primal
+  $2$-handle is pulled through a stationary primal $1$-handle.  The handle
+  generators persist, and the source and target attaching maps are related by
+  the canonical cellular continuation of this isotopy in the $1$-handlebody.
+
+  \item A $2/2$ slide is the usual oriented band sum of a moving framed
+  $2$-handle with a framed push-off of a stationary one
+  \cite[Section~5.1]{GompfStipsicz1999}.  Its two oriented basis changes are
+  exactly those fixed in \cref{conv:two-two-coordinates}.
+
+  \item A $1$--$2$ birth inserts the isolated dotted circle and its
+  $0$-framed meridian shown in
+  \cite[Figure~5.38]{GompfStipsicz1999}; on the handle complex it adds the
+  acyclic summand $\mathbb Z\xrightarrow{\,\pm1\,}\mathbb Z$ in degrees
+  $2\to1$.  A $1$--$2$ death is its inverse after the pair has been isolated.
+
+  \item A $2$--$3$ birth adds the standard cancelling pair and hence the
+  acyclic summand $\mathbb Z\xrightarrow{\,\pm1\,}\mathbb Z$ in degrees
+  $3\to2$.  A $2$--$3$ death is its inverse.
+\end{enumerate}
+Apart from framed isotopy, these are the five undirected move/cancellation
+rows in \cite[Table~2]{BarenzBarrett2018}, with each cancellation separated
+here into its birth and death directions.  In every case the displayed local model
+is supported in a ball or a cancelling-pair neighborhood and the framed
+tangle outside that neighborhood is identified pointwise.
+\end{convention}
 
 \begin{definition}[Marked elementary Kirby event]
 \label{def:marked-kirby-event}
@@ -611,9 +671,12 @@ The local forms required below satisfy the following conditions.
 \end{enumerate}
 These are the standard local band-slide and cancelling-pair models of Kirby
 calculus; compare \cite[Sections~5.1 and~5.4]{GompfStipsicz1999} and
-\cite[Table~2]{BarenzBarrett2018}.  The explicit attach--transport--detach
-factorization is our bookkeeping convention for applying the graphical
-calculus, not an additional topological theorem.
+\cite[Table~2]{BarenzBarrett2018}.  The topological assertion in
+\cref{item:slide-normal-form} is only that the standard band admits clean
+endpoint collars and a finite route with fixed exterior.  After categorical
+decoration, the attach, transport, and detach morphisms are defined and
+compared in \cref{subsec:kirby-invariance}; no graphical equality is imported
+from this proposition.
 \end{proposition}
 
 \begin{proof}
