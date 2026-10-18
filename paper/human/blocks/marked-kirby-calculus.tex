@@ -64,18 +64,79 @@ the two relative CW structures, so cellular-to-singular comparison gives the
 claimed naturality.
 \end{proof}
 
+\begin{proposition}[Coordinate form of marking transport]
+\label{prop:marking-coordinate-transport}
+Let $a$ be a handle $2$-cocycle before an elementary move.  Representatives
+of the transported class may be chosen as follows.
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item For framed isotopy, a $1/1$ slide, or a $2/1$ slide, the framed
+  $2$-handle generators are canonically identified and $a'=a$.
+
+  \item For a positive or negative $2/2$ slide with moving generator $e_x$
+  and stationary generator $e_y$, respectively,
+  \[
+    e_x'=e_x+e_y,\quad (a_x',a_y')=(a_x+a_y,a_y),
+  \]
+  or
+  \[
+    e_x'=e_x-e_y,\quad (a_x',a_y')=(a_x-a_y,a_y).
+    \tag{3.5}\label{eq:two-two-marking-transport}
+  \]
+  Every uninvolved coordinate is unchanged.
+
+  \item A $1$--$2$ birth adjoins an acyclic summand in degrees $1,2$,
+  and the transported class is represented by $a'=a\oplus0$.  On the side
+  containing the pair, every representative is cohomologous to one whose new
+  $2$-handle coordinate is zero.
+
+  \item A $2$--$3$ birth adjoins an acyclic summand in degrees $2,3$.
+  The cocycle equation forces the new $2$-handle coordinate to be zero, so
+  again $a'=a\oplus0$.
+\end{enumerate}
+The coordinate rules for deaths are the inverses of the corresponding birth
+rules.
+\end{proposition}
+
+\begin{proof}
+For the first three moves the cellular continuation map in degree $2$ is,
+respectively, the identity, the identity after changing the $C_1$-basis,
+and the identity under isotopy of the attaching map.  This gives (i).
+For a $2/2$ slide, evaluating the same cochain on
+$e_x'=e_x\pm e_y$ gives
+$a_x'=a_x\pm a_y$, while $e_y$ and every other generator are fixed.
+
+For a $1$--$2$ birth the added cochain summand is
+$\mathbb Z\xrightarrow{\,\pm1\,}\mathbb Z$ in degrees $1,2$.
+Extension by zero represents the transported class, and subtracting a
+coboundary makes the new degree-$2$ coordinate zero.  For a $2$--$3$
+birth the same two-term complex lies in degrees $2,3$; hence the degree-$3$
+cocycle equation itself forces the new coordinate to vanish.  Reversing the
+chain equivalences gives the death statements.
+\end{proof}
+
 \begin{lemma}[Three-handle slides]
 \label{lem:three-handle-slides}
 A slide of one \(3\)-handle over another changes only the chosen basis of
 \(C_3(\mathcal H)\).  It preserves both \(h_3(\mathcal H)\) and
-\(\operatorname{im}(\partial_3)\), and hence acts trivially on the data used by
-the evaluator.
+\(\operatorname{im}(\partial_3)\).  If \(\mathcal H'\) is obtained from
+\(\mathcal H\) by such a slide, then the same coordinate tuple \(a\) represents
+the transported marking and
+\[
+  \CY_{\cC,\eta}(\mathcal H,a)
+  =\CY_{\cC,\eta}(\mathcal H',a).
+  \tag{3.6}\label{eq:three-handle-slide-evaluation}
+\]
 \end{lemma}
 
 \begin{proof}
 If \(A\in\operatorname{GL}(C_3(\mathcal H))\) is the elementary basis change,
 the new boundary map is \(\partial_3A\), which has the same image as
-\(\partial_3\).
+\(\partial_3\).  Thus the cocycle condition and its quotient by
+\(\operatorname{im}(\partial_2^*)\) are unchanged.  The dotted--framed Kirby
+diagram, every character exponent, and every RT summand are unchanged, as is
+\(h_3\).  The two sides of
+\eqref{eq:three-handle-slide-evaluation} are therefore the same defining
+sum.
 \end{proof}
 
 \begin{theorem}[Marked Kirby--Cerf completeness]

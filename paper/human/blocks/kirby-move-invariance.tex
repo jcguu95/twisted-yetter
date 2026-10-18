@@ -754,6 +754,22 @@ $Z_{\mathrm{src}}^\varepsilon=Z_{\mathrm{tgt}}^\varepsilon$ for both
 orientations.
 \end{proof}
 
+For the cancellation calculations, write the unnormalized graph sum as
+\[
+  \mathcal R_{\cC,\eta}(\mathcal H,a)
+  :=\sum_{\lambda}
+      \left(\prod_k d_{\lambda_k}\right)
+      \operatorname{RT}_{\cC}
+        \bigl(S^3,\Gamma(\mathcal H,a;\lambda)\bigr).
+  \tag{5.6}\label{eq:raw-graph-sum}
+\]
+Thus
+\(
+  \CY_{\cC,\eta}(\mathcal H,a)
+  =\operatorname{Dim}(\cC)^{1-h_3(\mathcal H)}
+   \mathcal R_{\cC,\eta}(\mathcal H,a).
+\)
+
 \begin{lemma}[Cochain normal forms for cancelling pairs]
 \label{lem:cancellation-cochain-normal-forms}
 For an isolated standard $1$--$2$ birth, extension by zero on the new primal
@@ -794,7 +810,7 @@ For the simple-label set of $\cC$,
   \sum_i d_i\,\operatorname{tr}_i(P_{\mathbf1,i})=1,
   \qquad
   \sum_i d_i\,\operatorname{tr}_i(\operatorname{id}_i)
-  =\operatorname{Dim}(\cC).                  \tag{5.6}\label{eq:local-cancellation-sums}
+  =\operatorname{Dim}(\cC).                  \tag{5.7}\label{eq:local-cancellation-sums}
 \]
 \end{lemma}
 
@@ -804,6 +820,78 @@ $i\cong\mathbf1$ and zero otherwise.  Since $d_{\mathbf1}=1$, the first sum
 is $1$.  Spherical trace gives
 $\operatorname{tr}_i(\operatorname{id}_i)=d_i$, so the second sum is
 $\sum_i d_i^2=\operatorname{Dim}(\cC)$.
+\end{proof}
+
+\begin{lemma}[$1$--$2$ cancellation identity]
+\label{lem:one-two-cancellation-evaluation}
+Let \(\mathcal H^+\) be obtained from \(\mathcal H\) by inserting an isolated
+standard cancelling \(1\)--\(2\) pair, and let \(a^+=a\oplus0\) be the
+transported cocycle of
+\cref{prop:marking-coordinate-transport}.  Then
+\[
+  \mathcal R_{\cC,\eta}(\mathcal H^+,a^+)
+  =\mathcal R_{\cC,\eta}(\mathcal H,a),
+  \qquad
+  h_3(\mathcal H^+)=h_3(\mathcal H),
+  \tag{5.8}\label{eq:one-two-cancellation-evaluation}
+\]
+and hence
+\[
+  \CY_{\cC,\eta}(\mathcal H^+,a^+)
+  =\CY_{\cC,\eta}(\mathcal H,a).
+\]
+The reverse equality holds for an isolated \(1\)--\(2\) death.
+\end{lemma}
+
+\begin{proof}
+Fix every exterior label.  The new \(2\)-handle coordinate is zero, so its
+character coupon is
+\((\eta^0)_i=\operatorname{id}_i\).  The new dotted circle and its cancelling
+meridian contribute exactly
+\[
+  \sum_i d_i\,\operatorname{tr}_i(P_{\mathbf1,i})=1
+\]
+by \cref{lem:local-cancellation-sums}.  Thus every fixed exterior summand is
+unchanged, proving the first equality in
+\eqref{eq:one-two-cancellation-evaluation}.  This birth changes neither the
+number of \(3\)-handles nor the normalization.  Substitution into
+\eqref{eq:raw-graph-sum} proves the normalized equality.  Reading the same
+calculation backwards proves the death statement.
+\end{proof}
+
+\begin{lemma}[$2$--$3$ cancellation identity]
+\label{lem:two-three-cancellation-evaluation}
+Let \(\mathcal H^+\) be obtained from \(\mathcal H\) by inserting an isolated
+standard cancelling \(2\)--\(3\) pair, and let \(a^+=a\oplus0\).  Then
+\[
+  \mathcal R_{\cC,\eta}(\mathcal H^+,a^+)
+  =\operatorname{Dim}(\cC)\,
+   \mathcal R_{\cC,\eta}(\mathcal H,a),
+  \qquad
+  h_3(\mathcal H^+)=h_3(\mathcal H)+1,
+  \tag{5.9}\label{eq:two-three-cancellation-evaluation}
+\]
+and hence
+\[
+  \CY_{\cC,\eta}(\mathcal H^+,a^+)
+  =\CY_{\cC,\eta}(\mathcal H,a).
+\]
+The reverse equality holds for an isolated \(2\)--\(3\) death.
+\end{lemma}
+
+\begin{proof}
+The cocycle equation forces the new \(2\)-handle coordinate to vanish, so its
+character coupon is the identity.  For every fixed exterior labeling, the
+new \(0\)-framed component contributes
+\[
+  \sum_i d_i\,\operatorname{tr}_i(\operatorname{id}_i)
+  =\operatorname{Dim}(\cC)
+\]
+by \cref{lem:local-cancellation-sums}.  This gives the raw-sum equality in
+\eqref{eq:two-three-cancellation-evaluation}.  Meanwhile the new \(3\)-handle
+changes the normalization by
+\(\operatorname{Dim}(\cC)^{-1}\).  The two factors cancel.  Reversing the
+calculation proves the death case.
 \end{proof}
 
 \begin{theorem}[Elementary Kirby-move invariance]
@@ -823,48 +911,65 @@ $\xi\in H^2(\mathcal H)$,
 \end{theorem}
 
 \begin{proof}
-We use the local forms of \cref{prop:local-movie-normal-forms}; the exterior
-graph and all labels not mentioned below remain fixed.
+Choose a cocycle $a$ representing $\xi$, and in each case choose the
+target representative $a'$ prescribed by
+\cref{prop:marking-coordinate-transport}.  By
+\cref{prop:representative-independence}, proving the equality for these
+representatives proves it for the transported cohomology class.  We use the
+local forms of \cref{prop:local-movie-normal-forms}; the exterior graph and
+all labels not mentioned below remain fixed.
 
 \emph{Framed isotopy.}
-The two graphs represent the same colored framed ribbon graph.  Their
-evaluations agree by ribbon graphical coherence
-\cite[Theorem~6.1]{Shum1994}.
+Here $a'=a$, the label states are canonically identified, and
+\(h_3(\mathcal H')=h_3(\mathcal H)\).  For every label state $\lambda$,
+ribbon graphical coherence \cite[Theorem~6.1]{Shum1994} gives
+\[
+  \operatorname{RT}_{\cC}
+    \bigl(S^3,\Gamma(\mathcal H,a;\lambda)\bigr)
+  =
+  \operatorname{RT}_{\cC}
+    \bigl(S^3,\Gamma(\mathcal H',a';\lambda)\bigr).
+\]
+The Kirby-colour coefficients agree termwise, so summing proves the desired
+equality.
 
 \emph{$1/1$ and $2/1$ slides.}
-These are \cref{lem:dotted-handle-slides}.
+For both moves $a'=a$ on the canonically identified $2$-handle
+generators, and $h_3$ is unchanged.  For a $1/1$ slide the required local
+equality is exactly \eqref{eq:one-one-index-three-interface}.  For a $2/1$
+slide it is \eqref{eq:positive-two-one-interface} or
+\eqref{eq:negative-two-one-interface}, according to the crossing orientation.
+After applying the common exterior closure and summing over ordinary labels,
+\cref{lem:dotted-handle-slides} gives the normalized equality.
 
 \emph{$2/2$ slide.}
-This is \cref{lem:character-aware-two-two}.
+Use the positive or negative coordinate rule
+\eqref{eq:two-two-marking-transport}.  The attach calculation identifies the
+source character factor with the transported target factor; finite transport
+preserves each term; and the trace-dual detachment recombines the target
+Kirby colour.  Thus
+\[
+  Z_{\mathrm{src}}^\varepsilon
+  =Z_{\mathrm{tgt}}^\varepsilon
+\]
+by \cref{lem:character-aware-two-two}.  A $2/2$ slide does not change
+$h_3$, so this raw equality is the required evaluator equality.
 
 \emph{$1$--$2$ birth and death.}
 For birth, and for death after the explicit $2/2$ slide reduction of
 \cref{item:cancellation-normal-form}, the pair is isolated from the exterior.
-By \cref{lem:cancellation-cochain-normal-forms}, the standard coordinate
-inclusion extends a source cocycle by zero on the new $2$-handle.  Hence its
-character coupon is
-$\eta^0=\operatorname{id}$.  For each fixed exterior labeling, the new
-dotted circle and its ordinary meridian contribute the first sum in
-\eqref{eq:local-cancellation-sums}, hence the raw state sum is multiplied by
-$1$.  A $1$--$2$ birth does not change $h_3$, so the normalization is also
-unchanged.  For death, the preceding $2/2$ slides preserve the marked
-evaluator by \cref{lem:character-aware-two-two}; representative independence
-then replaces the cocycle by the zero-coordinate representative supplied by
-\cref{lem:cancellation-cochain-normal-forms}, and the isolated calculation
-is read backwards.
+The marking rule gives $a'=a\oplus0$, and
+\eqref{eq:one-two-cancellation-evaluation} proves the isolated equality.
+For death, the preceding $2/2$ slides preserve the marked evaluator by
+\cref{lem:character-aware-two-two}; representative independence supplies the
+zero-coordinate representative, and
+\cref{lem:one-two-cancellation-evaluation} is read backwards.
 
 \emph{$2$--$3$ birth and death.}
-The cocycle equation in \cref{lem:cancellation-cochain-normal-forms} forces
-the exponent on the new ordinary $0$-framed component to be zero, so it
-contributes no character factor.  For each fixed exterior labeling its
-Kirby-colour sum is the second sum in
-\eqref{eq:local-cancellation-sums}; hence the raw state sum is multiplied by
-$\operatorname{Dim}(\cC)$.  Birth increases the primal $3$-handle count by
-one, and therefore multiplies
-$\operatorname{Dim}(\cC)^{1-h_3}$ by
-$\operatorname{Dim}(\cC)^{-1}$.  The factors cancel.  For death, first use
-the same cocycle equation, rather than a change of representative, and read
-the calculation backwards.
+The cocycle equation gives $a'=a\oplus0$.  The two explicit equalities in
+\eqref{eq:two-three-cancellation-evaluation} show that the raw sum acquires
+one factor of $\operatorname{Dim}(\cC)$ while the normalization acquires its
+inverse.  Their product is $1$.  The death case is the reverse equality.
 
 These are all eight directed moves of \cref{def:kirby-move}.
 \end{proof}
