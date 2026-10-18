@@ -1,0 +1,129 @@
+\documentclass[11pt]{article}
+
+\pdftrailerid{}
+
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{aliascnt}
+\usepackage{etoolbox}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{xurl}
+\definecolor{InternalLink}{HTML}{1E63A8}
+\definecolor{ExternalLink}{HTML}{167C78}
+\usepackage[
+  backend=biber,
+  style=alphabetic,
+  sorting=nyt,
+  maxbibnames=99,
+  giveninits=true,
+  doi=true,
+  eprint=true,
+  url=true,
+  isbn=true
+]{biblatex}
+\usepackage[
+  colorlinks=true,
+  linkcolor=InternalLink,
+  citecolor=InternalLink,
+  urlcolor=ExternalLink,
+  pdfauthor={Jin-Cheng Guu},
+  pdftitle={Homologically Twisted Crane--Yetter Invariants}
+]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\makeatletter
+\g@addto@macro\UrlBreaks{\do\-}
+\def\input@path{{../}{../preliminaries/}{../evaluator/}%
+  {../stable-calculation/}{../appendix/}}
+\makeatother
+\Urlmuskip=0mu plus 1mu\relax
+\addbibresource{../references.bib}
+
+\newcommand{\CY}{\operatorname{CY}}
+\newcommand{\cC}{\mathcal{C}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newaliascnt{proposition}{theorem}
+\newtheorem{proposition}[proposition]{Proposition}
+\aliascntresetthe{proposition}
+\newaliascnt{corollary}{theorem}
+\newtheorem{corollary}[corollary]{Corollary}
+\aliascntresetthe{corollary}
+\newaliascnt{conjecture}{theorem}
+\newtheorem{conjecture}[conjecture]{Conjecture}
+\aliascntresetthe{conjecture}
+\newaliascnt{question}{theorem}
+\newtheorem{question}[question]{Question}
+\aliascntresetthe{question}
+\newaliascnt{lemma}{theorem}
+\newtheorem{lemma}[lemma]{Lemma}
+\aliascntresetthe{lemma}
+\newaliascnt{example}{theorem}
+\newtheorem{example}[example]{Example}
+\aliascntresetthe{example}
+\theoremstyle{remark}
+\newaliascnt{remark}{theorem}
+\newtheorem{remark}[remark]{Remark}
+\aliascntresetthe{remark}
+\theoremstyle{definition}
+\newaliascnt{definition}{theorem}
+\newtheorem{definition}[definition]{Definition}
+\aliascntresetthe{definition}
+\newaliascnt{convention}{theorem}
+\newtheorem{convention}[convention]{Convention}
+\aliascntresetthe{convention}
+
+\newcommand{\statementendmark}{\hfill\textcolor{black!55}{\(\lozenge\)}}
+\AtEndEnvironment{theorem}{\statementendmark}
+\AtEndEnvironment{proposition}{\statementendmark}
+\AtEndEnvironment{corollary}{\statementendmark}
+\AtEndEnvironment{conjecture}{\statementendmark}
+\AtEndEnvironment{question}{\statementendmark}
+\AtEndEnvironment{lemma}{\statementendmark}
+\AtEndEnvironment{example}{\statementendmark}
+\AtEndEnvironment{remark}{\statementendmark}
+\AtEndEnvironment{definition}{\statementendmark}
+\AtEndEnvironment{convention}{\statementendmark}
+
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{conjecture}{Conjecture}{Conjectures}
+\crefname{question}{Question}{Questions}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{example}{Example}{Examples}
+\crefname{remark}{Remark}{Remarks}
+\crefname{definition}{Definition}{Definitions}
+\crefname{convention}{Convention}{Conventions}
+
+\title{\bfseries Homologically Twisted Crane--Yetter Invariants}
+\author{Jin-Cheng Guu\\University of Alberta}
+\date{}
+
+\begin{document}
+
+\maketitle
+\vspace{-2.5em}
+\begin{center}
+  \textcolor{red}{\bfseries\Large DRAFT}
+\end{center}
+\vspace{-0.75em}
+
+\input{../abstract}
+\tableofcontents
+\input{../introduction}
+\input{preliminaries}
+\input{kirby-presentations}
+\input{evaluator}
+\input{invariance}
+\input{stable-calculation}
+\input{future-directions}
+\input{computational-evidence}
+
+\hypersetup{urlcolor=InternalLink}
+\printbibliography
+
+\end{document}
