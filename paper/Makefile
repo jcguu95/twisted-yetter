@@ -45,10 +45,10 @@ force-build-info:
 
 $(BUILD_INFO): force-build-info
 	@commit="$$(git rev-parse --short=12 HEAD 2>/dev/null || printf unknown)"; \
-	state="$$(git diff --quiet --ignore-submodules HEAD -- 2>/dev/null && printf clean || printf dirty)"; \
+	state="$$(test -z "$$(git status --porcelain --untracked-files=normal 2>/dev/null)" && printf clean || printf dirty)"; \
 	timestamp="$$(TZ=America/Edmonton date '+%Y-%m-%d %H:%M:%S %Z')"; \
-	printf '\\renewcommand{\\buildmetadata}{Compiled %s; commit %s (%s).}\n' \
-	  "$$timestamp" "$$commit" "$$state" > $(BUILD_INFO)
+	printf '\\renewcommand{\\buildmetadata}{git %s \\textbar{} %s \\textbar{} compiled %s}\n' \
+	  "$$commit" "$$state" "$$timestamp" > $(BUILD_INFO)
 
 clean:
 	$(LATEXMK) -c $(MAIN).tex

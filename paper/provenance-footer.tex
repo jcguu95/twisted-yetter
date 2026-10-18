@@ -1,0 +1,16 @@
+% Shared build-provenance footer for both paper editions.
+\providecommand{\buildmetadata}{git unknown | unknown state | compile time unavailable}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[L]{%
+  \textcolor{black!28}{\fontsize{6}{7}\selectfont\buildmetadata}}
+\fancyfoot[R]{\textcolor{black!45}{\scriptsize\thepage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyfoot[L]{%
+    \textcolor{black!28}{\fontsize{6}{7}\selectfont\buildmetadata}}
+  \fancyfoot[R]{\textcolor{black!45}{\scriptsize\thepage}}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}}

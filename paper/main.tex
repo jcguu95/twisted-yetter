@@ -111,23 +111,10 @@
 \author{Jin-Cheng Guu\\University of Alberta}
 \date{}
 
-\providecommand{\buildmetadata}{Build metadata unavailable.}
-\pagestyle{fancy}
-\fancyhf{}
-\fancyfoot[L]{\textcolor{gray!25}{\fontsize{6}{7}\selectfont\buildmetadata}}
-\fancyfoot[R]{\textcolor{gray!65}{\scriptsize\thepage}}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
-\fancypagestyle{plain}{%
-  \fancyhf{}
-  \fancyfoot[L]{\textcolor{gray!25}{\fontsize{6}{7}\selectfont\buildmetadata}}
-  \fancyfoot[R]{\textcolor{gray!65}{\scriptsize\thepage}}
-  \renewcommand{\headrulewidth}{0pt}
-  \renewcommand{\footrulewidth}{0pt}}
+\input{provenance-footer}
+\IfFileExists{build-info.tex}{\input{build-info.tex}}{}
 
 \begin{document}
-
-\IfFileExists{build-info.tex}{\input{build-info.tex}}{}
 
 \maketitle
 \vspace{-2.5em}
