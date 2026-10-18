@@ -1,6 +1,32 @@
 \subsection{Kirby-move invariance}
 \label{subsec:kirby-invariance}
 
+The proof can be read from the following list.  Each item is local, and the
+same exterior ribbon graph is restored after the calculation.
+\begin{description}[style=nextline,leftmargin=2.2em]
+  \item[Changing the cocycle representative.]
+  A coboundary inserts character coupons around a dotted handle; the
+  tensor-unit projector absorbs them.
+
+  \item[Framed isotopy.]
+  Ribbon graphical coherence preserves the RT evaluation.
+
+  \item[\(1/1\) and \(2/1\) slides.]
+  Cut at the stationary dotted handle.  Only the tensor-unit channel survives,
+  and that channel is transparent to the slide.
+
+  \item[\(2/2\) slides.]
+  Resolve the band attachment into simple fusion channels, transport the
+  character coupon by naturality, and apply the inverse resolution at
+  detachment.
+
+  \item[\(1\)--\(2\) and \(2\)--\(3\) cancellations.]
+  Put the pair in standard position.  The new character exponent is zero, and
+  the remaining local scalar is cancelled by the change in normalization.
+\end{description}
+
+The rest of this subsection proves precisely these five assertions.
+
 The character coupons disappear on the tensor-unit channel for a formal
 reason that will be used repeatedly.
 
@@ -64,7 +90,7 @@ defines a linear functional
 The dotted operation in that term is exactly
 \[
   \mathcal E_\delta(P_{\mathbf1,B_\delta}).
-  \tag{3.2}\label{eq:dotted-section}
+  \tag{5.1}\label{eq:dotted-section}
 \]
 For every puncture $p$ on the $k$th ordinary component, the following three
 features remain distinct.
@@ -180,7 +206,7 @@ $1$-handle, and let $w_\delta$ be the signed boundary word of
   \prod_k\eta_{\lambda_k}^{m(\delta^1e_\delta^*)_k}
   =
   \chi_\eta(w_\delta)^m.
-  \tag{3.3}\label{eq:dotted-incidence-character}
+  \tag{5.2}\label{eq:dotted-incidence-character}
 \]
 Moreover the scalar on either side acts trivially on the closed term
 $\mathcal E_\delta(P_{\mathbf1,B_\delta})$.
@@ -311,7 +337,7 @@ decorated incoming skein $\Gamma$,
   \mathsf H^{(3)}_{\mathrm{src}}([\Gamma])
   =
   \mathsf H^{(3)}_{\mathrm{tgt}}([\Gamma]).
-  \tag{3.4}\label{eq:one-one-index-three-interface}
+  \tag{5.3}\label{eq:one-one-index-three-interface}
 \]
 \end{lemma}
 
@@ -344,7 +370,7 @@ two source handle maps act termwise as
     ([\Gamma_{i,j;\mu,\nu}])
   =\delta_{i,\mathbf1}\delta_{j,\mathbf1}
     [\Gamma_{i,j;\mu,\nu}].
-  \tag{3.4a}\label{eq:one-one-simple-channel-action}
+  \tag{5.3a}\label{eq:one-one-simple-channel-action}
 \]
 
 The standard $1/1$ source and target are the local models fixed by
@@ -375,21 +401,21 @@ Put a $2/1$ slide into the clean local form of
 \cref{prop:local-movie-normal-forms}, cut the stationary dotted handle, and
 write $B=|w_\delta|$ for its through-object, $x$ for the moving oriented
 ribbon label, and $a\in\mathbb Z$ for the moving character exponent.  There
-has the same exterior tangle on
-$\operatorname{Hom}_{\cC}(B\otimes x,x\otimes B)$ in which the positive
+is a common exterior closure functional on
+$\operatorname{Hom}_{\cC}(B\otimes x,x\otimes B)$ under which the positive
 source and target local tangles are respectively the two sides of
 \[
   c_{B,x}\bigl(P_{\mathbf1,B}\otimes(\eta^a)_x\bigr)
   =
   \bigl((\eta^a)_x\otimes P_{\mathbf1,B}\bigr)c_{B,x}.
-  \tag{3.5}\label{eq:positive-two-one-interface}
+  \tag{5.4}\label{eq:positive-two-one-interface}
 \]
 For the opposite crossing orientation they are the two sides of
 \[
   c_{x,B}^{-1}\bigl(P_{\mathbf1,B}\otimes(\eta^a)_x\bigr)
   =
   \bigl((\eta^a)_x\otimes P_{\mathbf1,B}\bigr)c_{x,B}^{-1}.
-  \tag{3.6}\label{eq:negative-two-one-interface}
+  \tag{5.5}\label{eq:negative-two-one-interface}
 \]
 The clean attaching collar is the left factorization, the band transport is
 the displayed braiding followed by transport along the
@@ -768,7 +794,7 @@ For the simple-label set of $\cC$,
   \sum_i d_i\,\operatorname{tr}_i(P_{\mathbf1,i})=1,
   \qquad
   \sum_i d_i\,\operatorname{tr}_i(\operatorname{id}_i)
-  =\operatorname{Dim}(\cC).                  \tag{3.7}\label{eq:local-cancellation-sums}
+  =\operatorname{Dim}(\cC).                  \tag{5.6}\label{eq:local-cancellation-sums}
 \]
 \end{lemma}
 

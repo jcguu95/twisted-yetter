@@ -1,210 +1,147 @@
-\subsection{The marked handle formula}
+\subsection{The formula}
 \label{subsec:graphical-construction}
 
 \begin{definition}[Twisted categorical input]
 \label{def:twisted-categorical-input}
-A twisted categorical input is a pair $(\cC,\eta)$ consisting of a
-premodular fusion category $\cC$ and a character
+A twisted categorical input is a pair \((\cC,\eta)\), where \(\cC\) is a
+premodular fusion category over \(\mathbb C\) and
 \[
   \eta\in A_{\cC}
   =\operatorname{Aut}_{\otimes}(\operatorname{Id}_{\cC}).
 \]
-For every simple $i$, write
-$(\eta)_i=\eta_i\operatorname{id}_i$ as in
-\cref{def:character}.  Thus $\eta_i\in\mathbb C^\times$ is a scalar, while
-the coupon on an $i$-coloured ribbon is the endomorphism
-$\eta_i^n\operatorname{id}_i=(\eta^n)_i$.
+For a simple object \(i\), write
+\((\eta)_i=\eta_i\operatorname{id}_i\).  Thus a coupon labelled by
+\(\eta^n\) on an \(i\)-coloured ribbon is the actual endomorphism
+\(\eta_i^n\operatorname{id}_i\).
 \end{definition}
 
-\begin{definition}[Kirby colour]
+Two standard categorical ingredients enter the formula.
+
+\begin{definition}[Kirby colour and tensor-unit projector]
 \label{def:kirby-colour}
-The Kirby colour of $\cC$ is the formal linear combination
+\label{def:tensor-unit-projector}
+The Kirby colour is
 \[
   \Omega_{\cC}:=
-    \sum_{i\in\operatorname{Irr}(\cC)}d_i\,i.
+  \sum_{i\in\operatorname{Irr}(\cC)}d_i\,i.
+  \tag{4.1}\label{eq:kirby-colour}
 \]
-Colouring a link component by $\Omega_{\cC}$ means expanding it into the
-displayed finite weighted sum of simple-coloured components.
-\end{definition}
-
-\begin{definition}[Tensor-unit projector]
-\label{def:tensor-unit-projector}
-Let $W$ be an object of $\cC$.  Choose a basis
-$u_\mu\colon\mathbf1\to W$ and its composition-dual basis
-$\widehat u_\mu\colon W\to\mathbf1$, characterized by
-$\widehat u_\mu u_\nu=\delta_{\mu\nu}\operatorname{id}_{\mathbf1}$.
-Because $d_{\mathbf1}=1$, this is also the spherical trace-dual basis.  The
-projector onto the full
+For an object \(W\), choose a basis
+\(u_\mu\colon\mathbf1\to W\) and its composition-dual basis
+\(\widehat u_\mu\colon W\to\mathbf1\).  The canonical projector onto the full
 tensor-unit isotypic summand is
 \[
-  P_{\mathbf1,W}:=\sum_\mu u_\mu\widehat u_\mu
+  P_{\mathbf1,W}:=
+  \sum_\mu u_\mu\widehat u_\mu
   \in\operatorname{End}_{\cC}(W).
+  \tag{4.2}\label{eq:tensor-unit-projector}
 \]
-In the dotted construction we write
-\[
-  \operatorname{Cut}_{\cC}(W):=P_{\mathbf1,W}.
-\]
-No global-dimension factor is included in this operator.
+It is independent of the chosen dual bases.  We also write
+\(\operatorname{Cut}_{\cC}(W):=P_{\mathbf1,W}\); no global-dimension factor is
+included in this notation.
 \end{definition}
 
-\begin{remark}[Basis independence]
-\label{rem:tensor-unit-projector-basis-independence}
-The endomorphism $P_{\mathbf1,W}$ is independent of the choice of dual
-bases.
-\end{remark}
-
-Whenever a local ribbon tangle $f$ is displayed inside a fixed exterior
-tangle $E$, write $\operatorname{Cl}_E(f)$ for the RT evaluation after
-gluing.  This notation is linear in $f$, so an equality of local morphisms
-remains an equality after the common exterior is restored.
-
-\begin{definition}[Intrinsic dotted-circle operation]
+\begin{definition}[The operation represented by a dotted circle]
 \label{def:dotted-circle-translation}
-Let $\mathcal H$ be a special Kirby presentation and let $\delta$ be a dotted
-component of $D_{\mathcal H}$.  In the Crane--Yetter graphical expansion,
-$\delta$ means, by definition, the index-$3$ handle
-operation of \cite[Definition~5.11, $k=3$]{Tham2021}.  On the boundary-state
-object $B_\delta$ of that handle, after resolving the incident ribbons into
-simple channels, this operation is
+Let \(\delta\) be a dotted component of \(D_{\mathcal H}\).  A standard
+cross-section of the corresponding \(1\)-handle meets the oriented framed
+ribbons in a finite ordered boundary word.  If \(B_\delta\) is the tensor
+product represented by that word, then the operation assigned to \(\delta\)
+is
 \[
-  \operatorname{Cut}_{\cC}(B_\delta)=P_{\mathbf1,B_\delta}.
+  \operatorname{Cut}_{\cC}(B_\delta)
+  =P_{\mathbf1,B_\delta}.
+  \tag{4.3}\label{eq:dotted-operation}
 \]
-
-A dotted-handle section from \cref{lem:dotted-handle-sections} displays this
-intrinsic map in a ribbon diagram.  Fix an ordinary-label state and read its
-positive collar face as $(p_1,\ldots,p_r)$.  Let $X_j$ be the
-label already carried by the oriented ribbon through $p_j$, and put
-\[
-  X^{[+1]}:=X,\qquad X^{[-1]}:=X^*,
-\]
-\[
-  w_\delta:=((X_1,\sigma_1),\ldots,(X_r,\sigma_r)),
-  \qquad
-  B_\delta:=|w_\delta|
-  :=X_1^{[\sigma_1]}\otimes\cdots\otimes X_r^{[\sigma_r]}.
-\]
-On the opposite collar face the word is reversed and rigidly dualized, so
-canonically
-\[
-  |w_\delta^{\mathrm{op}}|\cong |w_\delta|^*.
-\]
-The disk therefore does not change the underlying component label $X_j$;
-its sign only specifies how that fixed oriented ribbon occurs in the
-boundary object.
-
-After the exterior tangle is fixed, regluing defines a linear functional
+Equivalently, after fixing the exterior ribbon tangle, closure gives a linear
+functional
 \[
   \mathcal E_\delta\colon
-  \operatorname{End}_{\cC}(B_\delta)\longrightarrow\mathbb C.
+  \operatorname{End}_{\cC}(B_\delta)\longrightarrow\mathbb C,
 \]
-The dotted contribution is
+and the dotted contribution is
 \[
   \mathcal E_\delta(P_{\mathbf1,B_\delta}).
-  \tag{3.1}\label{eq:intrinsic-dotted-context}
+  \tag{4.4}\label{eq:intrinsic-dotted-context}
 \]
-After every dotted circle has been translated in this way, the result is a
-finite linear combination of genuine closed $\cC$-coloured ribbon graphs in
-$S^3$.
+The topological reason for this rule is given in
+\cref{subsec:dotted-handle-interpretation}.
 \end{definition}
 
-\begin{remark}[Scope of the dotted-circle operation]
-\label{rem:dotted-circle-operation-scope}
-The dotted circle acts by projection onto the tensor-unit channel.  It is not
-itself a coloured ribbon component and is never assigned the ordinary Kirby
-colour.  In a modular category the same operation can alternatively be drawn
-by encircling with $\operatorname{Dim}(\cC)^{-1}\Omega_{\cC}$, but that
-modular replacement is not used here; compare
-\cite[Definition~5.11 and Lemma~2.31]{Tham2021}.
-
-The projector is therefore applied to the actual through-channel crossing the
-co-core, before the exterior is closed.  It is not postcomposed with a
-morphism out of $\mathbf1$: such a postcomposition would be vacuous.  In
-particular, if the bunched through-channel is a non-unit simple object $i$,
-then $P_{\mathbf1,i}=0$, exactly as required by the index-$3$ operation.
-Each resulting closed graph is evaluated by
-\cref{def:rt-graph-evaluation}.
-\end{remark}
+We can now give the entire evaluation recipe.
 
 \begin{definition}[The coloured graph sum]
 \label{def:colored-graph-sum}
-Let $\mathcal H$ be a special Kirby presentation of $X$, and let
-$a=(a_k)\in Z^2(\mathcal H)$ be a handle cocycle for
-$\alpha\in H_2(X;\mathbb Z)$.  For each choice $\lambda=(\lambda_k)$ of a
-simple label on every ordinary component of $D_{\mathcal H}$, construct a
-finite linear combination of closed coloured ribbon graphs as follows.
+Let \(\mathcal H\) be a special Kirby presentation and let
+\(a\in Z^2(\mathcal H)\) represent the marking.  For every assignment
+\(\lambda=(\lambda_k)\) of simple objects to the framed components, form a
+finite linear combination \(\Gamma(\mathcal H,a;\lambda)\) of closed coloured
+ribbon graphs by the following rules.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
-  \item\label{item:ordinary-kirby-expansion}
-  Every ordinary framed component is coloured by $\Omega_{\cC}$.  Thus a
-  state $\lambda$ chooses a simple label $\lambda_k$ for each such component
-  and has the external scalar weight $\prod_k d_{\lambda_k}$.
+  \item The \(k\)th framed component receives the simple label
+  \(\lambda_k\), with external Kirby-colour coefficient
+  \(d_{\lambda_k}\).
 
-  \item\label{item:character-coupons}
-  On the $k$th ordinary component insert one coupon carrying
-  the actual endomorphism
-  $(\eta^{a_k})_{\lambda_k}
-   =\eta_{\lambda_k}^{a_k}\operatorname{id}_{\lambda_k}$.
+  \item On that component insert the character coupon
+  \[
+    (\eta^{a_k})_{\lambda_k}
+    =\eta_{\lambda_k}^{a_k}\operatorname{id}_{\lambda_k}.
+  \]
 
-  \item\label{item:dotted-cut-projector}
-  Apply the intrinsic dotted-circle operation of
-  \cref{def:dotted-circle-translation} to every dotted circle.  In a co-core
-  section these disjoint maps are drawn simultaneously.
+  \item At every dotted component \(\delta\), insert
+  \(P_{\mathbf1,B_\delta}\) on the through-channel described in
+  \cref{def:dotted-circle-translation}.
 
-  \item\label{item:graphical-regluing}
-  Expand the projectors using dual bases, interpret all crossings, extrema,
-  twists, and coupons by the ribbon graphical calculus, and reglue the cut
-  tangle.  Each choice of ordinary labels gives a finite linear combination
-  of closed $\cC$-coloured ribbon graphs in $S^3$; its coefficients include
-  the fusion-basis coefficients from the tensor-unit projectors.
+  \item Expand the projectors in dual bases, reglue the cut-open local
+  tangles, and interpret every crossing, cup, cap, twist, and coupon by the
+  ribbon graphical calculus.
 \end{enumerate}
-For a fixed ordinary-label state $\lambda$, let
-\[
-  \Gamma(\mathcal H,a;\lambda)
-\]
-denote the class of this finite linear combination in the complex-linearized
-ribbon graphical category.  Graphical evaluation is extended linearly to
-$\Gamma(\mathcal H,a;\lambda)$.  By convention,
-$\Gamma(\mathcal H,a;\lambda)$ contains the projector/fusion expansion coefficients
-and all coupon morphisms, but it does \emph{not} contain the external
-Kirby-colour coefficient $\prod_kd_{\lambda_k}$; that factor occurs exactly
-once in \cref{def:twisted-handle-evaluator}.
+The projector expansion coefficients and all coupons belong to
+\(\Gamma(\mathcal H,a;\lambda)\).  The external product
+\(\prod_kd_{\lambda_k}\) does not; it appears once in the formula below.
 \end{definition}
-
-\begin{remark}[Intrinsic meaning of the graphical expansion]
-\label{rem:graph-sum-intrinsic-meaning}
-The expression $\Gamma(\mathcal H,a;\lambda)$ is the intrinsic composite modulo the
-ribbon graphical relations, not a chosen planar representative or a chosen
-spanning-disk system.  The orientation of a ribbon, not its direction through
-a dotted disk, determines whether its label is $X$ or $X^*$.
-\end{remark}
 
 \begin{definition}[Homologically twisted Crane--Yetter evaluator]
 \label{def:twisted-handle-evaluator}
-For the chosen cocycle $a$, define
+Define
 \[
+  \boxed{
   \CY_{\cC,\eta}(\mathcal H,a)
   :=
   \operatorname{Dim}(\cC)^{1-h_3(\mathcal H)}
   \sum_{\lambda}
     \left(\prod_k d_{\lambda_k}\right)
     \operatorname{RT}_{\cC}
-      \bigl(S^3,\Gamma(\mathcal H,a;\lambda)\bigr).
+      \bigl(S^3,\Gamma(\mathcal H,a;\lambda)\bigr).}
+  \tag{4.5}\label{eq:twisted-handle-evaluator}
 \]
 \end{definition}
 
-\begin{remark}[Evaluator conventions]
-\label{rem:handle-evaluator-conventions}
-Here the character coupons are part of the graph
-$\Gamma(\mathcal H,a;\lambda)$; equivalently their simple-component scalars
-$\eta_{\lambda_k}^{a_k}$ may be pulled outside the graphical evaluation.
-The power $1-h_3(\mathcal H)$ uses primal handle names and the turned-over convention
-of \cref{conv:primal-turned-over}.
+This is the promised map
+\[
+  (\mathcal H,a)\longmapsto
+  \CY_{\cC,\eta}(\mathcal H,a)\in\mathbb C.
+\]
+It is a finite sum: Kirby colours and tensor-unit projectors both expand over
+finite semisimple data.  Each summand is an ordinary closed
+\(\cC\)-coloured ribbon graph in \(S^3\), evaluated by
+\cref{def:rt-graph-evaluation}.
+
+\begin{remark}[What the dotted circle is not]
+\label{rem:dotted-circle-operation-scope}
+A dotted circle is not a coloured ribbon component and is never assigned the
+Kirby colour.  It denotes the projector onto the tensor-unit through-channel.
+In a modular category that projector admits an alternative encircling
+description using \(\operatorname{Dim}(\cC)^{-1}\Omega_{\cC}\), but no such
+replacement is used in the premodular construction; compare
+\cite[Definition~5.11 and Lemma~2.31]{Tham2021}.
 \end{remark}
 
-\begin{remark}[A finite sum, not one graph]
-\label{rem:evaluator-finite-sum}
-The construction does not canonically produce one coloured graph.  It
-produces a finite weighted family of graphs because the Kirby colour and the
-tensor-unit projectors must be expanded.  Each summand is an honest closed
-$\cC$-coloured ribbon graph and is evaluated by
-\cref{def:rt-graph-evaluation}.
+\begin{remark}[Intrinsic meaning]
+\label{rem:graph-sum-intrinsic-meaning}
+The expression \(\Gamma(\mathcal H,a;\lambda)\) denotes the resulting
+intrinsic composite modulo ribbon graphical relations, not a preferred planar
+drawing.  In particular, the orientation of a ribbon determines whether its
+label is \(X\) or \(X^*\); its passage through a dotted-handle cross-section
+does not recolour it.
 \end{remark}

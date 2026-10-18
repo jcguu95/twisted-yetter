@@ -1,15 +1,11 @@
-\subsection{Topological input}
+\subsection{From a marked four-manifold to marked handle data}
 \label{subsec:topological-input}
 
 \begin{definition}[Marked four-manifold]
 \label{def:marked-four-manifold}
-A \emph{marked four-manifold} is a pair $(X,\alpha)$ consisting of
-\begin{enumerate}[label=(\roman*),ref=\roman*]
-  \item\label{item:marked-manifold}
-  a closed, connected, oriented smooth four-manifold $X$; and
-  \item\label{item:manifold-marking}
-  a class $\alpha\in H_2(X;\mathbb Z)$.
-\end{enumerate}
+A \emph{marked four-manifold} is a pair \((X,\alpha)\), where \(X\) is a
+closed, connected, oriented smooth four-manifold and
+\(\alpha\in H_2(X;\mathbb Z)\).
 \end{definition}
 
 \begin{definition}[Kirby diagram]
@@ -19,526 +15,98 @@ A \emph{Kirby diagram} is a finite dotted--framed link
   D_{\mathrm{Kir}}=D_{\mathrm{dot}}\sqcup D_{\mathrm{fr}}
   \subset S^3.
 \]
-The dotted components form the standard unlink and encode the $1$-handles
-attached to a single $0$-handle.  The components of $D_{\mathrm{fr}}$ are
-equipped with integer framings and encode the attaching circles of the
-$2$-handles in the resulting $1$-handlebody.  Thus $D_{\mathrm{Kir}}$
-determines the $0$-, $1$-, and $2$-handlebody, which we denote by
-$W^{(2)}_{D_{\mathrm{Kir}}}$.
+The dotted sublink \(D_{\mathrm{dot}}\) is an unlink; its components encode
+the \(1\)-handles attached to a single \(0\)-handle.  The integer-framed
+components encode the attaching circles of the \(2\)-handles in the
+resulting \(1\)-handlebody.  We write
+\(W^{(2)}_{D_{\mathrm{Kir}}}\) for the represented \(0\)-, \(1\)-, and
+\(2\)-handlebody.
 \end{definition}
 
 \begin{definition}[Special Kirby presentation]
 \label{def:special-kirby-presentation}
-A \emph{special Kirby presentation} of a closed connected oriented smooth
-four-manifold $X$ is a handle decomposition $\mathcal H$ with one
-$0$-handle and one $4$-handle.  We write
-$D_{\mathcal H}=D_{\mathrm{dot}}\sqcup D_{\mathrm{fr}}$ for the Kirby
-diagram of its $1$- and $2$-handles.  Thus it consists of
-\begin{enumerate}[label=(\roman*),ref=\roman*]
-\item\label{item:special-handles}
-  the dotted circles encoding the primal $1$-handles;
+A \emph{special Kirby presentation} \(\mathcal H\) of \(X\) is a handle
+decomposition with one \(0\)-handle and one \(4\)-handle, together with its
+dotted--framed Kirby diagram \(D_{\mathcal H}\).  The diagram displays the
+primal \(1\)- and \(2\)-handles; the \(3\)-handles close
+\(W^{(2)}_{D_{\mathcal H}}\) before the final \(4\)-handle is attached.
 
-\item\label{item:special-diagram}
-  the integer-framed attaching circles encoding the primal $2$-handles; and
-
-\item\label{item:special-closing}
-  the $3$-handle attachments and the final $4$-handle which close
-  $W^{(2)}_{D_{\mathcal H}}$ to $X$.
-\end{enumerate}
-After orienting the handles, write
+After orienting the handles, the part of the integral handle complex relevant
+to degree two is
 \[
   C_3(\mathcal H)\xrightarrow{\partial_3}
   C_2(\mathcal H)\xrightarrow{\partial_2}
-  C_1(\mathcal H)
+  C_1(\mathcal H).
+  \tag{3.1}\label{eq:handle-complex}
 \]
-for the corresponding part of the integral handle complex, and write
-$h_3(\mathcal H)=\operatorname{rank}C_3(\mathcal H)$.
+The oriented framed components give the preferred basis of
+\(C_2(\mathcal H)\).  We write
+\(h_3(\mathcal H)=\operatorname{rank}C_3(\mathcal H)\).
 \end{definition}
 
-\begin{definition}[Handle cohomology and the marking]
+The \(3\)-handle attaching spheres do not have to be drawn in order to apply
+the formula below.  Their only contributions are the integer
+\(h_3(\mathcal H)\) and the relations
+\(\operatorname{im}(\partial_3)\subset C_2(\mathcal H)\).
+
+\begin{definition}[Handle representative of the marking]
 \label{def:handle-homology-marking}
-For a special Kirby presentation $\mathcal H$, put
+Set
 \[
   C^2(\mathcal H):=\operatorname{Hom}(C_2(\mathcal H),\mathbb Z),
   \qquad
-  Z^2(\mathcal H):=
-  \{a\in C^2(\mathcal H):
-    a|_{\operatorname{im}(\partial_3)}=0\}
+  Z^2(\mathcal H)
+  :=\{a\in C^2(\mathcal H):a\circ\partial_3=0\},
 \]
 and
 \[
-  H^2(\mathcal H):=
-  Z^2(\mathcal H)/\operatorname{im}(\partial_2^*).
+  H^2(\mathcal H)
+  :=Z^2(\mathcal H)/\operatorname{im}(\partial_2^*).
+  \tag{3.2}\label{eq:handle-cohomology}
 \]
-The cellular comparison isomorphism identifies this group with
-$H^2(X;\mathbb Z)$.  Given a marking $\alpha\in H_2(X;\mathbb Z)$, let
-$\xi_{\mathcal H}\in H^2(\mathcal H)$ denote the class corresponding to
-$\operatorname{PD}_X(\alpha)$.  A \emph{handle cocycle for $\alpha$} is any
-$a\in Z^2(\mathcal H)$ representing $\xi_{\mathcal H}$.
+Cellular comparison identifies this group with \(H^2(X;\mathbb Z)\).  Let
+\(\xi_{\mathcal H}\) be the class corresponding to
+\(\operatorname{PD}_X(\alpha)\).  A \emph{handle cocycle for \(\alpha\)} is
+an element \(a\in Z^2(\mathcal H)\) representing
+\(\xi_{\mathcal H}\).
+
+If \(e_k\) is the basis element represented by the \(k\)th framed component,
+write
+\[
+  a_k:=a(e_k)\in\mathbb Z.
+  \tag{3.3}\label{eq:handle-marking-coordinates}
+\]
+These integers are exactly the character exponents used in the evaluator.
 \end{definition}
 
-\begin{lemma}[Dotted-handle sections]
-\label{lem:dotted-handle-sections}
-Let $\mathcal H$ be a special Kirby presentation.  For every dotted
-component $\delta$ of $D_{\mathcal H}$ one may choose standard
-pair-of-balls coordinates on the corresponding $1$-handle so that the
-choices for distinct handles have disjoint supports.  A cooriented section
-$\Delta_\delta$ of this local model is transverse to the framed attaching
-link.  Its positive collar face meets that link in a finite ordered list
-$p_1,\ldots,p_r$.  Each $p_j$ remembers the ordinary component $k(p_j)$,
-the already fixed orientation of its ribbon, and the local intersection sign
-$\epsilon(p_j)\in\{+1,-1\}$.  On the opposite face the ordered boundary word
-is reversed and rigidly dualized.
+Changing \(a\) by an element of \(\operatorname{im}(\partial_2^*)\) changes
+the displayed coordinates but not the marking.  Representative independence
+will therefore be one of the first identities proved in
+\cref{subsec:kirby-invariance}.
 
-The signed incidence numbers
-\[
-  I_\delta(k)
-  :=\sum_{j:\,k(p_j)=k}\epsilon(p_j)\in\mathbb Z.
-  \tag{2.1}\label{eq:dotted-incidence-number}
-\]
-recover the cellular boundary map: if
-$e_k\in C_2(\mathcal H)$ is represented by the $k$th ordinary component and
-$e_\delta\in C_1(\mathcal H)$ is represented by the
-dotted component $\delta$, then the cellular attaching map is
-\[
-  \partial_2(e_k)=\sum_\delta I_\delta(k)e_\delta.
-  \tag{2.2}\label{eq:dotted-cellular-boundary}
-\]
-\end{lemma}
-
-\begin{proof}
-The handle decomposition already supplies pairwise disjoint local models for
-its $1$-handles.  Choose standard pair-of-balls coordinates in those models.
-In dotted-circle notation their displaying disks form the standard dotted
-unlink.  After a perturbation supported inside the chosen coordinate
-neighborhoods, the sections are transverse to the compact framed
-$2$-handle link and hence have finitely many intersections.  The usual
-signed-intersection computation of the cellular attaching map gives
-\eqref{eq:dotted-cellular-boundary}.
-\end{proof}
-
-\begin{proposition}[Dotted sections display the index-$3$ maps]
-\label{prop:dotted-section-index-three}
-Let $\delta$ be a dotted component of $D_{\mathcal H}$.
-In the standard pair-of-balls model of its primal $1$-handle, the positive
-collar face of a dotted-handle section records the ordered signed ribbon
-word carried by the strands traversing that handle.  After turning the handle
-decomposition over, this word presents the ribbons made transverse to the
-\emph{co-core} of the dual index-$3$ handle, which is the locus used by the
-index-$3$ operation of \cite[Definition~5.11, $k=3$]{Tham2021}.  The
-two-dimensional collar face displays that word; it is not
-being identified with the one-dimensional co-core itself.
-
-Consequently the projector drawn at this section is the fixed intrinsic
-index-$3$ handle map, not an additional choice of operator.  For all dotted
-components at once, the disjoint handle neighborhoods render the tensor
-product of the corresponding intrinsic maps; changing their written order is
-only the interchange law for disjoint morphisms.
-\end{proposition}
-
-\begin{proof}
-Use the standard pair-of-balls model $D^1\times D^3$ for the primal
-$1$-handle.  In Akbulut's dotted-circle notation, thickening a spanning disk
-for $\delta$ recovers these two attaching $3$-balls; ordinary attaching
-circles crossing the disk become the arcs entering one ball and leaving the
-other \cite[Section~2.3.2, Figure~1]{BarenzBarrett2018}.  The positive collar
-face records those traversing arcs, with their order and variance.  Turning
-the handle decomposition over replaces the primal $1$-handle by a dual
-index-$3$ handle.  The same traversing ribbons can then be bunched and made
-transverse to that handle's co-core.  This is exactly the dotted-circle
-calculation used in the proof of
-\cite[proof of Proposition~9.4, p.~96]{Tham2021}: removing primal $1$-handles,
-or equivalently attaching the dual $3$-handles, applies Definition~5.11 after
-the ribbons through each $1$-handle have been bunched using Lemma~2.27.
-Thus the collar section records the boundary word of the co-core
-transverse graph without identifying the disk face with the co-core.
-Definition~5.11, $k=3$, assigns the intrinsic handle map to this actual
-co-core; the section merely draws it.  Since the local handle neighborhoods are
-disjoint, their maps tensor independently, and the interchange law compares
-different written orders.  No uniqueness theorem for arbitrary systems of
-spanning disks is used.
-\end{proof}
-
-\begin{convention}[Three independent sources of signs]
-\label{conv:three-sign-sources}
-The following information must not be conflated.
-\begin{enumerate}[label=(\roman*),ref=\roman*]
-  \item\label{item:strand-dual-sign}
-  The orientation of a ribbon strand determines whether its label is $X$ or
-  $X^*$.
-
-  \item\label{item:cut-direction-sign}
-  The cooriented disk and the orientation of the attaching circle determine
-  the cellular intersection sign $\epsilon(p)$ and the variance of the
-  corresponding oriented boundary point in the cut section.
-
-  \item\label{item:character-exponent-source}
-  A representative of the cohomology marking supplies the integral character
-  exponent attached to each ordinary $2$-handle.
-\end{enumerate}
-In particular, \cref{item:cut-direction-sign} determines neither
-\cref{item:strand-dual-sign} nor \cref{item:character-exponent-source}.
-The dotted-handle section is auxiliary to the proof and is not an additional input to
-the manifold-level invariant.
-\end{convention}
-
-\begin{remark}[Sign references and scope]
-\label{rem:three-sign-sources-reference}
-The first convention is the standard orientation-duality convention for
-colored ribbon graphs \cite[Chapter~2, Section~2.2]{BakalovKirillov2001};
-the third follows the general coefficient-group programme of
-\cite[pp.~2--3 and Definitions~1 and~3]{Yetter1993}.  The integral
-fixed-character specialization and its invariance are arguments of this
-paper, not consequences quoted from Yetter's $\mathbb Z_2$ Theorem~8.
-\end{remark}
-
-\begin{convention}[Primal and turned-over handles]
-\label{conv:primal-turned-over}
-Topological handle names are primal.  The evaluator applies
-\cite[Definition~5.11]{Tham2021} to the turned-over decomposition, so
-\[
-  h^{\mathrm{Tham}}_1=h^{\mathrm{pr}}_3,
-  \qquad h^{\mathrm{Tham}}_2=h^{\mathrm{pr}}_2,
-  \qquad h^{\mathrm{Tham}}_3=h^{\mathrm{pr}}_1.
-\]
-Poincar\'e duality and the cellular comparison transport the primal homology
-marking to the displayed handle-cohomology marking before a representative
-cocycle and its character exponents are chosen.
-\end{convention}
-
-\begin{remark}[Turned-over convention references]
-\label{rem:turned-over-convention-references}
-Turning a handle decomposition upside down is
-described in \cite[Section~4.2]{GompfStipsicz1999}; the evaluator convention
-is \cite[Definition~5.11]{Tham2021}.
-\end{remark}
-
-\begin{definition}[Elementary Kirby move]
-\label{def:kirby-move}
-An elementary Kirby move $m\colon\mathcal H\to\mathcal H'$ is one of the
-following eight directed modifications of special Kirby presentations:
-\begin{enumerate}[label=(\roman*),ref=\roman*]
-  \item\label{move:framed-isotopy} framed isotopy;
-  \item\label{move:one-over-one} a $1/1$ slide;
-  \item\label{move:two-over-one} a $2/1$ slide;
-  \item\label{move:two-over-two} a $2/2$ slide;
-  \item\label{move:one-two-birth} a $1$--$2$ birth;
-  \item\label{move:one-two-death} a $1$--$2$ death;
-  \item\label{move:two-three-birth} a $2$--$3$ birth; or
-  \item\label{move:two-three-death} a $2$--$3$ death.
-\end{enumerate}
-For an $r/s$ slide, $r$ and $s$ record the indices of the moving and
-stationary primal handles.  The visible part of $m$ is the corresponding
-local modification of $D_{\mathcal H}$; the rest of the presentation is
-unchanged outside its supporting ball or cancelling-pair neighborhood.
-\end{definition}
-
-\begin{convention}[Referenced local topology dictionary]
-\label{conv:referenced-kirby-dictionary}
-The eight names in \cref{def:kirby-move} refer to the following standard
-local models.  This dictionary fixes the topological source and target of
-each move; it contains no categorical decoration and asserts no equality of
-evaluations.
-\begin{enumerate}[label=(\roman*),ref=\roman*]
-  \item A framed isotopy is an ambient isotopy of the framed link, preserving
-  the ordinary/dotted roles of its components.
-
-  \item A $1/1$ slide is the dotted-circle move of
-  \cite[Figure~5.39]{GompfStipsicz1999}: one primal $1$-handle is slid over
-  another.  Algebraically it is an elementary change of the $C_1$ basis,
-  together with the induced rewriting of $\partial_2$; no ordinary
-  $2$-handle is created or deleted.
-
-  \item A $2/1$ slide is the move of
-  \cite[Figure~5.36]{GompfStipsicz1999}: an attaching arc of a primal
-  $2$-handle is pulled through a stationary primal $1$-handle.  The handle
-  generators persist, and the source and target attaching maps are related by
-  the canonical cellular continuation of this isotopy in the $1$-handlebody.
-
-  \item A $2/2$ slide is the usual oriented band sum of a moving framed
-  $2$-handle with a framed push-off of a stationary one
-  \cite[Section~5.1]{GompfStipsicz1999}.  Its two oriented basis changes are
-  exactly those fixed in \cref{conv:two-two-coordinates}.
-
-  \item A $1$--$2$ birth inserts the isolated dotted circle and its
-  $0$-framed meridian shown in
-  \cite[Figure~5.38]{GompfStipsicz1999}; on the handle complex it adds the
-  acyclic summand $\mathbb Z\xrightarrow{\,\pm1\,}\mathbb Z$ in degrees
-  $2\to1$.  A $1$--$2$ death is its inverse after the pair has been isolated.
-
-  \item A $2$--$3$ birth adds the standard cancelling pair and hence the
-  acyclic summand $\mathbb Z\xrightarrow{\,\pm1\,}\mathbb Z$ in degrees
-  $3\to2$.  A $2$--$3$ death is its inverse.
-\end{enumerate}
-\end{convention}
-
-\begin{remark}[Local-model references]
-\label{rem:local-topology-dictionary-references}
-Apart from framed isotopy, these are the five undirected move/cancellation
-rows in \cite[Table~2]{BarenzBarrett2018}, with each cancellation separated
-here into its birth and death directions.  In every case the displayed local model
-is supported in a ball or a cancelling-pair neighborhood and the framed
-tangle outside that neighborhood is identified pointwise.
-\end{remark}
-
-\begin{convention}[Auxiliary orientation reversal]
-\label{conv:orientation-reversal}
-Reversing an ordinary $2$-handle generator simultaneously reverses the
-corresponding ribbon orientation.  In coordinates this sends
-\[
-  e_k\longmapsto-e_k,\qquad a_k\longmapsto-a_k,
-  \qquad i\longmapsto i^*.
-\]
-Reversing a dotted $1$-handle generator simultaneously reverses the dotted
-circle orientation and disk coorientation, so the signed boundary word is
-replaced by its rigid dual, with reversed order.  These are changes of
-auxiliary oriented bases, not Kirby moves.
-\end{convention}
-
-\begin{convention}[$2/2$ coordinates and channel orientation]
-\label{conv:two-two-coordinates}
-Let $e_x$ and $e_y$ denote the moving and stationary primal $2$-handle
-basis elements, and let a cellular $2$-cochain take the values $a$ and $b$
-on them.  For the positive slide we use
-\[
-  e_x'=e_x+e_y,
-  \qquad (a',b')=(a+b,b),
-\]
-and orient the attachment so that its internal simple channels satisfy
-$z\subset x\otimes y^*$.  For the negative slide we use
-\[
-  e_x'=e_x-e_y,
-  \qquad (a',b')=(a-b,b),
-\]
-and orient the attachment so that $z\subset x\otimes y$.  These are
-coordinate conventions for the handle-basis change and its dual cochain map.
-\end{convention}
-
-The topology used in the descent from diagrams to manifolds is isolated in
-the following statements.
-
-\begin{proposition}[Existence of special Kirby presentations]
+\begin{proposition}[Existence and realization]
 \label{prop:special-presentation-existence}
-Every closed connected oriented smooth four-manifold admits a special Kirby
-presentation.
-\end{proposition}
-
-\begin{proof}
-Choose a Morse function with a unique minimum and maximum, pass to its handle
-decomposition, and use dotted-framed Kirby notation.  This is
-\cite[Proposition~4.2.13]{GompfStipsicz1999} and its dual argument.
-\end{proof}
-
-\begin{proposition}[Handle-cohomology realization]
 \label{prop:handle-homology-realization}
-If $\mathcal H$ is a special Kirby presentation of $X$, there is a natural
-isomorphism
+Every closed connected oriented smooth four-manifold admits a special Kirby
+presentation.  For every such presentation of \(X\), the handle complex
+\eqref{eq:handle-complex} computes the integral (co)homology of \(X\); in
+particular, cellular comparison gives a natural isomorphism
 \[
   H^2(\mathcal H)\cong H^2(X;\mathbb Z).
 \]
-For a marking $\alpha$, this isomorphism defines the class
-$\xi_{\mathcal H}$ used in \cref{def:handle-homology-marking}.
 \end{proposition}
 
 \begin{proof}
-The handle decomposition is a relative CW decomposition, and its cellular
-chain complex is the handle complex in
-\cref{def:handle-homology-marking}.  See the handle-homology discussion
-immediately following \cite[Proposition~4.2.13]{GompfStipsicz1999}.
+Choose a Morse function with a unique minimum and maximum and pass to its
+handle decomposition.  Existence is
+\cite[Proposition~4.2.13]{GompfStipsicz1999} and its dual argument.  A handle
+decomposition is a relative CW decomposition, and its cellular chain complex
+is the handle complex above; see the handle-homology discussion immediately
+following that proposition.
 \end{proof}
 
-\begin{lemma}[Naturality of handle cohomology]
-\label{lem:handle-cohomology-naturality}
-Every move $m\colon\mathcal H\to\mathcal H'$ in
-\cref{def:kirby-move} determines a chain-homotopy
-equivalence of the associated handle complexes: a same-index slide is a based
-elementary change in the appropriate chain group, a $2/1$ move is continuation
-under an isotopy of a $2$-handle attaching map in the $1$-handlebody, and a
-birth or death is an elementary expansion or collapse by an acyclic
-adjacent-degree summand.  Under the
-cellular comparison maps, the induced map on handle cohomology is the map on
-$H^2$ induced by the underlying diffeomorphism of the represented
-four-manifolds.  More precisely, if
-$F_m\colon C_*(\mathcal H)\to C_*(\mathcal H')$ is the cellular continuation
-map, then the
-comparison maps intertwine the contravariant map
-$F_m^*\colon H^2(\mathcal H')\to H^2(\mathcal H)$ with
-singular-cohomology pullback.  Thus the
-source-to-target marking transport is $T_m=(F_m^*)^{-1}$.
-\end{lemma}
-
-\begin{proof}
-For a same-index handle slide, replace the moving handle generator by its signed
-sum with the stationary generator and leave the other generators fixed; the
-boundary matrices change by the corresponding row or column operation, so this
-is a chain isomorphism.  A $2/1$ move changes only the chosen attaching-map
-drawing through an isotopy in the $1$-handlebody and has its canonical cellular
-continuation.  For a cancelling birth, adjoin the two generators whose
-only new boundary coefficient is $\pm1$; they form a contractible two-term
-summand.  Death is the inverse collapse.  Framed isotopy gives the canonical
-identification.  These are the cellular continuation maps of the two relative
-CW structures.  Naturality of cellular cohomology with respect to cellular
-continuation and its comparison with singular cohomology gives the stated
-contravariant commutative square.  Each continuation map is a
-chain-homotopy equivalence, so $F_m^*$ is invertible and defines $T_m$.
-\end{proof}
-
-\begin{proposition}[Relative fixed-extrema Cerf movie]
-\label{prop:relative-fixed-extrema-cerf}
-Let $\mathcal H_0$ and $\mathcal H_1$ be special handle decompositions of the
-same closed connected oriented smooth four-manifold.  After isotopy, choose
-standard neighborhoods $B_-$ and $B_+$ of their unique minima and maxima.
-On
-\[
-  W=X\setminus\bigl(\operatorname{int}B_-\sqcup
-                     \operatorname{int}B_+\bigr),
-\]
-the two decompositions are joined by a finite relative Cerf movie with the
-following properties:
-\begin{enumerate}[label=(\roman*),ref=\roman*]
-  \item every regular level is connected;
-  \item every interior critical point has index $1$, $2$, or $3$; and
-  \item at each exceptional parameter there is either one critical-value
-  crossing or one birth or death of an adjacent-index pair, necessarily of
-  type $1$--$2$ or $2$--$3$.
-\end{enumerate}
-In particular, the movie contains no $0$--$1$ or $3$--$4$ birth or death.
-\end{proposition}
-
-\begin{proof}
-Choose ordered Morse functions for the two handle decompositions.  Their
-unique minima and maxima can be moved to fixed prescribed points by ambient
-isotopies and put into the same quadratic form on small coordinate balls.
-Removing the interiors of those balls leaves a cobordism from $S^3$ to
-$S^3$, and the restrictions satisfy the boundary minimum/maximum condition
-of \cite[Definition~2.1(i)]{GayWehrheimWoodward2012}.
-
-Every regular level is connected.  Indeed, levels begin connected; attaching
-index-$1$ or index-$2$ handles preserves connectedness.  An index-$3$ handle
-that disconnected a level could not be repaired by any later index-$3$
-handle, while the level immediately below the unique index-$4$ handle is the
-connected sphere $S^3$.  Thus the two restrictions are Morse data in the
-sense of \cite[Definition~2.1]{GayWehrheimWoodward2012}.
-
-Apply the relative connected Cerf theorem
-\cite[Theorem~3.6]{GayWehrheimWoodward2012}.  It gives a regular homotopy
-satisfying the boundary minimum/maximum condition, with connected levels and
-only finitely many special parameters, each a single critical-value crossing
-or cusp.  We do not require the homotopy to fix a prescribed quadratic
-collar pointwise; changes of the boundary collars are absorbed by the
-ambient isotopies at the ends.  The
-boundary minimum/maximum condition excludes interior critical points of
-index $0$ and $4$ throughout the homotopy; this exclusion is made explicit
-in the proof of the cited theorem.  Hence a cusp can create or cancel only an
-index-$(1,2)$ or index-$(2,3)$ pair, proving all three assertions.
-\end{proof}
-
-\begin{lemma}[Three-handle slides]
-\label{lem:three-handle-slides}
-A slide of one $3$-handle over another replaces the chosen basis of
-$C_3(\mathcal H)$ by an integral elementary basis change.  It preserves
-$h_3(\mathcal H)$ and $\operatorname{im}(\partial_3)$, and hence induces the
-identity on $H^2(\mathcal H)$.  In particular it does not change the handle
-formula defined below.
-\end{lemma}
-
-\begin{proof}
-If $A\in\operatorname{GL}(C_3(\mathcal H))$ is the elementary basis change,
-then the new boundary map is $\partial_3A$.  Its image equals that of
-$\partial_3$, while the rank of $C_3(\mathcal H)$ is unchanged.  The
-definition of $H^2(\mathcal H)$ in
-\cref{def:handle-homology-marking} and the formula of
-\cref{def:twisted-handle-evaluator} therefore remain unchanged.
-\end{proof}
-
-\begin{theorem}[Fixed-extrema marked Kirby--Cerf completeness]
-\label{prop:marked-kirby-cerf}
-Let $\mathcal H$ and $\mathcal H'$ be special Kirby presentations of $X$ and
-$Y$, respectively, and let $f\colon X\to Y$ be an orientation-preserving
-diffeomorphism.  If $f_*\alpha=\alpha'$, then the two presentations are
-connected by a finite sequence of the eight moves in
-\cref{def:kirby-move}, together with changes of the $C_3$ basis coming from
-$3$-handle slides.  The composite cohomology transport carries
-$\xi_{\mathcal H}$ to $\xi_{\mathcal H'}$.
-\end{theorem}
-
-\begin{proof}
-Pull the target handle decomposition back along $f$.  The comparison is then
-between two special handle decompositions of the same oriented manifold.
-After fixing neighborhoods of the unique extrema, apply
-\cref{prop:relative-fixed-extrema-cerf}.  Gompf--Stipsicz's relative Kirby
-theorem \cite[Theorem~5.5.3]{GompfStipsicz1999}, together with the
-dotted-circle moves of \cite[Section~5.4]{GompfStipsicz1999}, expresses the
-resulting movie by the eight moves of \cref{def:kirby-move} and slides among
-$3$-handles.  The fixed extrema exclude $0$--$1$ and $3$--$4$
-cancellations.  The $3$-handle slides are handled by
-\cref{lem:three-handle-slides}.
-
-Write $F_j$ for the cellular continuation map of the $j$th move and
-$T_j=(F_j^*)^{-1}$ for its source-to-target cohomology transport.  By
-\cref{lem:handle-cohomology-naturality}, the cellular comparison maps to
-singular cohomology commute with each contravariant map $F_j^*$.  Hence
-$T_j$ carries the handle class corresponding to a fixed singular-cohomology
-class to the class corresponding to that same class in the next handle
-decomposition.  Starting with $\xi_{\mathcal H}$, define each intermediate
-class by $\xi_{j+1}:=T_j(\xi_j)$.  Induction shows that the composite of the
-$T_j$ carries
-$\xi_{\mathcal H}$ to the marking of the
-pulled-back target.
-
-Undoing the pullback uses the naturality
-identity
-\[
-  f^*\operatorname{PD}_Y(f_*\alpha)=\operatorname{PD}_X(\alpha)
-\]
-for an orientation-preserving diffeomorphism $f$.  Hence the composite
-source-to-target transport carries $\xi_{\mathcal H}$ to
-$\xi_{\mathcal H'}$, as claimed.
-\end{proof}
-
-\begin{proposition}[Local movie normal forms]
-\label{prop:local-movie-normal-forms}
-The local forms required below satisfy the following conditions.
-\begin{enumerate}[label=(\roman*),ref=\roman*]
-  \item\label{item:slide-normal-form}
-  After framed isotopy, every slide is supported in a $3$-ball and decomposes
-  into a clean attachment, transport along the stationary component through
-  finitely many local features, and a clean detachment.  In a $1/1$ slide the
-  band is a legal dotted-handle slide: the target dotted sublink is again an
-  unlink, and the source and target admit systems of disjoint spanning disks
-  agreeing outside the supporting ball.
-
-  \item\label{item:cancellation-normal-form}
-  Every birth inserts an isolated standard cancelling pair.  Before a
-  $1$--$2$ death, ordinary $2$-handles other than the cancelling meridian are
-  slid off the cancelling $1$-handle; the resulting death removes an isolated
-  standard pair.  The analogous $2$--$3$ death is put in its standard local
-  form.  Thus a general cancellation is represented by allowed slides
-  followed by an isolated cancellation, rather than evaluated as an
-  isolated scalar without this reduction.
-
-  \item\label{item:fixed-exterior}
-  Outside the supporting ball, the framed tangle and every uninvolved
-  component remain fixed.
-\end{enumerate}
-\end{proposition}
-
-\begin{proof}
-These are the standard local band-slide and cancelling-pair models of Kirby
-calculus; compare \cite[Sections~5.1 and~5.4]{GompfStipsicz1999} and
-\cite[Table~2]{BarenzBarrett2018}.  Choose a band for the slide and compact
-collars at its endpoints.  A small
-isotopy makes the collars clean.  Compactness of the stationary circle and
-genericity leave only finitely many crossings, extrema, and framing twists
-of the underlying tangle to pass.  Character and fusion coupons arise only
-after categorical decoration and are handled separately by
-\cref{lem:finite-coupon-transport}.  For a cancelling $1$--$2$ pair, slide
-every other $2$-handle that
-passes through the $1$-handle over the cancelling $2$-handle, with sign
-chosen to remove that passage.  Finitely many passages are removed by
-induction; this is a change of the $C_2$ basis and leaves an isolated
-cancelling pair.  Handle cancellation then supplies the standard
-birth/death model.  The $2$--$3$ case is the upside-down analogue.  These are
-the local forms shown in
-\cite[Table~2 and its caption]{BarenzBarrett2018}.
-\end{proof}
+Thus the topological input needed for evaluation is concrete: the dotted and
+framed link \(D_{\mathcal H}\), the integer \(h_3(\mathcal H)\), and a tuple
+\((a_k)\) satisfying the \(3\)-handle relations.  The quotient in
+\eqref{eq:handle-cohomology} records which such tuples represent the same
+marking.

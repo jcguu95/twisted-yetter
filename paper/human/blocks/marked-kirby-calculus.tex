@@ -1,0 +1,106 @@
+\subsection{Marked Kirby calculus}
+\label{subsec:marked-kirby-calculus}
+
+The ordinary Kirby moves must now be read together with their induced maps on
+the handle complex.  This is the only additional meaning of the adjective
+``marked.''
+
+\begin{definition}[Elementary marked Kirby move]
+\label{def:kirby-move}
+An elementary move \(m\colon\mathcal H\to\mathcal H'\) is one of the following
+eight directed modifications:
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item\label{move:framed-isotopy} framed isotopy;
+  \item\label{move:one-over-one} a \(1/1\) slide;
+  \item\label{move:two-over-one} a \(2/1\) slide;
+  \item\label{move:two-over-two} a \(2/2\) slide;
+  \item\label{move:one-two-birth} a \(1\)--\(2\) birth;
+  \item\label{move:one-two-death} a \(1\)--\(2\) death;
+  \item\label{move:two-three-birth} a \(2\)--\(3\) birth; or
+  \item\label{move:two-three-death} a \(2\)--\(3\) death.
+\end{enumerate}
+For an \(r/s\) slide, \(r\) is the index of the moving handle and \(s\) the
+index of the stationary handle.  Outside the supporting ball or
+cancelling-pair neighborhood, the handle decomposition is unchanged.
+\end{definition}
+
+\begin{convention}[Standard local models]
+\label{conv:referenced-kirby-dictionary}
+The names in \cref{def:kirby-move} have their standard meanings in Kirby
+calculus.  The \(1/1\) and \(2/1\) moves are the dotted-circle moves in
+\cite[Figures~5.39 and~5.36]{GompfStipsicz1999}; a \(2/2\) move is an oriented
+band sum with a framed push-off of the stationary component
+\cite[Section~5.1]{GompfStipsicz1999}; and births insert the isolated standard
+cancelling pairs, with deaths as their inverses.  Equivalently, apart from
+framed isotopy, these are the five undirected rows of
+\cite[Table~2]{BarenzBarrett2018}, with each cancellation separated into its
+two directions.  This convention fixes only the topology of the source and
+target.  It contains no categorical decoration and asserts no equality of
+evaluations.
+\end{convention}
+
+\begin{lemma}[Transport of the marking]
+\label{lem:handle-cohomology-naturality}
+Every elementary move determines a chain-homotopy equivalence
+\[
+  F_m\colon C_*(\mathcal H)\longrightarrow C_*(\mathcal H').
+\]
+Under cellular comparison, \(F_m^*\) agrees with pullback on singular
+cohomology.  Consequently the source-to-target transport of a marking is
+\[
+  T_m:=(F_m^*)^{-1}\colon
+  H^2(\mathcal H)\longrightarrow H^2(\mathcal H').
+  \tag{3.4}\label{eq:marking-transport}
+\]
+\end{lemma}
+
+\begin{proof}
+A same-index slide is an elementary basis change in the corresponding chain
+group.  A \(2/1\) move is cellular continuation under an isotopy of a
+\(2\)-handle attaching map in the \(1\)-handlebody.  A birth adjoins an
+acyclic two-term summand \(\mathbb Z\xrightarrow{\,\pm1\,}\mathbb Z\), and a
+death removes it.  These maps are precisely the cellular continuation maps of
+the two relative CW structures, so cellular-to-singular comparison gives the
+claimed naturality.
+\end{proof}
+
+\begin{lemma}[Three-handle slides]
+\label{lem:three-handle-slides}
+A slide of one \(3\)-handle over another changes only the chosen basis of
+\(C_3(\mathcal H)\).  It preserves both \(h_3(\mathcal H)\) and
+\(\operatorname{im}(\partial_3)\), and hence acts trivially on the data used by
+the evaluator.
+\end{lemma}
+
+\begin{proof}
+If \(A\in\operatorname{GL}(C_3(\mathcal H))\) is the elementary basis change,
+the new boundary map is \(\partial_3A\), which has the same image as
+\(\partial_3\).
+\end{proof}
+
+\begin{theorem}[Marked Kirby--Cerf completeness]
+\label{prop:marked-kirby-cerf}
+Let \(\mathcal H\) and \(\mathcal H'\) present \(X\) and \(Y\), and let
+\(f\colon X\to Y\) be an orientation-preserving diffeomorphism.  If
+\(f_*\alpha=\alpha'\), then the two marked presentations are connected by a
+finite sequence of the eight moves in \cref{def:kirby-move}, together with
+\(3\)-handle slides.  The composite of the maps \(T_m\) carries
+\(\xi_{\mathcal H}\) to \(\xi_{\mathcal H'}\).
+\end{theorem}
+
+\begin{proof}
+Pull the target decomposition back along \(f\).  After fixing neighborhoods of
+the unique minimum and maximum, the relative connected Cerf theorem
+\cite[Theorem~3.6]{GayWehrheimWoodward2012} gives a finite movie with only
+critical-value crossings and births or deaths of adjacent-index pairs.  The
+fixed extrema exclude \(0\)--\(1\) and \(3\)--\(4\) pairs.  The relative Kirby
+theorem \cite[Theorem~5.5.3 and Section~5.4]{GompfStipsicz1999} expresses the
+movie by the eight moves above and slides among \(3\)-handles.  At each step,
+\cref{lem:handle-cohomology-naturality} identifies the transported handle
+class with the same singular-cohomology class.  Induction along the movie,
+followed by Poincar\'e-duality naturality
+\[
+  f^*\operatorname{PD}_Y(f_*\alpha)=\operatorname{PD}_X(\alpha),
+\]
+gives the endpoint statement.
+\end{proof}

@@ -33,31 +33,42 @@ notation clash in that note, we reserve $U(\cC)$ for the universal grading
     written for $H_2(M;\mathbb Z_2)$.  We instead fix
     $\eta\in A_{\cC}$ and use the coefficient homomorphism
     $\mathbb Z\to A_{\cC}$, $n\mapsto\eta^n$.  This is a cyclic integral
-    specialization of the general proposal, not a direct restatement of
-    Yetter's Theorem~8.  Yetter's note does not provide
-a Kirby-diagram handle formula, nor does it determine whether the refinement
-detects exotic smooth structure. We address these two questions for the
-four-dimensional Crane--Yetter theory; we do not consider the twisted
-Turaev--Viro theory. Throughout, $\cC$ is a premodular fusion category over
-$\mathbb C$---in particular, it is finite and semisimple---equipped with a
-monoidal natural automorphism
+specialization of the general proposal, not a direct restatement of Yetter's
+Theorem~8.  Yetter's note does not provide a Kirby-diagram handle formula, nor
+does it determine whether the refinement detects exotic smooth structure.  We
+address these two questions for the four-dimensional Crane--Yetter theory; we
+do not consider the twisted Turaev--Viro theory.
+
+The construction has three steps.  Fix a premodular fusion category $\cC$ over
+$\mathbb C$ and a monoidal natural automorphism
 \[
-  \eta\colon \operatorname{Id}_{\cC}\Longrightarrow
+  \eta\colon\operatorname{Id}_{\cC}\Longrightarrow
   \operatorname{Id}_{\cC}.
 \]
-For a closed connected oriented smooth four-manifold $X$ and
-$\alpha\in H_2(X;\mathbb Z)$, we
-define a scalar $\CY_{\cC,\eta}(X,\alpha)$ from a Kirby diagram presenting
-$(X,\alpha)$.  We prove the local projector, character, fusion, and
-normalization identities required for Kirby invariance.  Gompf--Stipsicz's
-relative Kirby theorem \cite[Theorem~5.5.3]{GompfStipsicz1999}, together with
-their dotted-circle calculus in Section~5.4, supplies the finite special-link
-movie required to compare representatives.  The scalar is therefore an
-invariant of the oriented
-diffeomorphism class of the marked pair $(X,\alpha)$.  Motivated
-by Tham's handle description of Crane--Yetter theory
-\cite[Definition~5.11]{Tham2021}, we expect this invariant
-to agree with the four-dimensional state sum sketched by Yetter; that
+First, present a marked manifold $(X,\alpha)$ by a special Kirby presentation
+$\mathcal H$ and a cellular $2$-cocycle $a=(a_k)$ representing
+$\operatorname{PD}_X(\alpha)$.  Second, decorate each framed $2$-handle by the
+Kirby colour and the character coupon $(\eta^{a_k})$, and let every dotted
+$1$-handle project the ribbons passing through it onto their tensor-unit
+channel.  This gives the finite handle formula
+\[
+  \CY_{\cC,\eta}(\mathcal H,a)
+  =\operatorname{Dim}(\cC)^{1-h_3(\mathcal H)}
+    \sum_{\lambda}
+      \left(\prod_kd_{\lambda_k}\right)
+      \operatorname{RT}_{\cC}
+        \bigl(S^3,\Gamma(\mathcal H,a;\lambda)\bigr).
+\]
+Third, check the eight Kirby moves together with their induced transport of
+the handle cocycle.  The projector absorbs coboundary character coupons and
+dotted-handle slides; monoidality of $\eta$ controls $2/2$ slides; and the
+local cancellation factors match the global-dimension normalization.
+Marked Kirby--Cerf completeness then produces an invariant
+$\CY_{\cC,\eta}(X,\alpha)$ of oriented diffeomorphism classes of marked
+four-manifolds.  When $\alpha=0$, the character coupons are trivial and the
+formula recovers the untwisted Crane--Yetter handle evaluation of
+\cite[Definition~5.11]{Tham2021}.  We expect the construction to agree with
+Yetter's four-dimensional state sum on their common domain, but that
 identification is not needed for, and is not claimed as part of, our results.
 
 The motivating question has a negative answer in the simply connected case:
@@ -103,37 +114,6 @@ connectivity enters our argument.  No corresponding marked realization
 theorem is assumed here for general fundamental groups.  Consequently our
 result rules out exotic-smoothness detection in the simply connected case,
 while leaving the non-simply-connected marked case unresolved.
-
-The construction and the no-go calculation share the same concrete starting
-point: a handle formula that makes the homological twist visible.  It is
-inspired by the turned-over handle description in Tham's Definition~5.11
-\cite{Tham2021}.  Let $\mathcal H$ be a handle decomposition with one
-$0$-handle and one $4$-handle, and let $D_{\mathcal H}$ be its Kirby diagram,
-with dotted circles representing the $1$-handles and ordinary framed
-components representing the $2$-handles.  Let $a=(a_k)$ be a cellular
-$2$-cocycle representing the handle-cohomology class corresponding to
-$\operatorname{PD}_X(\alpha)$.  The formula has the form
-\[
-  \CY_{\cC,\eta}(\mathcal H,a)
-  = \operatorname{Dim}(\cC)^{1-h_3(\mathcal H)}
-    \sum_{\lambda}
-      \left(\prod_k d_{\lambda_k}\right)
-      \operatorname{RT}_{\cC}
-        \bigl(S^3,\Gamma(\mathcal H,a;\lambda)\bigr).
-\]
-Here $\lambda$ ranges over simple labels of the ordinary framed
-$2$-handle components.  The graph sum $\Gamma(\mathcal H,a;\lambda)$ contains the
-actual character coupons $(\eta^{a_k})_{\lambda_k}$ and, at each dotted
-$1$-handle, the canonical projector onto the tensor-unit channel.  That
-projector carries no additional global-dimension factor.  The external
-Kirby-colour coefficient $\prod_kd_{\lambda_k}$ therefore occurs exactly
-once.  When
-$\alpha=0$, the character factor is trivial and the formula recovers the
-untwisted Crane--Yetter handle evaluation of
-\cite[Definition~5.11]{Tham2021}.  Proposition~\ref{prop:diffeomorphism-invariance}
-states the resulting marked diffeomorphism-invariance theorem.  Its proof
-verifies the local equality for each of the eight elementary Kirby moves and
-uses the relative marked Kirby--Cerf theorem to compare representatives.
 
 As in Reutter's calculation of semisimple four-dimensional field theories,
 stabilization turns this invariant into an effective computational tool

@@ -1,7 +1,14 @@
-\section{Kirby presentations and homological markings}
+\section{Marked Kirby presentations}
 \label{sec:kirby-presentations}
 
-We now specify the class of Kirby diagrams used by the evaluator and the
-relation between their handle coordinates and the marking in second homology.
+This section performs the first arrow in the construction:
+\[
+  (X,\alpha)\longmapsto (\mathcal H,[a]).
+\]
+Here \(\mathcal H\) is a Kirby presentation of \(X\), while \([a]\) is the
+handle-cohomology class corresponding to \(\operatorname{PD}_X(\alpha)\).
+This marked handle data is the complete topological input passed to the
+evaluator in \cref{sec:twisted-evaluator}.
 
 \input{topological-input}
+\input{marked-kirby-calculus}
