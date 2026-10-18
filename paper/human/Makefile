@@ -5,9 +5,9 @@ LATEXMK := latexmk
 
 all: $(MAIN).pdf
 
-$(MAIN).pdf: $(MAIN).tex preliminaries.tex kirby-presentations.tex evaluator.tex \
-		invariance.tex stable-calculation.tex future-directions.tex \
-		computational-evidence.tex
+BLOCKS := $(wildcard blocks/*.tex)
+
+$(MAIN).pdf: $(MAIN).tex $(BLOCKS) ../abstract.tex ../references.bib
 	$(LATEXMK) -pdf -interaction=nonstopmode -halt-on-error $(MAIN).tex
 
 clean:

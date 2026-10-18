@@ -1,0 +1,70 @@
+\subsubsection{Examples}
+\label{subsubsec:modular-examples}
+
+The following examples record exact consequences of
+\cref{prop:modular-formula}.
+\par\medskip
+
+\begin{example}[The projective planes]
+\label{ex:projective-planes}
+Let $e^2=1$ generate $H_2(\mathbb{CP}^2;\mathbb Z)$ and let
+$\bar e^2=-1$ generate $H_2(\overline{\mathbb{CP}}^{\,2};\mathbb Z)$.  For
+$n\in\mathbb Z$,
+\[
+  \widehat{\CY}_{\cC,\eta}(\mathbb{CP}^2,ne)
+    =\tau_+(\cC)\theta_{g_\eta}^{-n^2},
+  \qquad
+  \widehat{\CY}_{\cC,\eta}(\overline{\mathbb{CP}}^{\,2},n\bar e)
+    =\tau_-(\cC)\theta_{g_\eta}^{n^2}.
+\]
+Thus the entire marked function on either projective plane is determined by
+one Gauss sum and the twist of $g_\eta$.
+\end{example}
+
+\begin{example}[Diagonal rational surfaces]
+\label{ex:diagonal-rational-surfaces}
+For
+\[
+ X=p\mathbb{CP}^2\#q\overline{\mathbb{CP}}^{\,2},
+ \qquad
+ \alpha=(a_1,\ldots,a_p;b_1,\ldots,b_q),
+\]
+the modular closed formula gives
+\[
+ \widehat{\CY}_{\cC,\eta}(X,\alpha)
+ =\tau_+(\cC)^p\tau_-(\cC)^q
+  \theta_{g_\eta}^{-
+    (\sum_r a_r^2-\sum_s b_s^2)}.
+\]
+In particular, for $\mathbb{CP}^2\#2\overline{\mathbb{CP}}^{\,2}$ the
+exponent is $-(a^2-b^2-c^2)$.
+\end{example}
+
+\begin{example}[The hyperbolic block]
+\label{ex:s2xs2}
+Write $H=S^2\times S^2$ and choose the hyperbolic basis $u,v$, with
+$u^2=v^2=0$ and $u\cdot v=1$.  Then
+\[
+  \widehat{\CY}_{\cC,\eta}(H,au+bv)
+  =\tau_+(\cC)\tau_-(\cC)\theta_{g_\eta}^{-2ab}.
+\]
+For the zero marking $a=b=0$, this is precisely the factor introduced by a
+hyperbolic stabilization and cancelled in the stabilization argument.
+\end{example}
+
+\begin{example}[$K3$]
+\label{ex:k3-modular}
+With the complex orientation, $b_2^+(K3)=3$ and $b_2^-(K3)=19$; hence
+\[
+  \widehat{\CY}_{\cC,\eta}(K3,\alpha)
+  =\tau_+(\cC)^3\tau_-(\cC)^{19}
+   \theta_{g_\eta}^{-Q_{K3}(\alpha,\alpha)}.
+\]
+No Kirby-diagram contraction is needed once the intersection form and the
+self-intersection of $\alpha$ are known.
+\end{example}
+
+Independent numerical checks of these formulas, together with the
+runtime, cloud-cost, classical-scaling, and quantum-query estimates for the
+direct evaluator, are collected in
+Appendix~\ref{app:computational-record}.

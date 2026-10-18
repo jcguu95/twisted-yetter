@@ -1,0 +1,107 @@
+\subsection{Connected sums and stabilization}
+\label{subsec:connected-sums}
+
+\begin{definition}[Normalized invariant]
+\label{def:normalized-invariant}
+Set
+\[
+  \widehat{\CY}_{\cC,\eta}(X,\alpha)
+  :=\operatorname{Dim}(\cC)^{-1}
+    \CY_{\cC,\eta}(X,\alpha).
+\]
+\end{definition}
+
+\begin{proposition}[Marked connected-sum formula]
+\label{prop:connected-sum-formula}
+For marked closed oriented four-manifolds $(X,\alpha)$ and $(Y,\beta)$,
+use the canonical splitting
+\[
+  H_2(X\#Y;\mathbb Z)
+  \cong H_2(X;\mathbb Z)\oplus H_2(Y;\mathbb Z)
+\]
+to regard $\alpha\oplus\beta$ as a marking on $X\#Y$.  Then
+\[
+  \CY_{\cC,\eta}(X\#Y,\alpha\oplus\beta)
+  =\operatorname{Dim}(\cC)^{-1}
+   \CY_{\cC,\eta}(X,\alpha)
+   \CY_{\cC,\eta}(Y,\beta).
+\]
+Equivalently,
+\[
+  \widehat{\CY}_{\cC,\eta}(X\#Y,\alpha\oplus\beta)
+  =\widehat{\CY}_{\cC,\eta}(X,\alpha)
+   \widehat{\CY}_{\cC,\eta}(Y,\beta).
+\]
+\end{proposition}
+
+\begin{proof}
+Take special Kirby representatives in disjoint $3$-balls and form their
+connected sum outside both diagrams.  This diagram realizes the displayed
+canonical splitting on $H_2$, so the cocycle representatives and hence the
+character coupons separate into the $X$- and $Y$-parts.  Ordinary labels
+and dotted-projector expansions separate in the same way, while the
+Reshetikhin--Turaev evaluation is multiplicative under disjoint union.
+
+Write the chosen diagrams as $D_X$ and $D_Y$.  Their connected-sum diagram
+$D_X\#D_Y$ has
+\[
+  h_3(D_X\#D_Y)=h_3(D_X)+h_3(D_Y).
+\]
+Consequently its normalization is
+\[
+  \operatorname{Dim}(\cC)^{1-h_3(D_X)-h_3(D_Y)}
+  =\operatorname{Dim}(\cC)^{-1}
+   \operatorname{Dim}(\cC)^{1-h_3(D_X)}
+   \operatorname{Dim}(\cC)^{1-h_3(D_Y)}.
+\]
+Multiplying the separated finite sums proves the first formula.  This is
+the marked extension of the same handle calculation in
+\cite[Proposition~5.14]{Tham2021}; the new coupons do not cross the
+connected-sum neck.  Dividing by $\operatorname{Dim}(\cC)$ gives the
+normalized formula.
+\end{proof}
+
+Put $H=S^2\times S^2$ and
+\[
+  h_{\cC,\eta}:=
+    \widehat{\CY}_{\cC,\eta}(H,0).
+\]
+
+\begin{proposition}[Marked stabilization formula]
+\label{prop:marked-stabilization-formula}
+For every $r\geq0$,
+\[
+  \widehat{\CY}_{\cC,\eta}
+    \bigl(X\#rH,\alpha\oplus0\bigr)
+  =h_{\cC,\eta}^{r}
+    \widehat{\CY}_{\cC,\eta}(X,\alpha).
+\]
+Moreover $h_{\cC,\eta}\neq0$.  Consequently, if
+\[
+  (X\#rH,\alpha\oplus0)
+  \cong(M\#sH,\beta\oplus0),
+\]
+then
+\[
+  \widehat{\CY}_{\cC,\eta}(X,\alpha)
+  =\widehat{\CY}_{\cC,\eta}(M,\beta)
+   h_{\cC,\eta}^{s-r}.
+\]
+\end{proposition}
+
+\begin{proof}
+The first identity follows by induction from
+\cref{prop:connected-sum-formula}.  At the zero marking the character
+coupons disappear, so \cref{thm:untwisted-comparison} identifies
+$h_{\cC,\eta}$, up to the displayed nonzero global-dimension
+normalization, with the untwisted hyperbolic stabilization scalar.  Reutter
+records the Crane--Yetter--Kauffman theory of a ribbon fusion category as an
+indecomposable semisimple oriented four-dimensional TQFT
+\cite[Example~2.3]{Reutter2023}; his nonvanishing theorem therefore applies
+\cite[Theorem~3.5]{Reutter2023}.  Since
+$\operatorname{Dim}(\cC)\neq0$, this proves $h_{\cC,\eta}\neq0$.
+
+Apply marked diffeomorphism invariance to
+the displayed stable diffeomorphism, substitute the first identity on both
+sides, and cancel the nonzero powers of $h_{\cC,\eta}$.
+\end{proof}

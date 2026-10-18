@@ -1,0 +1,168 @@
+\subsection{Simply connected four-manifolds and stabilization}
+\label{subsec:low-dimensional-topology}
+
+The calculation of the invariant will use the following classical results
+only through the precise interfaces recorded here.
+
+\begin{definition}[Intersection lattice and hyperbolic stabilization]
+\label{def:intersection-lattice-stabilization}
+For a closed, connected, oriented, simply connected four-manifold $X$, set
+\[
+  L_X:=\bigl(H_2(X;\mathbb Z),Q_X\bigr),
+\]
+where $Q_X$ is the integral intersection pairing.  Let
+\[
+  H:=L_{S^2\times S^2}
+   =\left(\mathbb Z^2,
+      \begin{pmatrix}0&1\\1&0\end{pmatrix}\right),
+  \qquad
+  X^{(r)}:=X\mathbin{\#}r(S^2\times S^2).
+\]
+Then $L_{X^{(r)}}\cong L_X\oplus rH$.
+\end{definition}
+
+\begin{remark}[Intersection-form conventions]
+\label{rem:intersection-form-conventions}
+The intersection pairing and connected-sum convention are those of
+\cite[Definition~1.2.1 and Section~1.3]{GompfStipsicz1999}.
+\end{remark}
+
+\begin{definition}[Marked intersection lattice]
+\label{def:marked-intersection-lattice}
+For a simply connected marked four-manifold $(X,\alpha)$, its
+\emph{marked intersection lattice} is
+\[
+  \bigl(H_2(X;\mathbb Z),Q_X,\alpha\bigr).
+\]
+Thus an isomorphism of marked intersection lattices is an isometry of the
+intersection forms that carries one distinguished class to the other.
+\end{definition}
+
+\begin{remark}[Pointed lattice convention]
+\label{rem:pointed-lattice-convention}
+This is the pointed version of the lattice in
+\cite[Definition~1.2.1]{GompfStipsicz1999}.
+\end{remark}
+
+\begin{theorem}[Classification of indefinite unimodular forms]
+\label{thm:indefinite-unimodular-forms}
+Let $L$ be an indefinite unimodular integral lattice.
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item If $L$ is odd, then
+  \[
+    L\cong b_+(L)\langle 1\rangle
+      \oplus b_-(L)\langle-1\rangle.
+  \]
+  \item If $L$ is even, then $L$ is a direct sum of copies of the
+  hyperbolic plane $H$ and copies of $E_8$ or $-E_8$, with the numbers
+  determined by its rank and signature.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+This is \cite[Theorem~1.2.21]{GompfStipsicz1999}; see also
+\cite[Theorem~2.3.1]{PetersSterk2024}.
+\end{proof}
+
+\begin{theorem}[Freedman and Donaldson]
+\label{thm:freedman-donaldson}
+For closed, oriented, simply connected smooth four-manifolds:
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item an isometry of intersection forms determines an
+  orientation-preserving homeomorphism; and
+  \item if the intersection form is definite, then it is diagonalizable
+  over $\mathbb Z$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The first statement is the smoothable case of Freedman's classification
+\cite[Theorem~1.2.27]{GompfStipsicz1999,Freedman1982}.  The second is
+Donaldson's diagonalization theorem
+\cite[Theorem~1.2.30]{GompfStipsicz1999,Donaldson1983}.
+\end{proof}
+
+\begin{theorem}[Wall stable classification]
+\label{thm:wall-stable-classification}
+Let $X$ and $Y$ be closed, oriented, simply connected smooth
+four-manifolds.  If $L_X\cong L_Y$, then there is an integer $r\geq 0$ and
+an orientation-preserving diffeomorphism
+\[
+  X^{(r)}\cong Y^{(r)}.
+\]
+\end{theorem}
+
+\begin{proof}
+Wall proves that an isometry of the intersection forms gives an
+$h$-cobordism \cite[Theorem~2]{Wall1964}, and that $h$-cobordant simply
+connected four-manifolds become diffeomorphic after taking connected sums
+with the same number of copies of $S^2\times S^2$
+\cite[Theorem~3]{Wall1964}.
+\end{proof}
+
+\begin{theorem}[Ruberman--Strle one-stable realization]
+\label{thm:ruberman-strle-realization}
+Let $X$ be a closed, oriented, simply connected smooth four-manifold and let
+$A\in O(Q_X)$ be an automorphism of its intersection form.  Then
+\[
+  A\oplus\operatorname{id}_H
+\]
+is induced by an orientation-preserving self-diffeomorphism of
+$X\#(S^2\times S^2)$.
+\end{theorem}
+
+\begin{proof}
+This is \cite[Theorem~2.1]{RubermanStrle2022}.
+\end{proof}
+
+\begin{corollary}[Marked stable realization]
+\label{cor:marked-stable-realization}
+Let $f\colon X\to Y$ be an orientation-preserving homeomorphism between
+closed, oriented, simply connected smooth four-manifolds, and let
+$\alpha\in H_2(X;\mathbb Z)$.  For some $r\geq 0$, there is an
+orientation-preserving diffeomorphism
+\[
+  F\colon X^{(r)}\longrightarrow Y^{(r)}
+\]
+such that
+\[
+  F_*(\alpha\oplus0)=f_*(\alpha)\oplus0.
+\]
+\end{corollary}
+
+\begin{proof}
+By \cref{thm:wall-stable-classification}, choose
+$G\colon X^{(k)}\to Y^{(k)}$.  The isometry
+\[
+  B:=(f_*\oplus\operatorname{id}_{kH})G_*^{-1}
+  \in O(Q_{Y^{(k)}})
+\]
+is realized after one further stabilization by
+\cref{thm:ruberman-strle-realization}.  Composing that realization with
+$G\#\operatorname{id}_{S^2\times S^2}$ gives the required $F$ with
+$r=k+1$.
+\end{proof}
+
+\begin{theorem}[Reutter's stable-evaluation principle]
+\label{thm:reutter-stable-evaluation}
+An indecomposable semisimple oriented four-dimensional TQFT assigns an
+invertible scalar to $S^2\times S^2$ and takes the same value on stably
+diffeomorphic closed four-manifolds.  Consequently, its values on simply
+connected four-manifolds reduce to its values on standard connected-sum
+blocks.
+\end{theorem}
+
+\begin{proof}
+Stable-diffeomorphism invariance is \cite[Theorem~A]{Reutter2023},
+invertibility of the $S^2\times S^2$ value is
+\cite[Theorem~3.5]{Reutter2023}, and the resulting simply connected formulas
+are recorded in \cite[Corollary~3.9]{Reutter2023}.
+\end{proof}
+
+\begin{remark}[Use in the twisted theory]
+\label{rem:twisted-stabilization-use}
+\Cref{cor:marked-stable-realization} supplies the marked topological input
+needed later.  Reutter's theorem is cited as the untwisted precedent for the
+stabilization strategy; it does not by itself prove any statement about the
+homologically twisted evaluator.
+\end{remark}

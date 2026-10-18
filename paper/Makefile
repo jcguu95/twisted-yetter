@@ -2,6 +2,7 @@ MAIN := main
 LATEXMK := latexmk
 BUILD_INFO := build-info.tex
 FIGURE_GALLERY := figures/gallery
+HUMAN_BLOCKS := $(wildcard human/blocks/*.tex)
 FIGURE_SOURCES := figures/styles.tex \
 	figures/01-kirby-cancelling-pair.tex \
 	figures/02-special-kirby-representative.tex \
@@ -36,7 +37,7 @@ $(MAIN).pdf: $(MAIN).tex abstract.tex contents.tex introduction.tex preliminarie
 		appendix.tex appendix/numerical-checks.tex \
 		appendix/computational-cost.tex \
 		appendix/formalization-interface.tex \
-		references.tex references.bib $(BUILD_INFO)
+		references.tex references.bib $(HUMAN_BLOCKS) $(BUILD_INFO)
 	$(LATEXMK) -pdf -interaction=nonstopmode -halt-on-error $(MAIN).tex
 
 .PHONY: force-build-info

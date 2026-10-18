@@ -36,8 +36,7 @@
 \usepackage[nameinlink,noabbrev]{cleveref}
 \makeatletter
 \g@addto@macro\UrlBreaks{\do\-}
-\def\input@path{{../}{../preliminaries/}{../evaluator/}%
-  {../stable-calculation/}{../appendix/}}
+\def\input@path{{../}{blocks/}}
 \makeatother
 \Urlmuskip=0mu plus 1mu\relax
 \addbibresource{../references.bib}
@@ -114,14 +113,14 @@
 
 \input{../abstract}
 \tableofcontents
-\input{../introduction}
-\input{preliminaries}
-\input{kirby-presentations}
-\input{evaluator}
-\input{invariance}
-\input{stable-calculation}
-\input{future-directions}
-\input{computational-evidence}
+\input{blocks/introduction}
+\input{blocks/premodular-fusion-categories-and-graphical-preliminaries}
+\input{blocks/kirby-presentations-and-homological-markings}
+\input{blocks/the-homologically-twisted-crane-yetter-evaluator}
+\input{blocks/kirby-calculus-invariance}
+\input{blocks/stabilization-and-explicit-values}
+\input{blocks/future-directions}
+\input{blocks/numerical-and-computational-evidence}
 
 \hypersetup{urlcolor=InternalLink}
 \printbibliography

@@ -1,0 +1,181 @@
+\section{Introduction}
+
+A central problem in four-dimensional quantum topology is to construct a
+tractable field-theoretic invariant that detects exotic smooth structure.
+For premodular fusion categories, the Crane--Yetter theory
+reduces to classical invariants and does not detect exotic smooth structure
+\cite{Reutter2023}.  On the other hand, gauge-theoretic invariants have been
+successful in detecting smooth structure, and second homology is part of
+their input: Donaldson invariants admit insertions from $H_2$
+\cite{Donaldson1990}, while Seiberg--Witten invariants are organized by
+$\operatorname{Spin}^c$ structures and their classes in second cohomology
+\cite{Witten1994}.  A natural idea is therefore to enrich the Crane--Yetter
+theory by second-homology data and ask whether the resulting invariant can
+detect exotic smoothness.
+
+Yetter proposed precisely such a refinement in a sketch note in 1993.  For a
+premodular fusion category $\cC$,\footnote{Yetter's terminology was an
+``artinian semisimple tortile category.''  A tortile category is what is now
+called a ribbon category.  With the finite set of simple isomorphism classes,
+finite semisimplicity, rigidity, and simple tensor unit assumed here, this is
+precisely a ribbon fusion category, equivalently a premodular fusion category.}
+his sketch used the abelian coefficient group
+\[
+  A_{\cC}:=\operatorname{Aut}_{\otimes}(\operatorname{Id}_{\cC})
+  \cong\operatorname{Hom}\bigl(U(\cC),\mathbb C^\times\bigr),
+\]
+    where $U(\cC)$ is the universal grading group
+    \cite[Definitions~1 and~3 and Proposition~4]{Yetter1993}.  To avoid the
+notation clash in that note, we reserve $U(\cC)$ for the universal grading
+    group and $A_{\cC}$ for the coefficient group.  Yetter proposes homological
+    twisting with coefficients in $A_{\cC}$, but the four-dimensional state sum
+    actually displayed in Definition~6 and proved invariant in Theorem~8 is
+    written for $H_2(M;\mathbb Z_2)$.  We instead fix
+    $\eta\in A_{\cC}$ and use the coefficient homomorphism
+    $\mathbb Z\to A_{\cC}$, $n\mapsto\eta^n$.  This is a cyclic integral
+    specialization of the general proposal, not a direct restatement of
+    Yetter's Theorem~8.  Yetter's note does not provide
+a Kirby-diagram handle formula, nor does it determine whether the refinement
+detects exotic smooth structure. We address these two questions for the
+four-dimensional Crane--Yetter theory; we do not consider the twisted
+Turaev--Viro theory. Throughout, $\cC$ is a premodular fusion category over
+$\mathbb C$---in particular, it is finite and semisimple---equipped with a
+monoidal natural automorphism
+\[
+  \eta\colon \operatorname{Id}_{\cC}\Longrightarrow
+  \operatorname{Id}_{\cC}.
+\]
+For a closed connected oriented smooth four-manifold $X$ and
+$\alpha\in H_2(X;\mathbb Z)$, we
+define a scalar $\CY_{\cC,\eta}(X,\alpha)$ from a Kirby diagram presenting
+$(X,\alpha)$.  We prove the local projector, character, fusion, and
+normalization identities required for Kirby invariance.  Gompf--Stipsicz's
+relative Kirby theorem \cite[Theorem~5.5.3]{GompfStipsicz1999}, together with
+their dotted-circle calculus in Section~5.4, supplies the finite special-link
+movie required to compare representatives.  The scalar is therefore an
+invariant of the oriented
+diffeomorphism class of the marked pair $(X,\alpha)$.  Motivated
+by Tham's handle description of Crane--Yetter theory
+\cite[Definition~5.11]{Tham2021}, we expect this invariant
+to agree with the four-dimensional state sum sketched by Yetter; that
+identification is not needed for, and is not claimed as part of, our results.
+
+The motivating question has a negative answer in the simply connected case:
+$\CY_{\cC,\eta}(X,\alpha)$ depends only on the
+marked integral intersection lattice
+\[
+  \bigl(H_2(X;\mathbb Z),Q_X,\alpha\bigr),
+\]
+namely the integral second-homology group, its intersection pairing, and the
+distinguished class $\alpha$, together with categorical constants.  For an odd
+intersection form, the normalized value is a product of shifted positive and
+negative Gauss sums evaluated on the diagonal coordinates of $\alpha$
+(Proposition~\ref{prop:odd-formula}).  For an even intersection form, it is an
+explicit stabilized quotient of the values on $K3$, reversed $K3$, and
+hyperbolic blocks (Proposition~\ref{prop:even-formula}).  If $\cC$ is modular,
+these two descriptions reduce to a single closed formula
+(Proposition~\ref{prop:modular-formula}).  On setting the character twist to
+be trivial, the odd and even formulas specialize respectively to the non-spin
+and spin formulas of Reutter's Corollary~3.9, equations (5) and (6), for the
+Crane--Yetter theory \cite{Reutter2023}.
+Consequently this most direct semisimple homological refinement of the
+Yetter--Crane--Yetter construction does not furnish an exotic-smoothness
+witness for simply connected closed four-manifolds
+(Corollary~\ref{cor:no-simply-connected-exotic-detection}).
+
+Reutter's untwisted obstruction does not require simple connectivity.  If two
+closed oriented smooth four-manifolds are orientation-preservingly
+homeomorphic, an unmarked stable diffeomorphism is enough: the stabilization
+factor is nonzero and can therefore be cancelled \cite{Reutter2023}.  The
+marked theory requires strictly more.  Given a homeomorphism
+$g\colon X\to Y$ and a class $\alpha\in H_2(X;\mathbb Z)$, the cancellation
+argument requires a stable diffeomorphism $F$ satisfying
+\[
+  F_*(\alpha\oplus0)=(g_*\alpha)\oplus0.
+\]
+An arbitrary stable diffeomorphism need not satisfy this condition and may mix
+$\alpha$ with the new hyperbolic summands.
+
+In the simply connected setting, Wall's stable classification and the
+one-stable realization theorem of Ruberman--Strle provide precisely the
+required control \cite{Wall1964,RubermanStrle2022}.  This is where simple
+connectivity enters our argument.  No corresponding marked realization
+theorem is assumed here for general fundamental groups.  Consequently our
+result rules out exotic-smoothness detection in the simply connected case,
+while leaving the non-simply-connected marked case unresolved.
+
+The construction and the no-go calculation share the same concrete starting
+point: a handle formula that makes the homological twist visible.  It is
+inspired by the turned-over handle description in Tham's Definition~5.11
+\cite{Tham2021}.  Let $D$ be a Kirby diagram with one $0$-handle and one
+$4$-handle, with dotted circles representing the $1$-handles, ordinary
+framed components representing the $2$-handles, and with the boundary after
+the $2$-handles closed by $h_3(D)$ $3$-handles.  Let $a=(a_k)$ be a cellular
+$2$-cocycle representing the handle-cohomology class corresponding to
+$\operatorname{PD}_X(\alpha)$.  The formula has the form
+\[
+  \CY_{\cC,\eta}(D,a)
+  = \operatorname{Dim}(\cC)^{1-h_3(D)}
+    \sum_{\lambda}
+      \left(\prod_k d_{\lambda_k}\right)
+      \operatorname{RT}_{\cC}
+        \bigl(S^3,\Gamma(D,a;\lambda)\bigr).
+\]
+Here $\lambda$ ranges over simple labels of the ordinary framed
+$2$-handle components.  The graph sum $\Gamma(D,a;\lambda)$ contains the
+actual character coupons $(\eta^{a_k})_{\lambda_k}$ and, at each dotted
+$1$-handle, the canonical projector onto the tensor-unit channel.  That
+projector carries no additional global-dimension factor.  The external
+Kirby-colour coefficient $\prod_kd_{\lambda_k}$ therefore occurs exactly
+once.  When
+$\alpha=0$, the character factor is trivial and the formula recovers the
+untwisted Crane--Yetter handle evaluation of
+\cite[Definition~5.11]{Tham2021}.  Proposition~\ref{prop:diffeomorphism-invariance}
+states the resulting marked diffeomorphism-invariance theorem.  Its proof
+verifies the local equality for each of the eight elementary Kirby moves and
+uses the relative marked Kirby--Cerf theorem to compare representatives.
+
+As in Reutter's calculation of semisimple four-dimensional field theories,
+stabilization turns this invariant into an effective computational tool
+\cite[Theorem~A and Corollary~3.9]{Reutter2023}.  Put
+$H=S^2\times S^2$, write
+$\widehat{\CY}=\operatorname{Dim}(\cC)^{-1}\CY$, and set
+$h=\widehat{\CY}_{\cC,\eta}(H,0)$.  Wall's theorem says that simply connected
+four-manifolds with isometric intersection forms become diffeomorphic after
+taking connected sums with copies of $H$ \cite[Theorems~2--3]{Wall1964}.
+Because our invariant is marked by a class in $H_2$, we also use
+Ruberman--Strle's one-stable realization theorem to arrange that the stable
+diffeomorphism carries the chosen class to the chosen class
+\cite[Theorem~2.1]{RubermanStrle2022}.  The connected-sum formula and the
+direct calculation $h\neq0$ then imply that a marked stable diffeomorphism
+\[
+  (X\mathbin{\#}rH,\alpha\oplus0)
+  \cong (M\mathbin{\#}sH,\beta\oplus0)
+\]
+determines the unstabilized value by
+\[
+  \widehat{\CY}_{\cC,\eta}(X,\alpha)
+  =\widehat{\CY}_{\cC,\eta}(M,\beta)h^{s-r}.
+\]
+Thus stabilization is useful here not merely because it identifies more
+manifolds, but because its nonzero contribution can be divided out.
+
+This is especially effective for simply connected four-manifolds.  Their
+oriented homeomorphism types are controlled by their unimodular intersection
+forms, together with the Kirby--Siebenmann invariant, which vanishes in the
+smooth case \cite{Freedman1982}.  The odd indefinite forms are diagonal
+\cite[Theorem~2.3.1]{PetersSterk2024}, while Donaldson's theorem gives the same
+conclusion for smooth definite forms \cite[Theorem~A]{Donaldson1983}; their
+standard models are connected sums of $\mathbb{CP}^2$ and
+$\overline{\mathbb{CP}}^{\,2}$.  Even forms become, after hyperbolic
+stabilization, connected sums of $K3$, $\overline{K3}$, and $H$ blocks, as in
+the proof of \cite[Corollary~3.9]{Reutter2023}.  Consequently the preceding
+stable calculation reduces the value on an arbitrary simply connected marked
+manifold to values on these few standard pieces.  Connected-sum
+multiplicativity and stabilization then give the odd and even closed formulas
+in Propositions~\ref{prop:odd-formula} and
+\ref{prop:even-formula}.  If $\cC$ is modular, the character--object
+correspondence and the Gauss-sum identities of
+\cite[Lemmas~8.15.3 and~8.22.9, Corollary~8.15.5, and
+Proposition~8.15.4]{EGNO2015} reduce both formulas further to
+Proposition~\ref{prop:modular-formula}.
