@@ -55,7 +55,8 @@ Fix an ordinary-label state $\lambda$, an oriented dotted component $\delta$,
 and a dotted co-core chart.  Its positive transverse section determines
 the signed word $w_\delta$ and the boundary-state object
 $B_\delta=|w_\delta|$ of \cref{def:dotted-circle-translation}.  After all
-other labels and dotted operations are fixed, a linear closure context
+other labels and dotted operations are fixed, the exterior determines the
+closure context
 \[
   \mathcal E_\delta\colon
   \operatorname{End}_{\cC}(B_\delta)\longrightarrow\mathbb C.
@@ -81,6 +82,9 @@ pieces of data remain distinct.
   sign.
 \end{enumerate}
 Thus disk intersection never chooses the oriented label or $a_k$.
+In particular, a negative boundary occurrence is represented by the dual of
+the already fixed oriented label; it does not replace that component's colour
+by a disk-dependent choice.
 \end{lemma}
 
 \begin{proof}
@@ -186,11 +190,11 @@ $\mathcal E_\delta(P_{\mathbf1,B_\delta})$.
 \begin{proof}
 The coefficient $(\delta^1e_\delta^*)_k$ is the coefficient of the dotted
 $1$-handle in the cellular boundary of the $k$th $2$-handle.  In the collar
-normal form, the signed-intersection formula in
-\cref{lem:dotted-collar-factorization} gives
+normal form, \eqref{eq:dotted-cellular-boundary} gives the cochain identity
 \[
-  (\delta^1e_\delta^*)_k
-  =\sum_{p:\,k(p)=k}\epsilon(p).
+  \delta^1e_\delta^*=\sum_k I_\delta(k)e_k^*,
+  \qquad
+  I_\delta(k)=\sum_{p:\,k(p)=k}\epsilon(p).
 \]
 The puncture $p$ contributes
 $\eta_{\lambda_{k(p)}}^{m\epsilon(p)}$.  Multiplying these contributions and
@@ -291,7 +295,7 @@ displayed bend identity; the coevaluation formula is dual.  These prove one
 typed event.  Induction on the finite event list proves the final assertion.
 \end{proof}
 
-\begin{lemma}[Exact source-bound interface for a $1/1$ slide]
+\begin{lemma}[Index-$3$ handle-slide identity]
 \label{lem:one-one-exact-interface}
 Let $D\to D'$ be a $1/1$ slide in the clean local form of
 \cref{prop:local-movie-normal-forms}.  Turn the handle decompositions over,
@@ -319,28 +323,55 @@ through-objects.
 
 \begin{proof}
 By \cref{prop:dotted-chart-realization}, the two chart projectors are the
-coordinate expressions of the actual dual index-$3$ handle maps.  The final
-handle-slide relation in the proof of
-\cite[Proposition~5.13, pp.~53--54]{Tham2021} identifies the composites of
-two index-$3$ handle maps before and after sliding one index-$3$ handle over
-the other.  Its input is an arbitrary skein, so $\Gamma$ may already contain
-all character coupons and all uninvolved local morphisms.  Expanding each
-index-$3$ operation by
-\cite[Definition~5.11, $k=3$]{Tham2021} gives the two complete dual-basis
-resolutions claimed above; the proof of the cited relation pairs the same
-inclusion and projection indices and therefore preserves the unit
-multiplicity spaces.  The supporting-ball model and
+coordinate expressions of the actual dual index-$3$ handle maps.  Expand the
+incoming skein simultaneously across the two co-cores using complete simple
+resolutions.  Write its summands as
+\[
+  [\Gamma]
+  =\sum_{i,j,\mu,\nu}[\Gamma_{i,j;\mu,\nu}],
+\]
+where $i,j$ are the two transverse simple channels and $\mu,\nu$ are their
+full multiplicity indices; the trace-dual resolution coefficients are
+absorbed into the notation $[\Gamma_{i,j;\mu,\nu}]$.  By
+\cite[Definition~5.11, $k=3$]{Tham2021}, the
+two source handle maps act termwise as
+\[
+  \mathsf H^{(3)}_{\mathrm{src}}
+    ([\Gamma_{i,j;\mu,\nu}])
+  =\delta_{i,\mathbf1}\delta_{j,\mathbf1}
+    [\Gamma_{i,j;\mu,\nu}].
+  \tag{3.4a}\label{eq:one-one-simple-channel-action}
+\]
+
+The standard $1/1$ source and target are the local models fixed by
+\cref{conv:referenced-kirby-dictionary}.  Moving from the source pair of
+co-cores to the target pair changes the two complete resolutions by the
+tunnelling isomorphism of
+\cite[Lemma~2.28, Equation~(2.17)]{Tham2021}.  This isomorphism is obtained
+from the same composition-dual bases, is invertible on every multiplicity
+space, and carries the $(\mathbf1,\mathbf1)$ summand identically to the
+$(\mathbf1,\mathbf1)$ summand.  Applying the target index-$3$ maps therefore
+again gives the right-hand side of
+\eqref{eq:one-one-simple-channel-action}, with the same surviving
+$\mu,\nu$.  Summing the resolved terms proves
+\eqref{eq:one-one-index-three-interface}.  This is the algebraic expansion
+of the final $1$-handle-slide relation in the proof of
+\cite[Proposition~5.13, pp.~53--54]{Tham2021}.
+
+The input is an arbitrary decorated skein, so all character coupons and
+uninvolved morphisms remain present.  The supporting-ball model and
 \cref{item:fixed-exterior} identify the relation's endpoints with the actual
-Kirby source and target and leave the exterior unchanged.
+Kirby source and target, while the common exterior is applied only after the
+local morphism equality has been established.
 \end{proof}
 
-\begin{lemma}[Exact typed interface for a $2/1$ slide]
+\begin{lemma}[Projector naturality for a $2/1$ slide]
 \label{lem:two-one-exact-interface}
 Put a $2/1$ slide into the clean local form of
 \cref{prop:local-movie-normal-forms}, cut the stationary dotted handle, and
 write $B=|w_\delta|$ for its through-object, $x$ for the moving oriented
 ribbon label, and $a\in\mathbb Z$ for the moving character exponent.  There
-is one fixed exterior linear context on
+is one fixed exterior closure context on
 $\operatorname{Hom}_{\cC}(B\otimes x,x\otimes B)$ in which the positive
 source and target local tangles are respectively the two sides of
 \[
@@ -400,14 +431,14 @@ slide.
 Put the slide into the clean local form of
 \cref{prop:local-movie-normal-forms} and keep the exterior fixed.
 
-For a $1/1$ slide, \cref{lem:one-one-exact-interface} identifies the exact
+For a $1/1$ slide, \cref{lem:one-one-exact-interface} identifies the
 source and target composites of the two dual index-$3$ maps.  Because the
 identity is an equality on every decorated input skein, it retains all
 character coupons already present on ordinary strands.  It also retains the
 two full unit-projector resolutions separately, including all multiplicity
 indices.  No ordinary $2$-handle generator changes.
 
-For a $2/1$ slide, \cref{lem:two-one-exact-interface} identifies the exact
+For a $2/1$ slide, \cref{lem:two-one-exact-interface} identifies the
 source and target local tangles with the two sides of projector and character
 naturality, for either crossing orientation.  During the finite route, the
 moving character decoration is transported only by the typed rules of

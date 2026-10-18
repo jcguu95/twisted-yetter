@@ -48,6 +48,27 @@ we write
 No global-dimension factor is included in this operator.
 \end{definition}
 
+\begin{definition}[Exterior closure context]
+\label{def:exterior-closure-context}
+Let a local ribbon box have input object $U$ and output object $V$.  Fix all
+of the coloured tangle outside that box.  After using the standard rigid
+identifications at its boundary, the exterior is a morphism
+\[
+  q_E\colon V\longrightarrow U.
+\]
+It defines the linear functional
+\[
+  \operatorname{Cl}_E\colon
+  \operatorname{Hom}_{\cC}(U,V)\longrightarrow\mathbb C,
+  \qquad
+  \operatorname{Cl}_E(f):=\operatorname{tr}_U(q_Ef).
+\]
+This is exactly the RT evaluation obtained by gluing $f$ into the fixed
+exterior tangle.  In particular, an equality $f=g$ in
+$\operatorname{Hom}_{\cC}(U,V)$ remains an equality after closure.  We
+suppress associators and unitors in this notation by ribbon coherence.
+\end{definition}
+
 \begin{definition}[Intrinsic dotted-circle operation]
 \label{def:dotted-circle-translation}
 Let $\delta$ be a dotted circle in the dotted sublink
@@ -90,7 +111,8 @@ its sign only specifies how that fixed oriented ribbon occurs in the typed
 boundary object.
 
 After all data outside the cut section are fixed, regluing the exterior gives
-a linear closure context
+an exterior closure context in the sense of
+\cref{def:exterior-closure-context},
 \[
   \mathcal E_\delta\colon
   \operatorname{End}_{\cC}(B_\delta)\longrightarrow\mathbb C.
