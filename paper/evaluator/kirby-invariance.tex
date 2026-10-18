@@ -400,9 +400,10 @@ regluing maps agree outside the supporting ball.
 In the pair-of-balls model for the stationary $1$-handle, a $2/1$ slide
 pulls the moving attaching arc through one ball and returns it through the
 other.  Cutting at the positive face of
-\cref{prop:dotted-chart-realization} turns the standard before picture into
-the left composite of \eqref{eq:positive-two-one-interface} and the standard
-after picture into the right composite.  Reversing the local crossing gives
+\cref{prop:dotted-chart-realization} identifies the referenced source local
+tangle with the left composite of \eqref{eq:positive-two-one-interface} and
+the referenced target local tangle with the right composite.  Reversing the
+local crossing gives
 \eqref{eq:negative-two-one-interface}.  The blackboard push-off of the band
 fixes the ribbon framing, and a change of local orientation is expressed by
 the rigid mate at the corresponding cup or cap.  Thus the equations name the
@@ -458,35 +459,67 @@ the same answer by \cref{prop:representative-independence}.  Summing over all
 ordinary labels proves the lemma.
 \end{proof}
 
-\begin{lemma}[Weighted Kirby-colour slide]
+\begin{lemma}[Trace-dual band-transport identity]
 \label{lem:weighted-kirby-colour-slide}
-Let $A$ be a fixed exterior ribbon tangle and let an $x$-coloured ribbon be
-band-summed with a component coloured by
-$\Omega_{\cC}=\sum_y d_y y$.  Before inserting character coupons, the
-weighted sum of the resulting local morphisms is unchanged by transporting
-the band once along the stationary component and detaching it.  The statement
-holds for either orientation of the band and inside every fixed exterior
-context.
+Fix an $x$-coloured moving ribbon, a clean oriented band, and an exterior
+closure context.  Expand the stationary Kirby colour
+$\Omega_{\cC}=\sum_y d_y y$.  For a simple stationary label $y$, choose the
+trace-dual resolution
+\[
+  \operatorname{id}_{x\otimes y^\varepsilon}
+  =\sum_{z,\mu}d_z\,\iota_{z,\mu}\pi_{z,\mu},
+  \qquad \varepsilon\in\{+1,-1\}.
+\]
+Let $A^\varepsilon_{y,z,\mu}$ be the local morphism obtained by inserting
+$\iota_{z,\mu}$ and $\pi_{z,\mu}$ in the clean attaching collar.  Transport
+the insertion along the finite band route.  Pivotal mating gives a bijection
+from the attaching fusion basis to the detaching fusion basis; write
+$\mu\mapsto\mu^\sharp$ for this bijection and call the resulting local
+morphism $D^\varepsilon_{y,z,\mu^\sharp}$.  Then, after the canonical
+identification of the attaching and detaching boundary words,
+\[
+  \operatorname{Cl}_E(A^\varepsilon_{y,z,\mu})
+  =\operatorname{Cl}_E(D^\varepsilon_{y,z,\mu^\sharp})
+\]
+for every $(y,z,\mu)$, and consequently
+\[
+  \sum_{y,z,\mu}d_y d_z\,
+    \operatorname{Cl}_E(A^\varepsilon_{y,z,\mu})
+  =
+  \sum_{y,z,\mu}d_y d_z\,
+    \operatorname{Cl}_E(D^\varepsilon_{y,z,\mu^\sharp}).
+\]
+Both assertions hold for either band orientation.  No character coupon is
+present in this lemma.
 \end{lemma}
 
 \begin{proof}
-Expand the stationary Kirby colour.  For each simple $y$, insert the
-dimension-weighted trace-dual resolution through all simple channels
-$z\subset x\otimes y^*$ (or $z\subset x\otimes y$ for the opposite
-orientation), including every multiplicity index.  The expanded coefficient
-is the product $d_y d_z$.  Move the inclusion around the stationary
-component by braiding naturality.  Taking its pivotal mate gives a bijection
-between the attaching and detaching fusion bases; sphericality says that
-this bijection preserves the trace-dual pairing.  The inverse weighted
-resolution then recombines the $y$-sum into the target Kirby colour.  Thus
-the source and target sums, including all quantum-dimension coefficients,
-are equal.  This is the insertion and sliding calculation of
+For the positive orientation use channels $z\subset x\otimes y^*$; for the
+negative orientation use $z\subset x\otimes y$.  Braiding naturality moves
+the inclusion and projection through each crossing of the finite route.
+Rigidity moves them through cups and caps by taking mates, twist naturality
+handles framing twists, and braiding naturality handles the remaining
+crossings.  In the evaluator the stationary Kirby-colour ribbon carries no
+independent morphism coupon along this route; the character coupon is
+transported separately in \cref{lem:finite-coupon-transport}.  Induction on
+the event list therefore identifies
+$A^\varepsilon_{y,z,\mu}$ with
+$D^\varepsilon_{y,z,\mu^\sharp}$ before closure.  Applying the common linear
+functional $\operatorname{Cl}_E$ proves the displayed equality for each
+matched pair of basis elements.
+
+The mate operation is a bijection between the attaching and detaching fusion
+bases.  Sphericality preserves their trace-dual pairing, so the coefficient
+$d_z$ is unchanged.  Multiplication by the stationary Kirby-colour weight
+$d_y$ and summation give the displayed weighted equality.  Applying the
+inverse completeness relation at detachment recombines the sum into the
+target Kirby colour.  This is the insertion and band-transport calculation of
 \cite[Lemmas~3.2--3.4]{BarenzBarrett2018}.  The factors $d_y d_z$ and the
 pivotal mate are displayed in Equations~(3.1.3)--(3.1.8), while preservation
 of the trace-dual pairing is proved in Equations~(3.1.9)--(3.1.11), with the
-pivotal functor specialized to the identity.  The displayed calculation is
-the positive band orientation.  Reversing the stationary orientation,
-replacing every label by its dual, and using
+pivotal functor specialized to the identity.  Thus no extra functorial
+structure from the generalized setting is used here.  Reversing the
+stationary orientation, replacing every label by its dual, and using
 $\Omega_{\cC}^*=\Omega_{\cC}$ gives the negative orientation; spherical
 duality preserves $d_y d_z$ and every multiplicity index.
 \end{proof}
@@ -601,33 +634,92 @@ slide.
 \begin{proof}
 Fix all labels outside the two participating components.  Write $a$ and $b$
 for the moving and stationary character exponents, and expand their Kirby
-colours into simple labels $x$ and $y$.  Apply the complete
-weighted sliding calculation of
-\cref{lem:weighted-kirby-colour-slide}.  It includes every stationary label
-$y$, every internal channel $z$, every multiplicity index, and the required
-quantum-dimension coefficients.  On each of these summands apply
-\cref{lem:character-aware-fusion-attachment}.  The source character factor
-then becomes exactly the positive or negative transported factor fixed in
-\cref{conv:two-two-coordinates}, without changing any categorical weight.
+colours into simple labels $x$ and $y$.  For
+$\varepsilon=-1$ in the positive convention and $\varepsilon=+1$ in the
+negative convention, use the local terms
+$A^\varepsilon_{y,z,\mu}$ and $D^\varepsilon_{y,z,\mu^\sharp}$ of
+\cref{lem:weighted-kirby-colour-slide}.  With the fixed exterior labels
+suppressed, the fully expanded source and target contributions have the
+common categorical coefficient $d_xd_yd_z$ and the form
+\[
+\begin{aligned}
+  Z_{\mathrm{src}}^\varepsilon
+    &=\sum_{x,y,z,\mu}d_xd_yd_z\,
+      s_{\mathrm{src}}(x,y;a,b)\,
+      \operatorname{Cl}_E(A^\varepsilon_{y,z,\mu}),\\
+  Z_{\mathrm{tgt}}^\varepsilon
+    &=\sum_{x,y,z,\mu}d_xd_yd_z\,
+      s_{\mathrm{tgt}}^\varepsilon(x,y,z;a,b)\,
+      \operatorname{Cl}_E(D^\varepsilon_{y,z,\mu^\sharp}),
+\end{aligned}
+\]
+where
+\[
+  s_{\mathrm{src}}(x,y;a,b)=\eta_x^a\eta_y^b
+\]
+and
+\[
+\begin{aligned}
+  s_{\mathrm{tgt}}^{-1}(x,y,z;a,b)
+    &=\eta_x^{a+b}\eta_{z^*}^{b},\\
+  s_{\mathrm{tgt}}^{+1}(x,y,z;a,b)
+    &=\eta_x^{a-b}\eta_z^{b}.
+\end{aligned}
+\]
+We now compare these sums in three separate steps.
 
-Move the internal coupon from the attaching collar to the detaching collar.
-The route is finite by \cref{prop:local-movie-normal-forms}, and its value is
-unchanged by the event-by-event typed rules of
-\cref{lem:finite-coupon-transport}; at every dual bend the coupon is replaced
-by its mate and its local exponent changes sign.  At a fusion coupon we use
-whole-word naturality, not a choice of one outgoing leg.  At detachment,
-compose the fusion inclusions with their trace-dual projections.
-Orthogonality removes unequal channels and basis indices, and the weighted
-completeness relation
-$\sum_{z,\mu}d_z\iota_{z,\mu}\pi_{z,\mu}=\operatorname{id}$ recombines the
-remaining sum.  The factor $d_z$ here is the same factor already present in
-the $d_y d_z$ expansion of \cref{lem:weighted-kirby-colour-slide}; it is not
-inserted a second time.  The oriented target identifications and identities in
-\cref{lem:character-aware-fusion-attachment} identify the recombined
-character factor with the target marking.  Finally sum over $z$, its
-multiplicity basis, $x$, $y$, and the fixed exterior labels.  This gives the
-source and target state sums, with their full Kirby-colour coefficients, for
-the positive and negative slides, respectively.
+In the source expansion, $y$ is the external stationary label and $z$ is the
+inserted fusion channel.  After band transport these roles are exchanged:
+$z^*$ in the positive convention (respectively $z$ in the negative
+convention) is the external stationary label of the target, while $y$ is the
+channel summed over by the inverse resolution.  Hence the source and target
+expansions both carry the same product $d_xd_yd_z$; the notation does not
+identify their external Kirby-colour labels term by term.
+
+\emph{Attach.}
+Insert the complete trace-dual resolution at the clean attaching collar.
+This produces every simple channel $z$ and every multiplicity index $\mu$
+exactly once, with the single coefficient $d_z$.  The two scalar identities
+proved in \cref{lem:character-aware-fusion-attachment} give, term by term,
+\[
+  s_{\mathrm{src}}=s_{\mathrm{tgt}}^{-1}
+  \quad\text{or}\quad
+  s_{\mathrm{src}}=s_{\mathrm{tgt}}^{+1},
+\]
+according to the band orientation.  These are precisely the transported
+coordinates of \cref{conv:two-two-coordinates}.
+
+\emph{Finite transport.}
+The route is finite by \cref{prop:local-movie-normal-forms}.  The termwise
+identity in \cref{lem:weighted-kirby-colour-slide} transports the fusion
+insertion, while \cref{lem:finite-coupon-transport} transports its character
+coupon.  At a dual bend the coupon is replaced by its mate and its displayed
+local exponent changes sign; at a multivalent coupon naturality is applied to
+the whole boundary word.  Consequently
+\[
+  s_{\mathrm{src}}\operatorname{Cl}_E
+    (A^\varepsilon_{y,z,\mu})
+  =s_{\mathrm{tgt}}^\varepsilon\operatorname{Cl}_E
+    (D^\varepsilon_{y,z,\mu^\sharp})
+\]
+for every $x,y,z,\mu$.
+
+\emph{Detach.}
+At the clean detaching collar, compose the transported inclusion with its
+trace-dual projection.  Orthogonality removes unequal channels and basis
+indices, and
+\[
+  \sum_{z,\mu}d_z\iota_{z,\mu}\pi_{z,\mu}
+  =\operatorname{id}_{x\otimes y^\varepsilon}
+\]
+recombines the surviving terms into the target Kirby-colour expansion.  The
+$d_z$ in this equation is the factor already displayed in the common
+coefficient $d_xd_yd_z$; no second factor is inserted.  The map
+$\mu\mapsto\mu^\sharp$ is a bijection, so it merely reindexes the target
+fusion basis.  Summing the matched identities over $x,y,z,\mu$ and then over
+the fixed exterior labels gives
+$Z_{\mathrm{src}}^\varepsilon=Z_{\mathrm{tgt}}^\varepsilon$ for both
+orientations.
 \end{proof}
 
 \begin{lemma}[Cochain normal forms for cancelling pairs]
