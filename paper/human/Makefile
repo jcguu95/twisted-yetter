@@ -1,4 +1,4 @@
-MAIN := main
+MAIN := main-human
 LATEXMK := latexmk
 
 .PHONY: all clean distclean
