@@ -1,0 +1,14 @@
+\begin{tikzpicture}[scale=.9]
+  \draw[kirby component] (-0.7,0) circle[radius=1.1];
+  \draw[ordinary component,preaction={draw=white,line width=4.8pt}]
+    (0.7,0) circle[radius=1.1];
+  \draw[kirby component,preaction={draw=white,line width=4.8pt}]
+    (-0.7,0) ++(43:1.1) arc[start angle=43,end angle=59,radius=1.1];
+  \fill (-1.8,0) circle[radius=2.35pt];
+  \node[font=\small,anchor=east] at (-2.02,0) {$\delta$};
+  \node[font=\small,text=TYordinary,anchor=west] at (2.02,0) {$K\;(0)$};
+  \node[semantic label,text width=2.7cm] at (-1.5,-1.62)
+    {dotted circle\\primal $1$-handle};
+  \node[semantic label,text=TYordinary,text width=2.9cm] at (1.5,-1.62)
+    {$0$-framed meridian\\primal $2$-handle};
+\end{tikzpicture}

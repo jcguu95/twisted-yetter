@@ -1,0 +1,18 @@
+\begin{tikzpicture}[scale=.92]
+  \fill[TYprojector!7] (0,0) ellipse[x radius=2.35,y radius=1.05];
+  \draw[kirby component] (0,0) ellipse[x radius=2.35,y radius=1.05];
+  \fill (-2.35,0) circle[radius=2.25pt];
+  \node[font=\small,anchor=east] at (-2.55,0) {$\delta$};
+
+  \foreach \x/\lab/\sgn in {-1.25/p_1/+,0/p_2/-,1.25/p_3/+} {
+    \draw[ribbon strand] (\x-.18,-1.55) -- (\x+.18,1.55);
+    \fill[white] (\x,0) circle[radius=4pt];
+    \draw[TYordinary,line width=.9pt] (\x,0) circle[radius=4pt];
+    \node[font=\scriptsize,anchor=south] at (\x+.08,.18) {$\lab$};
+    \node[font=\scriptsize,anchor=north] at (\x-.08,-.18) {$\epsilon=\sgn$};
+  }
+  \node[semantic label,anchor=south] at (0,1.72)
+    {oriented strands are fixed before the chart is chosen};
+  \node[semantic label,anchor=north] at (0,-1.75)
+    {the chart records ordered transverse occurrences};
+\end{tikzpicture}

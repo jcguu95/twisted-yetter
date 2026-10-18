@@ -1,0 +1,26 @@
+\begin{tikzpicture}[scale=.82]
+  \node[font=\small\bfseries] at (-3.5,2) {$1$--$2$ cancellation};
+  \begin{scope}[shift={(-3.5,0)}]
+    \draw[kirby component] (-.55,0) circle[radius=.9];
+    \draw[ordinary component,preaction={draw=white,line width=4.5pt}]
+      (.55,0) circle[radius=.9];
+    \draw[kirby component,preaction={draw=white,line width=4.5pt}]
+      (-.55,0) ++(42:.9) arc[start angle=42,end angle=60,radius=.9];
+    \fill (-1.45,0) circle[radius=2.1pt];
+    \node[font=\scriptsize,text=TYordinary,anchor=west] at (1.58,0) {$0$};
+  \end{scope}
+  \draw[flow arrow] (-1.75,0) -- (-.7,0)
+    node[midway,above,font=\scriptsize] {death};
+  \node[font=\large] at (0,0) {$\varnothing$};
+
+  \draw[black!25,line width=.6pt] (1,-2.05) -- (1,2.2);
+
+  \node[font=\small\bfseries] at (4.1,2) {$2$--$3$ cancellation};
+  \draw[ordinary component] (3.35,0) circle[radius=.9];
+  \node[font=\scriptsize,text=TYordinary] at (4.1,.45) {$0$};
+  \draw[flow arrow] (4.65,0) -- (5.75,0)
+    node[midway,above,font=\scriptsize] {death};
+  \node[font=\large] at (6.4,0) {$\varnothing$};
+  \node[semantic label,text width=8.8cm] at (1.5,-2.55)
+    {local topology only; character neutrality and normalization cancellation are separate calculations};
+\end{tikzpicture}

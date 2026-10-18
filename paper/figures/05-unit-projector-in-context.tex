@@ -1,0 +1,17 @@
+\begin{tikzpicture}[scale=.95]
+  \draw[context box] (-2.75,-1.75) rectangle (2.75,1.75);
+  \node[semantic label,anchor=north east] at (2.68,1.68)
+    {exterior closure $\mathcal E_\delta$};
+  \foreach \x in {-1.15,0,1.15} {
+    \draw[plain strand] (\x,-1.65) -- (\x,-.35);
+    \draw[plain strand] (\x,.35) -- (\x,1.65);
+  }
+  \node[projector coupon,minimum width=3.35cm] at (0,0)
+    {$P_{\mathbf1,B_\delta}$};
+  \node[semantic label] at (0,-2.12)
+    {$\mathcal E_\delta\!\left(P_{\mathbf1,B_\delta}\right)$};
+  \node[semantic label,anchor=east] at (-2.95,0)
+    {$B_\delta$};
+  \node[semantic label,anchor=west] at (2.95,0)
+    {$B_\delta$};
+\end{tikzpicture}

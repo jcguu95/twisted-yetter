@@ -1,0 +1,15 @@
+\begin{tikzpicture}[scale=.95]
+  \draw[ordinary component] (-3,0) circle[radius=1];
+  \node[font=\small,text=TYordinary] at (-3,0) {$\Omega_{\mathcal C}$};
+  \node[character coupon] at (-2.02,0) {$\eta^a$};
+
+  \draw[flow arrow] (-1.55,0) -- (-.45,0)
+    node[midway,above,font=\scriptsize] {expand};
+  \node[font=\large] at (0,0) {$\displaystyle\sum_{i\in\operatorname{Irr}(\mathcal C)}d_i$};
+
+  \draw[ordinary component] (3,0) circle[radius=1];
+  \node[font=\small,text=TYordinary] at (3,0) {$i$};
+  \node[character coupon] at (3.98,0) {$\eta_i^a$};
+  \node[semantic label] at (0,-1.55)
+    {the Kirby-colour coefficient and the character coupon occur exactly once};
+\end{tikzpicture}

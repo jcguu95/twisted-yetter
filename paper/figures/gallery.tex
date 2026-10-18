@@ -1,0 +1,86 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,margin=.7in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.markings,positioning}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+\input{styles}
+
+\title{Candidate Diagram Gallery}
+\author{Homologically Twisted Crane--Yetter Invariants}
+\date{Draft for mathematical review}
+
+\begin{document}
+\maketitle
+
+These diagrams are candidates, not yet normative figures.  Each caption
+states the sole mathematical role intended for the corresponding picture.
+
+\begin{figure}[ht]
+  \centering\input{01-kirby-cancelling-pair}
+  \caption{Kirby notation tested on the standard canceling $1$--$2$ pair.}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering\input{02-special-kirby-representative}
+  \caption{Schematic anatomy of a special Kirby representative.  No
+  four-manifold is assigned to this particular link.}
+\end{figure}
+
+\clearpage
+\begin{figure}[ht]
+  \centering\input{03-dotted-cocore-chart}
+  \caption{A dotted co-core chart records finitely many ordered transverse
+  strand occurrences.  It does not choose the labels $X$ versus $X^*$.}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering\input{04-cut-open-boundary-word}
+  \caption{The two faces of a cut-open dotted handle carry mutually reversed
+  dual boundary words.}
+\end{figure}
+
+\clearpage
+\begin{figure}[ht]
+  \centering\input{05-unit-projector-in-context}
+  \caption{The dotted operation is the tensor-unit projector inserted into
+  the actual exterior closure context.}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering\input{06-kirby-colour-character}
+  \caption{An ordinary component is expanded in the Kirby colour and carries
+  its homological character coupon.}
+\end{figure}
+
+\clearpage
+\begin{figure}[ht]
+  \centering\input{07-two-over-two-movie}
+  \caption{Proof architecture for an oriented $2/2$ slide: attach, finite
+  coupon transport, and detach.  The exact sign convention remains visible.}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering\input{08-two-over-one-after-cutting}
+  \caption{After the dotted operation, the $2/1$ calculation is transport
+  across a tensor-unit channel.}
+\end{figure}
+
+\clearpage
+\begin{figure}[ht]
+  \centering\input{09-one-over-one-after-cutting}
+  \caption{After simultaneous cutting, the $1/1$ calculation exchanges two
+  tensor-unit channels.}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering\input{10-cancellation-normal-forms}
+  \caption{The local topology of the two cancellation moves.  Their scalar
+  and normalization calculations are deliberately not hidden in the figure.}
+\end{figure}
+
+\end{document}

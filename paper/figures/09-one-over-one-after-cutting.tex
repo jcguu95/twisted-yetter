@@ -1,0 +1,21 @@
+\begin{tikzpicture}[scale=.95]
+  \node[projector coupon] (pl) at (-3,-.85) {$P_{\mathbf1,B_1}$};
+  \node[projector coupon] (pr) at (-3,.85) {$P_{\mathbf1,B_2}$};
+  \draw[plain strand] (pl.east) .. controls (-2.15,-.8) and (-1.85,.8) .. (-1,.85);
+  \draw[plain strand,preaction={draw=white,line width=4.5pt}]
+    (pr.east) .. controls (-2.15,.8) and (-1.85,-.8) .. (-1,-.85);
+  \node[font=\scriptsize] at (-1.3,1.08) {$\mathbf1$};
+  \node[font=\scriptsize] at (-1.3,-1.08) {$\mathbf1$};
+
+  \draw[flow arrow] (-.45,0) -- (.45,0)
+    node[midway,above,font=\scriptsize] {$c_{\mathbf1,\mathbf1}=\operatorname{id}$};
+
+  \node[projector coupon] (ql) at (1,-.85) {$P_{\mathbf1,B_1}$};
+  \node[projector coupon] (qr) at (1,.85) {$P_{\mathbf1,B_2}$};
+  \draw[plain strand] (ql.east) -- (3.05,-.85);
+  \draw[plain strand] (qr.east) -- (3.05,.85);
+  \node[font=\scriptsize] at (2.75,1.08) {$\mathbf1$};
+  \node[font=\scriptsize] at (2.75,-1.08) {$\mathbf1$};
+  \node[semantic label] at (0,-1.65)
+    {both cut-open dotted channels have already been projected to $\mathbf1$};
+\end{tikzpicture}

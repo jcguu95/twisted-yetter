@@ -1,0 +1,43 @@
+\begin{tikzpicture}[scale=.78]
+  \foreach \shift/\title in {0/before,3.2/attach,6.4/transport,9.6/detach} {
+    \node[font=\scriptsize\bfseries] at (\shift,1.75) {\title};
+  }
+
+  % before
+  \draw[plain strand] (-.8,-1.15) -- (-.8,1.15);
+  \draw[plain strand] (.8,-1.15) -- (.8,1.15);
+  \node[font=\scriptsize] at (-1.05,-1.42) {$x$};
+  \node[font=\scriptsize] at (1.05,-1.42) {$y$};
+  \node[character coupon] at (-.8,.35) {$\eta_x^a$};
+  \node[character coupon] at (.8,-.35) {$\eta_y^b$};
+
+  % attach to an internal channel z
+  \draw[plain strand] (2.55,-1.15) -- (2.55,-.15);
+  \draw[plain strand] (3.85,-1.15) -- (3.85,-.15);
+  \draw[plain strand] (2.55,-.15) -- (3.2,.35);
+  \draw[plain strand] (3.85,-.15) -- (3.2,.35);
+  \node[fusion vertex] at (3.2,.35) {};
+  \draw[plain strand] (3.2,.35) -- (3.2,1.15);
+  \node[character coupon] at (3.2,.78) {$\eta_z^{\varepsilon b}$};
+  \node[font=\scriptsize] at (3.82,1.12) {$z,\mu$};
+
+  % transport along the internal channel
+  \draw[plain strand] (6.4,-1.15) -- (6.4,1.15);
+  \node[character coupon] at (6.4,-.55) {$\eta_z^{\varepsilon b}$};
+  \draw[flow arrow] (5.8,.55) -- (7,.55)
+    node[midway,above,font=\scriptsize] {finite naturality moves};
+
+  % detach
+  \draw[plain strand] (9.6,-1.15) -- (9.6,-.35);
+  \node[fusion vertex] at (9.6,-.35) {};
+  \draw[plain strand] (9.6,-.35) -- (8.95,.3) -- (8.95,1.15);
+  \draw[plain strand] (9.6,-.35) -- (10.25,.3) -- (10.25,1.15);
+  \node[character coupon] at (8.95,.72) {$\eta^{a'}$};
+  \node[character coupon] at (10.25,.72) {$\eta^{b'}$};
+
+  \foreach \x in {1.6,4.8,8.0} {
+    \draw[flow arrow] (\x-.35,0) -- (\x+.35,0);
+  }
+  \node[semantic label] at (4.8,-1.85)
+    {$\varepsilon=\pm1$ is fixed by the oriented slide convention; sum over $(z,\mu)$};
+\end{tikzpicture}

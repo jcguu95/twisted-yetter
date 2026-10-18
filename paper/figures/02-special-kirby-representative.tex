@@ -1,0 +1,30 @@
+\begin{tikzpicture}[scale=.88]
+  % A schematic closed framed link: no manifold is assigned to this picture.
+  \draw[kirby component] (-2.25,.75) circle[radius=.62];
+  \fill (-2.87,.75) circle[radius=2.15pt];
+  \node[font=\scriptsize,anchor=east] at (-3.02,.75) {$\delta_1$};
+  \draw[kirby component] (-2.05,-.85) circle[radius=.5];
+  \fill (-2.55,-.85) circle[radius=2.15pt];
+  \node[font=\scriptsize,anchor=east] at (-2.7,-.85) {$\delta_2$};
+
+  \draw[ordinary component]
+    (-1.55,1.25)
+      .. controls (-.45,1.85) and (.1,1.15) .. (.45,.55)
+      .. controls (.8,-.05) and (1.65,.05) .. (1.85,.8)
+      .. controls (2.1,1.7) and (1.15,2.15) .. (.25,1.75)
+      .. controls (-.55,1.4) and (-1.05,.65) .. (-1.55,1.25);
+  \node[font=\scriptsize,text=TYordinary] at (2.1,1.45) {$K_1\;(m)$};
+
+  \draw[ordinary component]
+    (-1.15,-1.05)
+      .. controls (-.35,-1.75) and (.65,-1.7) .. (1.15,-1.05)
+      .. controls (1.65,-.4) and (1.05,.15) .. (.3,-.15)
+      .. controls (-.35,-.42) and (-.7,-.65) .. (-1.15,-1.05);
+  \node[font=\scriptsize,text=TYordinary] at (1.5,-1.35) {$K_2\;(n)$};
+
+  \draw[context box] (-3.4,-1.75) rectangle (2.55,2.25);
+  \node[semantic label,anchor=north west] at (-3.28,2.18)
+    {$D=D_{\mathrm{dot}}\sqcup D_{\mathrm{fr}}$};
+  \node[semantic label,anchor=north east] at (2.5,-1.8)
+    {closing data: $h_3(D)$ and $\operatorname{im}\partial_3$};
+\end{tikzpicture}

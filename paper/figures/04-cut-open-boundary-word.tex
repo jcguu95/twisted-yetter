@@ -1,0 +1,26 @@
+\begin{tikzpicture}[scale=.92]
+  \node[draw=black!55,rounded corners=2pt,minimum width=4.6cm,
+    minimum height=1.45cm,fill=black!2] (plus) at (-3.1,0) {};
+  \node[font=\scriptsize,anchor=south west] at (-5.28,.78)
+    {positive collar face};
+  \foreach \x/\j/\obj in {-4.35/1/X_1^{[\sigma_1]},-3.1/2/X_2^{[\sigma_2]},-1.85/3/X_3^{[\sigma_3]}} {
+    \node[boundary point] at (\x,0) {};
+    \node[font=\scriptsize,anchor=south] at (\x,.18) {$p_\j$};
+    \node[font=\scriptsize,anchor=north] at (\x,-.18) {$\obj$};
+  }
+
+  \draw[flow arrow] (-.45,0) -- (.45,0);
+  \node[font=\scriptsize,align=center] at (0,.62) {opposite\\face};
+
+  \node[draw=black!55,rounded corners=2pt,minimum width=4.6cm,
+    minimum height=1.45cm,fill=black!2] (minus) at (3.1,0) {};
+  \node[font=\scriptsize,anchor=south west] at (.92,.78)
+    {reversed dual word};
+  \foreach \x/\j/\obj in {1.85/3/(X_3^{[\sigma_3]})^*,3.1/2/(X_2^{[\sigma_2]})^*,4.35/1/(X_1^{[\sigma_1]})^*} {
+    \node[boundary point] at (\x,0) {};
+    \node[font=\scriptsize,anchor=south] at (\x,.18) {$p_\j$};
+    \node[font=\scriptsize,anchor=north] at (\x,-.18) {$\obj$};
+  }
+  \node[semantic label] at (0,-1.55)
+    {$B_\delta=X_1^{[\sigma_1]}\otimes X_2^{[\sigma_2]}\otimes X_3^{[\sigma_3]}$};
+\end{tikzpicture}

@@ -1,0 +1,21 @@
+\definecolor{TYordinary}{HTML}{1F5F7A}
+\definecolor{TYcharacter}{HTML}{A33A2B}
+\definecolor{TYprojector}{HTML}{167C78}
+\definecolor{TYauxiliary}{HTML}{6B7280}
+
+\tikzset{
+  kirby component/.style={line width=1.05pt,line cap=round,line join=round},
+  ordinary component/.style={kirby component,draw=TYordinary},
+  ribbon strand/.style={line width=1.1pt,draw=TYordinary,-{Stealth[length=4pt]}},
+  plain strand/.style={line width=1.1pt,draw=TYordinary},
+  character coupon/.style={draw=TYcharacter,fill=white,line width=.8pt,
+    minimum width=8mm,minimum height=4.5mm,font=\scriptsize,text=TYcharacter},
+  projector coupon/.style={draw=TYprojector,fill=TYprojector!7,line width=.9pt,
+    minimum width=12mm,minimum height=6mm,font=\scriptsize,text=TYprojector},
+  fusion vertex/.style={circle,fill=black,inner sep=1.35pt},
+  boundary point/.style={circle,fill=black,inner sep=1.7pt},
+  flow arrow/.style={-{Stealth[length=5pt]},line width=.8pt,draw=black!65},
+  context box/.style={draw=black!45,dashed,rounded corners=2pt,line width=.7pt},
+  panel label/.style={font=\small\bfseries,anchor=north west},
+  semantic label/.style={font=\footnotesize,align=center,text=black!75}
+}
