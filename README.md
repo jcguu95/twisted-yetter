@@ -33,7 +33,7 @@ note.
 ## Manuscript
 
 The source is in [`paper/`](paper/). A compiled draft is attached to the
-[latest GitHub release](https://github.com/jcguu95/twisted-yetter/releases/latest)
+[v0.1.0 research snapshot](https://github.com/jcguu95/twisted-yetter/releases/tag/v0.1.0)
 as `homologically-twisted-crane-yetter-draft.pdf`.
 
 Build it with:
