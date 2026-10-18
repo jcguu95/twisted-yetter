@@ -107,22 +107,22 @@ while leaving the non-simply-connected marked case unresolved.
 The construction and the no-go calculation share the same concrete starting
 point: a handle formula that makes the homological twist visible.  It is
 inspired by the turned-over handle description in Tham's Definition~5.11
-\cite{Tham2021}.  Let $D$ be a Kirby diagram with one $0$-handle and one
-$4$-handle, with dotted circles representing the $1$-handles, ordinary
-framed components representing the $2$-handles, and with the boundary after
-the $2$-handles closed by $h_3(D)$ $3$-handles.  Let $a=(a_k)$ be a cellular
+\cite{Tham2021}.  Let $\mathcal H$ be a handle decomposition with one
+$0$-handle and one $4$-handle, and let $D_{\mathcal H}$ be its Kirby diagram,
+with dotted circles representing the $1$-handles and ordinary framed
+components representing the $2$-handles.  Let $a=(a_k)$ be a cellular
 $2$-cocycle representing the handle-cohomology class corresponding to
 $\operatorname{PD}_X(\alpha)$.  The formula has the form
 \[
-  \CY_{\cC,\eta}(D,a)
-  = \operatorname{Dim}(\cC)^{1-h_3(D)}
+  \CY_{\cC,\eta}(\mathcal H,a)
+  = \operatorname{Dim}(\cC)^{1-h_3(\mathcal H)}
     \sum_{\lambda}
       \left(\prod_k d_{\lambda_k}\right)
       \operatorname{RT}_{\cC}
-        \bigl(S^3,\Gamma(D,a;\lambda)\bigr).
+        \bigl(S^3,\Gamma(\mathcal H,a;\lambda)\bigr).
 \]
 Here $\lambda$ ranges over simple labels of the ordinary framed
-$2$-handle components.  The graph sum $\Gamma(D,a;\lambda)$ contains the
+$2$-handle components.  The graph sum $\Gamma(\mathcal H,a;\lambda)$ contains the
 actual character coupons $(\eta^{a_k})_{\lambda_k}$ and, at each dotted
 $1$-handle, the canonical projector onto the tensor-unit channel.  That
 projector carries no additional global-dimension factor.  The external

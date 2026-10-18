@@ -49,14 +49,14 @@ Graphically, this is the tunnelling property of the completeness idempotent
 in \cite[Lemmas~2.27--2.28]{Tham2021}.
 \end{proof}
 
-\begin{lemma}[Oriented dotted-section factorization]
+\begin{lemma}[Local form of a dotted-handle operation]
 \label{lem:dotted-collar-factorization}
 Fix an ordinary-label state $\lambda$, an oriented dotted component $\delta$,
-and a dotted co-core chart.  Its positive transverse section determines
+and a dotted-handle section.  Its positive face determines
 the signed word $w_\delta$ and the boundary-state object
 $B_\delta=|w_\delta|$ of \cref{def:dotted-circle-translation}.  After all
-other labels and dotted operations are fixed, the exterior determines the
-closure context
+other labels and dotted operations are fixed, regluing the common exterior
+defines a linear functional
 \[
   \mathcal E_\delta\colon
   \operatorname{End}_{\cC}(B_\delta)\longrightarrow\mathbb C.
@@ -64,13 +64,13 @@ closure context
 The dotted operation in that term is exactly
 \[
   \mathcal E_\delta(P_{\mathbf1,B_\delta}).
-  \tag{3.2}\label{eq:typed-dotted-section}
+  \tag{3.2}\label{eq:dotted-section}
 \]
 For every puncture $p$ on the $k$th ordinary component, the following three
-pieces of data remain distinct.
+features remain distinct.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item The orientation of component $k$ fixes the ribbon label
-  $\lambda_k$ before the disk is chosen; this is the datum that distinguishes
+  $\lambda_k$ before the disk is chosen; this is what distinguishes
   $X$ from $X^*$.
 
   \item The oriented arc and the disk coorientation determine the intersection
@@ -101,29 +101,27 @@ dimension-weighted simple-channel resolution of
 channel $i$ to zero unless $i\cong\mathbf1$, in which case it removes that
 channel.  Summing the surviving multiplicity terms is precisely the canonical
 projector $P_{\mathbf1,B_\delta}$, so regluing gives
-\eqref{eq:typed-dotted-section}.  Notice that the projector is inserted on
+\eqref{eq:dotted-section}.  Notice that the projector is inserted on
 the through-channel before closure; no currying of the whole exterior tangle
 is involved.  The second item is the standard signed-intersection formula for
 the coefficient of a $1$-handle in the cellular boundary of a $2$-handle; the
 first and third items were fixed before the disk was chosen.
 \end{proof}
 
-\begin{proposition}[Independence of projector bases and graphical representatives]
+\begin{proposition}[Independence of auxiliary graphical choices]
 \label{prop:graphical-auxiliary-independence}
-For a fixed marked diagram $(D,\xi_D)$, the evaluator is independent of the
-bases used to expand the tensor-unit projectors.  A dotted co-core chart is
-not an input to the evaluator: whenever one is used, it is a graphical
-representative of the intrinsic index-$3$ maps already fixed by the handle
-decomposition.
+For a fixed special Kirby presentation $\mathcal H$ and handle cocycle $a$,
+the evaluator is independent of the dual bases used to expand the
+tensor-unit projectors and of the dotted-handle sections used to draw them.
 \end{proposition}
 
 \begin{proof}
 The sum $\sum_\mu u_\mu\widehat u_\mu$ is the canonical projector onto the
 full tensor-unit isotypic summand, so a change of composition-dual bases does
-not change its morphism.  The evaluator itself was defined by composing the
-intrinsic index-handle maps, before choosing any graphical chart.
-By \cref{prop:dotted-chart-realization}, a dotted co-core chart is a diagram of
-those fixed maps.  Two drawings of the same intrinsic composite have the same
+not change its morphism.  The evaluator is defined by composing the
+intrinsic handle maps.  By \cref{prop:dotted-section-index-three}, a
+dotted-handle section only draws those fixed maps.  Two drawings of the same
+intrinsic composite have the same
 morphism by ribbon graphical coherence \cite[Theorem~6.1]{Shum1994}; no
 comparison theorem for arbitrary spanning-disk systems is required.  For
 several dotted handles, their actual handle neighborhoods are disjoint, so
@@ -158,7 +156,7 @@ graphical evaluation is unchanged.  The incidence
 coefficient and the dual $1$-cochain generator both reverse, so the
 representative calculation below is covariant.  A $C_3$ orientation change
 does not change $\operatorname{im}(\partial_3)$ and hence does not change
-$H^2(D)$ or its marking.
+    $H^2(\mathcal H)$ or its marking.
 \end{proof}
 
 For an ordered signed boundary word
@@ -218,21 +216,21 @@ $\mathcal E_\delta$ proves the final assertion.
 \begin{proposition}[Representative independence]
 \label{prop:representative-independence}
 If two integral cellular $2$-cocycles $a$ and $a'$ represent the same class
-in $H^2(D)$, then
+in $H^2(\mathcal H)$, then
 \[
-  \CY_{\cC,\eta}(D,a)=\CY_{\cC,\eta}(D,a').
+  \CY_{\cC,\eta}(\mathcal H,a)=\CY_{\cC,\eta}(\mathcal H,a').
 \]
 Consequently the value depends only on the marked class
-$\xi_D\in H^2(D)$.
+$\xi_{\mathcal H}\in H^2(\mathcal H)$.
 \end{proposition}
 
 \begin{proof}
 Since $a$ and $a'$ represent the same cellular cohomology class, there is a
-$1$-cochain $b\in C^1(D)$ such that
+$1$-cochain $b\in C^1(\mathcal H)$ such that
 \[
   a'-a=\delta^1b.
 \]
-The group $C^1(D)$ is freely generated by the primal $1$-handles, so it is
+The group $C^1(\mathcal H)$ is freely generated by the primal $1$-handles, so it is
 enough to prove the assertion when $b=m e^*_{\delta}$ for one dotted
 component $\delta$ and one integer $m$, and then induct over the finite
 support of $b$.
@@ -243,7 +241,7 @@ $a+m\delta^1e_\delta^*$ multiplies its character weight by
   \prod_k\eta_{\lambda_k}^{m(\delta^1e_\delta^*)_k}.
 \]
 By \cref{lem:dotted-incidence-character}, this is the component of $\eta^m$
-on the exact through-channel $B_\delta$ carrying the dotted projector, and
+on the through-channel $B_\delta$ carrying the dotted projector, and
 hence is absorbed by that projector before the exterior is closed.  The
 Kirby-colour weights and all other local morphisms are
 unchanged.  Therefore the two fixed-label summands are equal.  Summing over
@@ -251,10 +249,11 @@ $\lambda$, and then applying the argument successively to the finitely many
 generators in the support of $b$, proves the claim.
 \end{proof}
 
-We therefore write $\CY_{\cC,\eta}(D,\xi_D)$ for the value of any cellular
-$2$-cocycle representing $\xi_D$.
+We therefore write
+$\CY_{\cC,\eta}(\mathcal H,\xi_{\mathcal H})$ for the value of any cellular
+$2$-cocycle representing $\xi_{\mathcal H}$.
 
-\begin{lemma}[Typed finite character transport]
+\begin{lemma}[Character transport along a ribbon]
 \label{lem:finite-coupon-transport}
 Let $n\in\mathbb Z$.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
@@ -278,9 +277,9 @@ Let $n\in\mathbb Z$.
   with the analogous coevaluation identity.  Thus the local exponent changes
   sign when the oriented route is expressed on the dual strand.
 \end{enumerate}
-Consequently a character decoration may be transported through a finite
-typed event sequence provided every event uses the matching rule above and
-the final boundary words are identified by the framed isotopy.
+Consequently a character decoration may be transported along any compact
+ribbon through the finitely many crossings, extrema, twists, and coupons of
+a generic diagram.
 \end{lemma}
 
 \begin{proof}
@@ -292,13 +291,13 @@ $\operatorname{ev}_X$ gives
  ((\eta^n)_{X^*}\otimes(\eta^n)_X)=\operatorname{ev}_X.
 \]
 Precompose with $(\eta^{-n})_{X^*}\otimes\operatorname{id}_X$ to obtain the
-displayed bend identity; the coevaluation formula is dual.  These prove one
-typed event.  Induction on the finite event list proves the final assertion.
+displayed bend identity; the coevaluation formula is dual.  Applying these
+identities successively along the finite route proves the final assertion.
 \end{proof}
 
 \begin{lemma}[Index-$3$ handle-slide identity]
-\label{lem:one-one-exact-interface}
-Let $D\to D'$ be a $1/1$ slide in the clean local form of
+\label{lem:index-three-handle-slide}
+Let $\mathcal H\to\mathcal H'$ be a $1/1$ slide in the local form of
 \cref{prop:local-movie-normal-forms}.  Turn the handle decompositions over,
 and denote the two involved dual index-$3$ handles before the slide by
 $H_m^\vee,H_s^\vee$ and after the slide by
@@ -316,9 +315,9 @@ decorated incoming skein $\Gamma$,
 \]
 \end{lemma}
 
-\begin{remark}[Multiplicity data in the $1/1$ identity]
+\begin{remark}[Multiplicity indices in the $1/1$ identity]
 \label{rem:one-one-multiplicity-data}
-In dotted co-core charts, each side is expanded using the full
+At dotted-handle sections, each side is expanded using the full
 composition-dual resolution of the tensor-unit isotypic summand for each of
 the two handles.  Equation~\eqref{eq:one-one-index-three-interface} retains
 every multiplicity index separately: it does \emph{not} replace two
@@ -327,8 +326,8 @@ through-objects.
 \end{remark}
 
 \begin{proof}
-By \cref{prop:dotted-chart-realization}, the two chart projectors are the
-coordinate expressions of the actual dual index-$3$ handle maps.  Expand the
+By \cref{prop:dotted-section-index-three}, the two projectors are the
+graphical expressions of the actual dual index-$3$ handle maps.  Expand the
 incoming skein simultaneously across the two co-cores using complete simple
 resolutions.  Write its summands as
 \[
@@ -371,12 +370,12 @@ local morphism equality has been established.
 \end{proof}
 
 \begin{lemma}[Projector naturality for a $2/1$ slide]
-\label{lem:two-one-exact-interface}
+\label{lem:two-one-projector-naturality}
 Put a $2/1$ slide into the clean local form of
 \cref{prop:local-movie-normal-forms}, cut the stationary dotted handle, and
 write $B=|w_\delta|$ for its through-object, $x$ for the moving oriented
 ribbon label, and $a\in\mathbb Z$ for the moving character exponent.  There
-is one fixed exterior closure context on
+has the same exterior tangle on
 $\operatorname{Hom}_{\cC}(B\otimes x,x\otimes B)$ in which the positive
 source and target local tangles are respectively the two sides of
 \[
@@ -393,7 +392,7 @@ For the opposite crossing orientation they are the two sides of
   \tag{3.6}\label{eq:negative-two-one-interface}
 \]
 The clean attaching collar is the left factorization, the band transport is
-the displayed braiding followed by the finite typed route along the
+the displayed braiding followed by transport along the
 stationary component, and the clean detaching collar is the right
 factorization.  Positive orientation gives $c_{B,x}$, negative orientation
 gives $c_{x,B}^{-1}$, the blackboard push-off fixes the band framing, and a
@@ -405,7 +404,7 @@ regluing maps agree outside the supporting ball.
 In the pair-of-balls model for the stationary $1$-handle, a $2/1$ slide
 pulls the moving attaching arc through one ball and returns it through the
 other.  Cutting at the positive face of
-\cref{prop:dotted-chart-realization} identifies the referenced source local
+\cref{prop:dotted-section-index-three} identifies the source local
 tangle with the left composite of \eqref{eq:positive-two-one-interface} and
 the referenced target local tangle with the right composite.  Reversing the
 local crossing gives
@@ -437,17 +436,17 @@ slide.
 Put the slide into the clean local form of
 \cref{prop:local-movie-normal-forms} and keep the exterior fixed.
 
-For a $1/1$ slide, \cref{lem:one-one-exact-interface} identifies the
+For a $1/1$ slide, \cref{lem:index-three-handle-slide} identifies the
 source and target composites of the two dual index-$3$ maps.  Because the
 identity is an equality on every decorated input skein, it retains all
 character coupons already present on ordinary strands.  It also retains the
 two full unit-projector resolutions separately, including all multiplicity
 indices.  No ordinary $2$-handle generator changes.
 
-For a $2/1$ slide, \cref{lem:two-one-exact-interface} identifies the
+For a $2/1$ slide, \cref{lem:two-one-projector-naturality} identifies the
 source and target local tangles with the two sides of projector and character
 naturality, for either crossing orientation.  During the finite route, the
-moving character decoration is transported only by the typed rules of
+    moving character decoration is transported only by the naturality rules of
 \cref{lem:finite-coupon-transport}; any bend uses the dual mate and any
 multivalent coupon uses whole-word naturality.  Since the route returns to
 the same oriented moving component, the final coupon is again
@@ -466,8 +465,8 @@ ordinary labels proves the lemma.
 
 \begin{lemma}[Trace-dual band-transport identity]
 \label{lem:weighted-kirby-colour-slide}
-Fix an $x$-coloured moving ribbon, a clean oriented band, and an exterior
-closure context.  Expand the stationary Kirby colour
+Fix an $x$-coloured moving ribbon, an oriented band, and the common exterior
+tangle.  Expand the stationary Kirby colour
 $\Omega_{\cC}=\sum_y d_y y$.  For a simple stationary label $y$, choose the
 trace-dual resolution
 \[
@@ -545,7 +544,7 @@ every simple summand $z$ and multiplicity index $\mu$, trace-dual maps
     =\operatorname{id}_{x\otimes y^{\varepsilon}}.
 \]
 Here $\varepsilon=-1$ means $y^*$ and $\varepsilon=+1$ means $y$.
-The exact source/channel/target data are
+The source, channel, and target labels are
 \begin{center}
 \begin{tabular}{c|c|c|c|c}
 band & attaching channel & target stationary label & target coordinates
@@ -785,13 +784,15 @@ $\sum_i d_i^2=\operatorname{Dim}(\cC)$.
 \label{thm:elementary-kirby-invariance}
 Let
 \[
-  m\colon(D,\xi_D)\longrightarrow(D',\xi_{D'})
+  m\colon\mathcal H\longrightarrow\mathcal H'
 \]
-be a marked elementary Kirby event in the sense of
-\cref{def:marked-kirby-event}.  Then
+be an elementary Kirby move, and let
+$T_m\colon H^2(\mathcal H)\to H^2(\mathcal H')$ be its induced cohomology
+transport from \cref{lem:handle-cohomology-naturality}.  Then, for every
+$\xi\in H^2(\mathcal H)$,
 \[
-  \CY_{\cC,\eta}(D,\xi_D)
-  =\CY_{\cC,\eta}(D',\xi_{D'}).
+  \CY_{\cC,\eta}(\mathcal H,\xi)
+  =\CY_{\cC,\eta}(\mathcal H',T_m\xi).
 \]
 \end{theorem}
 
@@ -839,18 +840,18 @@ $\operatorname{Dim}(\cC)^{-1}$.  The factors cancel.  For death, first use
 the same cocycle equation, rather than a change of representative, and read
 the calculation backwards.
 
-These are all eight directed events of
-\cref{def:marked-kirby-event}.
+These are all eight directed moves of \cref{def:kirby-move}.
 \end{proof}
 
 \begin{definition}[Manifold-level evaluator]
 \label{def:manifold-level-evaluator}
 For a marked closed connected oriented smooth four-manifold $(X,\alpha)$, choose a
-marked special Kirby representative $(D,\xi_D)$ as in
-\cref{prop:special-representative-existence} and set
+special Kirby presentation $\mathcal H$ as in
+\cref{prop:special-presentation-existence}.  Let $\xi_{\mathcal H}$ be the
+handle-cohomology class corresponding to $\operatorname{PD}_X(\alpha)$ and set
 \[
   \CY_{\cC,\eta}(X,\alpha)
-  :=\CY_{\cC,\eta}(D,\xi_D).
+  :=\CY_{\cC,\eta}(\mathcal H,\xi_{\mathcal H}).
 \]
 \end{definition}
 
@@ -866,13 +867,15 @@ $\alpha\in H_2(X;\mathbb Z)$.  Then
 \end{theorem}
 
 \begin{proof}
-Choose marked special Kirby representatives of the two marked manifolds.  By marked
+Choose special Kirby presentations of the two marked manifolds.  By marked
 Kirby--Cerf completeness, \cref{prop:marked-kirby-cerf}, they are connected
-by a finite sequence of the eight marked events.  Apply
+by a finite sequence of the eight moves, transporting the cohomology class at
+each step, together with $3$-handle slides.  Apply
 \cref{thm:elementary-kirby-invariance} at each step and induct on the length
-of the sequence.  Handle-cohomology naturality and Poincar\'e-duality
+of the sequence; $3$-handle slides are harmless by
+\cref{lem:three-handle-slides}.  Handle-cohomology naturality and Poincar\'e-duality
 naturality identify the two endpoint markings, while representative
-independence says that the evaluation on each fixed diagram does not depend
+independence says that the evaluation on each fixed presentation does not depend
 on the cocycle chosen to display its handle-cohomology class.  Thus
 \cref{def:manifold-level-evaluator} is independent of every choice and has
 the asserted diffeomorphism invariance.
