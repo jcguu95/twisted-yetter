@@ -7,7 +7,8 @@ the handle complex.  This is the only additional meaning of the adjective
 
 \begin{definition}[Elementary marked Kirby move]
 \label{def:kirby-move}
-An elementary move \(m\colon\mathcal H\to\mathcal H'\) is one of the following
+Let \(\mathcal H\) and \(\mathcal H'\) be special Kirby presentations.  An
+elementary move \(m\colon\mathcal H\to\mathcal H'\) is one of the following
 eight directed modifications:
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item\label{move:framed-isotopy} framed isotopy;
@@ -41,7 +42,8 @@ evaluations.
 
 \begin{lemma}[Transport of the marking]
 \label{lem:handle-cohomology-naturality}
-Every elementary move determines a chain-homotopy equivalence
+Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary marked Kirby move.
+Then \(m\) determines a chain-homotopy equivalence
 \[
   F_m\colon C_*(\mathcal H)\longrightarrow C_*(\mathcal H').
 \]
@@ -66,8 +68,9 @@ claimed naturality.
 
 \begin{proposition}[Coordinate form of marking transport]
 \label{prop:marking-coordinate-transport}
-Let $a$ be a handle $2$-cocycle before an elementary move.  Representatives
-of the transported class may be chosen as follows.
+Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary marked Kirby move
+and let \(a\in Z^2(\mathcal H)\).  A cocycle
+\(a'\in Z^2(\mathcal H')\) representing \(T_m([a])\) may be chosen as follows.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item For framed isotopy, a $1/1$ slide, or a $2/1$ slide, the framed
   $2$-handle generators are canonically identified and $a'=a$.
@@ -116,10 +119,12 @@ chain equivalences gives the death statements.
 
 \begin{lemma}[Three-handle slides]
 \label{lem:three-handle-slides}
-A slide of one \(3\)-handle over another changes only the chosen basis of
+Fix a twisted categorical input \((\cC,\eta)\).  Let \(\mathcal H'\) be
+obtained from a special Kirby presentation \(\mathcal H\) by sliding one
+\(3\)-handle over another, and let \(a\in Z^2(\mathcal H)\).  The slide
+changes only the chosen basis of
 \(C_3(\mathcal H)\).  It preserves both \(h_3(\mathcal H)\) and
-\(\operatorname{im}(\partial_3)\).  If \(\mathcal H'\) is obtained from
-\(\mathcal H\) by such a slide, then the same coordinate tuple \(a\) represents
+\(\operatorname{im}(\partial_3)\).  The same coordinate tuple \(a\) represents
 the transported marking and
 \[
   \CY_{\cC,\eta}(\mathcal H,a)
@@ -141,7 +146,10 @@ sum.
 
 \begin{theorem}[Marked Kirby--Cerf completeness]
 \label{prop:marked-kirby-cerf}
-Let \(\mathcal H\) and \(\mathcal H'\) present \(X\) and \(Y\), and let
+Let \(X\) and \(Y\) be closed, connected, oriented smooth four-manifolds,
+let \(\mathcal H\) and \(\mathcal H'\) be special Kirby presentations of
+\(X\) and \(Y\), let \(\alpha\in H_2(X;\mathbb Z)\) and
+\(\alpha'\in H_2(Y;\mathbb Z)\), and let
 \(f\colon X\to Y\) be an orientation-preserving diffeomorphism.  If
 \(f_*\alpha=\alpha'\), then the two marked presentations are connected by a
 finite sequence of the eight moves in \cref{def:kirby-move}, together with

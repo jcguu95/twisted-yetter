@@ -61,7 +61,8 @@ The notation and global-dimension convention are those of
 
 \begin{proposition}[Canonical spherical structure and dimension]
 \label{prop:canonical-spherical-dimension}
-The ribbon structure of $\cC$ determines its canonical spherical pivotal
+Let \(\cC\) be a premodular fusion category.  Its ribbon structure determines
+its canonical spherical pivotal
 structure.  With respect to this structure, the global dimension in
 \cref{item:global-dimension} is nonzero.
 \end{proposition}
@@ -75,7 +76,8 @@ nonvanishing in characteristic zero follows from
 
 \begin{definition}[Character]
 \label{def:character}
-A \emph{character} of $\cC$ is a monoidal natural automorphism
+Let \(\cC\) be a premodular fusion category.  A \emph{character} of \(\cC\)
+is a monoidal natural automorphism
 \[
   \eta\colon\operatorname{Id}_{\cC}\Longrightarrow
   \operatorname{Id}_{\cC}.
@@ -93,7 +95,8 @@ This is the ``functorial tensor automorphism'' of
 
 \begin{lemma}[Character identities]
 \label{lem:character-identities}
-For simple objects $i,j,k$,
+Let \(\cC\) be a premodular fusion category and let \(\eta\) be a character
+of \(\cC\).  For simple objects $i,j,k\in\cC$,
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item\label{item:character-unit-dual}
   $\eta_{\mathbf 1}=1$ and $\eta_{i^*}=\eta_i^{-1}$.
@@ -114,7 +117,8 @@ the second identity.
 
 \begin{definition}[Universal grading group]
 \label{def:universal-grading-group}
-The \emph{universal grading group} $U(\cC)$ is a group equipped with a map
+Let \(\cC\) be a fusion category.  The \emph{universal grading group}
+\(U(\cC)\) is a group equipped with a map
 \[
   \deg\colon\operatorname{Irr}(\cC)\longrightarrow U(\cC)
 \]
@@ -124,7 +128,8 @@ such that
   \quad\Longrightarrow\quad
   \deg(k)=\deg(i)\deg(j),
 \]
-and which is universal among groups equipped with such a map.
+for all \(i,j,k\in\operatorname{Irr}(\cC)\), and which is universal among
+groups equipped with such a map.
 \end{definition}
 
 \begin{remark}[Yetter's grading group]
@@ -135,14 +140,16 @@ This is the group denoted $\operatorname{Gr}_{\cC}$ by
 
 \begin{proposition}[Characters and the universal grading]
 \label{prop:characters-universal-grading}
-There is a canonical isomorphism of abelian groups
+Let \(\cC\) be a fusion category.  There is a canonical isomorphism of
+abelian groups
 \[
   A_{\cC}:=\operatorname{Aut}_{\otimes}
     (\operatorname{Id}_{\cC})
   \cong
   \operatorname{Hom}\bigl(U(\cC),\mathbb C^\times\bigr).
 \]
-Under this isomorphism, $a\in A_{\cC}$ acts on a simple object $i$ by
+Under this isomorphism, $a\in A_{\cC}$ acts on
+\(i\in\operatorname{Irr}(\cC)\) by
 the scalar obtained by evaluating the corresponding character at
 $\deg(i)$.
 \end{proposition}
@@ -167,7 +174,8 @@ $H_2(-;A_{\cC})$-valued extension is discussed in
 
 \begin{definition}[$\cC$-colored ribbon graph]
 \label{def:colored-ribbon-graph}
-A $\cC$-colored ribbon graph in an oriented $3$-ball consists of the
+Let \(\cC\) be a premodular fusion category.  A $\cC$-colored ribbon graph
+in an oriented $3$-ball consists of the
 following data, considered up to ambient isotopy relative to the boundary.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item\label{item:ribbon-embedding}
@@ -204,7 +212,8 @@ free tortile category is treated in \cite[Theorem~6.1]{Shum1994}.
 
 \begin{proposition}[Graphical interpretation]
 \label{prop:graphical-interpretation}
-A $\cC$-colored ribbon graph in a $3$-ball canonically determines a morphism
+Let \(\cC\) be a premodular fusion category.  A $\cC$-colored ribbon graph
+in a $3$-ball canonically determines a morphism
 from the tensor product of its ordered input labels to the tensor product of
 its ordered output labels.  This morphism is invariant under ambient isotopy
 relative to the boundary.
@@ -220,7 +229,8 @@ the ribbon coherence theorem of \cite{Shum1994}.
 
 \begin{definition}[Reshetikhin--Turaev graph evaluation]
 \label{def:rt-graph-evaluation}
-Let $\Gamma\subset S^3$ be a closed $\cC$-colored ribbon graph.  Remove a
+Let \(\cC\) be a premodular fusion category and let
+$\Gamma\subset S^3$ be a closed $\cC$-colored ribbon graph.  Remove a
 $3$-ball disjoint from $\Gamma$ and apply
 \cref{prop:graphical-interpretation}.  The resulting endomorphism of
 $\mathbf 1$ is a scalar.  We denote it by

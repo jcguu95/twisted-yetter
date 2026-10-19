@@ -1,6 +1,8 @@
 \subsection{Premodular formulas}
 \label{subsec:premodular-formulas}
 
+Throughout this subsection, fix a twisted categorical input \((\cC,\eta)\).
+
 For $n\in\mathbb Z$, define the shifted Gauss sums
 \[
   \tau_\eta^+(n)
@@ -13,7 +15,8 @@ For $n\in\mathbb Z$, define the shifted Gauss sums
 \begin{proposition}[Odd premodular formula]
 \label{prop:odd-formula}
 Let $X$ be a closed, oriented, simply connected smooth four-manifold with
-odd intersection form.  Choose an integral diagonalization
+odd intersection form, and let \(\alpha\in H_2(X;\mathbb Z)\).  Choose an
+integral diagonalization
 \[
   Q_X\cong p\langle1\rangle\oplus q\langle-1\rangle
 \]
@@ -48,7 +51,7 @@ hyperbolic stabilization factor by
 \end{proof}
 
 Fix a hyperbolic basis $e,f$ of $H_2(H;\mathbb Z)$, with
-$Q_H(e,f)=1$, and write $\alpha=ae+bf$.  Put
+$Q_H(e,f)=1$.  For \(a,b\in\mathbb Z\), write $\alpha=ae+bf$ and put
 \[
   \mathcal H_{\cC,\eta}(a,b)
   :=\sum_{i,j\in\operatorname{Irr}(\cC)}
@@ -60,7 +63,8 @@ scalar, with its first and second components representing $e$ and $f$,
 respectively.  The exchanged exponents occur because
 $\langle\operatorname{PD}(ae+bf),e\rangle=b$ and
 $\langle\operatorname{PD}(ae+bf),f\rangle=a$.
-For a marked standard block $(B,\beta)$ define
+For a standard block \(B\in\{K3,\overline{K3},H\}\) and a marking
+\(\beta\in H_2(B;\mathbb Z)\), define
 \[
   V_{\cC,\eta}(B,\beta)=
   \begin{cases}

@@ -7,12 +7,15 @@ for a dotted circle.  We now relate it to the turned-over handle operation of
 
 \begin{lemma}[A cross-section of a dotted handle]
 \label{lem:dotted-handle-sections}
-For every dotted component \(\delta\), choose standard pair-of-balls
+Let \(\mathcal H\) be a special Kirby presentation and let \(\delta\) be a
+dotted component of \(D_{\mathcal H}\).  Choose standard pair-of-balls
 coordinates on the corresponding \(1\)-handle.  A cooriented cross-section
 \(\Delta_\delta\), transverse to the framed attaching link, meets it in a
 finite ordered list \(p_1,\ldots,p_r\).  Each occurrence remembers its framed
-component \(k(p_j)\), its oriented ribbon label, and its local intersection
-sign \(\epsilon(p_j)\in\{+1,-1\}\).  The signed incidence numbers
+component \(k(p_j)\), its oriented strand, and its local intersection sign
+\(\epsilon(p_j)\in\{+1,-1\}\).  After a simple-label state is fixed, the
+occurrence inherits the label of that already oriented strand.  The signed
+incidence numbers
 \[
   I_\delta(k):=
   \sum_{j:\,k(p_j)=k}\epsilon(p_j)
@@ -35,7 +38,12 @@ The usual signed-intersection computation of the cellular attaching map gives
 
 \begin{proposition}[Turned-over interpretation]
 \label{prop:dotted-section-index-three}
-After turning the handle decomposition over, a primal dotted \(1\)-handle is a
+Let \(\cC\) be a premodular fusion category, let \(\mathcal H\) be a special
+Kirby presentation, fix a simple-label state \(\lambda\), and let \(\delta\)
+be a dotted component of \(D_{\mathcal H}\).  Let \(B_\delta\) be the
+boundary object determined by \(\lambda\) and the ordered cross-section of
+\cref{lem:dotted-handle-sections}.  After turning the handle
+decomposition over, the primal dotted \(1\)-handle \(\delta\) is a
 dual index-\(3\) handle.  The ordered boundary word on
 \(\Delta_\delta\) is the ribbon word transverse to the co-core of that dual
 handle.  The index-\(3\) operation of
@@ -61,6 +69,9 @@ projector \(P_{\mathbf1,B_\delta}\).
 
 \begin{convention}[Three independent pieces of information]
 \label{conv:three-sign-sources}
+Fix a twisted categorical input \((\cC,\eta)\), a special Kirby presentation
+\(\mathcal H\), a cocycle \(a\in Z^2(\mathcal H)\), and a simple-label state
+\(\lambda\).
 For a ribbon meeting a dotted-handle cross-section, keep the following data
 separate.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
@@ -79,7 +90,8 @@ not additional input to the manifold invariant.
 
 \begin{convention}[Primal and turned-over indices]
 \label{conv:primal-turned-over}
-Our topological handle names are primal, whereas Tham's evaluator is applied
+Let \(\mathcal H\) be a special Kirby presentation.  Our topological handle
+names are primal, whereas Tham's evaluator is applied
 to the turned-over decomposition.  Thus
 \[
   h^{\mathrm{Tham}}_1=h^{\mathrm{pr}}_3,

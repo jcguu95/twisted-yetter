@@ -9,11 +9,14 @@ record cited below is a repository-relative, machine-readable artifact.
 
 \begin{example}[$D(\mathrm{Dic}_3)$ on $\mathbb{CP}^2$]
 \label{ex:dic3-cp2-numerical}
-Take the untwisted Drinfeld double of the order-$12$ dicyclic group and the
-order-$4$ character represented by the invertible object used in our
-calculation.  Here $\operatorname{Dim}(\cC)=144$, the standard
+Let \(\cC=D(\mathrm{Dic}_3)\) be the untwisted Drinfeld double of the
+order-$12$ dicyclic group, and let \(\eta\) be the order-$4$ character
+represented by the invertible object used in our calculation.  Here
+$\operatorname{Dim}(\cC)=144$, the standard
 $\mathbb{CP}^2$ Gauss value is numerically $12$, and
-$\theta_{g_\eta}=-1$.  Thus \cref{ex:projective-planes} predicts
+$\theta_{g_\eta}=-1$.  Let \(e\) be the positive generator of
+\(H_2(\mathbb{CP}^2;\mathbb Z)\).  Thus \cref{ex:projective-planes} predicts
+for every \(n\in\mathbb Z\) that
 \[
  \widehat{\CY}_{\cC,\eta}(\mathbb{CP}^2,ne)=12(-1)^n.
 \]
@@ -61,8 +64,9 @@ and
 
 \begin{example}[A visible $D(\mathrm{Dic}_3)$ character phase]
 \label{ex:dic3-yasui-a1}
-On the same Figure~3 presentation, the $D(\mathrm{Dic}_3)$ witness character
-has $\theta_{g_\eta}=-1$.  Under the recorded coordinate identification,
+On the same Figure~3 presentation, let \(\cC=D(\mathrm{Dic}_3)\) and let
+\(\eta\) be the witness character, for which
+$\theta_{g_\eta}=-1$.  Under the recorded coordinate identification,
 \cref{ex:diagonal-rational-surfaces} therefore predicts that the component-A
 generator twist changes the normalized value from $12$ to $-12$.  The
 historical evaluator returned
@@ -115,11 +119,12 @@ $1.3235946575869639\times10^{-12}$.  The record is
 The manifold $E'_3$ in Akbulut--Yasui Figure~21 is homeomorphic to
 $\mathbb{CP}^2\#9\overline{\mathbb{CP}}^{\,2}$
 \cite[Section~6, Theorem~6.1 and Figure~21]{AkbulutYasui2008}.  Consequently
-the theorem predicts
+for every modular twisted categorical input \((\cC,\eta)\), the theorem
+predicts, for every \(\alpha\in H_2(E'_3;\mathbb Z)\),
 \[
  \widehat{\CY}_{\cC,\eta}(E'_3,\alpha)
  =\tau_+(\cC)\tau_-(\cC)^9
-  \theta_{g_\eta}^{-Q(\alpha,\alpha)}.
+  \theta_{g_\eta}^{-Q_{E'_3}(\alpha,\alpha)}.
 \]
 The retained numerical batch tested $15$ pointed modular
 realizations of ranks $2$ through $5$.  After a presentation normalization

@@ -1,6 +1,8 @@
 \subsection{Kirby-move invariance}
 \label{subsec:kirby-invariance}
 
+Throughout this subsection, fix a twisted categorical input \((\cC,\eta)\).
+
 The proof can be read from the following list.  Each item is local, and the
 same exterior ribbon graph is restored after the calculation.
 \begin{description}[style=nextline,leftmargin=2.2em]
@@ -77,8 +79,10 @@ in \cite[Lemmas~2.27--2.28]{Tham2021}.
 
 \begin{lemma}[Local form of a dotted-handle operation]
 \label{lem:dotted-collar-factorization}
-Fix an ordinary-label state $\lambda$, an oriented dotted component $\delta$,
-and a dotted-handle section.  Its positive face determines
+Let \(\mathcal H\) be a special Kirby presentation, let
+\(a\in Z^2(\mathcal H)\), fix an ordinary-label state $\lambda$, and let
+$\delta$ be an oriented dotted component of \(D_{\mathcal H}\) equipped with
+a dotted-handle section.  Its positive face determines
 the signed word $w_\delta$ and the boundary-state object
 $B_\delta=|w_\delta|$ of \cref{def:dotted-circle-translation}.  After all
 other labels and dotted operations are fixed, regluing the common exterior
@@ -136,7 +140,8 @@ first and third items were fixed before the disk was chosen.
 
 \begin{proposition}[Independence of auxiliary graphical choices]
 \label{prop:graphical-auxiliary-independence}
-For a fixed special Kirby presentation $\mathcal H$ and handle cocycle $a$,
+For a special Kirby presentation $\mathcal H$ and a handle cocycle
+\(a\in Z^2(\mathcal H)\),
 the evaluator is independent of the dual bases used to expand the
 tensor-unit projectors and of the dotted-handle sections used to draw them.
 \end{proposition}
@@ -157,7 +162,9 @@ interchange law for tensor products of morphisms.
 
 \begin{proposition}[Independence of auxiliary orientations]
 \label{prop:orientation-choice-independence}
-The evaluator is unchanged when any auxiliary oriented handle generator and
+Let \(\mathcal H\) be a special Kirby presentation and let
+\(a\in Z^2(\mathcal H)\).  The evaluator is unchanged when any auxiliary
+oriented handle generator and
 its tied Kirby component orientation are reversed as in
 \cref{conv:orientation-reversal}.
 \end{proposition}
@@ -199,9 +206,10 @@ $\eta_{X_j^*}=\eta_{X_j}^{-1}$.  It does not recolour the component.
 
 \begin{lemma}[Dotted-incidence character identity]
 \label{lem:dotted-incidence-character}
-Let $e_\delta^*$ be the cellular $1$-cochain dual to a dotted primal
-$1$-handle, and let $w_\delta$ be the signed boundary word of
-\cref{lem:dotted-collar-factorization}.  For every $m\in\mathbb Z$,
+Let \(\mathcal H\) be a special Kirby presentation, let \(\lambda\) be a
+simple-label state, and let $e_\delta^*$ be the cellular $1$-cochain dual to
+a dotted primal $1$-handle \(\delta\).  Let $w_\delta$ be the signed boundary
+word of \cref{lem:dotted-collar-factorization}.  For every $m\in\mathbb Z$,
 \[
   \prod_k\eta_{\lambda_k}^{m(\delta^1e_\delta^*)_k}
   =
@@ -241,7 +249,8 @@ $\mathcal E_\delta$ proves the final assertion.
 
 \begin{proposition}[Representative independence]
 \label{prop:representative-independence}
-If two integral cellular $2$-cocycles $a$ and $a'$ represent the same class
+Let \(\mathcal H\) be a special Kirby presentation.  If two integral
+cellular $2$-cocycles $a,a'\in Z^2(\mathcal H)$ represent the same class
 in $H^2(\mathcal H)$, then
 \[
   \CY_{\cC,\eta}(\mathcal H,a)=\CY_{\cC,\eta}(\mathcal H,a').
@@ -283,7 +292,7 @@ $2$-cocycle representing $\xi_{\mathcal H}$.
 \label{lem:finite-coupon-transport}
 Let $n\in\mathbb Z$.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
-  \item For every morphism $f\colon U\to V$,
+  \item For every morphism $f\colon U\to V$ in \(\cC\),
   \[
     (\eta^n)_Vf=f(\eta^n)_U.
   \]
@@ -292,7 +301,8 @@ Let $n\in\mathbb Z$.
 
   \item The same naturality identity applies to braidings and twists.
 
-  \item At a dual bend the transported component is its mate:
+  \item For every object \(X\in\cC\), at a dual bend the transported
+  component is its mate:
   \[
     \operatorname{ev}_X
       (\operatorname{id}_{X^*}\otimes(\eta^n)_X)
@@ -323,7 +333,8 @@ identities successively along the finite route proves the final assertion.
 
 \begin{lemma}[Index-$3$ handle-slide identity]
 \label{lem:index-three-handle-slide}
-Let $\mathcal H\to\mathcal H'$ be a $1/1$ slide in the local form of
+Let \(m\colon\mathcal H\to\mathcal H'\) be a $1/1$ slide between special
+Kirby presentations in the local form of
 \cref{prop:local-movie-normal-forms}.  Turn the handle decompositions over,
 and denote the two involved dual index-$3$ handles before the slide by
 $H_m^\vee,H_s^\vee$ and after the slide by
@@ -397,11 +408,13 @@ local morphism equality has been established.
 
 \begin{lemma}[Projector naturality for a $2/1$ slide]
 \label{lem:two-one-projector-naturality}
-Put a $2/1$ slide into the clean local form of
-\cref{prop:local-movie-normal-forms}, cut the stationary dotted handle, and
-write $B=|w_\delta|$ for its through-object, $x$ for the moving oriented
-ribbon label, and $a\in\mathbb Z$ for the moving character exponent.  There
-is a common exterior closure functional on
+Let \(m\colon\mathcal H\to\mathcal H'\) be a $2/1$ slide between special
+Kirby presentations.  Put \(m\) into the clean local form of
+\cref{prop:local-movie-normal-forms}, denote its stationary dotted component
+by \(\delta\), and cut that handle.  Write $B=|w_\delta|$ for its
+through-object, let \(x\in\operatorname{Irr}(\cC)\) be the moving oriented
+ribbon label, and let $a\in\mathbb Z$ be the moving character exponent.
+There is a common exterior closure functional on
 $\operatorname{Hom}_{\cC}(B\otimes x,x\otimes B)$ under which the positive
 source and target local tangles are respectively the two sides of
 \[
@@ -454,8 +467,12 @@ Applying that common exterior context proves the local evaluation equality.
 
 \begin{lemma}[Dotted-handle slides]
 \label{lem:dotted-handle-slides}
-The marked evaluator is unchanged under a $1/1$ slide and under a $2/1$
-slide.
+Let \(m\colon\mathcal H\to\mathcal H'\) be either a $1/1$ slide or a $2/1$
+slide, and let \(\xi\in H^2(\mathcal H)\).  Then
+\[
+  \CY_{\cC,\eta}(\mathcal H,\xi)
+  =\CY_{\cC,\eta}(\mathcal H',T_m\xi).
+\]
 \end{lemma}
 
 \begin{proof}
@@ -491,8 +508,10 @@ ordinary labels proves the lemma.
 
 \begin{lemma}[Trace-dual band-transport identity]
 \label{lem:weighted-kirby-colour-slide}
-Fix an $x$-coloured moving ribbon, an oriented band, and the common exterior
-tangle.  Expand the stationary Kirby colour
+Let \(x\in\operatorname{Irr}(\cC)\).  Fix an $x$-coloured moving ribbon, an
+oriented band, and a common exterior tangle \(E\); write
+\(\operatorname{Cl}_E\) for closure by that exterior.  Expand the stationary
+Kirby colour
 $\Omega_{\cC}=\sum_y d_y y$.  For a simple stationary label $y$, choose the
 trace-dual resolution
 \[
@@ -556,8 +575,9 @@ duality preserves $d_y d_z$ and every multiplicity index.
 
 \begin{lemma}[Character-aware fusion attachment]
 \label{lem:character-aware-fusion-attachment}
-Let $x$ and $y$ be simple labels and let $a,b\in\mathbb Z$.  Choose, for
-every simple summand $z$ and multiplicity index $\mu$, trace-dual maps
+Let $x,y\in\operatorname{Irr}(\cC)$ and let $a,b\in\mathbb Z$.  Choose, for
+each \(\varepsilon\in\{+1,-1\}\), every simple summand $z$ of
+\(x\otimes y^\varepsilon\), and every multiplicity index $\mu$, trace-dual maps
 \[
   \iota_{z,\mu}\colon z\longrightarrow x\otimes y^{\varepsilon},
   \qquad
@@ -569,7 +589,7 @@ every simple summand $z$ and multiplicity index $\mu$, trace-dual maps
   \sum_{z,\mu}d_z\,\iota_{z,\mu}\pi_{z,\mu}
     =\operatorname{id}_{x\otimes y^{\varepsilon}}.
 \]
-Here $\varepsilon=-1$ means $y^*$ and $\varepsilon=+1$ means $y$.
+Here $y^{-1}$ means $y^*$ and $y^{+1}$ means $y$.
 The source, channel, and target labels are
 \begin{center}
 \begin{tabular}{c|c|c|c|c}
@@ -659,8 +679,12 @@ identity resolution by the corresponding character equality proves both rows.
 
 \begin{lemma}[Character-aware $2/2$ slide]
 \label{lem:character-aware-two-two}
-The marked evaluator is unchanged under either orientation of a $2/2$
-slide.
+Let \(m\colon\mathcal H\to\mathcal H'\) be either orientation of a $2/2$
+slide, and let \(\xi\in H^2(\mathcal H)\).  Then
+\[
+  \CY_{\cC,\eta}(\mathcal H,\xi)
+  =\CY_{\cC,\eta}(\mathcal H',T_m\xi).
+\]
 \end{lemma}
 
 \begin{proof}
@@ -754,7 +778,9 @@ $Z_{\mathrm{src}}^\varepsilon=Z_{\mathrm{tgt}}^\varepsilon$ for both
 orientations.
 \end{proof}
 
-For the cancellation calculations, write the unnormalized graph sum as
+For the cancellation calculations, let \(\mathcal H\) be a special Kirby
+presentation and let \(a\in Z^2(\mathcal H)\).  Write the unnormalized graph
+sum as
 \[
   \mathcal R_{\cC,\eta}(\mathcal H,a)
   :=\sum_{\lambda}
@@ -764,15 +790,17 @@ For the cancellation calculations, write the unnormalized graph sum as
   \tag{5.6}\label{eq:raw-graph-sum}
 \]
 Thus
-\(
+\[
   \CY_{\cC,\eta}(\mathcal H,a)
   =\operatorname{Dim}(\cC)^{1-h_3(\mathcal H)}
    \mathcal R_{\cC,\eta}(\mathcal H,a).
-\)
+\]
 
 \begin{lemma}[Cochain normal forms for cancelling pairs]
 \label{lem:cancellation-cochain-normal-forms}
-For an isolated standard $1$--$2$ birth, extension by zero on the new primal
+Let \(\mathcal H\to\mathcal H^+\) be a birth in the isolated standard local
+form of \cref{prop:local-movie-normal-forms}.  For a $1$--$2$ birth,
+extension by zero on the new primal
 $2$-handle sends a source $2$-cocycle to a target $2$-cocycle representing
 the transported class.  Conversely, every target $2$-cocycle is cohomologous
 to one whose new $2$-handle coordinate is zero.  The same statement applies
@@ -824,8 +852,10 @@ $\sum_i d_i^2=\operatorname{Dim}(\cC)$.
 
 \begin{lemma}[$1$--$2$ cancellation identity]
 \label{lem:one-two-cancellation-evaluation}
-Let \(\mathcal H^+\) be obtained from \(\mathcal H\) by inserting an isolated
-standard cancelling \(1\)--\(2\) pair, and let \(a^+=a\oplus0\) be the
+Let \(\mathcal H\) be a special Kirby presentation, and let
+\(\mathcal H^+\) be obtained from it by inserting an isolated standard
+cancelling \(1\)--\(2\) pair.  For \(a\in Z^2(\mathcal H)\), let
+\(a^+=a\oplus0\) be the
 transported cocycle of
 \cref{prop:marking-coordinate-transport}.  Then
 \[
@@ -861,8 +891,10 @@ calculation backwards proves the death statement.
 
 \begin{lemma}[$2$--$3$ cancellation identity]
 \label{lem:two-three-cancellation-evaluation}
-Let \(\mathcal H^+\) be obtained from \(\mathcal H\) by inserting an isolated
-standard cancelling \(2\)--\(3\) pair, and let \(a^+=a\oplus0\).  Then
+Let \(\mathcal H\) be a special Kirby presentation, and let
+\(\mathcal H^+\) be obtained from it by inserting an isolated standard
+cancelling \(2\)--\(3\) pair.  For \(a\in Z^2(\mathcal H)\), let
+\(a^+=a\oplus0\).  Then
 \[
   \mathcal R_{\cC,\eta}(\mathcal H^+,a^+)
   =\operatorname{Dim}(\cC)\,
@@ -896,7 +928,8 @@ calculation proves the death case.
 
 \begin{theorem}[Elementary Kirby-move invariance]
 \label{thm:elementary-kirby-invariance}
-Let
+Let \(\mathcal H\) and \(\mathcal H'\) be special Kirby presentations, and
+let
 \[
   m\colon\mathcal H\longrightarrow\mathcal H'
 \]
@@ -976,7 +1009,7 @@ These are all eight directed moves of \cref{def:kirby-move}.
 
 \begin{definition}[Manifold-level evaluator]
 \label{def:manifold-level-evaluator}
-For a marked closed connected oriented smooth four-manifold $(X,\alpha)$, choose a
+For a marked four-manifold $(X,\alpha)$, choose a
 special Kirby presentation $\mathcal H$ as in
 \cref{prop:special-presentation-existence}.  Let $\xi_{\mathcal H}$ be the
 handle-cohomology class corresponding to $\operatorname{PD}_X(\alpha)$ and set

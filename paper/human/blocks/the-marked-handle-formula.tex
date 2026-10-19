@@ -20,7 +20,7 @@ Two standard categorical ingredients enter the formula.
 \begin{definition}[Kirby colour and tensor-unit projector]
 \label{def:kirby-colour}
 \label{def:tensor-unit-projector}
-The Kirby colour is
+Let \(\cC\) be a premodular fusion category.  Its Kirby colour is
 \[
   \Omega_{\cC}:=
   \sum_{i\in\operatorname{Irr}(\cC)}d_i\,i.
@@ -43,7 +43,10 @@ included in this notation.
 
 \begin{definition}[The operation represented by a dotted circle]
 \label{def:dotted-circle-translation}
-Let \(\delta\) be a dotted component of \(D_{\mathcal H}\).  A standard
+Let \(\cC\) be a premodular fusion category, let \(\mathcal H\) be a special
+Kirby presentation, and let \(\delta\) be a dotted component of
+\(D_{\mathcal H}\).  Fix an assignment \(\lambda\) of simple labels to the
+framed components.  A standard
 cross-section of the corresponding \(1\)-handle meets the oriented framed
 ribbons in a finite ordered boundary word.  If \(B_\delta\) is the tensor
 product represented by that word, then the operation assigned to \(\delta\)
@@ -64,6 +67,8 @@ and the dotted contribution is
   \mathcal E_\delta(P_{\mathbf1,B_\delta}).
   \tag{4.4}\label{eq:intrinsic-dotted-context}
 \]
+Here and below, the dependence of \(B_\delta\) and \(\mathcal E_\delta\) on
+the currently fixed label state \(\lambda\) is suppressed from the notation.
 The topological reason for this rule is given in
 \cref{subsec:dotted-handle-interpretation}.
 \end{definition}
@@ -72,7 +77,8 @@ We can now give the entire evaluation recipe.
 
 \begin{definition}[The coloured graph sum]
 \label{def:colored-graph-sum}
-Let \(\mathcal H\) be a special Kirby presentation and let
+Fix a twisted categorical input \((\cC,\eta)\).  Let \(\mathcal H\) be a
+special Kirby presentation and let
 \(a\in Z^2(\mathcal H)\) represent the marking.  For every assignment
 \(\lambda=(\lambda_k)\) of simple objects to the framed components, form a
 finite linear combination \(\Gamma(\mathcal H,a;\lambda)\) of closed coloured
@@ -103,7 +109,8 @@ The projector expansion coefficients and all coupons belong to
 
 \begin{definition}[Homologically twisted Crane--Yetter evaluator]
 \label{def:twisted-handle-evaluator}
-Define
+Fix a twisted categorical input \((\cC,\eta)\), a special Kirby presentation
+\(\mathcal H\), and a cocycle \(a\in Z^2(\mathcal H)\).  Define
 \[
   \boxed{
   \CY_{\cC,\eta}(\mathcal H,a)
