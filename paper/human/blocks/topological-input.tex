@@ -45,10 +45,13 @@ The oriented framed components give the preferred basis of
 \(h_3(\mathcal H)=\operatorname{rank}C_3(\mathcal H)\).
 \end{definition}
 
-The \(3\)-handle attaching spheres do not have to be drawn in order to apply
-the formula below.  Their only contributions are the integer
-\(h_3(\mathcal H)\) and the relations
-\(\operatorname{im}(\partial_3)\subset C_2(\mathcal H)\).
+\begin{convention}[Retained three-handle data]
+\label{conv:retained-three-handle-data}
+For a special Kirby presentation \(\mathcal H\), we retain from the
+\(3\)-handles the integer \(h_3(\mathcal H)\) and the subgroup
+\(\operatorname{im}(\partial_3)\subset C_2(\mathcal H)\).  We do not choose
+explicit drawings of their attaching spheres.
+\end{convention}
 
 \begin{definition}[Handle representative of the marking]
 \label{def:handle-homology-marking}
@@ -66,9 +69,10 @@ and
   :=Z^2(\mathcal H)/\operatorname{im}(\partial_2^*).
   \tag{3.2}\label{eq:handle-cohomology}
 \]
-Cellular comparison identifies this group with \(H^2(X;\mathbb Z)\).  Let
-\(\xi_{\mathcal H}\) be the class corresponding to
-\(\operatorname{PD}_X(\alpha)\).  A \emph{handle cocycle for \(\alpha\)} is
+Through the cellular comparison isomorphism of
+\cref{prop:handle-homology-realization}, define \(\xi_{\mathcal H}\) to be
+the class corresponding to \(\operatorname{PD}_X(\alpha)\).  A
+\emph{handle cocycle for \(\alpha\)} is
 an element \(a\in Z^2(\mathcal H)\) representing
 \(\xi_{\mathcal H}\).
 
@@ -78,13 +82,7 @@ write
   a_k:=a(e_k)\in\mathbb Z.
   \tag{3.3}\label{eq:handle-marking-coordinates}
 \]
-These integers are exactly the character exponents used in the evaluator.
 \end{definition}
-
-Changing \(a\) by an element of \(\operatorname{im}(\partial_2^*)\) changes
-the displayed coordinates but not the marking.  Representative independence
-will therefore be one of the first identities proved in
-\cref{subsec:kirby-invariance}.
 
 \begin{proposition}[Existence and realization]
 \label{prop:special-presentation-existence}
@@ -107,9 +105,3 @@ decomposition is a relative CW decomposition, and its cellular chain complex
 is the handle complex above; see the handle-homology discussion immediately
 following that proposition.
 \end{proof}
-
-Thus the topological input needed for evaluation is concrete: the dotted and
-framed link \(D_{\mathcal H}\), the integer \(h_3(\mathcal H)\), and a tuple
-\((a_k)\) satisfying the \(3\)-handle relations.  The quotient in
-\eqref{eq:handle-cohomology} records which such tuples represent the same
-marking.

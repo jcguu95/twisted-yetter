@@ -9,10 +9,6 @@ premodular fusion category over \(\mathbb C\) and
   \eta\in A_{\cC}
   =\operatorname{Aut}_{\otimes}(\operatorname{Id}_{\cC}).
 \]
-For a simple object \(i\), write
-\((\eta)_i=\eta_i\operatorname{id}_i\).  Thus a coupon labelled by
-\(\eta^n\) on an \(i\)-coloured ribbon is the actual endomorphism
-\(\eta_i^n\operatorname{id}_i\).
 \end{definition}
 
 Two standard categorical ingredients enter the formula.
@@ -28,18 +24,37 @@ Let \(\cC\) be a premodular fusion category.  Its Kirby colour is
 \]
 For an object \(W\), choose a basis
 \(u_\mu\colon\mathbf1\to W\) and its composition-dual basis
-\(\widehat u_\mu\colon W\to\mathbf1\).  The canonical projector onto the full
-tensor-unit isotypic summand is
+\(\widehat u_\mu\colon W\to\mathbf1\), and set
 \[
   P_{\mathbf1,W}:=
   \sum_\mu u_\mu\widehat u_\mu
   \in\operatorname{End}_{\cC}(W).
   \tag{4.2}\label{eq:tensor-unit-projector}
 \]
-It is independent of the chosen dual bases.  We also write
+We also write
 \(\operatorname{Cut}_{\cC}(W):=P_{\mathbf1,W}\); no global-dimension factor is
 included in this notation.
 \end{definition}
+
+\begin{lemma}[Basis independence of the tensor-unit projector]
+\label{lem:tensor-unit-projector-basis-independence}
+Let \(\cC\) be a premodular fusion category and let \(W\in\cC\).
+The endomorphism \(P_{\mathbf1,W}\) in
+\eqref{eq:tensor-unit-projector} is independent of the chosen pair of dual
+bases.
+\end{lemma}
+
+\begin{proof}
+If \(v_\nu=\sum_\mu A_{\nu\mu}u_\mu\), then its dual basis is
+\(\widehat v_\nu=\sum_\rho(A^{-1})_{\rho\nu}\widehat u_\rho\).  Hence
+\[
+  \sum_\nu v_\nu\widehat v_\nu
+  =\sum_{\mu,\rho}
+    \left(\sum_\nu A_{\nu\mu}(A^{-1})_{\rho\nu}\right)
+    u_\mu\widehat u_\rho
+  =\sum_\mu u_\mu\widehat u_\mu.
+\]
+\end{proof}
 
 \begin{definition}[The operation represented by a dotted circle]
 \label{def:dotted-circle-translation}
@@ -67,11 +82,13 @@ and the dotted contribution is
   \mathcal E_\delta(P_{\mathbf1,B_\delta}).
   \tag{4.4}\label{eq:intrinsic-dotted-context}
 \]
+\end{definition}
+
+\begin{convention}[Suppressed label-state dependence]
+\label{conv:suppressed-label-state-dependence}
 Here and below, the dependence of \(B_\delta\) and \(\mathcal E_\delta\) on
 the currently fixed label state \(\lambda\) is suppressed from the notation.
-The topological reason for this rule is given in
-\cref{subsec:dotted-handle-interpretation}.
-\end{definition}
+\end{convention}
 
 We can now give the entire evaluation recipe.
 
@@ -101,10 +118,11 @@ ribbon graphs by the following rules.
   \item Expand the projectors in dual bases, reglue the cut-open local
   tangles, and interpret every crossing, cup, cap, twist, and coupon by the
   ribbon graphical calculus.
+
+  \item Include all projector-expansion coefficients and character coupons
+  in \(\Gamma(\mathcal H,a;\lambda)\), but leave the Kirby-colour weight
+  \(\prod_kd_{\lambda_k}\) outside this graph sum.
 \end{enumerate}
-The projector expansion coefficients and all coupons belong to
-\(\Gamma(\mathcal H,a;\lambda)\).  The external product
-\(\prod_kd_{\lambda_k}\) does not; it appears once in the formula below.
 \end{definition}
 
 \begin{definition}[Homologically twisted Crane--Yetter evaluator]
@@ -124,15 +142,17 @@ Fix a twisted categorical input \((\cC,\eta)\), a special Kirby presentation
 \]
 \end{definition}
 
-This is the promised map
-\[
-  (\mathcal H,a)\longmapsto
-  \CY_{\cC,\eta}(\mathcal H,a)\in\mathbb C.
-\]
-It is a finite sum: Kirby colours and tensor-unit projectors both expand over
-finite semisimple data.  Each summand is an ordinary closed
-\(\cC\)-coloured ribbon graph in \(S^3\), evaluated by
-\cref{def:rt-graph-evaluation}.
+\begin{proposition}[Finiteness of the evaluator]
+\label{prop:evaluator-finiteness}
+The sum in \eqref{eq:twisted-handle-evaluator} is finite.
+\end{proposition}
+
+\begin{proof}
+The Kirby-colour sums are finite because \(\cC\) has finitely many simple
+isomorphism classes.  Each tensor-unit projector is a finite sum because
+\(\cC\) is finite semisimple.  A Kirby diagram has finitely many components,
+so only finitely many choices occur.
+\end{proof}
 
 \begin{remark}[What the dotted circle is not]
 \label{rem:dotted-circle-operation-scope}

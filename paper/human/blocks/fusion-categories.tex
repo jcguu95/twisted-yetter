@@ -3,7 +3,6 @@
 
 \begin{definition}[Premodular fusion category]
 \label{def:premodular-category}
-The categorical input is specified as follows.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item\label{item:fusion-category}
   A \emph{fusion category} is a finite semisimple $\mathbb C$-linear abelian
@@ -21,14 +20,15 @@ The categorical input is specified as follows.
   \]
 
   \item\label{item:premodular-category}
-  A \emph{premodular fusion category} is a ribbon fusion category.  No
-  nondegeneracy condition is imposed on its braiding.
+  A \emph{premodular fusion category} is a ribbon fusion category.
 \end{enumerate}
 \end{definition}
 
 \begin{remark}[Terminology and references]
 \label{rem:premodular-category-reference}
 These are \cite[Definitions~4.1.1, 8.10.1, and 8.13.1]{EGNO2015}.
+In particular, premodularity imposes no nondegeneracy condition on the
+braiding.
 \end{remark}
 
 \begin{convention}[Simple-object data]
@@ -82,10 +82,23 @@ is a monoidal natural automorphism
   \eta\colon\operatorname{Id}_{\cC}\Longrightarrow
   \operatorname{Id}_{\cC}.
 \]
-For every simple $i$, Schur's lemma determines a unique
-$\eta_i\in\mathbb C^\times$ such that
-$(\eta)_i=\eta_i\operatorname{id}_i$.
 \end{definition}
+
+\begin{lemma}[Simple-object character scalars]
+\label{lem:simple-object-character-scalars}
+Let \(\eta\) be a character of a premodular fusion category \(\cC\).  For
+every \(i\in\operatorname{Irr}(\cC)\), there is a unique
+\(\eta_i\in\mathbb C^\times\) such that
+\[
+  (\eta)_i=\eta_i\operatorname{id}_i.
+\]
+\end{lemma}
+
+\begin{proof}
+Schur's lemma identifies \(\operatorname{End}_{\cC}(i)\) with
+\(\mathbb C\).  Since \((\eta)_i\) is an automorphism, its scalar is
+nonzero.
+\end{proof}
 
 \begin{remark}[Yetter's terminology]
 \label{rem:yetter-character-terminology}
@@ -96,7 +109,7 @@ This is the ``functorial tensor automorphism'' of
 \begin{lemma}[Character identities]
 \label{lem:character-identities}
 Let \(\cC\) be a premodular fusion category and let \(\eta\) be a character
-of \(\cC\).  For simple objects $i,j,k\in\cC$,
+of \(\cC\).  For $i,j,k\in\operatorname{Irr}(\cC)$,
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item\label{item:character-unit-dual}
   $\eta_{\mathbf 1}=1$ and $\eta_{i^*}=\eta_i^{-1}$.
@@ -198,10 +211,16 @@ following data, considered up to ambient isotopy relative to the boundary.
   Designated input and output disks containing the ordered incoming and
   outgoing boundary ribbons.
 \end{enumerate}
-Crossings, cups, caps, and full twists denote the braiding, duality maps, and
+\end{definition}
+
+\begin{convention}[Graphical generators]
+\label{conv:graphical-generators}
+Let \(\cC\) be a premodular fusion category and let \(\eta\) be a character
+of \(\cC\).  In a generic planar projection,
+crossings, cups, caps, and full twists denote the braiding, duality maps, and
 ribbon twist.  A character coupon on an $X$-colored ribbon denotes
 $\eta_X^n$ for a specified $n\in\mathbb Z$.
-\end{definition}
+\end{convention}
 
 \begin{remark}[Ribbon-graph references]
 \label{rem:ribbon-graph-references}

@@ -61,9 +61,6 @@ For every morphism $f\colon U\to V$ in $\cC$,
 \[
   fP_{\mathbf1,U}=P_{\mathbf1,V}f.
 \]
-Consequently a tensor-unit projector may be moved through any finite
-composite of crossings, cups, caps, twists, and morphism coupons, with the
-source and target projectors changed according to the boundary objects.
 \end{lemma}
 
 \begin{proof}
@@ -71,10 +68,21 @@ Finite semisimplicity decomposes every object as a direct sum of its simple
 isotypic summands.  By Schur's lemma, a morphism has no matrix entries
 between the tensor-unit isotypic summand and a nonisomorphic simple
 isotypic summand.  It therefore preserves the tensor-unit summand, which is
-exactly the displayed identity.  Applying the identity successively to the
-elementary morphisms in a ribbon expression gives the second assertion.
-Graphically, this is the tunnelling property of the completeness idempotent
-in \cite[Lemmas~2.27--2.28]{Tham2021}.
+exactly the displayed identity.
+\end{proof}
+
+\begin{corollary}[Finite transport of the tensor-unit projector]
+\label{cor:finite-unit-projector-transport}
+A tensor-unit projector may be moved through any finite composite of
+crossings, cups, caps, twists, and morphism coupons, with the source and
+target projectors changed according to the boundary objects.
+\end{corollary}
+
+\begin{proof}
+Apply \cref{lem:unit-projector-naturality} successively to the elementary
+morphisms in the ribbon expression.  Graphically, this is the tunnelling
+property of the completeness idempotent in
+\cite[Lemmas~2.27--2.28]{Tham2021}.
 \end{proof}
 
 \begin{lemma}[Local form of a dotted-handle operation]
@@ -91,17 +99,17 @@ defines a linear functional
   \mathcal E_\delta\colon
   \operatorname{End}_{\cC}(B_\delta)\longrightarrow\mathbb C.
 \]
-The dotted operation in that term is exactly
+The dotted operation in that term is
 \[
   \mathcal E_\delta(P_{\mathbf1,B_\delta}).
   \tag{5.1}\label{eq:dotted-section}
 \]
-For every puncture $p$ on the $k$th ordinary component, the following three
+For every puncture $p$ on the $k$th ordinary component, the following four
 features remain distinct.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item The orientation of component $k$ fixes the ribbon label
   $\lambda_k$ before the disk is chosen; this is what distinguishes
-  $X$ from $X^*$.
+  $\lambda_k$ from $\lambda_k^*$.
 
   \item The oriented arc and the disk coorientation determine the intersection
   sign $\epsilon(p)$.  This is both its contribution to $\partial_2$ and the
@@ -110,11 +118,11 @@ features remain distinct.
   \item The marking representative supplies $a_k$ and hence the actual coupon
   $(\eta^{a_k})_{\lambda_k}$.  The disk supplies neither this exponent nor its
   sign.
+
+  \item Neither the oriented label nor \(a_k\) depends on the dotted-handle
+  section.  A negative boundary occurrence uses the rigid dual of the
+  already fixed oriented label; it does not recolour the component.
 \end{enumerate}
-Thus disk intersection never chooses the oriented label or $a_k$.
-In particular, a negative boundary occurrence is represented by the dual of
-the already fixed oriented label; it does not replace that component's colour
-by a disk-dependent choice.
 \end{lemma}
 
 \begin{proof}
@@ -135,7 +143,8 @@ projector $P_{\mathbf1,B_\delta}$, so regluing gives
 the through-channel before closure; no currying of the whole exterior tangle
 is involved.  The second item is the standard signed-intersection formula for
 the coefficient of a $1$-handle in the cellular boundary of a $2$-handle; the
-first and third items were fixed before the disk was chosen.
+first and third items were fixed before the disk was chosen, and the fourth
+follows from them.
 \end{proof}
 
 \begin{proposition}[Independence of auxiliary graphical choices]
@@ -296,8 +305,6 @@ Let $n\in\mathbb Z$.
   \[
     (\eta^n)_Vf=f(\eta^n)_U.
   \]
-  This moves the automorphism of the \emph{whole} input word through a
-  multivalent coupon; it does not route one coupon through an arbitrary leg.
 
   \item The same naturality identity applies to braidings and twists.
 
@@ -310,8 +317,7 @@ Let $n\in\mathbb Z$.
     \operatorname{ev}_X
       ((\eta^{-n})_{X^*}\otimes\operatorname{id}_X),
   \]
-  with the analogous coevaluation identity.  Thus the local exponent changes
-  sign when the oriented route is expressed on the dual strand.
+  with the analogous coevaluation identity.
 \end{enumerate}
 Consequently a character decoration may be transported along any compact
 ribbon through the finitely many crossings, extrema, twists, and coupons of
@@ -330,6 +336,14 @@ Precompose with $(\eta^{-n})_{X^*}\otimes\operatorname{id}_X$ to obtain the
 displayed bend identity; the coevaluation formula is dual.  Applying these
 identities successively along the finite route proves the final assertion.
 \end{proof}
+
+\begin{remark}[Scope of coupon naturality]
+\label{rem:coupon-naturality-scope}
+The first identity transports the automorphism of the whole boundary object
+through a multivalent coupon; it does not route one factor through an
+arbitrary leg.  At a dual bend, expressing the same oriented route on the
+dual strand replaces the local exponent \(n\) by \(-n\).
+\end{remark}
 
 \begin{lemma}[Index-$3$ handle-slide identity]
 \label{lem:index-three-handle-slide}
@@ -509,7 +523,8 @@ ordinary labels proves the lemma.
 \begin{lemma}[Trace-dual band-transport identity]
 \label{lem:weighted-kirby-colour-slide}
 Let \(x\in\operatorname{Irr}(\cC)\).  Fix an $x$-coloured moving ribbon, an
-oriented band, and a common exterior tangle \(E\); write
+oriented band, and a common exterior tangle \(E\), with no character coupon
+inserted in the local band calculation; write
 \(\operatorname{Cl}_E\) for closure by that exterior.  Expand the stationary
 Kirby colour
 $\Omega_{\cC}=\sum_y d_y y$.  For a simple stationary label $y$, choose the
@@ -538,8 +553,7 @@ for every $(y,z,\mu)$, and consequently
   \sum_{y,z,\mu}d_y d_z\,
     \operatorname{Cl}_E(D^\varepsilon_{y,z,\mu^\sharp}).
 \]
-Both assertions hold for either band orientation.  No character coupon is
-present.
+Both assertions hold for either band orientation.
 \end{lemma}
 
 \begin{proof}
@@ -577,7 +591,8 @@ duality preserves $d_y d_z$ and every multiplicity index.
 \label{lem:character-aware-fusion-attachment}
 Let $x,y\in\operatorname{Irr}(\cC)$ and let $a,b\in\mathbb Z$.  Choose, for
 each \(\varepsilon\in\{+1,-1\}\), every simple summand $z$ of
-\(x\otimes y^\varepsilon\), and every multiplicity index $\mu$, trace-dual maps
+\(x\otimes y^\varepsilon\), where \(y^{-1}:=y^*\) and
+\(y^{+1}:=y\), and every multiplicity index $\mu$, trace-dual maps
 \[
   \iota_{z,\mu}\colon z\longrightarrow x\otimes y^{\varepsilon},
   \qquad
@@ -589,7 +604,6 @@ each \(\varepsilon\in\{+1,-1\}\), every simple summand $z$ of
   \sum_{z,\mu}d_z\,\iota_{z,\mu}\pi_{z,\mu}
     =\operatorname{id}_{x\otimes y^{\varepsilon}}.
 \]
-Here $y^{-1}$ means $y^*$ and $y^{+1}$ means $y$.
 The source, channel, and target labels are
 \begin{center}
 \begin{tabular}{c|c|c|c|c}
@@ -617,10 +631,10 @@ $\iota\colon z\to x\otimes y^*$ to
     (\operatorname{coev}_z\otimes\operatorname{id}_y)
   \colon y\longrightarrow z^*\otimes x.
 \]
-Thus the first output ribbon at detachment is literally labelled $z^*$; this
-is the stationary target strand in the positive convention, while the second
-output is the moving $x$-strand.  Both rows name the actual oriented target
-label.
+Under this mate isomorphism, the ordered detaching labels are \((z^*,x)\).
+The first is the stationary target strand in the positive convention and the
+second is the moving strand.  Both rows therefore name the actual oriented
+target label.
 \end{lemma}
 
 \begin{proof}
@@ -778,9 +792,10 @@ $Z_{\mathrm{src}}^\varepsilon=Z_{\mathrm{tgt}}^\varepsilon$ for both
 orientations.
 \end{proof}
 
-For the cancellation calculations, let \(\mathcal H\) be a special Kirby
-presentation and let \(a\in Z^2(\mathcal H)\).  Write the unnormalized graph
-sum as
+\begin{definition}[Unnormalized graph sum]
+\label{def:unnormalized-graph-sum}
+For a special Kirby presentation \(\mathcal H\) and
+\(a\in Z^2(\mathcal H)\), define
 \[
   \mathcal R_{\cC,\eta}(\mathcal H,a)
   :=\sum_{\lambda}
@@ -789,12 +804,22 @@ sum as
         \bigl(S^3,\Gamma(\mathcal H,a;\lambda)\bigr).
   \tag{5.6}\label{eq:raw-graph-sum}
 \]
-Thus
+\end{definition}
+
+\begin{lemma}[Normalization identity]
+\label{lem:normalization-identity}
+For every special Kirby presentation \(\mathcal H\) and every
+\(a\in Z^2(\mathcal H)\),
 \[
   \CY_{\cC,\eta}(\mathcal H,a)
   =\operatorname{Dim}(\cC)^{1-h_3(\mathcal H)}
    \mathcal R_{\cC,\eta}(\mathcal H,a).
 \]
+\end{lemma}
+
+\begin{proof}
+This is \cref{def:twisted-handle-evaluator,def:unnormalized-graph-sum}.
+\end{proof}
 
 \begin{lemma}[Cochain normal forms for cancelling pairs]
 \label{lem:cancellation-cochain-normal-forms}

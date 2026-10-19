@@ -3,7 +3,9 @@
 
 Throughout this subsection, fix a twisted categorical input \((\cC,\eta)\).
 
-For $n\in\mathbb Z$, define the shifted Gauss sums
+\begin{definition}[Shifted Gauss sums]
+\label{def:shifted-gauss-sums}
+For $n\in\mathbb Z$, define
 \[
   \tau_\eta^+(n)
   :=\sum_{i\in\operatorname{Irr}(\cC)}d_i^2\theta_i\eta_i^n,
@@ -11,6 +13,7 @@ For $n\in\mathbb Z$, define the shifted Gauss sums
   \tau_\eta^-(n)
   :=\sum_{i\in\operatorname{Irr}(\cC)}d_i^2\theta_i^{-1}\eta_i^n.
 \]
+\end{definition}
 
 \begin{proposition}[Odd premodular formula]
 \label{prop:odd-formula}
@@ -50,8 +53,10 @@ hyperbolic stabilization factor by
 \cref{prop:marked-stabilization-formula}.
 \end{proof}
 
+\begin{definition}[Hyperbolic block value]
+\label{def:hyperbolic-block-value}
 Fix a hyperbolic basis $e,f$ of $H_2(H;\mathbb Z)$, with
-$Q_H(e,f)=1$.  For \(a,b\in\mathbb Z\), write $\alpha=ae+bf$ and put
+$Q_H(e,f)=1$.  For \(a,b\in\mathbb Z\), define
 \[
   \mathcal H_{\cC,\eta}(a,b)
   :=\sum_{i,j\in\operatorname{Irr}(\cC)}
@@ -60,9 +65,18 @@ $Q_H(e,f)=1$.  For \(a,b\in\mathbb Z\), write $\alpha=ae+bf$ and put
 \]
 where $\operatorname{Hopf}_{\cC}^{+}(i,j)$ is the positive Hopf-link
 scalar, with its first and second components representing $e$ and $f$,
-respectively.  The exchanged exponents occur because
+respectively.
+\end{definition}
+
+\begin{remark}[Exchanged hyperbolic exponents]
+\label{rem:exchanged-hyperbolic-exponents}
+For the marking \(\alpha=ae+bf\), the exponents are exchanged because
 $\langle\operatorname{PD}(ae+bf),e\rangle=b$ and
 $\langle\operatorname{PD}(ae+bf),f\rangle=a$.
+\end{remark}
+
+\begin{definition}[Standard block value]
+\label{def:standard-block-value}
 For a standard block \(B\in\{K3,\overline{K3},H\}\) and a marking
 \(\beta\in H_2(B;\mathbb Z)\), define
 \[
@@ -75,6 +89,7 @@ For a standard block \(B\in\{K3,\overline{K3},H\}\) and a marking
       &B=H\text{ and }\beta=(a,b).
   \end{cases}
 \]
+\end{definition}
 
 \begin{proposition}[Even premodular formula]
 \label{prop:even-formula}
