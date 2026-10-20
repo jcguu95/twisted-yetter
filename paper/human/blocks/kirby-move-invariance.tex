@@ -978,6 +978,36 @@ diagram, every character exponent, and every RT summand are unchanged, as is
 sum.
 \end{proof}
 
+\begin{lemma}[Pullback relabelling]
+\label{lem:pullback-presentation-evaluation}
+Let \(f\colon X\to Y\) be an orientation-preserving diffeomorphism, let
+\((\mathcal H',\xi_{\mathcal H'})\) be a marked special Kirby presentation
+of \((Y,\alpha')\), and let
+\((f^*\mathcal H',\widetilde\xi_{\mathcal H'})\) be its pullback to \(X\).
+Then
+\[
+  \CY_{\cC,\eta}
+    (f^*\mathcal H',\widetilde\xi_{\mathcal H'})
+  =
+  \CY_{\cC,\eta}(\mathcal H',\xi_{\mathcal H'}).
+  \tag{5.11}\label{eq:pullback-presentation-evaluation}
+\]
+\end{lemma}
+
+\begin{proof}
+Choose a handle cocycle representing \(\xi_{\mathcal H'}\).  Transporting
+the handles along \(f^{-1}\) gives a cocycle on \(f^*\mathcal H'\) with the
+same integer coordinate on every corresponding oriented \(2\)-handle; by
+cellular naturality it represents
+\(\widetilde\xi_{\mathcal H'}\).  The two presentations have the same
+dotted--framed diagram, handle counts, framings, component orientations, and
+ordinary label states.  For corresponding label states, the categorical
+ribbon expression, every character coupon, and every Kirby-colour
+coefficient are therefore identical.  The defining sums agree term by term.
+Representative independence, \cref{prop:representative-independence}, removes
+the initial choice of cocycle.
+\end{proof}
+
 \begin{theorem}[Elementary Kirby-move invariance]
 \label{thm:elementary-kirby-invariance}
 Let
@@ -1000,10 +1030,13 @@ representatives proves it for the transported cohomology class.  We use the
 local forms of \cref{prop:local-movie-normal-forms}; the exterior graph and
 all labels not mentioned below remain fixed.
 
-\emph{Framed isotopy.}
+\emph{Level isotopy.}
 Here $a'=a$, the label states are canonically identified, and
-\(h_3(\mathcal H')=h_3(\mathcal H)\).  For every label state $\lambda$,
-ribbon graphical coherence \cite[Theorem~6.1]{Shum1994} gives
+\(h_3(\mathcal H')=h_3(\mathcal H)\).  If the move is a level isotopy of a
+\(3\)-handle attaching sphere, then the dotted--framed diagram,
+\(\operatorname{im}(\partial_3)\), and the defining sum are literally
+unchanged.  Otherwise, for every label state $\lambda$, ribbon graphical
+coherence \cite[Theorem~6.1]{Shum1994} gives
 \[
   \operatorname{RT}_{\cC}
     \bigl(S^3,\Gamma(\mathcal H,a;\lambda)\bigr)
@@ -1079,16 +1112,22 @@ $\alpha\in H_2(X;\mathbb Z)$.  Then
 \end{theorem}
 
 \begin{proof}
-Choose marked special Kirby presentations of the two marked manifolds.  By
-marked Kirby--Cerf completeness, \cref{prop:marked-kirby-cerf}, they are
-connected by a finite sequence of marked lifts of the eight moves, together
-with marked $3$-handle slides.  Apply
+Choose marked special Kirby presentations of the two marked manifolds and
+pull the target presentation back along $f$.  By marked Kirby--Cerf
+completeness, \cref{prop:marked-kirby-cerf}, the source is connected to this
+pulled-back target by a finite marked movie on $X$, consisting of marked
+lifts of the eight moves together with marked $3$-handle slides.  Apply
 \cref{thm:elementary-kirby-invariance} at each marked step and induct on the
 length of the sequence; $3$-handle slides are harmless by
-\cref{lem:three-handle-slides}.  Handle-cohomology naturality and Poincar\'e-duality
-naturality identify the two endpoint markings, while representative
-independence says that the evaluation on each fixed presentation does not depend
-on the cocycle chosen to display its handle-cohomology class.  Thus
+\cref{lem:three-handle-slides}.  Handle-cohomology naturality and
+Poincar\'e-duality naturality identify the two endpoint markings, while
+representative independence says that the evaluation on each fixed
+presentation does not depend on the cocycle chosen to display its
+handle-cohomology class.
+
+The pullback value is the target value by
+\cref{lem:pullback-presentation-evaluation}.  Composing this tautological
+endpoint identification with the fixed-manifold movie represents $f$.  Thus
 \cref{def:manifold-level-evaluator} is independent of every choice and has
 the asserted diffeomorphism invariance.
 \end{proof}

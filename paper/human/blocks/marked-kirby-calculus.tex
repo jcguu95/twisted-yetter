@@ -2,7 +2,11 @@
 \label{subsec:marked-kirby-calculus}
 
 We now add a prescribed second-homology class to the ordinary Kirby calculus
-of the preceding subsection.
+of the preceding subsection.  The handle-chain calculations used below are
+standard \cite[Sections~3 and~4]{DurstGeigesKegel2019}, but the marked
+formulation is not stated there.  We therefore give the complete deduction,
+including the compatibility between handle coordinates, Poincar\'e duality,
+and a prescribed diffeomorphism.
 
 \begin{definition}[Marked four-manifold]
 \label{def:marked-four-manifold}
@@ -13,17 +17,18 @@ closed, connected, oriented smooth four-manifold and
 
 \begin{definition}[Handle cohomology]
 \label{def:handle-cohomology}
-Let \(\mathcal H\) be a special Kirby presentation.  Set
+Let \(\mathcal H\) be a special Kirby presentation.  Its handle cochain
+complex is
 \[
-  C^2(\mathcal H):=\operatorname{Hom}(C_2(\mathcal H),\mathbb Z),
+  C^k(\mathcal H):=\operatorname{Hom}(C_k(\mathcal H),\mathbb Z),
   \qquad
-  Z^2(\mathcal H)
-  :=\{a\in C^2(\mathcal H):a\circ\partial_3=0\},
+  \delta^k(\lambda):=\lambda\circ\partial_{k+1}.
 \]
-and
+In degree two, set
 \[
-  H^2(\mathcal H)
-  :=Z^2(\mathcal H)/\operatorname{im}(\partial_2^*).
+  Z^2(\mathcal H):=\ker(\delta^2),
+  \qquad
+  H^2(\mathcal H):=\ker(\delta^2)/\operatorname{im}(\delta^1).
   \tag{3.2}\label{eq:handle-cohomology}
 \]
 \end{definition}
@@ -31,19 +36,24 @@ and
 \begin{proposition}[Handle-cohomology realization]
 \label{prop:handle-homology-realization}
 For every special Kirby presentation \(\mathcal H\) of \(X\), the handle
-complex \eqref{eq:handle-complex} computes the integral (co)homology of
-\(X\).  In particular, cellular comparison gives a natural isomorphism
+complex \eqref{eq:handle-complex} computes the integral homology of \(X\),
+and its dual computes integral cohomology.  Cellular-to-singular comparison
+therefore gives an isomorphism
 \[
   \kappa_{\mathcal H}\colon
   H^2(\mathcal H)\xrightarrow{\ \cong\ }H^2(X;\mathbb Z).
+  \tag{3.3}\label{eq:handle-comparison}
 \]
+It is natural for cellular maps between handle decompositions.
 \end{proposition}
 
 \begin{proof}
-A handle decomposition is a relative CW decomposition, and its cellular
-chain complex is the handle complex.  The conclusion is the standard
-cellular-to-singular comparison; see the handle-homology discussion after
-\cite[Proposition~4.2.13]{GompfStipsicz1999}.
+Collapsing each handle radially onto its core gives the CW complex associated
+with the handle decomposition.  Its cellular boundary is the signed
+attaching-sphere--belt-sphere intersection map, hence is precisely the handle
+boundary.  Cellular homology and cohomology agree naturally with singular
+homology and cohomology.  See \cite[Section~4.2]{GompfStipsicz1999} and
+\cite[Section~3]{DurstGeigesKegel2019}.
 \end{proof}
 
 \begin{definition}[Marked special Kirby presentation]
@@ -59,111 +69,170 @@ presentation} of \((X,\alpha)\) is the pair
   \qquad
   \kappa_{\mathcal H}(\xi_{\mathcal H})
   =\operatorname{PD}_X(\alpha).
+  \tag{3.4}\label{eq:marked-presentation}
 \]
-Thus \(\xi_{\mathcal H}\) is uniquely determined by \(\mathcal H\) and
-\(\alpha\).
+Thus \(\xi_{\mathcal H}\) is a cohomology class, uniquely determined by
+\(\mathcal H\) and \(\alpha\).  It is not a choice of cocycle.
 
 A \emph{handle cocycle} for \((\mathcal H,\xi_{\mathcal H})\) is an element
-\(a\in Z^2(\mathcal H)\) representing \(\xi_{\mathcal H}\).  If \(e_k\) is
-the basis element represented by the \(k\)th framed component, write
+\(a\in Z^2(\mathcal H)\) representing \(\xi_{\mathcal H}\).  If \(e_j\) is
+the oriented basis element represented by the \(j\)th framed component, set
 \[
-  a_k:=a(e_k)\in\mathbb Z.
-  \tag{3.3}\label{eq:handle-marking-coordinates}
+  a_j:=a(e_j)\in\mathbb Z.
+  \tag{3.5}\label{eq:handle-marking-coordinates}
 \]
+Different handle cocycles representing the same \(\xi_{\mathcal H}\) differ
+by a coboundary.  Independence of that later choice is a separate property
+of the evaluator, proved in \cref{sec:kirby-invariance}.
 \end{definition}
 
-\begin{lemma}[Transport of the marking]
+\begin{definition}[Canonical transport of a marking]
+\label{def:canonical-marking-transport}
+Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary Kirby move or a
+slide of one \(3\)-handle over another.  Write
+\[
+  [\phi_m]\colon X_{\mathcal H}\longrightarrow X_{\mathcal H'}
+\]
+for the relative isotopy class of orientation-preserving diffeomorphisms
+supplied by its standard local model; its representatives are the identity
+outside the support of the move.  This relative isotopy class, rather than a
+chosen representative, is part of the usual local move.  Isotopic maps induce
+the same map in cohomology, so the following source-to-target transport is
+well defined:
+\[
+  T_m
+  :=\kappa_{\mathcal H'}^{-1}
+     \circ(\phi_m^{-1})^*
+     \circ\kappa_{\mathcal H}
+  \colon H^2(\mathcal H)\longrightarrow H^2(\mathcal H').
+  \tag{3.6}\label{eq:marking-transport}
+\]
+Here \(\phi_m\) denotes any representative of \([\phi_m]\).  The definition
+uses only its cohomological map; no coordinate convention enters it.
+\end{definition}
+
+\begin{proposition}[Handle-chain realization of canonical transport]
 \label{lem:handle-cohomology-naturality}
-Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary Kirby move
-or a slide of one \(3\)-handle over another.  Let \(X_{\mathcal H}\) and
-\(X_{\mathcal H'}\) denote the represented manifolds, and write
-\(\phi_m\colon X_{\mathcal H}\to X_{\mathcal H'}\) for the
-orientation-preserving diffeomorphism realized by the standard local model.
-Then \(m\) determines a chain-homotopy equivalence
+For every move \(m\) in
+\cref{def:canonical-marking-transport}, there is a chain-homotopy equivalence
 \[
-  F_m\colon C_*(\mathcal H)\longrightarrow C_*(\mathcal H').
+  F_m\colon C_*(\mathcal H)\longrightarrow C_*(\mathcal H')
 \]
-If \(\kappa_{\mathcal H}\) and \(\kappa_{\mathcal H'}\) are the cellular
-comparison isomorphisms, then
+realizing the corresponding cellular continuation, basis change, or
+elementary expansion/collapse.  If
 \[
-  \kappa_{\mathcal H}\circ F_m^*
+  F_m^\vee\colon C^*(\mathcal H')\longrightarrow C^*(\mathcal H),
+  \qquad b\longmapsto b\circ F_m,
+\]
+is the dual cochain map, then
+\[
+  \kappa_{\mathcal H}\circ H^2(F_m^\vee)
   =\phi_m^*\circ\kappa_{\mathcal H'}.
+  \tag{3.7}\label{eq:single-move-comparison-square}
 \]
-Consequently the source-to-target transport of a marking is
+Consequently,
 \[
-  T_m:=(F_m^*)^{-1}\colon
-  H^2(\mathcal H)\longrightarrow H^2(\mathcal H').
-  \tag{3.4}\label{eq:marking-transport}
+  T_m=H^2(F_m^\vee)^{-1}.
+  \tag{3.8}\label{eq:canonical-transport-chain-map}
 \]
-\end{lemma}
+\end{proposition}
 
 \begin{proof}
-For a handle decomposition, the group \(C_k\) is the relative homology
-generated by the oriented \(k\)-handles.  We construct \(F_m\) from the
-standard local model of \cref{conv:referenced-kirby-dictionary}.
+Write \(X^{(k)}_{\mathcal H}\) for the union of the handles of index at most
+\(k\).  The handle group \(C_k(\mathcal H)\) is canonically the relative
+homology group
+\[
+  H_k(X^{(k)}_{\mathcal H},X^{(k-1)}_{\mathcal H};\mathbb Z),
+\]
+with one preferred generator for each oriented \(k\)-handle.  Its boundary
+map is the connecting map of the handle filtration.  The comparison
+\(\kappa_{\mathcal H}\) is obtained from this filtered cellular complex.
+Consequently, a map of filtered handle decompositions induces both the
+handle-chain map and the corresponding map on singular cohomology, and the
+cellular-to-singular comparison commutes with those maps.  We now identify
+that filtered map for each type of local move.
 
-For framed isotopy, and for a \(2/1\) move, the attaching map of the moving
-\(2\)-handle varies by isotopy in the boundary of the \(0\)- and
-\(1\)-handlebody.  Isotopy extension gives \(\phi_m\), and cellular
-continuation gives \(F_m\).  Continuation along the reversed isotopy is a
-chain-homotopy inverse.
+For a level isotopy of attaching data, including a visible framed isotopy or
+an isotopy of a \(3\)-handle attaching sphere, isotopy extension gives a
+filtered diffeomorphism representing \([\phi_m]\).  The induced map on the
+relative groups above is the cellular continuation map \(F_m\).  The same
+argument applies to a \(2/1\) move: it is an isotopy of the attaching circle
+of a \(2\)-handle in the boundary of the \(1\)-handlebody, expressed in
+dotted-circle notation.  Reversing either isotopy gives a filtered
+chain-homotopy inverse.  Naturality of cellular-to-singular comparison gives
+\eqref{eq:single-move-comparison-square} in these cases.
 
-For a same-index \(k/k\) slide, with \(k=1,2\), or for a \(3/3\) slide, the
-new moving handle generator represents the old moving generator plus or
-minus the old stationary generator.  Let
+For a same-index \(k/k\) slide, \(k=1,2,3\), let
 \[
   J_m\colon C_*(\mathcal H')\longrightarrow C_*(\mathcal H)
 \]
-send that new generator to the corresponding signed sum and canonically
-identify every other generator.  The cellular boundary matrices after the
-slide are exactly the old matrices in this new basis, so
-\(J_m\partial'=\partial J_m\).  Thus \(J_m\) is a chain isomorphism; set
-\(F_m=J_m^{-1}\).  Its inverse is the chain map associated to the opposite
-slide.
+send the new moving generator to the old moving generator plus or minus the
+old stationary generator, and identify all other generators.  The boundary
+matrix after the slide is the old boundary matrix written in this new basis;
+equivalently, \(J_m\partial'=\partial J_m\).  Thus \(J_m\) is a chain
+isomorphism, and we take \(F_m=J_m^{-1}\).  Geometrically, the standard local
+slide diffeomorphism induces a filtered homotopy equivalence between the two
+core CW complexes.  In the pre-slide and post-slide cellular bases, its map
+on relative handle groups is precisely \(F_m\); after forgetting the
+filtration, it represents the same homotopy class as \(\phi_m\).  This is the
+handle-slide basis change proved in
+\cite[Section~4.1]{DurstGeigesKegel2019}.  Applying naturality to this
+filtered homotopy equivalence gives
+\eqref{eq:single-move-comparison-square} for all three same-index slides.
 
-For a \(k\)--\((k+1)\) birth, where \(k=1\) or \(2\), the isolated
-cancelling pair gives a direct-sum decomposition
+For a standard \(k\)--\((k+1)\) birth, \(k=1,2\), the pair is introduced in
+a ball disjoint from the remaining attaching data.  Hence
 \[
   C_*(\mathcal H')\cong C_*(\mathcal H)\oplus A_*,
   \qquad
   A_{k+1}=\mathbb Z u,
   \quad A_k=\mathbb Z v,
-  \quad \partial u=\pm v.
+  \quad \partial u=\varepsilon v,
+  \quad\varepsilon\in\{\pm1\}.
+  \tag{3.9}\label{eq:acyclic-birth-summand}
 \]
-Take \(F_m\) to be inclusion of the first summand.  Projection onto that
-summand is a homotopy inverse: on \(A_*\), the degree-one map
-\(s(v)=\pm u\), \(s(u)=0\), satisfies
-\(\partial s+s\partial=\operatorname{id}_{A_*}\).  A death uses the
-projection and the same contraction in the reverse direction.
+Inclusion of the first summand is \(F_m\); projection is a homotopy inverse,
+since the degree-one map \(s(v)=\varepsilon u\), \(s(u)=0\), satisfies
+\(\partial s+s\partial=\operatorname{id}_{A_*}\).  A standard death uses
+the projection.  A general cancelling pair is first put into this local form
+by the separate slide and isotopy moves; compare
+\cite[Section~4.2]{DurstGeigesKegel2019}.
 
-In each case, the map just constructed is induced by the map of filtered
-handlebodies realizing \(\phi_m\): continuation for an isotopy, the identity
-map written in the slid handle basis, or the elementary expansion/collapse
-of a cancelling pair.  Naturality of the cellular-to-singular comparison
-therefore gives
-\(
-  \kappa_{\mathcal H}\circ F_m^*
-  =\phi_m^*\circ\kappa_{\mathcal H'}
-\).
-Since \(F_m\) is a chain-homotopy equivalence, \(F_m^*\) is an isomorphism on
-cohomology, so its inverse defines \(T_m\) in the asserted direction.
+The inclusion and projection are precisely the cellular maps of the
+elementary expansion and collapse of the handle CW complex.  After passing
+to the core CW complexes, they are homotopic relative to the exterior of the
+supporting ball to the maps supplied by the local birth and death
+diffeomorphisms.  They therefore induce the same singular-cohomology maps,
+and naturality gives
+\eqref{eq:single-move-comparison-square} in the remaining cases.
+
+We have now proved the comparison square, rather than merely postulated an
+abstract homology isomorphism, for every listed move.  Since \(F_m\) is a
+chain-homotopy equivalence, \(H^2(F_m^\vee)\) is invertible.  Inverting the
+comparison square gives
+\[
+  H^2(F_m^\vee)^{-1}
+  =\kappa_{\mathcal H'}^{-1}
+     \circ(\phi_m^{-1})^*
+     \circ\kappa_{\mathcal H}
+  =T_m,
+\]
+which proves \eqref{eq:canonical-transport-chain-map}.
 \end{proof}
 
 \begin{definition}[Marked Kirby move]
 \label{def:marked-kirby-move}
 Let \((\mathcal H,\xi)\) and \((\mathcal H',\xi')\) be marked special
-Kirby presentations.  Using the transport \(T_m\) supplied by
-\cref{lem:handle-cohomology-naturality}, a \emph{marked Kirby move}
+Kirby presentations.  A \emph{marked Kirby move}
 \[
   m\colon(\mathcal H,\xi)\longrightarrow(\mathcal H',\xi')
 \]
 is an elementary Kirby move \(m\colon\mathcal H\to\mathcal H'\) satisfying
 \[
   \xi'=T_m\xi.
-  \tag{3.5}\label{eq:marked-move-condition}
+  \tag{3.10}\label{eq:marked-move-condition}
 \]
-A marked \(3\)-handle slide is defined by the same condition for an
-underlying \(3\)-handle slide.
+A marked \(3\)-handle slide is defined by the same condition.
 \end{definition}
 
 \begin{proposition}[Coordinate form of marking transport]
@@ -173,119 +242,169 @@ Let
   m\colon(\mathcal H,\xi)\longrightarrow(\mathcal H',\xi')
 \]
 be a marked Kirby move, and let \(a\in Z^2(\mathcal H)\) represent \(\xi\).
-A cocycle \(a'\in Z^2(\mathcal H')\) representing
-\(\xi'=T_m\xi\) may be chosen as follows.
+There is a cocycle \(a'\in Z^2(\mathcal H')\) representing \(\xi'=T_m\xi\)
+with the following coordinates.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
-  \item For framed isotopy, a $1/1$ slide, or a $2/1$ slide, the framed
-  $2$-handle generators are canonically identified and $a'=a$.
+  \item For framed isotopy, a \(1/1\) slide, a \(2/1\) slide, or a
+  \(3/3\) slide, the oriented \(2\)-handle generators are canonically
+  identified and \(a'=a\) under that identification.
 
-  \item For a positive or negative $2/2$ slide with moving generator $e_x$
-  and stationary generator $e_y$, respectively,
+  \item For a \(2/2\) slide with moving generator \(e_x\), stationary
+  generator \(e_y\), and sign \(\varepsilon\in\{\pm1\}\) fixed by
   \[
-    e_x'=e_x+e_y,\quad (a_x',a_y')=(a_x+a_y,a_y),
+    J_m(e_x')=e_x+\varepsilon e_y,
   \]
-  or
+  one may take
   \[
-    e_x'=e_x-e_y,\quad (a_x',a_y')=(a_x-a_y,a_y).
-    \tag{3.6}\label{eq:two-two-marking-transport}
+    a_x'=a_x+\varepsilon a_y,
+    \qquad a_y'=a_y.
+    \tag{3.11}\label{eq:two-two-marking-transport}
   \]
   Every uninvolved coordinate is unchanged.
 
-  \item A $1$--$2$ birth adjoins an acyclic summand in degrees $1,2$,
-  and the transported class is represented by $a'=a\oplus0$.  On the side
-  containing the pair, every representative is cohomologous to one whose new
-  $2$-handle coordinate is zero.
+  \item A \(1\)--\(2\) birth adjoins the acyclic summand
+  \eqref{eq:acyclic-birth-summand} in degrees \(1,2\).  Extension by zero,
+  \(a'=a\oplus0\), represents the transported class.  Every representative
+  of that class is cohomologous to one whose new \(2\)-handle coordinate is
+  zero.
 
-  \item A $2$--$3$ birth adjoins an acyclic summand in degrees $2,3$.
-  The cocycle equation forces the new $2$-handle coordinate to be zero, so
-  again $a'=a\oplus0$.
+  \item A \(2\)--\(3\) birth adjoins
+  \eqref{eq:acyclic-birth-summand} in degrees \(2,3\).  The cocycle equation
+  itself forces the new \(2\)-handle coordinate to vanish, so again
+  \(a'=a\oplus0\).
 \end{enumerate}
 The coordinate rules for deaths are the inverses of the corresponding birth
 rules.
 \end{proposition}
 
 \begin{proof}
-For the first three moves the cellular continuation map in degree $2$ is,
-respectively, the identity, the identity after changing the $C_1$-basis,
-and the identity under isotopy of the attaching map.  This gives (i).
-For a $2/2$ slide, the cochain $a':=a\circ J_m$ satisfies
-$F_m^*a'=a$, so it represents $T_m([a])$.  Evaluating on
-$J_m(e_x')=e_x\pm e_y$ gives
-$a_x'=a_x\pm a_y$, while $e_y$ and every other generator are fixed.
+By \cref{lem:handle-cohomology-naturality}, it suffices to dualize the
+explicit chain maps there.  In case (i), the degree-two component of
+\(F_m\) is the canonical identification.  Changes of the degree-one or
+degree-three basis alter the adjacent boundary matrix but not the
+degree-two coordinates.
 
-For a $1$--$2$ birth the added cochain summand is
-$\mathbb Z\xrightarrow{\,\pm1\,}\mathbb Z$ in degrees $1,2$.
-Extension by zero represents the transported class, and subtracting a
-coboundary makes the new degree-$2$ coordinate zero.  For a $2$--$3$
-birth the same two-term complex lies in degrees $2,3$; hence the degree-$3$
-cocycle equation itself forces the new coordinate to vanish.  Reversing the
-chain equivalences gives the death statements.
+For a \(2/2\) slide, put \(a':=a\circ J_m\).  Then
+\(F_m^\vee(a')=a\), so \([a']=T_m[a]\) by
+\eqref{eq:canonical-transport-chain-map}.  Evaluation on the new moving
+generator gives
+\[
+  a_x'=a(J_m(e_x'))=a(e_x+\varepsilon e_y)
+  =a_x+\varepsilon a_y,
+\]
+and all remaining formulas follow from the definition of \(J_m\).
+
+For a \(1\)--\(2\) birth, the dual of the nonzero differential in
+\eqref{eq:acyclic-birth-summand} maps the new degree-one cochain
+isomorphically onto the new degree-two cochain.  Thus extension by zero is a
+cocycle representing the transported class, and any value on the new
+degree-two generator can be removed by a coboundary.  For a \(2\)--\(3\)
+birth, the dual differential maps the new degree-two cochain isomorphically
+onto the new degree-three cochain; hence a degree-two cocycle must have zero
+new coordinate.  Reversing the chain equivalences proves the death cases.
 \end{proof}
 
-\begin{lemma}[Naturality of a marking along a handle movie]
+\begin{lemma}[Naturality along a handle movie]
 \label{lem:marking-naturality-along-movie}
 Let
 \[
-  M=(m_1,\ldots,m_N)\colon \mathcal H_0\longrightarrow\mathcal H_N
+  M=(m_1,\ldots,m_N)\colon\mathcal H_0\longrightarrow\mathcal H_N
 \]
 be a finite movie of the moves above, let
-\(\Phi_M\colon X_0\to X_N\) be the orientation-preserving diffeomorphism
-realized by the movie, and write
+\(\Phi_M\colon X_0\to X_N\) be its realized orientation-preserving
+diffeomorphism, and set
 \[
-  \kappa_i\colon H^2(\mathcal H_i)\xrightarrow{\ \cong\ }
-  H^2(X_i;\mathbb Z)
+  T_M:=T_{m_N}\circ\cdots\circ T_{m_1}.
 \]
-for cellular comparison.  If
-\(T_M=T_{m_N}\circ\cdots\circ T_{m_1}\), then
+Then
 \[
-  \kappa_N\circ T_M
-  =(\Phi_M^{-1})^*\circ\kappa_0.
-  \tag{3.7}\label{eq:movie-marking-naturality}
+  \kappa_{\mathcal H_N}\circ T_M
+  =(\Phi_M^{-1})^*\circ\kappa_{\mathcal H_0}.
+  \tag{3.12}\label{eq:movie-marking-naturality}
 \]
+In particular, reverse movies induce inverse transports.
 \end{lemma}
 
 \begin{proof}
-For a single move, \eqref{eq:movie-marking-naturality} is exactly the
-cellular-to-singular naturality in
-\cref{lem:handle-cohomology-naturality}; the inverse appears because
-cohomological pullback is contravariant whereas \(T_m\) is directed from
-source to target.  The general identity follows by induction on \(N\), using
-functoriality of pullback at the induction step.
+For one move this is the definition of \(T_m\).  Suppose it holds for a
+movie \(M\colon\mathcal H_0\to\mathcal H_r\) with realized diffeomorphism
+\(\Phi\).  Adjoining a move
+\(m\colon\mathcal H_r\to\mathcal H_{r+1}\) with diffeomorphism \(\phi\)
+gives
+\[
+  \kappa_{\mathcal H_{r+1}}\circ T_m\circ T_M
+  =(\phi^{-1})^*\circ(\Phi^{-1})^*
+     \circ\kappa_{\mathcal H_0}
+  =((\phi\circ\Phi)^{-1})^*\circ\kappa_{\mathcal H_0}.
+\]
+Induction proves the claim.  Applying it to a movie followed by its reverse
+gives the final assertion.
 \end{proof}
 
 \begin{theorem}[Marked Kirby--Cerf completeness]
 \label{prop:marked-kirby-cerf}
-Let \((X,\alpha)\) and \((Y,\alpha')\) be marked four-manifolds,
-let \((\mathcal H,\xi_{\mathcal H})\) and
+Let \((X,\alpha)\) and \((Y,\alpha')\) be marked four-manifolds, and let
+\((\mathcal H,\xi_{\mathcal H})\) and
 \((\mathcal H',\xi_{\mathcal H'})\) be marked special Kirby presentations
-of \((X,\alpha)\) and \((Y,\alpha')\), respectively, and let
-\(f\colon X\to Y\) be an orientation-preserving diffeomorphism.  If
-\(f_*\alpha=\alpha'\), then the two marked presentations are connected by a
-finite sequence of marked lifts of the eight moves in
-\cref{def:kirby-move}, together with marked \(3\)-handle slides.
+of them.  If
+\[
+  f\colon X\longrightarrow Y
+\]
+is an orientation-preserving diffeomorphism satisfying
+\(f_*\alpha=\alpha'\), let \(f^*\mathcal H'\) be the pullback presentation
+of \(X\), and let \(\widetilde\xi_{\mathcal H'}\) be the unique class in
+\(H^2(f^*\mathcal H')\) whose cellular image is
+\(\operatorname{PD}_X(\alpha)\).  Then there is a finite marked movie on the
+fixed manifold \(X\),
+\[
+  (\mathcal H,\xi_{\mathcal H})
+  \rightsquigarrow
+  (f^*\mathcal H',\widetilde\xi_{\mathcal H'}),
+\]
+consisting of marked lifts of the eight moves in
+\cref{def:kirby-move} and marked \(3\)-handle slides.  Its endpoint
+identification is isotopic to \(\operatorname{id}_X\).  Following it by the
+tautological endpoint identification induced by \(f\) gives
+\((\mathcal H',\xi_{\mathcal H'})\) and represents the prescribed isotopy
+class of \(f\).
 \end{theorem}
 
 \begin{proof}
-Apply \cref{prop:special-handle-movie-completeness} to \(\mathcal H\),
-\(\mathcal H'\), and \(f\).  This gives a movie using only the asserted
-moves and realizing \(f\) up to isotopy.
-
-Let \(T_M\) be its composite marking transport.  By
-\cref{lem:marking-naturality-along-movie} and naturality of Poincar\'e duality,
+The specification of \(f\) is essential.  Pull \(\mathcal H'\) back along
+\(f\), obtaining a handle decomposition \(f^*\mathcal H'\) of the same
+manifold \(X\) on which \(\mathcal H\) is defined.  Denote by
+\(\widetilde\xi_{\mathcal H'}\in H^2(f^*\mathcal H')\) the pullback of the
+target marking.  It is the unique class whose image under cellular
+comparison is
 \[
-\begin{aligned}
-  \kappa_{\mathcal H'}(T_M\xi_{\mathcal H})
-  &=(f^{-1})^*\kappa_{\mathcal H}(\xi_{\mathcal H}) \\
-  &=(f^{-1})^*\operatorname{PD}_X(\alpha) \\
-  &=\operatorname{PD}_Y(f_*\alpha) \\
-  &=\operatorname{PD}_Y(\alpha') \\
-  &=\kappa_{\mathcal H'}(\xi_{\mathcal H'}).
-\end{aligned}
+  f^*\kappa_{\mathcal H'}(\xi_{\mathcal H'})
+  =f^*\operatorname{PD}_Y(\alpha')
+  =f^*\operatorname{PD}_Y(f_*\alpha)
+  =\operatorname{PD}_X(\alpha).
+  \tag{3.13}\label{eq:pd-marking-naturality}
 \]
-Since \(\kappa_{\mathcal H'}\) is an isomorphism,
-\(T_M\xi_{\mathcal H}=\xi_{\mathcal H'}\).  Mark every intermediate
-presentation by the image of \(\xi_{\mathcal H}\) under the corresponding
-partial composite of the maps \(T_m\).  Each step is then a marked Kirby
-move (or a marked \(3\)-handle slide), and the final marking is
-\(\xi_{\mathcal H'}\), as required.
+The last equality is naturality of cap product and Poincar\'e duality for an
+orientation-preserving diffeomorphism; see
+\cite[pp.~239--241 and Theorem~3.30]{Hatcher2002}.
+
+Apply \cref{prop:special-handle-movie-completeness}.  It gives a movie on the
+fixed manifold \(X\), from \(\mathcal H\) to \(f^*\mathcal H'\), whose
+endpoint identification is isotopic to \(\operatorname{id}_X\).  By
+\cref{lem:marking-naturality-along-movie}, its composite transport carries
+\(\xi_{\mathcal H}\) to a class whose cellular image remains
+\(\operatorname{PD}_X(\alpha)\).  By
+\eqref{eq:pd-marking-naturality} and injectivity of the target comparison
+isomorphism, this is exactly the pulled-back class
+\(\widetilde\xi_{\mathcal H'}\).
+
+Mark each intermediate presentation by the image of
+\(\xi_{\mathcal H}\) under the corresponding partial composite of the
+canonical transports.  Every step then satisfies
+\eqref{eq:marked-move-condition}, and the endpoint marking is
+\(\widetilde\xi_{\mathcal H'}\).  Finally identify the pulled-back endpoint
+with \(\mathcal H'\) using \(f\).  Equation
+\eqref{eq:pd-marking-naturality} says that this identification carries
+\(\widetilde\xi_{\mathcal H'}\) to \(\xi_{\mathcal H'}\), while the
+unmarked completeness theorem says that its composite with the fixed-manifold
+movie represents \(f\).  This proves every assertion.
 \end{proof}
