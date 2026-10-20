@@ -953,24 +953,20 @@ calculation proves the death case.
 
 \begin{theorem}[Elementary Kirby-move invariance]
 \label{thm:elementary-kirby-invariance}
-Let \(\mathcal H\) and \(\mathcal H'\) be special Kirby presentations, and
-let
+Let
 \[
-  m\colon\mathcal H\longrightarrow\mathcal H'
+  m\colon(\mathcal H,\xi)\longrightarrow(\mathcal H',\xi')
 \]
-be an elementary Kirby move, and let
-$T_m\colon H^2(\mathcal H)\to H^2(\mathcal H')$ be its induced cohomology
-transport from \cref{lem:handle-cohomology-naturality}.  Then, for every
-$\xi\in H^2(\mathcal H)$,
+be a marked Kirby move.  Then
 \[
   \CY_{\cC,\eta}(\mathcal H,\xi)
-  =\CY_{\cC,\eta}(\mathcal H',T_m\xi).
+  =\CY_{\cC,\eta}(\mathcal H',\xi').
 \]
 \end{theorem}
 
 \begin{proof}
 Choose a cocycle $a$ representing $\xi$, and in each case choose the
-target representative $a'$ prescribed by
+target representative $a'$ of $\xi'=T_m\xi$ prescribed by
 \cref{prop:marking-coordinate-transport}.  By
 \cref{prop:representative-independence}, proving the equality for these
 representatives proves it for the transported cohomology class.  We use the
@@ -1034,10 +1030,10 @@ These are all eight directed moves of \cref{def:kirby-move}.
 
 \begin{definition}[Manifold-level evaluator]
 \label{def:manifold-level-evaluator}
-For a marked four-manifold $(X,\alpha)$, choose a
-special Kirby presentation $\mathcal H$ as in
-\cref{prop:special-presentation-existence}.  Let $\xi_{\mathcal H}$ be the
-handle-cohomology class corresponding to $\operatorname{PD}_X(\alpha)$ and set
+For a marked four-manifold $(X,\alpha)$, choose a marked special Kirby
+presentation $(\mathcal H,\xi_{\mathcal H})$ as in
+\cref{prop:special-presentation-existence,def:marked-special-kirby-presentation}
+and set
 \[
   \CY_{\cC,\eta}(X,\alpha)
   :=\CY_{\cC,\eta}(\mathcal H,\xi_{\mathcal H}).
@@ -1056,12 +1052,12 @@ $\alpha\in H_2(X;\mathbb Z)$.  Then
 \end{theorem}
 
 \begin{proof}
-Choose special Kirby presentations of the two marked manifolds.  By marked
-Kirby--Cerf completeness, \cref{prop:marked-kirby-cerf}, they are connected
-by a finite sequence of the eight moves, transporting the cohomology class at
-each step, together with $3$-handle slides.  Apply
-\cref{thm:elementary-kirby-invariance} at each step and induct on the length
-of the sequence; $3$-handle slides are harmless by
+Choose marked special Kirby presentations of the two marked manifolds.  By
+marked Kirby--Cerf completeness, \cref{prop:marked-kirby-cerf}, they are
+connected by a finite sequence of marked lifts of the eight moves, together
+with marked $3$-handle slides.  Apply
+\cref{thm:elementary-kirby-invariance} at each marked step and induct on the
+length of the sequence; $3$-handle slides are harmless by
 \cref{lem:three-handle-slides}.  Handle-cohomology naturality and Poincar\'e-duality
 naturality identify the two endpoint markings, while representative
 independence says that the evaluation on each fixed presentation does not depend

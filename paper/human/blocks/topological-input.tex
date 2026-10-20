@@ -53,10 +53,9 @@ For a special Kirby presentation \(\mathcal H\), we retain from the
 explicit drawings of their attaching spheres.
 \end{convention}
 
-\begin{definition}[Handle representative of the marking]
-\label{def:handle-homology-marking}
-Let \((X,\alpha)\) be a marked four-manifold and let \(\mathcal H\) be a
-special Kirby presentation of \(X\).  Set
+\begin{definition}[Handle cohomology]
+\label{def:handle-cohomology}
+Let \(\mathcal H\) be a special Kirby presentation.  Set
 \[
   C^2(\mathcal H):=\operatorname{Hom}(C_2(\mathcal H),\mathbb Z),
   \qquad
@@ -68,19 +67,6 @@ and
   H^2(\mathcal H)
   :=Z^2(\mathcal H)/\operatorname{im}(\partial_2^*).
   \tag{3.2}\label{eq:handle-cohomology}
-\]
-Through the cellular comparison isomorphism of
-\cref{prop:handle-homology-realization}, define \(\xi_{\mathcal H}\) to be
-the class corresponding to \(\operatorname{PD}_X(\alpha)\).  A
-\emph{handle cocycle for \(\alpha\)} is
-an element \(a\in Z^2(\mathcal H)\) representing
-\(\xi_{\mathcal H}\).
-
-If \(e_k\) is the basis element represented by the \(k\)th framed component,
-write
-\[
-  a_k:=a(e_k)\in\mathbb Z.
-  \tag{3.3}\label{eq:handle-marking-coordinates}
 \]
 \end{definition}
 
@@ -105,3 +91,35 @@ decomposition is a relative CW decomposition, and its cellular chain complex
 is the handle complex above; see the handle-homology discussion immediately
 following that proposition.
 \end{proof}
+
+\begin{definition}[Marked special Kirby presentation]
+\label{def:marked-special-kirby-presentation}
+\label{def:handle-homology-marking}
+Let \((X,\alpha)\) be a marked four-manifold, let \(\mathcal H\) be a
+special Kirby presentation of \(X\), and write
+\[
+  \kappa_{\mathcal H}\colon
+  H^2(\mathcal H)\xrightarrow{\ \cong\ }H^2(X;\mathbb Z)
+\]
+for the cellular comparison isomorphism of
+\cref{prop:handle-homology-realization}.  A \emph{marked special Kirby
+presentation} of \((X,\alpha)\) is the pair
+\[
+  (\mathcal H,\xi_{\mathcal H}),
+  \qquad
+  \xi_{\mathcal H}\in H^2(\mathcal H),
+  \qquad
+  \kappa_{\mathcal H}(\xi_{\mathcal H})
+  =\operatorname{PD}_X(\alpha).
+\]
+Thus the marking \(\xi_{\mathcal H}\) is uniquely determined once
+\(\mathcal H\) and \(\alpha\) are fixed.
+
+A \emph{handle cocycle} for \((\mathcal H,\xi_{\mathcal H})\) is an element
+\(a\in Z^2(\mathcal H)\) representing \(\xi_{\mathcal H}\).  If \(e_k\) is
+the basis element represented by the \(k\)th framed component, write
+\[
+  a_k:=a(e_k)\in\mathbb Z.
+  \tag{3.3}\label{eq:handle-marking-coordinates}
+\]
+\end{definition}

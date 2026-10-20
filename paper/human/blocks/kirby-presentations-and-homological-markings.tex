@@ -3,12 +3,16 @@
 
 This section performs the first arrow in the construction:
 \[
-  (X,\alpha)\longmapsto (\mathcal H,[a]).
+  (X,\alpha)\longmapsto(\mathcal H,\xi_{\mathcal H}),
+  \qquad
+  \kappa_{\mathcal H}(\xi_{\mathcal H})
+  =\operatorname{PD}_X(\alpha).
 \]
-Here \(\mathcal H\) is a Kirby presentation of \(X\), while \([a]\) is the
-handle-cohomology class corresponding to \(\operatorname{PD}_X(\alpha)\).
-This marked handle data is the complete topological input passed to the
-evaluator in \cref{sec:twisted-evaluator}.
+Here \(\mathcal H\) is a special Kirby presentation of \(X\), while
+\(\xi_{\mathcal H}\) is its handle-cohomology marking.  The evaluator in
+\cref{sec:twisted-evaluator} is displayed using a handle cocycle
+\(a\in Z^2(\mathcal H)\) representing \(\xi_{\mathcal H}\), but the resulting
+value will be independent of that representative.
 
 \input{topological-input}
 \input{marked-kirby-calculus}

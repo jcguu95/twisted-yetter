@@ -1,11 +1,10 @@
 \subsection{Marked Kirby calculus}
 \label{subsec:marked-kirby-calculus}
 
-The ordinary Kirby moves must now be read together with their induced maps on
-the handle complex.  This is the only additional meaning of the adjective
-``marked.''
+We first specify the underlying Kirby moves.  Their lifts to marked
+presentations will then be defined by the induced maps on handle cohomology.
 
-\begin{definition}[Elementary marked Kirby move]
+\begin{definition}[Elementary Kirby move]
 \label{def:kirby-move}
 Let \(\mathcal H\) and \(\mathcal H'\) be special Kirby presentations.  An
 elementary move \(m\colon\mathcal H\to\mathcal H'\) is one of the following
@@ -42,7 +41,7 @@ evaluations.
 
 \begin{lemma}[Transport of the marking]
 \label{lem:handle-cohomology-naturality}
-Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary marked Kirby move
+Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary Kirby move
 or a slide of one \(3\)-handle over another.  Then \(m\) determines a
 chain-homotopy equivalence
 \[
@@ -68,11 +67,31 @@ the two relative CW structures, so cellular-to-singular comparison gives the
 claimed naturality.
 \end{proof}
 
+\begin{definition}[Marked Kirby move]
+\label{def:marked-kirby-move}
+Let \((\mathcal H,\xi)\) and \((\mathcal H',\xi')\) be marked special
+Kirby presentations.  A \emph{marked Kirby move}
+\[
+  m\colon(\mathcal H,\xi)\longrightarrow(\mathcal H',\xi')
+\]
+is an elementary Kirby move \(m\colon\mathcal H\to\mathcal H'\) satisfying
+\[
+  \xi'=T_m\xi.
+  \tag{3.5}\label{eq:marked-move-condition}
+\]
+A marked \(3\)-handle slide is defined by the same condition for an
+underlying \(3\)-handle slide.
+\end{definition}
+
 \begin{proposition}[Coordinate form of marking transport]
 \label{prop:marking-coordinate-transport}
-Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary marked Kirby move
-and let \(a\in Z^2(\mathcal H)\).  A cocycle
-\(a'\in Z^2(\mathcal H')\) representing \(T_m([a])\) may be chosen as follows.
+Let
+\[
+  m\colon(\mathcal H,\xi)\longrightarrow(\mathcal H',\xi')
+\]
+be a marked Kirby move, and let \(a\in Z^2(\mathcal H)\) represent \(\xi\).
+A cocycle \(a'\in Z^2(\mathcal H')\) representing
+\(\xi'=T_m\xi\) may be chosen as follows.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item For framed isotopy, a $1/1$ slide, or a $2/1$ slide, the framed
   $2$-handle generators are canonically identified and $a'=a$.
@@ -85,7 +104,7 @@ and let \(a\in Z^2(\mathcal H)\).  A cocycle
   or
   \[
     e_x'=e_x-e_y,\quad (a_x',a_y')=(a_x-a_y,a_y).
-    \tag{3.5}\label{eq:two-two-marking-transport}
+    \tag{3.6}\label{eq:two-two-marking-transport}
   \]
   Every uninvolved coordinate is unchanged.
 
@@ -131,7 +150,7 @@ the transported marking and
 \[
   \CY_{\cC,\eta}(\mathcal H,a)
   =\CY_{\cC,\eta}(\mathcal H',a).
-  \tag{3.6}\label{eq:three-handle-slide-evaluation}
+  \tag{3.7}\label{eq:three-handle-slide-evaluation}
 \]
 \end{lemma}
 
@@ -231,7 +250,7 @@ for cellular comparison.  If
 \[
   \kappa_N\circ T_M
   =(\Phi_M^{-1})^*\circ\kappa_0.
-  \tag{3.7}\label{eq:movie-marking-naturality}
+  \tag{3.8}\label{eq:movie-marking-naturality}
 \]
 \end{lemma}
 
@@ -246,15 +265,14 @@ functoriality of pullback at the induction step.
 
 \begin{theorem}[Marked Kirby--Cerf completeness]
 \label{prop:marked-kirby-cerf}
-Let \(X\) and \(Y\) be closed, connected, oriented smooth four-manifolds,
-let \(\mathcal H\) and \(\mathcal H'\) be special Kirby presentations of
-\(X\) and \(Y\), let \(\alpha\in H_2(X;\mathbb Z)\) and
-\(\alpha'\in H_2(Y;\mathbb Z)\), and let
+Let \((X,\alpha)\) and \((Y,\alpha')\) be marked four-manifolds,
+let \((\mathcal H,\xi_{\mathcal H})\) and
+\((\mathcal H',\xi_{\mathcal H'})\) be marked special Kirby presentations
+of \((X,\alpha)\) and \((Y,\alpha')\), respectively, and let
 \(f\colon X\to Y\) be an orientation-preserving diffeomorphism.  If
 \(f_*\alpha=\alpha'\), then the two marked presentations are connected by a
-finite sequence of the eight moves in \cref{def:kirby-move}, together with
-\(3\)-handle slides.  The composite of the maps \(T_m\) carries
-\(\xi_{\mathcal H}\) to \(\xi_{\mathcal H'}\).
+finite sequence of marked lifts of the eight moves in
+\cref{def:kirby-move}, together with marked \(3\)-handle slides.
 \end{theorem}
 
 \begin{proof}
@@ -280,5 +298,9 @@ Let \(T_M\) be its composite marking transport.  By
 \end{aligned}
 \]
 Since \(\kappa_{\mathcal H'}\) is an isomorphism,
-\(T_M\xi_{\mathcal H}=\xi_{\mathcal H'}\), as required.
+\(T_M\xi_{\mathcal H}=\xi_{\mathcal H'}\).  Mark every intermediate
+presentation by the image of \(\xi_{\mathcal H}\) under the corresponding
+partial composite of the maps \(T_m\).  Each step is then a marked Kirby
+move (or a marked \(3\)-handle slide), and the final marking is
+\(\xi_{\mathcal H'}\), as required.
 \end{proof}
