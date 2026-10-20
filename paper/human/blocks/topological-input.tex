@@ -1,12 +1,10 @@
-\subsection{From a marked four-manifold to marked handle data}
+\subsection{Kirby calculus for closed oriented four-manifolds}
 \label{subsec:topological-input}
 
-\begin{definition}[Marked four-manifold]
-\label{def:marked-four-manifold}
-A \emph{marked four-manifold} is a pair \((X,\alpha)\), where \(X\) is a
-closed, connected, oriented smooth four-manifold and
-\(\alpha\in H_2(X;\mathbb Z)\).
-\end{definition}
+This subsection is a review of textbook-level handle and Kirby calculus.  We
+follow \cite[Chapters~4 and~5]{GompfStipsicz1999}; the original framed-link
+calculus is due to Kirby \cite{Kirby1978}.  Throughout, the four-manifolds are
+closed, connected, oriented, and smooth.
 
 \begin{definition}[Kirby diagram]
 \label{def:kirby-diagram}
@@ -29,7 +27,7 @@ Let \(X\) be a closed, connected, oriented smooth four-manifold.  A
 \emph{special Kirby presentation} \(\mathcal H\) of \(X\) is a handle
 decomposition with one \(0\)-handle and one \(4\)-handle, together with its
 dotted--framed Kirby diagram \(D_{\mathcal H}\).  The diagram displays the
-primal \(1\)- and \(2\)-handles; the \(3\)-handles close
+\(1\)- and \(2\)-handles; the \(3\)-handles close
 \(W^{(2)}_{D_{\mathcal H}}\) before the final \(4\)-handle is attached.
 
 After orienting the handles, the part of the integral handle complex relevant
@@ -53,73 +51,81 @@ For a special Kirby presentation \(\mathcal H\), we retain from the
 explicit drawings of their attaching spheres.
 \end{convention}
 
-\begin{definition}[Handle cohomology]
-\label{def:handle-cohomology}
-Let \(\mathcal H\) be a special Kirby presentation.  Set
-\[
-  C^2(\mathcal H):=\operatorname{Hom}(C_2(\mathcal H),\mathbb Z),
-  \qquad
-  Z^2(\mathcal H)
-  :=\{a\in C^2(\mathcal H):a\circ\partial_3=0\},
-\]
-and
-\[
-  H^2(\mathcal H)
-  :=Z^2(\mathcal H)/\operatorname{im}(\partial_2^*).
-  \tag{3.2}\label{eq:handle-cohomology}
-\]
-\end{definition}
-
-\begin{proposition}[Existence and realization]
+\begin{proposition}[Existence of special presentations]
 \label{prop:special-presentation-existence}
-\label{prop:handle-homology-realization}
 Let \(X\) be a closed, connected, oriented smooth four-manifold.  Then \(X\)
-admits a special Kirby presentation.  For every such presentation
-\(\mathcal H\) of \(X\), the handle complex
-\eqref{eq:handle-complex} computes the integral (co)homology of \(X\); in
-particular, cellular comparison gives a natural isomorphism
-\[
-  H^2(\mathcal H)\cong H^2(X;\mathbb Z).
-\]
+admits a special Kirby presentation.
 \end{proposition}
 
 \begin{proof}
 Choose a Morse function with a unique minimum and maximum and pass to its
-handle decomposition.  Existence is
-\cite[Proposition~4.2.13]{GompfStipsicz1999} and its dual argument.  A handle
-decomposition is a relative CW decomposition, and its cellular chain complex
-is the handle complex above; see the handle-homology discussion immediately
-following that proposition.
+handle decomposition.  This is \cite[Proposition~4.2.13]{GompfStipsicz1999}
+together with its dual argument.
 \end{proof}
 
-\begin{definition}[Marked special Kirby presentation]
-\label{def:marked-special-kirby-presentation}
-\label{def:handle-homology-marking}
-Let \((X,\alpha)\) be a marked four-manifold, let \(\mathcal H\) be a
-special Kirby presentation of \(X\), and write
-\[
-  \kappa_{\mathcal H}\colon
-  H^2(\mathcal H)\xrightarrow{\ \cong\ }H^2(X;\mathbb Z)
-\]
-for the cellular comparison isomorphism of
-\cref{prop:handle-homology-realization}.  A \emph{marked special Kirby
-presentation} of \((X,\alpha)\) is the pair
-\[
-  (\mathcal H,\xi_{\mathcal H}),
-  \qquad
-  \xi_{\mathcal H}\in H^2(\mathcal H),
-  \qquad
-  \kappa_{\mathcal H}(\xi_{\mathcal H})
-  =\operatorname{PD}_X(\alpha).
-\]
-Thus the marking \(\xi_{\mathcal H}\) is uniquely determined once
-\(\mathcal H\) and \(\alpha\) are fixed.
-
-A \emph{handle cocycle} for \((\mathcal H,\xi_{\mathcal H})\) is an element
-\(a\in Z^2(\mathcal H)\) representing \(\xi_{\mathcal H}\).  If \(e_k\) is
-the basis element represented by the \(k\)th framed component, write
-\[
-  a_k:=a(e_k)\in\mathbb Z.
-  \tag{3.3}\label{eq:handle-marking-coordinates}
-\]
+\begin{definition}[Elementary Kirby move]
+\label{def:kirby-move}
+Let \(\mathcal H\) and \(\mathcal H'\) be special Kirby presentations.  An
+elementary move \(m\colon\mathcal H\to\mathcal H'\) is one of the following
+eight directed modifications:
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item\label{move:framed-isotopy} framed isotopy;
+  \item\label{move:one-over-one} a \(1/1\) slide;
+  \item\label{move:two-over-one} a \(2/1\) slide;
+  \item\label{move:two-over-two} a \(2/2\) slide;
+  \item\label{move:one-two-birth} a \(1\)--\(2\) birth;
+  \item\label{move:one-two-death} a \(1\)--\(2\) death;
+  \item\label{move:two-three-birth} a \(2\)--\(3\) birth; or
+  \item\label{move:two-three-death} a \(2\)--\(3\) death.
+\end{enumerate}
+For an \(r/s\) slide, \(r\) is the index of the moving handle and \(s\) the
+index of the stationary handle.  Outside the supporting ball or
+cancelling-pair neighborhood, the handle decomposition is unchanged.
 \end{definition}
+
+\begin{convention}[Standard local models]
+\label{conv:referenced-kirby-dictionary}
+The names in \cref{def:kirby-move} have their standard meanings in Kirby
+calculus.  The \(1/1\) and \(2/1\) moves are the dotted-circle moves in
+\cite[Figures~5.39 and~5.36]{GompfStipsicz1999}; a \(2/2\) move is an oriented
+band sum with a framed push-off of the stationary component
+\cite[Section~5.1]{GompfStipsicz1999}; and births insert the isolated standard
+cancelling pairs, with deaths as their inverses.  This convention fixes the
+topology of each source and target and nothing more.
+\end{convention}
+
+\begin{theorem}[Kirby--Cerf completeness for special presentations]
+\label{prop:special-handle-movie-completeness}
+Let \(\mathcal H_0\) and \(\mathcal H_1\) be special Kirby presentations of
+closed, connected, oriented smooth four-manifolds \(X_0\) and \(X_1\), and
+let \(f\colon X_0\to X_1\) be an orientation-preserving diffeomorphism.
+Then \(\mathcal H_0\) and \(\mathcal H_1\) are connected by a finite sequence
+of the eight moves in \cref{def:kirby-move}, together with slides among
+\(3\)-handles.  The diffeomorphism realized by the composite movie is
+isotopic to \(f\).
+\end{theorem}
+
+\begin{proof}
+Pull \(\mathcal H_1\) back along \(f\), so that it becomes a handle
+decomposition of \(X_0\).  Choose small balls inside the unique \(0\)- and
+\(4\)-handles and identify their collars.  Removing the interiors of these
+balls turns both decompositions into relative handle decompositions of the
+same cobordism \(S^3\to S^3\), using only handles of indices \(1,2,3\).
+
+Connected Cerf theory
+\cite[Theorem~3.4]{GayWehrheimWoodward2012} relates the two relative
+decompositions by isotopies of attaching data, same-index handle slides, and
+births or deaths of adjacent-index cancelling pairs.  In handle language this
+is the standard completeness theorem
+\cite[Theorem~4.2.12]{GompfStipsicz1999}.  The connected-level condition
+excludes \(0\)--\(1\) and \(3\)--\(4\) births.  In dotted--framed notation,
+index-\(1\) slides are the \(1/1\) move
+\cite[Figure~5.39]{GompfStipsicz1999}, isotopies through the \(1\)-handlebody
+are generated by framed isotopy and the \(2/1\) move
+\cite[Figure~5.36]{GompfStipsicz1999}, and index-\(2\) slides are the framed
+band sums of \cite[Section~5.1]{GompfStipsicz1999}.  The two possible
+adjacent-index cancellations give the four birth/death moves.  Thus the Cerf
+movie has precisely the asserted diagrammatic form.  The movie for the
+pulled-back target realizes the identity of \(X_0\) up to isotopy; composing
+its final identification with \(f\) yields a movie realizing \(f\).
+\end{proof}
