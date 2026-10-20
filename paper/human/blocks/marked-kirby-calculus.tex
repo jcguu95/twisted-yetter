@@ -1,142 +1,82 @@
 \subsection{Kirby calculus for closed oriented marked four-manifolds}
 \label{subsec:marked-kirby-calculus}
 
-Suppose that a closed oriented smooth four-manifold \(X\) is equipped with a
-class \(\alpha\in H_2(X;\mathbb Z)\), and require every diffeomorphism to
-carry this class to the class on its target.  Does the ordinary Kirby
-calculus remain complete?  The answer is yes.
+We now specify the object on which marked Kirby calculus acts.
 
-\begin{theorem}[Marked Kirby--Cerf completeness]
-\label{prop:marked-kirby-cerf}
-Let \(f\colon X\to Y\) be an orientation-preserving diffeomorphism of closed,
-connected, oriented smooth four-manifolds, and let
-\[
-  \alpha\in H_2(X;\mathbb Z),
-  \qquad
-  \alpha'\in H_2(Y;\mathbb Z),
-  \qquad
-  f_*\alpha=\alpha'.
-\]
-For any special Kirby presentations \(\mathcal H\) of \(X\) and
-\(\mathcal H'\) of \(Y\), the Kirby movie furnished by
-\cref{prop:special-handle-movie-completeness} has a unique lift that
-transports the marking \(\alpha\).  It ends at the pullback of the marking
-\(\alpha'\), and its composite with the final identification by \(f\)
-represents the prescribed marked diffeomorphism
-\[
-  f\colon(X,\alpha)\longrightarrow(Y,\alpha').
-\]
-\end{theorem}
-
-\begin{proof}
-The handle filtration of a special Kirby presentation \(\mathcal K\) has
-cellular chain complex \(C_*(\mathcal K)\).  Put
-\[
-  H^2(\mathcal K)
-  :=H^2\!\left(\operatorname{Hom}
-    (C_*(\mathcal K),\mathbb Z)\right).
-\]
-Natural cellular-to-singular comparison gives an isomorphism
-\[
-  \kappa_{\mathcal K}\colon
-  H^2(\mathcal K)\xrightarrow{\ \cong\ }H^2(X_{\mathcal K};\mathbb Z).
-\]
-Thus the marking of \(\mathcal H\) is the unique class
-\[
-  \xi_{\mathcal H}
-  :=\kappa_{\mathcal H}^{-1}
-    \bigl(\operatorname{PD}_X(\alpha)\bigr)
-  \in H^2(\mathcal H).
-  \tag{3.2}\label{eq:marked-presentation}
-\]
-This is the only place where the homology class enters the Kirby
-presentation.
-
-Pull \(\mathcal H'\) back along \(f\).  By ordinary Kirby--Cerf
-completeness there is a finite movie on the fixed manifold \(X\),
-\[
-  \mathcal H=\mathcal H_0
-  \xrightarrow{m_1}\mathcal H_1
-  \longrightarrow\cdots\longrightarrow
-  \mathcal H_N=f^*\mathcal H',
-\]
-whose realized diffeomorphism is isotopic to
-\(\operatorname{id}_X\).  Each standard move
-\(m_r\colon\mathcal H_{r-1}\to\mathcal H_r\) carries a relative isotopy
-class of local diffeomorphisms
-\(\phi_r\colon X_{\mathcal H_{r-1}}\to X_{\mathcal H_r}\).  It therefore
-forces the transport
-\[
-  T_{m_r}:=
-  \kappa_{\mathcal H_r}^{-1}
-  \circ(\phi_r^{-1})^*
-  \circ\kappa_{\mathcal H_{r-1}}.
-  \tag{3.3}\label{eq:marking-transport}
-\]
-Starting with \(\xi_0=\xi_{\mathcal H}\), define recursively
-\(\xi_r:=T_{m_r}\xi_{r-1}\).  This gives the unique possible marked lift of
-the movie.
-
-If \(\Phi_r=\phi_r\circ\cdots\circ\phi_1\), repeated substitution in
-\eqref{eq:marking-transport} gives
-\[
-  \kappa_{\mathcal H_r}(\xi_r)
-  =(\Phi_r^{-1})^*\operatorname{PD}_X(\alpha).
-  \tag{3.4}\label{eq:movie-marking-naturality}
-\]
-At \(r=N\), the map \(\Phi_N\) is isotopic to
-\(\operatorname{id}_X\).  Hence
-\[
-  \kappa_{f^*\mathcal H'}(\xi_N)
-  =\operatorname{PD}_X(\alpha),
-\]
-so \(\xi_N\) is exactly the marking of the pulled-back presentation.
-
-Finally, Poincar\'e duality is natural under orientation-preserving
-diffeomorphisms:
-\[
-  f^*\operatorname{PD}_Y(\alpha')
-  =f^*\operatorname{PD}_Y(f_*\alpha)
-  =\operatorname{PD}_X(\alpha).
-  \tag{3.5}\label{eq:pd-marking-naturality}
-\]
-Therefore the final identification by \(f\) carries \(\xi_N\) to the
-marking of \(\mathcal H'\).  The underlying unmarked composite represents
-\(f\) by \cref{prop:special-handle-movie-completeness}; hence the lifted
-composite represents the prescribed marked diffeomorphism.
-\end{proof}
-
-\begin{definition}[Marked presentations and moves]
+\begin{definition}[Marked Kirby datum]
 \label{def:marked-special-kirby-presentation}
 \label{def:handle-homology-marking}
+An \(H_2\)-marked four-manifold is a pair \((X,\alpha)\), where \(X\) is a
+closed, connected, oriented smooth four-manifold and
+\(\alpha\in H_2(X;\mathbb Z)\).
+
+Let \(\mathcal H\) be a special Kirby presentation of \(X\), and set
+\[
+  H^2(\mathcal H)
+  :=
+  H^2\!\left(\operatorname{Hom}
+    (C_*(\mathcal H),\mathbb Z)\right).
+\]
+The handle filtration and cellular-to-singular comparison give a natural
+isomorphism
+\[
+  \kappa_{\mathcal H}\colon
+  H^2(\mathcal H)\xrightarrow{\ \cong\ }H^2(X;\mathbb Z).
+\]
+A \emph{marked Kirby datum} for \((X,\alpha)\) is a pair
+\((\mathcal H,\xi)\), where \(\xi\in H^2(\mathcal H)\) satisfies
+\[
+  \kappa_{\mathcal H}(\xi)=\operatorname{PD}_X(\alpha).
+  \tag{3.2}\label{eq:marked-presentation}
+\]
+Equivalently,
+\(\xi=\kappa_{\mathcal H}^{-1}(\operatorname{PD}_X(\alpha))\), so the
+marking is uniquely determined once \(\mathcal H\) and \(\alpha\) are
+fixed.  We also call \((\mathcal H,\xi)\) a
+\emph{marked special Kirby presentation}.
+\end{definition}
+
+\begin{definition}[Transport under a Kirby move]
 \label{def:marked-kirby-move}
-The pair \((\mathcal H,\xi_{\mathcal H})\) in
-\eqref{eq:marked-presentation} is the \emph{marked special Kirby
-presentation} of \((X,\alpha)\) based on \(\mathcal H\).  A
-\emph{handle cocycle} is a cocycle
+Let \(m\colon\mathcal H\to\mathcal H'\) be one of the elementary moves in
+\cref{def:kirby-move}, or a \(3/3\) slide.  Its standard local model
+determines a relative isotopy class of orientation-preserving
+diffeomorphisms
+\[
+  \phi_m\colon X_{\mathcal H}\longrightarrow X_{\mathcal H'}.
+\]
+Define
+\[
+  T_m
+  :=
+  \kappa_{\mathcal H'}^{-1}
+  \circ(\phi_m^{-1})^*
+  \circ\kappa_{\mathcal H}
+  \colon H^2(\mathcal H)\longrightarrow H^2(\mathcal H').
+  \tag{3.3}\label{eq:marking-transport}
+\]
+The result of applying \(m\) to \((\mathcal H,\xi)\) is
+\[
+  m_*(\mathcal H,\xi):=(\mathcal H',T_m\xi).
+\]
+This is independent of the representative of the relative isotopy class
+of \(\phi_m\).  A move equipped with this transport is called a
+\emph{marked Kirby move}.
+\end{definition}
+
+The preceding definition acts on cohomology classes.  For the evaluator we
+will also need a convenient cocycle representative.  A \emph{handle
+cocycle} for \((\mathcal H,\xi)\) is a cocycle
 \[
   a\in\operatorname{Hom}(C_2(\mathcal H),\mathbb Z)
 \]
-representing \(\xi_{\mathcal H}\).  If \(e_j\) denotes the oriented
-\(2\)-handle generator corresponding to the \(j\)th framed component, write
-\(a_j:=a(e_j)\).
+representing \(\xi\).  If \(e_j\) is the oriented \(2\)-handle generator
+corresponding to the \(j\)th framed component, write \(a_j:=a(e_j)\).
 
-A \emph{marked Kirby move}
-\[
-  m\colon(\mathcal H,\xi)\longrightarrow(\mathcal H',\xi')
-\]
-is an elementary Kirby move, or a \(3/3\) slide, for which
-\[
-  \xi'=T_m\xi.
-  \tag{3.6}\label{eq:marked-move-condition}
-\]
-\end{definition}
-
-\begin{proposition}[Coordinate form of marking transport]
+\begin{proposition}[Coordinate form of move transport]
 \label{prop:marking-coordinate-transport}
-Let \(a\) be a handle cocycle for \((\mathcal H,\xi)\).  For a marked move
-\(m\colon(\mathcal H,\xi)\to(\mathcal H',T_m\xi)\), the transported class
-has a representative \(a'\) with the following coordinates.
+Let \(a\) represent \(\xi\).  The class \(T_m\xi\) has a representative
+\(a'\) with the following coordinates.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item For framed isotopy, a \(1/1\) slide, a \(2/1\) slide, or a
   \(3/3\) slide, the \(2\)-handle generators are canonically identified and
@@ -150,9 +90,9 @@ has a representative \(a'\) with the following coordinates.
     a_x'=a_x+\varepsilon a_y,
     \qquad
     a_y'=a_y,
-    \tag{3.7}\label{eq:two-two-marking-transport}
+    \tag{3.4}\label{eq:two-two-marking-transport}
   \]
-  while all uninvolved coordinates are unchanged.
+  while every uninvolved coordinate is unchanged.
 
   \item A \(1\)--\(2\) birth admits \(a'=a\oplus0\); every representative
   of the transported class is cohomologous to one whose new \(2\)-handle
@@ -166,27 +106,107 @@ The death formulas are the inverses of the corresponding birth formulas.
 
 \begin{proof}
 The handle complex is the cellular chain complex of the handle filtration,
-and cellular comparison is natural.  It is therefore enough to write the
+and cellular comparison is natural.  It is therefore enough to use the
 standard cellular map for each local move
 \cite[Sections~4.1--4.2]{DurstGeigesKegel2019}.
 
 Isotopy, \(1/1\), \(2/1\), and \(3/3\) moves act as the identity on
 \(C_2\).  For a \(2/2\) slide, the target-to-source basis change sends the
-new moving generator to \(e_x+\varepsilon e_y\) and fixes all other
+new moving generator to \(e_x+\varepsilon e_y\) and fixes the other
 generators.  Precomposing \(a\) with this basis change gives
 \[
-  a_x'=a(e_x+\varepsilon e_y)=a_x+\varepsilon a_y,
+  a_x'=a(e_x+\varepsilon e_y)=a_x+\varepsilon a_y.
 \]
-which proves \eqref{eq:two-two-marking-transport}.
 
 A \(1\)--\(2\) birth adds the acyclic complex
 \[
   0\longrightarrow\mathbb Z
   \xrightarrow{\ \pm1\ }\mathbb Z\longrightarrow0
 \]
-in degrees \(2\) and \(1\).  The new degree-two cochain is therefore a
-coboundary, so its coordinate may be chosen to be zero.  A \(2\)--\(3\)
-birth adds the same acyclic complex in degrees \(3\) and \(2\); now the
-degree-two cocycle equation itself forces the new coordinate to vanish.
-Reversing these chain equivalences gives the death formulas.
+in degrees \(2\) and \(1\).  Its new degree-two cochain is a coboundary, so
+that coordinate may be chosen to be zero.  A \(2\)--\(3\) birth adds the
+same acyclic complex in degrees \(3\) and \(2\); the degree-two cocycle
+equation now forces the new coordinate to vanish.  Reversing these chain
+equivalences gives the death formulas.
+\end{proof}
+
+\begin{proposition}[Kirby moves preserve marked data]
+\label{prop:kirby-move-preserves-marked-data}
+If \((\mathcal H,\xi)\) is a marked Kirby datum for \((X,\alpha)\), then
+\[
+  m_*(\mathcal H,\xi)
+  =
+  (\mathcal H',T_m\xi)
+\]
+is a marked Kirby datum for
+\[
+  \bigl(X_{\mathcal H'},(\phi_m)_*\alpha\bigr).
+\]
+In particular, when the move is performed on a fixed manifold using its
+standard identification, it preserves the original marking \(\alpha\).
+\end{proposition}
+
+\begin{proof}
+By \eqref{eq:marking-transport} and naturality of Poincar\'e duality,
+\[
+  \begin{aligned}
+  \kappa_{\mathcal H'}(T_m\xi)
+  &=(\phi_m^{-1})^*\kappa_{\mathcal H}(\xi)\\
+  &=(\phi_m^{-1})^*\operatorname{PD}_X(\alpha)\\
+  &=\operatorname{PD}_{X_{\mathcal H'}}
+      \bigl((\phi_m)_*\alpha\bigr).
+  \end{aligned}
+\]
+This is exactly the defining condition \eqref{eq:marked-presentation}.
+\end{proof}
+
+\begin{theorem}[Marked Kirby--Cerf completeness]
+\label{prop:marked-kirby-cerf}
+Let
+\[
+  f\colon(X,\alpha)\longrightarrow(Y,\alpha')
+\]
+be an orientation-preserving diffeomorphism of \(H_2\)-marked closed
+four-manifolds; thus \(f_*\alpha=\alpha'\).  Let
+\((\mathcal H,\xi)\) and \((\mathcal H',\xi')\) be marked Kirby data for
+\((X,\alpha)\) and \((Y,\alpha')\), respectively.  Then there is a finite
+movie of marked Kirby moves from \((\mathcal H,\xi)\) to the pullback of
+\((\mathcal H',\xi')\) on \(X\).  Following that movie by the tautological
+endpoint identification induced by \(f\) represents the prescribed isotopy
+class of the marked diffeomorphism \(f\).
+\end{theorem}
+
+\begin{proof}
+Apply ordinary Kirby--Cerf completeness,
+\cref{prop:special-handle-movie-completeness}, to obtain a movie on the
+fixed manifold \(X\),
+\[
+  \mathcal H=\mathcal H_0
+  \xrightarrow{m_1}\mathcal H_1
+  \longrightarrow\cdots\longrightarrow
+  \mathcal H_N=f^*\mathcal H',
+\]
+whose realized diffeomorphism is isotopic to
+\(\operatorname{id}_X\).  Starting with \(\xi_0=\xi\), define recursively
+\[
+  \xi_r:=T_{m_r}\xi_{r-1}.
+\]
+By \cref{prop:kirby-move-preserves-marked-data}, every
+\((\mathcal H_r,\xi_r)\) is a marked Kirby datum for the corresponding
+transport of \((X,\alpha)\).  Since the composite diffeomorphism of the
+movie is isotopic to \(\operatorname{id}_X\), the endpoint
+\((f^*\mathcal H',\xi_N)\) is a marked Kirby datum for \((X,\alpha)\).
+
+There is only one marking on the fixed presentation \(f^*\mathcal H'\)
+that satisfies \eqref{eq:marked-presentation}.  Moreover,
+\[
+  f^*\operatorname{PD}_Y(\alpha')
+  =f^*\operatorname{PD}_Y(f_*\alpha)
+  =\operatorname{PD}_X(\alpha).
+\]
+Hence \(\xi_N\) is precisely the pullback of \(\xi'\).  Finally,
+\cref{prop:special-handle-movie-completeness} says that composing the
+fixed-manifold movie with the endpoint identification induced by \(f\)
+represents the prescribed isotopy class of \(f\).  The same composite
+therefore represents the prescribed marked diffeomorphism.
 \end{proof}
