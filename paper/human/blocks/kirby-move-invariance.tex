@@ -102,7 +102,7 @@ defines a linear functional
 The dotted operation in that term is
 \[
   \mathcal E_\delta(P_{\mathbf1,B_\delta}).
-  \tag{5.1}\label{eq:dotted-section}
+  \tag{4.7}\label{eq:dotted-section}
 \]
 For every puncture $p$ on the $k$th ordinary component, the following four
 features remain distinct.
@@ -223,7 +223,7 @@ word of \cref{lem:dotted-collar-factorization}.  For every $m\in\mathbb Z$,
   \prod_k\eta_{\lambda_k}^{m(\delta^1e_\delta^*)_k}
   =
   \chi_\eta(w_\delta)^m.
-  \tag{5.2}\label{eq:dotted-incidence-character}
+  \tag{4.8}\label{eq:dotted-incidence-character}
 \]
 Moreover the scalar on either side acts trivially on the closed term
 $\mathcal E_\delta(P_{\mathbf1,B_\delta})$.
@@ -362,7 +362,7 @@ decorated incoming skein $\Gamma$,
   \mathsf H^{(3)}_{\mathrm{src}}([\Gamma])
   =
   \mathsf H^{(3)}_{\mathrm{tgt}}([\Gamma]).
-  \tag{5.3}\label{eq:one-one-index-three-interface}
+  \tag{4.9}\label{eq:one-one-index-three-interface}
 \]
 \end{lemma}
 
@@ -395,7 +395,7 @@ two source handle maps act termwise as
     ([\Gamma_{i,j;\mu,\nu}])
   =\delta_{i,\mathbf1}\delta_{j,\mathbf1}
     [\Gamma_{i,j;\mu,\nu}].
-  \tag{5.3a}\label{eq:one-one-simple-channel-action}
+  \tag{4.10}\label{eq:one-one-simple-channel-action}
 \]
 
 The standard $1/1$ source and target are the local models fixed by
@@ -435,14 +435,14 @@ source and target local tangles are respectively the two sides of
   c_{B,x}\bigl(P_{\mathbf1,B}\otimes(\eta^a)_x\bigr)
   =
   \bigl((\eta^a)_x\otimes P_{\mathbf1,B}\bigr)c_{B,x}.
-  \tag{5.4}\label{eq:positive-two-one-interface}
+  \tag{4.11}\label{eq:positive-two-one-interface}
 \]
 For the opposite crossing orientation they are the two sides of
 \[
   c_{x,B}^{-1}\bigl(P_{\mathbf1,B}\otimes(\eta^a)_x\bigr)
   =
   \bigl((\eta^a)_x\otimes P_{\mathbf1,B}\bigr)c_{x,B}^{-1}.
-  \tag{5.5}\label{eq:negative-two-one-interface}
+  \tag{4.12}\label{eq:negative-two-one-interface}
 \]
 The clean attaching collar is the left factorization, the band transport is
 the displayed braiding followed by transport along the
@@ -802,7 +802,7 @@ For a special Kirby presentation \(\mathcal H\) and
       \left(\prod_k d_{\lambda_k}\right)
       \operatorname{RT}_{\cC}
         \bigl(S^3,\Gamma(\mathcal H,a;\lambda)\bigr).
-  \tag{5.6}\label{eq:raw-graph-sum}
+  \tag{4.13}\label{eq:raw-graph-sum}
 \]
 \end{definition}
 
@@ -863,7 +863,7 @@ For the simple-label set of $\cC$,
   \sum_i d_i\,\operatorname{tr}_i(P_{\mathbf1,i})=1,
   \qquad
   \sum_i d_i\,\operatorname{tr}_i(\operatorname{id}_i)
-  =\operatorname{Dim}(\cC).                  \tag{5.7}\label{eq:local-cancellation-sums}
+  =\operatorname{Dim}(\cC).                  \tag{4.14}\label{eq:local-cancellation-sums}
 \]
 \end{lemma}
 
@@ -888,7 +888,7 @@ transported cocycle of
   =\mathcal R_{\cC,\eta}(\mathcal H,a),
   \qquad
   h_3(\mathcal H^+)=h_3(\mathcal H),
-  \tag{5.8}\label{eq:one-two-cancellation-evaluation}
+  \tag{4.15}\label{eq:one-two-cancellation-evaluation}
 \]
 and hence
 \[
@@ -926,7 +926,7 @@ cancelling \(2\)--\(3\) pair.  For \(a\in Z^2(\mathcal H)\), let
    \mathcal R_{\cC,\eta}(\mathcal H,a),
   \qquad
   h_3(\mathcal H^+)=h_3(\mathcal H)+1,
-  \tag{5.9}\label{eq:two-three-cancellation-evaluation}
+  \tag{4.16}\label{eq:two-three-cancellation-evaluation}
 \]
 and hence
 \[
@@ -963,7 +963,7 @@ represents the transported marking, and
 \[
   \CY_{\cC,\eta}(\mathcal H,a)
   =\CY_{\cC,\eta}(\mathcal H',a).
-  \tag{5.10}\label{eq:three-handle-slide-evaluation}
+  \tag{4.17}\label{eq:three-handle-slide-evaluation}
 \]
 \end{lemma}
 
@@ -990,7 +990,7 @@ Then
     (f^*\mathcal H',\widetilde\xi_{\mathcal H'})
   =
   \CY_{\cC,\eta}(\mathcal H',\xi_{\mathcal H'}).
-  \tag{5.11}\label{eq:pullback-presentation-evaluation}
+  \tag{4.18}\label{eq:pullback-presentation-evaluation}
 \]
 \end{lemma}
 
@@ -1088,6 +1088,30 @@ inverse.  Their product is $1$.  The death case is the reverse equality.
 These are all eight directed moves of \cref{def:kirby-move}.
 \end{proof}
 
+\begin{proposition}[Well-definedness on a marked four-manifold]
+\label{prop:marked-manifold-evaluation-well-defined}
+Let \((\mathcal H,\xi)\) and \((\mathcal K,\zeta)\) be marked Kirby data
+for the same \(H_2\)-marked four-manifold \((X,\alpha)\).  Then
+\[
+  \CY_{\cC,\eta}(\mathcal H,\xi)
+  =\CY_{\cC,\eta}(\mathcal K,\zeta).
+\]
+Thus the presentation-level evaluation depends only on \((X,\alpha)\).
+\end{proposition}
+
+\begin{proof}
+Apply marked Kirby--Cerf completeness,
+\cref{prop:marked-kirby-cerf}, to the identity marked diffeomorphism of
+\((X,\alpha)\).  It gives a finite marked Kirby movie from
+\((\mathcal H,\xi)\) to \((\mathcal K,\zeta)\), up to the tautological
+endpoint identification.  Apply
+\cref{thm:elementary-kirby-invariance} at every elementary step and
+\cref{lem:three-handle-slides} at every \(3/3\) slide, then induct on the
+length of the movie.  The endpoint identification changes no term of the
+defining sum, by \cref{lem:pullback-presentation-evaluation} with
+\(f=\operatorname{id}_X\).
+\end{proof}
+
 \begin{definition}[Manifold-level evaluator]
 \label{def:manifold-level-evaluator}
 For a marked four-manifold $(X,\alpha)$, choose a marked special Kirby
@@ -1113,21 +1137,10 @@ $\alpha\in H_2(X;\mathbb Z)$.  Then
 
 \begin{proof}
 Choose marked special Kirby presentations of the two marked manifolds and
-pull the target presentation back along $f$.  By marked Kirby--Cerf
-completeness, \cref{prop:marked-kirby-cerf}, the source is connected to this
-pulled-back target by a finite marked movie on $X$, consisting of marked
-lifts of the eight moves together with marked $3$-handle slides.  Apply
-\cref{thm:elementary-kirby-invariance} at each marked step and induct on the
-length of the sequence; $3$-handle slides are harmless by
-\cref{lem:three-handle-slides}.  Handle-cohomology naturality and
-Poincar\'e-duality naturality identify the two endpoint markings, while
-representative independence says that the evaluation on each fixed
-presentation does not depend on the cocycle chosen to display its
-handle-cohomology class.
-
-The pullback value is the target value by
-\cref{lem:pullback-presentation-evaluation}.  Composing this tautological
-endpoint identification with the fixed-manifold movie represents $f$.  Thus
-\cref{def:manifold-level-evaluator} is independent of every choice and has
-the asserted diffeomorphism invariance.
+pull the target presentation back along $f$.  It is a marked Kirby datum for
+$(X,\alpha)$ by naturality of Poincar\'e duality.  Its value equals the value
+of the chosen source datum by
+\cref{prop:marked-manifold-evaluation-well-defined}, and it equals the target
+value by \cref{lem:pullback-presentation-evaluation}.  This proves the
+displayed equality.
 \end{proof}

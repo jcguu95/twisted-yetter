@@ -45,7 +45,11 @@ force-build-info:
 
 $(BUILD_INFO): force-build-info
 	@commit="$$(git rev-parse --short=12 HEAD 2>/dev/null || printf unknown)"; \
-	state="$$(test -z "$$(git status --porcelain --untracked-files=normal 2>/dev/null)" && printf clean || printf dirty)"; \
+	if test -z "$$(git status --porcelain --untracked-files=normal 2>/dev/null)"; then \
+	  state='clean'; \
+	else \
+	  state='\textcolor{red}{\bfseries dirty}'; \
+	fi; \
 	timestamp="$$(TZ=America/Edmonton date '+%Y-%m-%d %H:%M:%S %Z')"; \
 	printf '\\renewcommand{\\buildmetadata}{git %s \\textbar{} %s \\textbar{} compiled %s}\n' \
 	  "$$commit" "$$state" "$$timestamp" > $(BUILD_INFO)
