@@ -951,6 +951,33 @@ changes the normalization by
 calculation proves the death case.
 \end{proof}
 
+\begin{lemma}[Three-handle slides]
+\label{lem:three-handle-slides}
+Fix a twisted categorical input \((\cC,\eta)\).  Let \(\mathcal H'\) be
+obtained from a special Kirby presentation \(\mathcal H\) by sliding one
+\(3\)-handle over another, and let \(a\in Z^2(\mathcal H)\).  The slide
+changes only the chosen basis of \(C_3(\mathcal H)\).  It preserves both
+\(h_3(\mathcal H)\) and
+\(\operatorname{im}(\partial_3)\).  The same coordinate tuple \(a\)
+represents the transported marking, and
+\[
+  \CY_{\cC,\eta}(\mathcal H,a)
+  =\CY_{\cC,\eta}(\mathcal H',a).
+  \tag{5.10}\label{eq:three-handle-slide-evaluation}
+\]
+\end{lemma}
+
+\begin{proof}
+If \(A\in\operatorname{GL}(C_3(\mathcal H))\) is the elementary basis change,
+the new boundary map is \(\partial_3A\), which has the same image as
+\(\partial_3\).  Thus the cocycle condition and its quotient by
+\(\operatorname{im}(\partial_2^*)\) are unchanged.  The dotted--framed Kirby
+diagram, every character exponent, and every RT summand are unchanged, as is
+\(h_3\).  The two sides of
+\eqref{eq:three-handle-slide-evaluation} are therefore the same defining
+sum.
+\end{proof}
+
 \begin{theorem}[Elementary Kirby-move invariance]
 \label{thm:elementary-kirby-invariance}
 Let
