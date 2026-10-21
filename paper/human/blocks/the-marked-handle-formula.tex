@@ -56,33 +56,63 @@ If \(v_\nu=\sum_\mu A_{\nu\mu}u_\mu\), then its dual basis is
 \]
 \end{proof}
 
+\begin{definition}[Cut-open tangle at a dotted component]
+\label{def:cut-open-dotted-tangle}
+Let \(\mathcal H\) be a special Kirby presentation, written as a
+three-dimensional dotted--framed link
+\[
+  D_{\mathcal H}=D_{\mathrm{dot}}\sqcup D_{\mathrm{fr}}\subset S^3.
+\]
+For a dotted component \(\delta\), choose a spanning disk
+\(\Delta_\delta\subset S^3\) transverse to \(D_{\mathrm{fr}}\); because
+\(D_{\mathrm{dot}}\) is an unlink, these disks may be chosen mutually
+disjoint.  Cutting the framed ribbon link along a small product neighborhood
+\(\Delta_\delta\times(-\epsilon,\epsilon)\) replaces every transverse
+intersection by one endpoint on each of the two faces
+\(\Delta_\delta^-\) and \(\Delta_\delta^+\).  The result is a
+three-dimensional framed ribbon tangle with boundary.
+
+Fix a simple-label assignment \(\lambda\) on the framed components.  Using
+the product coordinates, bunch the endpoints on each face into a standard
+ordered row.  Their oriented labels form a boundary word; denote its tensor
+product by \(B_\delta\).  The two faces carry respectively \(B_\delta\) and
+its oppositely oriented boundary state.  After the exterior tangle is fixed,
+inserting an endomorphism of \(B_\delta\) between these faces and regluing
+defines a linear functional
+\[
+  \mathcal E_\delta\colon
+  \operatorname{End}_{\cC}(B_\delta)\longrightarrow\mathbb C.
+\]
+Inserting \(\operatorname{id}_{B_\delta}\) reconstructs the original
+coloured framed link.
+\end{definition}
+
 \begin{definition}[The operation represented by a dotted circle]
 \label{def:dotted-circle-translation}
-Let \(\cC\) be a premodular fusion category, let \(\mathcal H\) be a special
-Kirby presentation, and let \(\delta\) be a dotted component of
-\(D_{\mathcal H}\).  Fix an assignment \(\lambda\) of simple labels to the
-framed components.  A standard
-cross-section of the corresponding \(1\)-handle meets the oriented framed
-ribbons in a finite ordered boundary word.  If \(B_\delta\) is the tensor
-product represented by that word, then the operation assigned to \(\delta\)
-is
+Let \(\cC\) be a premodular fusion category and use the cut-open tangle of
+\cref{def:cut-open-dotted-tangle}.  The dotted \(1\)-handle replaces the
+ordinary regluing morphism \(\operatorname{id}_{B_\delta}\) by the
+tensor-unit projector.  Thus the operation assigned to \(\delta\) is
 \[
   \operatorname{Cut}_{\cC}(B_\delta)
   =P_{\mathbf1,B_\delta}.
   \tag{4.3}\label{eq:dotted-operation}
 \]
-Equivalently, after fixing the exterior ribbon tangle, closure gives a linear
-functional
-\[
-  \mathcal E_\delta\colon
-  \operatorname{End}_{\cC}(B_\delta)\longrightarrow\mathbb C,
-\]
-and the dotted contribution is
+Equivalently, its contribution after regluing the exterior is
 \[
   \mathcal E_\delta(P_{\mathbf1,B_\delta}).
   \tag{4.4}\label{eq:intrinsic-dotted-context}
 \]
 \end{definition}
+
+\begin{remark}[Planar diagrams are notation]
+\label{rem:planar-projection-after-cutting}
+The cutting and regluing above take place in three dimensions.  A planar
+ribbon diagram is obtained only afterwards, by choosing a regular projection
+of the cut-open tangle.  Different regular projections represent the same
+ribbon morphism by graphical coherence, so the planar projection is not an
+additional input to the evaluator.
+\end{remark}
 
 \begin{convention}[Suppressed label-state dependence]
 \label{conv:suppressed-label-state-dependence}
