@@ -10,7 +10,7 @@ An \(H_2\)-marked four-manifold is a pair \((X,\alpha)\), where \(X\) is a
 closed, connected, oriented smooth four-manifold and
 \(\alpha\in H_2(X;\mathbb Z)\).
 
-Let \(\mathcal H\) be a special Kirby presentation of \(X\), and set
+Let \((\mathcal H,\rho)\) be a special Kirby presentation of \(X\), and set
 \[
   H^2(\mathcal H)
   :=
@@ -21,18 +21,19 @@ The handle filtration and cellular-to-singular comparison give a natural
 isomorphism
 \[
   \kappa_{\mathcal H}\colon
-  H^2(\mathcal H)\xrightarrow{\ \cong\ }H^2(X;\mathbb Z).
+  H^2(\mathcal H)\xrightarrow{\ \cong\ }H^2(|\mathcal H|;\mathbb Z).
 \]
 A \emph{marked Kirby datum} for \((X,\alpha)\) is a pair
-\((\mathcal H,\xi)\), where \(\xi\in H^2(\mathcal H)\) satisfies
+\(((\mathcal H,\rho),\xi)\), where \(\xi\in H^2(\mathcal H)\) satisfies
 \[
-  \kappa_{\mathcal H}(\xi)=\operatorname{PD}_X(\alpha).
+  \kappa_{\mathcal H}(\xi)=\rho^*\operatorname{PD}_X(\alpha).
   \tag{3.2}\label{eq:marked-presentation}
 \]
 Equivalently,
-\(\xi=\kappa_{\mathcal H}^{-1}(\operatorname{PD}_X(\alpha))\), so the
-marking is uniquely determined once \(\mathcal H\) and \(\alpha\) are
-fixed.  We also call \((\mathcal H,\xi)\) a
+\(\xi=\kappa_{\mathcal H}^{-1}(\rho^*\operatorname{PD}_X(\alpha))\), so the
+marking is uniquely determined once \((\mathcal H,\rho)\) and \(\alpha\) are
+fixed.  We suppress \(\rho\) when it is understood and write
+\((\mathcal H,\xi)\).  We also call this a
 \emph{marked special Kirby presentation}.
 \end{definition}
 
@@ -43,31 +44,38 @@ in \cref{def:kirby-move}.  Its standard local model
 determines a relative isotopy class of orientation-preserving
 diffeomorphisms
 \[
-  \phi_m\colon X_{\mathcal H}\longrightarrow X_{\mathcal H'}.
+  |m|\colon |\mathcal H|\longrightarrow|\mathcal H'|.
 \]
 Define
 \[
   T_m
   :=
   \kappa_{\mathcal H'}^{-1}
-  \circ(\phi_m^{-1})^*
+  \circ(|m|^{-1})^*
   \circ\kappa_{\mathcal H}
   \colon H^2(\mathcal H)\longrightarrow H^2(\mathcal H').
   \tag{3.3}\label{eq:marking-transport}
 \]
-The result of applying \(m\) to \((\mathcal H,\xi)\) is
+If \((\mathcal H,\rho)\) presents \(X\), then the target presentation is
 \[
-  m_*(\mathcal H,\xi):=(\mathcal H',T_m\xi).
+  (\mathcal H',\rho_m),
+  \qquad
+  \rho_m:=\rho\circ|m|^{-1}\colon|\mathcal H'|\longrightarrow X.
+\]
+The result of applying \(m\) to \(((\mathcal H,\rho),\xi)\) is
+\[
+  m_*((\mathcal H,\rho),\xi)
+  :=((\mathcal H',\rho_m),T_m\xi).
 \]
 This is independent of the representative of the relative isotopy class
-of \(\phi_m\).  A move equipped with this transport is called a
+of \(|m|\).  A move equipped with this transport is called a
 \emph{marked Kirby--Cerf move}.
 \end{definition}
 
 \begin{definition}[Handle cocycle]
 \label{def:handle-cocycle}
-Let \((\mathcal H,\xi)\) be a marked Kirby datum.  A \emph{handle cocycle}
-for \((\mathcal H,\xi)\) is a cocycle
+Let \(((\mathcal H,\rho),\xi)\) be a marked Kirby datum.  A
+\emph{handle cocycle} for \((\mathcal H,\xi)\) is a cocycle
 \[
   a\in\operatorname{Hom}(C_2(\mathcal H),\mathbb Z)
 \]
@@ -139,21 +147,15 @@ equivalences gives the death formulas.
 \begin{proposition}[Kirby--Cerf moves preserve marked data]
 \label{prop:kirby-move-preserves-marked-data}
 Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary Kirby--Cerf move,
-and let \(\phi_m\colon X_{\mathcal H}\to X_{\mathcal H'}\) be the
-orientation-preserving diffeomorphism represented by its standard local
-model, as in \cref{def:marked-kirby-move}.  If
-\((\mathcal H,\xi)\) is a marked Kirby datum for \((X,\alpha)\), then
+let \((\mathcal H,\rho)\) be a presentation of \(X\), and let
+\(\rho_m=\rho\circ|m|^{-1}\).  If
+\(((\mathcal H,\rho),\xi)\) is a marked Kirby datum for \((X,\alpha)\), then
 \[
-  m_*(\mathcal H,\xi)
+  m_*((\mathcal H,\rho),\xi)
   =
-  (\mathcal H',T_m\xi)
+  ((\mathcal H',\rho_m),T_m\xi)
 \]
-is a marked Kirby datum for
-\[
-  \bigl(X_{\mathcal H'},(\phi_m)_*\alpha\bigr).
-\]
-In particular, when the move is performed on a fixed manifold using its
-standard identification, it preserves the original marking \(\alpha\).
+is a marked Kirby datum for the same marked manifold \((X,\alpha)\).
 \end{proposition}
 
 \begin{proof}
@@ -161,10 +163,9 @@ By \eqref{eq:marking-transport} and naturality of Poincar\'e duality,
 \[
   \begin{aligned}
   \kappa_{\mathcal H'}(T_m\xi)
-  &=(\phi_m^{-1})^*\kappa_{\mathcal H}(\xi)\\
-  &=(\phi_m^{-1})^*\operatorname{PD}_X(\alpha)\\
-  &=\operatorname{PD}_{X_{\mathcal H'}}
-      \bigl((\phi_m)_*\alpha\bigr).
+  &=(|m|^{-1})^*\kappa_{\mathcal H}(\xi)\\
+  &=(|m|^{-1})^*\rho^*\operatorname{PD}_X(\alpha)\\
+  &=\rho_m^*\operatorname{PD}_X(\alpha).
   \end{aligned}
 \]
 This is exactly the defining condition \eqref{eq:marked-presentation}.
@@ -178,12 +179,14 @@ Let
 \]
 be an orientation-preserving diffeomorphism of \(H_2\)-marked closed
 four-manifolds; thus \(f_*\alpha=\alpha'\).  Let
-\((\mathcal H,\xi)\) and \((\mathcal H',\xi')\) be marked Kirby data for
-\((X,\alpha)\) and \((Y,\alpha')\), respectively.  Then there is a finite
-movie of marked Kirby--Cerf moves from \((\mathcal H,\xi)\) to the pullback of
-\((\mathcal H',\xi')\) on \(X\).  Following that movie by the tautological
-endpoint identification induced by \(f\) represents the prescribed isotopy
-class of the marked diffeomorphism \(f\).
+\(((\mathcal H,\rho),\xi)\) and
+\(((\mathcal H',\rho'),\xi')\) be marked Kirby data for
+\((X,\alpha)\) and \((Y,\alpha')\), respectively.  Give \(\mathcal H'\) the
+pulled-back realization \(f^{-1}\circ\rho'\colon|\mathcal H'|\to X\).
+Then there is a finite movie of marked Kirby--Cerf moves from
+\(((\mathcal H,\rho),\xi)\) to
+\(((\mathcal H',f^{-1}\circ\rho'),\xi')\).  The prescribed marked
+diffeomorphism \(f\) is the final endpoint identification.
 \end{theorem}
 
 \begin{proof}
@@ -196,27 +199,24 @@ fixed manifold \(X\),
   \longrightarrow\cdots\longrightarrow
   \mathcal H_N=f^*\mathcal H',
 \]
-whose realized diffeomorphism is isotopic to
-\(\operatorname{id}_X\).  Starting with \(\xi_0=\xi\), define recursively
+where the endpoint realization is \(f^{-1}\circ\rho'\).  Starting with
+\(\xi_0=\xi\), define recursively
 \[
   \xi_r:=T_{m_r}\xi_{r-1}.
 \]
-By \cref{prop:kirby-move-preserves-marked-data}, every
-\((\mathcal H_r,\xi_r)\) is a marked Kirby datum for the corresponding
-transport of \((X,\alpha)\).  Since the composite diffeomorphism of the
-movie is isotopic to \(\operatorname{id}_X\), the endpoint
-\((f^*\mathcal H',\xi_N)\) is a marked Kirby datum for \((X,\alpha)\).
+By \cref{prop:kirby-move-preserves-marked-data}, every stage is a marked
+Kirby datum for \((X,\alpha)\).  In particular, the endpoint is a marking on
+the presentation \((\mathcal H',f^{-1}\circ\rho')\) of \(X\).
 
 There is only one marking on the fixed presentation \(f^*\mathcal H'\)
 that satisfies \eqref{eq:marked-presentation}.  Moreover,
 \[
-  f^*\operatorname{PD}_Y(\alpha')
-  =f^*\operatorname{PD}_Y(f_*\alpha)
-  =\operatorname{PD}_X(\alpha).
+  (f^{-1})^*\operatorname{PD}_X(\alpha)
+  =\operatorname{PD}_Y(\alpha').
 \]
-Hence \(\xi_N\) is precisely the pullback of \(\xi'\).  Finally,
-\cref{prop:special-handle-movie-completeness} says that composing the
-fixed-manifold movie with the endpoint identification induced by \(f\)
-represents the prescribed isotopy class of \(f\).  The same composite
-therefore represents the prescribed marked diffeomorphism.
+Hence \(\xi'\) satisfies the marked condition for the pulled-back
+presentation, and uniqueness forces \(\xi_N=\xi'\).  The final endpoint map
+is the given \(f\), which carries \(\alpha\) to \(\alpha'\) by hypothesis.
+No claim that the preceding move sequence alone realizes the mapping class
+of \(f\) is needed.
 \end{proof}
