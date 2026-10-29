@@ -93,14 +93,29 @@ parts of a Kirby datum.
 \begin{definition}[One-ended Kirby datum]
 \label{def:one-ended-kirby-datum}
 A Kirby datum is \emph{one-ended} if
-\(h_0(\mathcal H)=h_4(\mathcal H)=1\).  For such a datum, the \(1\)- and
-\(2\)-handles admit the usual reduced record as a finite dotted--framed link
+\(h_0(\mathcal H)=h_4(\mathcal H)=1\).  Its \(0\)-handle is identified with
+the standard \(B^4\), whose boundary is the standard \(S^3\).  The \(1\)- and
+\(2\)-handle attaching data then admit the usual dotted--framed record
 \[
   D_{\mathcal H}=D_{\mathrm{dot}}\sqcup D_{\mathrm{fr}}\subset S^3.
 \]
-Each dotted component records a \(1\)-handle and each framed component records
-a \(2\)-handle.  This link is a convenient record of the full attaching
-data, not the definition of a general Kirby datum.
+Here \(D_{\mathrm{dot}}\) is a finite dotted unlink.  Each of its components
+is an unknot encoding one pair of disjoint attaching \(3\)-balls for a
+\(1\)-handle, in the standard dotted-circle notation.  Surgery on all dotted
+components identifies the resulting three-manifold with the boundary of the
+\(0\)--\(1\) subhandlebody.
+
+The set \(D_{\mathrm{fr}}\) is a framed link in that boundary, displayed in
+the original \(S^3\) together with \(D_{\mathrm{dot}}\).  Its components are
+the attaching circles of the \(2\)-handles.  The framing of a component is
+the homotopy class of a trivialization of its normal \(2\)-plane bundle in
+the boundary; an integer records this class after the usual diagrammatic
+reference framing has been chosen.  Thus a strand of
+\(D_{\mathrm{fr}}\) may pass through a spanning disk of a dotted component,
+but the two links themselves are disjoint.  The \(3\)-handle attaching data
+are not encoded by this dotted--framed link.  Consequently
+\(D_{\mathcal H}\) is a reduced record used for calculations, not the
+definition of the full Kirby datum.
 \end{definition}
 
 \begin{proposition}[Existence and one-ended reduction]
@@ -121,12 +136,49 @@ standard reduction to a handle decomposition with one minimum and one maximum;
 see \cite[Sections~4.2 and~5.1]{GompfStipsicz1999}.
 \end{proof}
 
+\begin{definition}[Handle slide and passage through a dotted handle]
+\label{def:handle-slide}
+Let the handles of index less than \(k\) already be attached.
+A \emph{same-index \(k/k\) slide} replaces the attaching sphere of a moving
+index-\(k\) handle by its boundary connected sum with a framed parallel copy
+of the attaching sphere of a stationary index-\(k\) handle.  The connected
+sum is taken along an embedded band in the boundary of the lower
+subhandlebody, disjoint from all other attaching regions.  The normal
+framing is the band sum of the two given framings.  All other attaching data
+are unchanged outside a neighborhood of this band.
+
+In a one-ended dotted--framed record, a \emph{\(2/1\) passage} is an ambient
+isotopy of a \(2\)-handle attaching circle in the boundary of the
+\(0\)--\(1\) subhandlebody.  In the \(S^3\) picture this isotopy is drawn by
+passing a strand through a dotted component.  It does not slide an
+index-\(2\) handle over an index-\(1\) handle in the Morse-theoretic sense;
+it is an additional diagrammatic move created by dotted-circle notation.
+\end{definition}
+
+\begin{definition}[Cancelling handle pair]
+\label{def:cancelling-handle-pair}
+An adjacent pair consisting of an index-\(k\) handle \(h\) and an
+index-\((k+1)\) handle \(H\) is \emph{cancelling} if the attaching sphere of
+\(H\) meets the belt sphere of \(h\) transversely in exactly one point and
+the attaching framing of \(H\) agrees there with the product framing of the
+standard cancelling local model.  A \emph{death} removes such an isolated
+standard pair; a \emph{birth} is the inverse operation.  Handles that meet
+the local model must first be moved away by isotopy or slides.
+
+For a \(1\)--\(2\) pair in dotted notation, this says that the \(2\)-handle
+attaching circle goes geometrically once over the dotted \(1\)-handle and
+has the standard relative framing.  The definitions for \(0\)--\(1\),
+\(2\)--\(3\), and \(3\)--\(4\) pairs are the corresponding attaching-sphere
+and belt-sphere conditions.
+\end{definition}
+
 \begin{definition}[Elementary Kirby--Cerf move]
 \label{def:kirby-move}
 An elementary Kirby--Cerf move \(m\colon\mathcal H\to\mathcal H'\) is a
-level isotopy, a same-index handle slide, or the birth or death of a
-cancelling adjacent-index pair.  In dimension four these are the following
-thirteen directed types:
+level isotopy, a same-index handle slide as in \cref{def:handle-slide}, the
+birth or death of a pair satisfying \cref{def:cancelling-handle-pair}, or,
+in a dotted--framed record, a \(2/1\) passage.  In dimension four these are
+the following thirteen directed types:
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item\label{move:framed-isotopy} level isotopy of attaching data;
   \item\label{move:one-over-one} a \(1/1\) slide;
@@ -142,51 +194,90 @@ thirteen directed types:
   \item a \(3\)--\(4\) birth; or
   \item a \(3\)--\(4\) death.
 \end{enumerate}
-Here an \(r/s\) slide moves an index-\(r\) handle over a stationary
-index-\(s\) handle.  Outside the supporting neighborhood the handle datum is
-unchanged.
 \end{definition}
 
-\begin{convention}[Standard local models]
-\label{conv:referenced-kirby-dictionary}
-The moves in \cref{def:kirby-move} have their standard handle-calculus
-meanings.  In a one-ended record, the \(1/1\), \(2/1\), and \(2/2\) moves are
-respectively the dotted-circle slide, passage through a dotted handle, and
-oriented framed band sum of \cite[Figures~5.39 and~5.36 and
-Section~5.1]{GompfStipsicz1999}.  Births insert isolated standard cancelling
-pairs and deaths are their inverses.  This convention fixes only the topology
-of source and target.
-\end{convention}
+\begin{proposition}[Realization of an elementary move]
+\label{prop:elementary-move-realization}
+Every elementary move \(m\colon\mathcal H\to\mathcal H'\) in
+\cref{def:kirby-move} determines, up to isotopy relative to the complement
+of its supporting neighborhood, an orientation-preserving diffeomorphism
+\[
+  |m|\colon |\mathcal H|\longrightarrow|\mathcal H'|.
+\]
+For a same-index slide this is the standard handle-slide diffeomorphism; for
+a birth or death it is the diffeomorphism supplied by cancellation of the
+standard local pair; and for a \(2/1\) passage it is induced by the ambient
+isotopy in the boundary of the \(0\)--\(1\) subhandlebody.
+\end{proposition}
+
+\begin{proof}
+These are the local realization statements of handle calculus.  The
+attaching-sphere and framing descriptions above are exactly the hypotheses
+of the handle-slide and handle-cancellation theorems.  The maps are the
+identity outside the displayed supporting neighborhoods.  In one-ended
+dotted notation the corresponding pictures are the dotted-circle slide,
+passage through a dotted handle, and oriented framed band sum of
+\cite[Figures~5.39 and~5.36 and Section~5.1]{GompfStipsicz1999}.
+\end{proof}
 
 \begin{theorem}[Kirby--Cerf completeness]
 \label{prop:handle-movie-completeness}
 Let \((\mathcal H_0,\rho_0)\) and \((\mathcal H_1,\rho_1)\) be Kirby
 presentations of \(X_0\) and \(X_1\), and let
-\(f\colon X_0\to X_1\) be an orientation-preserving diffeomorphism.  After
-pulling the second presentation back along \(f\), the two handle
-decompositions of \(X_0\) are related by a finite movie of the thirteen moves
-in \cref{def:kirby-move}.  The map \(f\) is the final endpoint
-identification; no claim is made that the movie alone realizes its mapping
-class.
+\(f\colon X_0\to X_1\) be an orientation-preserving diffeomorphism.  There
+is a finite sequence of elementary moves
+\[
+  \mathcal H_0=\mathcal K_0
+  \xrightarrow{m_1}\mathcal K_1
+  \longrightarrow\cdots\longrightarrow
+  \mathcal K_N=\mathcal H_1
+\]
+and choices of the realization maps in
+\cref{prop:elementary-move-realization} such that, for
+\(\mu:=|m_N|\circ\cdots\circ|m_1|\),
+\[
+  \rho_1\circ\mu\simeq f\circ\rho_0
+  \tag{KC}\label{eq:cerf-realizes-diffeomorphism}
+\]
+through orientation-preserving diffeomorphisms.  Thus the Kirby movie
+realizes the prescribed isotopy class of \(f\).
 \end{theorem}
 
 \begin{proof}
-This is the standard Cerf-theoretic completeness theorem for handle
-decompositions: a generic one-parameter family of Morse functions produces
-level isotopies, same-index slides, and births or deaths of adjacent-index
-cancelling pairs.  See \cite{Cerf1970} and
-\cite[Theorem~4.2.12]{GompfStipsicz1999}.  Pulling back along \(f\) places the
-two decompositions on the same manifold, to which that theorem applies.
-The endpoint is then identified with the original target by \(f\).
+Choose Morse functions with pseudo-gradients realizing \(\mathcal H_0\) and
+\(\mathcal H_1\).  Transfer the latter Morse data to
+\(|\mathcal H_0|\) by the diffeomorphism
+\[
+  \varphi:=\rho_1^{-1}\circ f\circ\rho_0
+  \colon|\mathcal H_0|\longrightarrow|\mathcal H_1|.
+\]
+A generic path from the first Morse data to the transferred second Morse
+data meets only the codimension-one strata of Cerf theory.  The regular
+intervals give level isotopies, exchanges of critical values reorder
+disjoint handle attachments, isolated same-index connecting trajectories in
+the pseudo-gradient family give handle slides, and the birth--death strata
+give cancelling adjacent-index pairs.  In dotted notation one may further
+subdivide level isotopies into the \(2/1\) passages of
+\cref{def:handle-slide}.  This produces the finite movie above.
+
+Track the level identifications and pseudo-gradient flows throughout the
+path.  Their composite identifies the terminal handle decomposition with
+the one transferred by \(\varphi\), and hence is isotopic to \(\varphi\).
+After composing with \(\rho_1\), this is precisely
+\eqref{eq:cerf-realizes-diffeomorphism}.  This is the realization-aware form
+of the standard Cerf comparison theorem; see \cite{Cerf1970} and
+\cite[Theorem~4.2.12]{GompfStipsicz1999}.
 \end{proof}
 
-\begin{remark}[One-ended movies and mapping classes]
+\begin{remark}[One-ended movies and the next coherence level]
 \label{rem:mapping-class-refinement}
 If both endpoints are one-ended, connected Cerf theory permits a movie that
 avoids \(0\)--\(1\) and \(3\)--\(4\) births
 \cite[Remark~2.7 and Theorem~3.4]{GayWehrheimWoodward2012}.  This is an
-object-level statement.  It does not assert that a based movie realizes an
-arbitrarily prescribed element of \(\pi_0\operatorname{Diff}^+(X)\), nor a
-complete two-parameter calculus of movies of movies.  Related partial results
-for \(S^4\) appear in \cite{Gay2025}; no such refinement is used here.
+existence statement about one-parameter movies.  The theorem above already
+allows the movie to realize a prescribed diffeomorphism up to isotopy.  A
+different, higher-coherence question asks whether any two such movies with
+the same endpoint diffeomorphism are related by an explicit and complete
+list of two-parameter moves of movies.  No answer to that question is used
+here.  Related two-parameter results for \(S^4\) appear in \cite{Gay2025}.
 \end{remark}

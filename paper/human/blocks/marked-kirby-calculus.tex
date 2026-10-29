@@ -40,8 +40,9 @@ fixed.  We suppress \(\rho\) when it is understood and write
 \begin{definition}[Transport under a Kirby--Cerf move]
 \label{def:marked-kirby-move}
 Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary Kirby--Cerf move
-in \cref{def:kirby-move}.  Its standard local model
-determines a relative isotopy class of orientation-preserving
+in \cref{def:kirby-move}.  By
+\cref{prop:elementary-move-realization}, its local model determines a
+relative isotopy class of orientation-preserving
 diffeomorphisms
 \[
   |m|\colon |\mathcal H|\longrightarrow|\mathcal H'|.
@@ -183,12 +184,21 @@ be an orientation-preserving diffeomorphism of \(H_2\)-marked closed
 four-manifolds; thus \(f_*\alpha=\alpha'\).  Let
 \(((\mathcal H,\rho),\xi)\) and
 \(((\mathcal H',\rho'),\xi')\) be marked Kirby data for
-\((X,\alpha)\) and \((Y,\alpha')\), respectively.  Give \(\mathcal H'\) the
-pulled-back realization \(f^{-1}\circ\rho'\colon|\mathcal H'|\to X\).
-Then there is a finite movie of marked Kirby--Cerf moves from
-\(((\mathcal H,\rho),\xi)\) to
-\(((\mathcal H',f^{-1}\circ\rho'),\xi')\).  The prescribed marked
-diffeomorphism \(f\) is the final endpoint identification.
+\((X,\alpha)\) and \((Y,\alpha')\), respectively.  Then there is a finite
+movie
+\[
+  \mathcal H=\mathcal H_0
+  \xrightarrow{m_1}\mathcal H_1
+  \longrightarrow\cdots\longrightarrow
+  \mathcal H_N=\mathcal H'
+\]
+such that, if \(\mu=|m_N|\circ\cdots\circ|m_1|\), then
+\[
+  \rho'\circ\mu\simeq f\circ\rho,
+  \tag{3.6}\label{eq:marked-cerf-realizes-diffeomorphism}
+\]
+and successive transport by the maps \(T_{m_i}\) carries \(\xi\) to
+\(\xi'\).
 If both presentations are one-ended, the movie may be chosen one-ended
 throughout; equivalently, it uses the nine move types other than
 \(0\)--\(1\) and \(3\)--\(4\) birth/death.
@@ -196,34 +206,25 @@ throughout; equivalently, it uses the nine move types other than
 
 \begin{proof}
 Apply ordinary Kirby--Cerf completeness,
-\cref{prop:handle-movie-completeness}, to obtain a movie on the
-fixed manifold \(X\),
-\[
-  \mathcal H=\mathcal H_0
-  \xrightarrow{m_1}\mathcal H_1
-  \longrightarrow\cdots\longrightarrow
-  \mathcal H_N=f^*\mathcal H',
-\]
-where the endpoint realization is \(f^{-1}\circ\rho'\).  Starting with
+\cref{prop:handle-movie-completeness}, to obtain the displayed movie and
+\eqref{eq:marked-cerf-realizes-diffeomorphism}.  Starting with
 \(\xi_0=\xi\), define recursively
 \[
   \xi_r:=T_{m_r}\xi_{r-1}.
 \]
 By \cref{prop:kirby-move-preserves-marked-data}, every stage is a marked
-Kirby datum for \((X,\alpha)\).  In particular, the endpoint is a marking on
-the presentation \((\mathcal H',f^{-1}\circ\rho')\) of \(X\).
-
-There is only one marking on the fixed presentation \(f^*\mathcal H'\)
-that satisfies \eqref{eq:marked-presentation}.  Moreover,
+Kirby datum for \((X,\alpha)\), with endpoint realization
+\(\rho\circ\mu^{-1}\colon|\mathcal H'|\to X\).  The isotopy
+\eqref{eq:marked-cerf-realizes-diffeomorphism} gives
+\(\rho\circ\mu^{-1}\simeq f^{-1}\circ\rho'\).  Naturality of Poincar\'e
+duality gives
 \[
   (f^{-1})^*\operatorname{PD}_X(\alpha)
   =\operatorname{PD}_Y(\alpha').
 \]
-Hence \(\xi'\) satisfies the marked condition for the pulled-back
-presentation, and uniqueness forces \(\xi_N=\xi'\).  The final endpoint map
-is the given \(f\), which carries \(\alpha\) to \(\alpha'\) by hypothesis.
-No claim that the preceding move sequence alone realizes the mapping class
-of \(f\) is needed.
+It follows that \(\xi_N\) and \(\xi'\) have the same image under
+\(\kappa_{\mathcal H'}\).  Since \(\kappa_{\mathcal H'}\) is an
+isomorphism, \(\xi_N=\xi'\).
 When both endpoints are one-ended, use the connected Cerf refinement in
 \cref{rem:mapping-class-refinement}; the same marking-transport argument
 applies at every stage.
