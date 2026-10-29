@@ -4,13 +4,13 @@
 We now specify the object on which marked Kirby calculus acts.
 
 \begin{definition}[Marked Kirby datum]
-\label{def:marked-special-kirby-presentation}
+\label{def:marked-kirby-presentation}
 \label{def:handle-homology-marking}
 An \(H_2\)-marked four-manifold is a pair \((X,\alpha)\), where \(X\) is a
 closed, connected, oriented smooth four-manifold and
 \(\alpha\in H_2(X;\mathbb Z)\).
 
-Let \((\mathcal H,\rho)\) be a special Kirby presentation of \(X\), and set
+Let \((\mathcal H,\rho)\) be a Kirby presentation of \(X\), and set
 \[
   H^2(\mathcal H)
   :=
@@ -34,7 +34,7 @@ Equivalently,
 marking is uniquely determined once \((\mathcal H,\rho)\) and \(\alpha\) are
 fixed.  We suppress \(\rho\) when it is understood and write
 \((\mathcal H,\xi)\).  We also call this a
-\emph{marked special Kirby presentation}.
+\emph{marked Kirby presentation}.
 \end{definition}
 
 \begin{definition}[Transport under a Kirby--Cerf move]
@@ -92,8 +92,9 @@ and \(a\) is the integer cocycle whose coordinates are used by the
 evaluator.  The class \(T_m\xi\) has a representative \(a'\) with the
 following coordinates.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
-  \item For framed isotopy, a \(1/1\) slide, a \(2/1\) slide, or a
-  \(3/3\) slide, the \(2\)-handle generators are canonically identified and
+  \item For framed isotopy, a \(1/1\) slide, a \(2/1\) slide, a
+  \(3/3\) slide, a \(0\)--\(1\) birth or death, or a \(3\)--\(4\) birth or
+  death, the \(2\)-handle generators are canonically identified and
   \(a'=a\).
 
   \item For a \(2/2\) slide, let \(e_x\) be the moving generator,
@@ -124,8 +125,9 @@ and cellular comparison is natural.  It is therefore enough to use the
 standard cellular map for each local move
 \cite[Sections~4.1--4.2]{DurstGeigesKegel2019}.
 
-Isotopy, \(1/1\), \(2/1\), and \(3/3\) moves act as the identity on
-\(C_2\).  For a \(2/2\) slide, the target-to-source basis change sends the
+Isotopy, \(1/1\), \(2/1\), \(3/3\), \(0\)--\(1\), and \(3\)--\(4\) moves
+act as the identity on \(C_2\).  For a \(2/2\) slide, the target-to-source
+basis change sends the
 new moving generator to \(e_x+\varepsilon e_y\) and fixes the other
 generators.  Precomposing \(a\) with this basis change gives
 \[
@@ -187,11 +189,14 @@ Then there is a finite movie of marked Kirby--Cerf moves from
 \(((\mathcal H,\rho),\xi)\) to
 \(((\mathcal H',f^{-1}\circ\rho'),\xi')\).  The prescribed marked
 diffeomorphism \(f\) is the final endpoint identification.
+If both presentations are one-ended, the movie may be chosen one-ended
+throughout; equivalently, it uses the nine move types other than
+\(0\)--\(1\) and \(3\)--\(4\) birth/death.
 \end{theorem}
 
 \begin{proof}
 Apply ordinary Kirby--Cerf completeness,
-\cref{prop:special-handle-movie-completeness}, to obtain a movie on the
+\cref{prop:handle-movie-completeness}, to obtain a movie on the
 fixed manifold \(X\),
 \[
   \mathcal H=\mathcal H_0
@@ -219,4 +224,7 @@ presentation, and uniqueness forces \(\xi_N=\xi'\).  The final endpoint map
 is the given \(f\), which carries \(\alpha\) to \(\alpha'\) by hypothesis.
 No claim that the preceding move sequence alone realizes the mapping class
 of \(f\) is needed.
+When both endpoints are one-ended, use the connected Cerf refinement in
+\cref{rem:mapping-class-refinement}; the same marking-transport argument
+applies at every stage.
 \end{proof}

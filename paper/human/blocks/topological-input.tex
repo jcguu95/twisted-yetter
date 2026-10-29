@@ -1,10 +1,11 @@
 \subsection{Kirby calculus for closed oriented four-manifolds}
 \label{subsec:topological-input}
 
-This subsection is a review of textbook-level handle and Kirby calculus.  We
-follow \cite[Chapters~4 and~5]{GompfStipsicz1999}; the original framed-link
-calculus is due to Kirby \cite{Kirby1978}.  Throughout, the four-manifolds are
-closed, connected, oriented, and smooth.
+This subsection reviews textbook-level handle and Kirby calculus.  We follow
+\cite[Chapters~4 and~5]{GompfStipsicz1999}; the original framed-link calculus
+is due to Kirby \cite{Kirby1978}.  Throughout, four-manifolds are closed,
+connected, oriented, and smooth.  We do not impose a unique minimum or
+maximum on a handle decomposition.
 
 \begin{definition}[Handle attachment]
 \label{def:handle-attachment}
@@ -13,233 +14,179 @@ Let \(W\) be an oriented smooth four-manifold with boundary.  An
 \[
   \phi\colon S^{k-1}\times D^{4-k}\hookrightarrow\partial W.
 \]
-It produces the oriented manifold
-\[
-  W\cup_{\phi}(D^k\times D^{4-k}),
-\]
-where \(S^{k-1}\times D^{4-k}\) is the attaching region of the handle.
-Several handles of the same index are attached along a family of embeddings
-with pairwise disjoint images.
+It produces \(W\cup_{\phi}(D^k\times D^{4-k})\).  Several handles of the
+same index are attached along a finite family of embeddings with pairwise
+disjoint images.
 \end{definition}
 
-\begin{definition}[Special Kirby datum]
-\label{def:special-kirby-datum}
-A \emph{special Kirby datum} \(\mathcal H\) consists of three finite labelled
-families of attaching embeddings and a closing map, constructed successively
-as follows.
-Write \(\Phi^k\) for the disjoint union of all index-\(k\) attaching
-embeddings.  Start with \(W^{(0)}=B^4\), and set
-\begin{align*}
-  \phi_i^1&\colon S^0\times D^3\hookrightarrow
-    \partial W^{(0)}=S^3,
-  &W^{(1)}&:=W^{(0)}\cup_{\Phi^1}
-    \bigsqcup_i(D^1\times D^3),\\
-  \phi_j^2&\colon S^1\times D^2\hookrightarrow
-    \partial W^{(1)},
-  &W^{(2)}&:=W^{(1)}\cup_{\Phi^2}
-    \bigsqcup_j(D^2\times D^2),\\
-  \phi_\ell^3&\colon S^2\times D^1\hookrightarrow
-    \partial W^{(2)},
-  &W^{(3)}&:=W^{(2)}\cup_{\Phi^3}
-    \bigsqcup_\ell(D^3\times D^1).
-\end{align*}
-The closing map is an orientation-reversing diffeomorphism
+\begin{definition}[Kirby datum]
+\label{def:kirby-datum}
+A \emph{Kirby datum} \(\mathcal H\) consists of finite handle sets
+\(I_k(\mathcal H)\), \(0\leq k\leq4\), and the following attaching data.
+Begin with
 \[
-  \gamma_{\mathcal H}\colon
-  \partial B^4\xrightarrow{\ \cong\ }\partial W^{(3)}.
+  W^{(0)}:=\bigsqcup_{q\in I_0(\mathcal H)}B_q^4.
 \]
-Thus the datum has one implicit initial \(0\)-handle and one explicitly
-attached final \(4\)-handle.
+For \(k=1,2,3\), attach the handles successively along pairwise disjoint
+embeddings
+\[
+  \phi_h^k\colon S^{k-1}\times D^{4-k}
+  \hookrightarrow\partial W^{(k-1)},
+  \qquad h\in I_k(\mathcal H),
+\]
+and denote the resulting manifold by \(W^{(k)}\).  Finally, for every
+\(q\in I_4(\mathcal H)\), choose an orientation-reversing diffeomorphism
+\[
+  \gamma_q\colon \partial B_q^4\xrightarrow{\ \cong\ }Y_q,
+\]
+where the \(Y_q\) are precisely the connected components of
+\(\partial W^{(3)}\).  Thus the closing maps exhaust the boundary, with one
+map for each boundary component.  The resulting closed manifold is required
+to be connected.
 \end{definition}
 
 \begin{definition}[Realization and presentation]
-\label{def:special-kirby-presentation}
+\label{def:kirby-presentation}
 The \emph{realization} of \(\mathcal H\) is
 \[
-  |\mathcal H|:=W^{(3)}\cup_{\gamma_{\mathcal H}}B^4.
+  |\mathcal H|:=W^{(3)}\cup_{\bigsqcup_q\gamma_q}
+    \bigsqcup_{q\in I_4(\mathcal H)}B_q^4.
 \]
-Its oriented diffeomorphism type is independent of the closing map: two
-closing maps differ by an orientation-preserving diffeomorphism of \(S^3\),
-which extends over \(B^4\) by Cerf's theorem \(\Gamma_4=0\)
-\cite{Cerf1968}.  A
-\emph{special Kirby presentation} of a closed, connected, oriented smooth
+A \emph{Kirby presentation} of a closed connected oriented smooth
 four-manifold \(X\) is a pair
 \[
-  (\mathcal H,\rho),
-  \qquad
-  \rho\colon|\mathcal H|\xrightarrow{\ \cong\ }X
+  (\mathcal H,\rho),\qquad
+  \rho\colon|\mathcal H|\xrightarrow{\ \cong\ }X,
 \]
-with \(\rho\) orientation preserving.  When the realization map is
-understood, we suppress \(\rho\) and simply call \(\mathcal H\) a
-presentation of \(X\).
+with \(\rho\) orientation preserving.  The choice of any individual closing
+map does not affect the oriented diffeomorphism type: two such maps differ by
+an orientation-preserving diffeomorphism of \(S^3\), which extends over
+\(B^4\) by Cerf's theorem \(\Gamma_4=0\) \cite{Cerf1968}.
 \end{definition}
 
 \begin{definition}[Derived handle chain complex]
 \label{def:derived-handle-chain-complex}
-For each \(k\), let \(I_k(\mathcal H)\) be the finite set of index-\(k\) handles
-in \(\mathcal H\), and put \(W^{(-1)}=\varnothing\) and
-\(W^{(4)}=|\mathcal H|\).  Define
+Put \(W^{(-1)}=\varnothing\) and \(W^{(4)}=|\mathcal H|\), and define
 \[
   C_k(\mathcal H):=
   H_k\bigl(W^{(k)},W^{(k-1)};\mathbb Z\bigr).
 \]
-After choosing orientations of the handle cores, the handle classes give an
-identification
+After orienting the handle cores, their classes identify
 \[
   C_k(\mathcal H)\cong
   \bigoplus_{h\in I_k(\mathcal H)}\mathbb Z[h].
 \]
-The triples in the handle filtration give boundary maps
-\(\partial_k\colon C_k(\mathcal H)\to C_{k-1}(\mathcal H)\): the coefficient
-of an index-\((k-1)\) handle in \(\partial_k h\) is the signed intersection
-number of the attaching sphere of \(h\) with the belt sphere of that
-index-\((k-1)\) handle.  These maps form the integral handle chain complex.
-In particular, its degree-two portion is
+The boundary maps are the connecting maps of the handle filtration; their
+matrix entries are the signed intersections of attaching and belt spheres.
+In particular,
 \[
   C_3(\mathcal H)\xrightarrow{\partial_3}
   C_2(\mathcal H)\xrightarrow{\partial_2}
   C_1(\mathcal H).
   \tag{3.1}\label{eq:handle-complex}
 \]
-The oriented framed components give the chosen basis of
-\(C_2(\mathcal H)\), and
-\(h_3(\mathcal H):=\operatorname{rank}C_3(\mathcal H)\) is the number of
-index-\(3\) handles.  None of this chain-level information is additional
-Kirby datum; it is derived from the handle attachments.
+Write \(h_k(\mathcal H)=|I_k(\mathcal H)|\).  The chain complex and the
+numbers \(h_k\) are derived from the handle attachments; they are not extra
+parts of a Kirby datum.
 \end{definition}
 
-\begin{remark}[Reduced records]
-\label{rem:reduced-kirby-records}
-The preceding definitions retain the full attaching embeddings.  Up to
-attaching isotopy, less information is usually drawn.  For each labelled
-\(1\)-handle, \(S^0\times D^3\) is represented by the two centres of its
-attaching balls together with their pairing; the ball neighbourhoods are
-standard.  A \(2\)-handle is represented by its attaching circle and integer
-framing.  A \(3\)-handle is represented by its attaching sphere with its
-product neighbourhood.  The first two reduced records form the usual finite
-dotted--framed link
+\begin{definition}[One-ended Kirby datum]
+\label{def:one-ended-kirby-datum}
+A Kirby datum is \emph{one-ended} if
+\(h_0(\mathcal H)=h_4(\mathcal H)=1\).  For such a datum, the \(1\)- and
+\(2\)-handles admit the usual reduced record as a finite dotted--framed link
 \[
   D_{\mathcal H}=D_{\mathrm{dot}}\sqcup D_{\mathrm{fr}}\subset S^3.
 \]
-The closing map is normally suppressed because its choice does not change the
-oriented diffeomorphism type of the realization.  These reductions are
-notation for the full datum, not replacements for its definition.
-\end{remark}
+Each dotted component records a \(1\)-handle and each framed component records
+a \(2\)-handle.  This link is a convenient record of the full attaching
+data, not the definition of a general Kirby datum.
+\end{definition}
 
-\begin{proposition}[Existence of special presentations]
-\label{prop:special-presentation-existence}
-Let \(X\) be a closed, connected, oriented smooth four-manifold.  Then \(X\)
-admits a special Kirby presentation.
+\begin{proposition}[Existence and one-ended reduction]
+\label{prop:kirby-presentation-existence}
+Every closed connected oriented smooth four-manifold admits a Kirby
+presentation.  Moreover, every Kirby presentation can be changed, by
+same-index slides and cancellations of \(0\)--\(1\) and \(3\)--\(4\) pairs,
+to a one-ended Kirby presentation of the same manifold.
 \end{proposition}
 
 \begin{proof}
-Choose a Morse function with a unique minimum and maximum and pass to its
-handle decomposition.  This is \cite[Proposition~4.2.13]{GompfStipsicz1999}
-together with its dual argument.
+A Morse function gives the first assertion.  Since the realized manifold is
+connected, the incidence graph of its \(0\)- and \(1\)-handles is connected.
+Choose a spanning tree, slide the corresponding \(1\)-handles into cancelling
+position, and cancel all but one \(0\)-handle.  Apply the same argument to the
+turned-over decomposition to cancel all but one \(4\)-handle.  This is the
+standard reduction to a handle decomposition with one minimum and one maximum;
+see \cite[Sections~4.2 and~5.1]{GompfStipsicz1999}.
 \end{proof}
 
 \begin{definition}[Elementary Kirby--Cerf move]
 \label{def:kirby-move}
-Let \(\mathcal H\) and \(\mathcal H'\) be special Kirby data.  An
-elementary Kirby--Cerf move
-\(m\colon\mathcal H\to\mathcal H'\) is one of the following nine directed
-modifications of the complete handle data:
+An elementary Kirby--Cerf move \(m\colon\mathcal H\to\mathcal H'\) is a
+level isotopy, a same-index handle slide, or the birth or death of a
+cancelling adjacent-index pair.  In dimension four these are the following
+thirteen directed types:
 \begin{enumerate}[label=(\roman*),ref=\roman*]
-  \item\label{move:framed-isotopy} a level isotopy of attaching data, seen
-  as framed isotopy when it changes the dotted--framed diagram;
+  \item\label{move:framed-isotopy} level isotopy of attaching data;
   \item\label{move:one-over-one} a \(1/1\) slide;
   \item\label{move:two-over-one} a \(2/1\) slide;
   \item\label{move:two-over-two} a \(2/2\) slide;
   \item\label{move:three-over-three} a \(3/3\) slide;
+  \item a \(0\)--\(1\) birth;
+  \item a \(0\)--\(1\) death;
   \item\label{move:one-two-birth} a \(1\)--\(2\) birth;
   \item\label{move:one-two-death} a \(1\)--\(2\) death;
-  \item\label{move:two-three-birth} a \(2\)--\(3\) birth; or
-  \item\label{move:two-three-death} a \(2\)--\(3\) death.
+  \item\label{move:two-three-birth} a \(2\)--\(3\) birth;
+  \item\label{move:two-three-death} a \(2\)--\(3\) death;
+  \item a \(3\)--\(4\) birth; or
+  \item a \(3\)--\(4\) death.
 \end{enumerate}
-For an \(r/s\) slide, \(r\) is the index of the moving handle and \(s\) the
-index of the stationary handle.  Outside the supporting ball or
-cancelling-pair neighborhood, the handle decomposition is unchanged.
-Level isotopy and a \(3/3\) slide act on the actual \(3\)-handle attaching
-embeddings even though that change is invisible in the dotted--framed
-diagram.
+Here an \(r/s\) slide moves an index-\(r\) handle over a stationary
+index-\(s\) handle.  Outside the supporting neighborhood the handle datum is
+unchanged.
 \end{definition}
 
 \begin{convention}[Standard local models]
 \label{conv:referenced-kirby-dictionary}
-The names in \cref{def:kirby-move} have their standard meanings in Kirby
-calculus.  The \(1/1\) and \(2/1\) moves are the dotted-circle moves in
-\cite[Figures~5.39 and~5.36]{GompfStipsicz1999}; a \(2/2\) move is an oriented
-band sum with a framed push-off of the stationary component
-\cite[Section~5.1]{GompfStipsicz1999}; a \(3/3\) move is the corresponding
-same-index slide of one \(3\)-handle attaching sphere over another; and
-births insert the isolated standard cancelling pairs, with deaths as their
-inverses.  This convention fixes the topology of each source and target and
-nothing more.
+The moves in \cref{def:kirby-move} have their standard handle-calculus
+meanings.  In a one-ended record, the \(1/1\), \(2/1\), and \(2/2\) moves are
+respectively the dotted-circle slide, passage through a dotted handle, and
+oriented framed band sum of \cite[Figures~5.39 and~5.36 and
+Section~5.1]{GompfStipsicz1999}.  Births insert isolated standard cancelling
+pairs and deaths are their inverses.  This convention fixes only the topology
+of source and target.
 \end{convention}
 
-\begin{theorem}[Kirby--Cerf completeness for special presentations]
-\label{prop:special-handle-movie-completeness}
-Let \((\mathcal H_0,\rho_0)\) and \((\mathcal H_1,\rho_1)\) be special Kirby
-presentations of closed, connected, oriented smooth four-manifolds \(X_0\)
-and \(X_1\), and let
-\(f\colon X_0\to X_1\) be an orientation-preserving diffeomorphism.  Via
-\(\rho_0\) and \(f^{-1}\circ\rho_1\), regard both handle decompositions as
-embedded decompositions of the fixed manifold \(X_0\).  They are related by
-a finite handle movie on \(X_0\),
-\[
-  \mathcal H_0\rightsquigarrow f^*\mathcal H_1,
-\]
-consisting of the nine moves in \cref{def:kirby-move}.  Here
-\(f^*\mathcal H_1\) denotes the second decomposition viewed inside \(X_0\),
-not a claim that the movie alone realizes the mapping class of \(f\).
-The prescribed map appears as the final tautological endpoint identification
-\[
-  f\colon f^*\mathcal H_1\longrightarrow\mathcal H_1
-\]
-between the two ambient manifolds.
+\begin{theorem}[Kirby--Cerf completeness]
+\label{prop:handle-movie-completeness}
+Let \((\mathcal H_0,\rho_0)\) and \((\mathcal H_1,\rho_1)\) be Kirby
+presentations of \(X_0\) and \(X_1\), and let
+\(f\colon X_0\to X_1\) be an orientation-preserving diffeomorphism.  After
+pulling the second presentation back along \(f\), the two handle
+decompositions of \(X_0\) are related by a finite movie of the thirteen moves
+in \cref{def:kirby-move}.  The map \(f\) is the final endpoint
+identification; no claim is made that the movie alone realizes its mapping
+class.
 \end{theorem}
 
 \begin{proof}
-Pull \(\mathcal H_1\) back along \(f\), so that it becomes a handle
-decomposition of \(X_0\).  Choose small balls inside the unique \(0\)- and
-\(4\)-handles and identify their collars.  Removing the interiors of these
-balls turns both decompositions into relative handle decompositions of the
-same cobordism \(S^3\to S^3\), using only handles of indices \(1,2,3\).
-
-We use connected Cerf theory only to keep all intermediate levels connected:
-\cite[Remark~2.7 and Theorem~3.4]{GayWehrheimWoodward2012} supplies a connected Cerf
-decomposition and hence excludes \(0\)--\(1\) and \(3\)--\(4\) births.  That
-result deliberately does not record attaching cycles or handle slides.  For
-those data we use Cerf's original one-parameter theory \cite{Cerf1970} in the
-standard relative handle-completeness form
-\cite[Theorem~4.2.12]{GompfStipsicz1999}: two relative handle decompositions
-are related by level isotopies of attaching data, same-index handle slides,
-and births or deaths of adjacent-index cancelling pairs.
-
-In dotted--framed notation, index-\(1\) slides are the \(1/1\) move
-\cite[Figure~5.39]{GompfStipsicz1999}, isotopies through the \(1\)-handlebody
-are generated by framed isotopy and the \(2/1\) move
-\cite[Figure~5.36]{GompfStipsicz1999}, and index-\(2\) slides are the framed
-band sums of \cite[Section~5.1]{GompfStipsicz1999}.  The two possible
-adjacent-index cancellations give the four birth/death moves.  Thus the Cerf
-movie has precisely the asserted form: same-index slides include the
-\(3/3\) move on the full \(3\)-handle attaching data, and level isotopies
-include isotopies of those attaching spheres.  Every operation takes place
-on the fixed manifold \(X_0\).  This proves the asserted object-level
-completeness.  The final map \(f\) is supplied by the chosen realization of
-the endpoint; no mapping-class realization theorem for the move sequence is
-being asserted.
+This is the standard Cerf-theoretic completeness theorem for handle
+decompositions: a generic one-parameter family of Morse functions produces
+level isotopies, same-index slides, and births or deaths of adjacent-index
+cancelling pairs.  See \cite{Cerf1970} and
+\cite[Theorem~4.2.12]{GompfStipsicz1999}.  Pulling back along \(f\) places the
+two decompositions on the same manifold, to which that theorem applies.
+The endpoint is then identified with the original target by \(f\).
 \end{proof}
 
-\begin{remark}[Mapping-class refinement]
+\begin{remark}[One-ended movies and mapping classes]
 \label{rem:mapping-class-refinement}
-The preceding theorem is deliberately an object-level completeness statement.
-It does not assert that a based Kirby--Cerf movie realizes an arbitrarily
-prescribed element of \(\pi_0\operatorname{Diff}^+(X)\).  To the author's
-knowledge, it remains open in this generality whether every such mapping class
-admits a based-movie realization and whether isotopies between the resulting
-diffeomorphisms are generated by a complete list of two-parameter
-``moves of moves.''  Related partial results for \(S^4\), formulated using
-loops of embedded spheres and Cerf theory, appear in
-\cite{Gay2025}.  No such mapping-class refinement is used below.
+If both endpoints are one-ended, connected Cerf theory permits a movie that
+avoids \(0\)--\(1\) and \(3\)--\(4\) births
+\cite[Remark~2.7 and Theorem~3.4]{GayWehrheimWoodward2012}.  This is an
+object-level statement.  It does not assert that a based movie realizes an
+arbitrarily prescribed element of \(\pi_0\operatorname{Diff}^+(X)\), nor a
+complete two-parameter calculus of movies of movies.  Related partial results
+for \(S^4\) appear in \cite{Gay2025}; no such refinement is used here.
 \end{remark}

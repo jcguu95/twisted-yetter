@@ -56,9 +56,30 @@ If \(v_\nu=\sum_\mu A_{\nu\mu}u_\mu\), then its dual basis is
 \]
 \end{proof}
 
+\begin{definition}[Handle-operator evaluation]
+\label{def:general-handle-operator-evaluation}
+Let \((\mathcal H,a)\) be a Kirby datum equipped with a handle \(2\)-cocycle.
+Turn the handle decomposition over.  This reverses the handle order and sends
+each primal index-\(k\) handle to a dual index-\((4-k)\) elementary
+cobordism.  Assign to it the corresponding skein operator of
+\cite[Definition~5.11]{Tham2021}.  For a primal \(2\)-handle \(e_j\), modify
+that operator by inserting the natural-automorphism coupon
+\((\eta^{a_j})\) on its attaching ribbon.  Compose the resulting operators in
+the turned-over handle order.  Since the incoming and outgoing boundaries are empty, the
+composite is an endomorphism of the vacuum line and hence a scalar.  Denote it
+by
+\[
+  \CY_{\cC,\eta}(\mathcal H,a)\in\mathbb C.
+\]
+The definition permits arbitrary finite numbers of \(0\)- and \(4\)-handles;
+their operators are, respectively, the turned-over index-\(4\) RT closure and
+index-\(0\) vacuum creation operators.  Only the index-\(2\) operators carry
+the homological character coupons.
+\end{definition}
+
 \begin{definition}[Cut-open tangle at a dotted component]
 \label{def:cut-open-dotted-tangle}
-Let \(\mathcal H\) be a special Kirby presentation, written as a
+Let \(\mathcal H\) be a one-ended Kirby presentation, written as a
 three-dimensional dotted--framed link
 \[
   D_{\mathcal H}=D_{\mathrm{dot}}\sqcup D_{\mathrm{fr}}\subset S^3.
@@ -120,12 +141,13 @@ Here and below, the dependence of \(B_\delta\) and \(\mathcal E_\delta\) on
 the currently fixed label state \(\lambda\) is suppressed from the notation.
 \end{convention}
 
-We can now give the entire evaluation recipe.
+We can now expand \cref{def:general-handle-operator-evaluation} in the
+one-ended case as a single RT graph sum.
 
 \begin{definition}[The coloured graph sum]
 \label{def:colored-graph-sum}
 Fix a twisted categorical input \((\cC,\eta)\).  Let \(\mathcal H\) be a
-special Kirby presentation and let
+one-ended Kirby presentation and let
 \(a\in Z^2(\mathcal H)\) represent the marking.  For every assignment
 \(\lambda=(\lambda_k)\) of simple objects to the framed components, form a
 finite linear combination \(\Gamma(\mathcal H,a;\lambda)\) of closed coloured
@@ -155,10 +177,11 @@ ribbon graphs by the following rules.
 \end{enumerate}
 \end{definition}
 
-\begin{definition}[Homologically twisted Crane--Yetter evaluator]
+\begin{proposition}[One-ended handle formula]
 \label{def:twisted-handle-evaluator}
-Fix a twisted categorical input \((\cC,\eta)\), a special Kirby presentation
-\(\mathcal H\), and a cocycle \(a\in Z^2(\mathcal H)\).  Define
+Fix a twisted categorical input \((\cC,\eta)\), a one-ended Kirby presentation
+\(\mathcal H\), and a cocycle \(a\in Z^2(\mathcal H)\).  Then the handle
+operator evaluation is
 \[
   \boxed{
   \CY_{\cC,\eta}(\mathcal H,a)
@@ -170,11 +193,22 @@ Fix a twisted categorical input \((\cC,\eta)\), a special Kirby presentation
       \bigl(S^3,\Gamma(\mathcal H,a;\lambda)\bigr).}
   \tag{4.5}\label{eq:twisted-handle-evaluator}
 \]
-\end{definition}
+\end{proposition}
+
+\begin{proof}
+Turn the handle decomposition over and expand the operators of
+\cite[Definition~5.11]{Tham2021}.  The unique primal \(4\)-handle contributes
+the index-\(0\) vacuum factor \(\operatorname{Dim}(\cC)\); each primal
+\(3\)-handle contributes the inverse factor; primal \(2\)-handles give the
+Kirby-colour sums with the displayed character coupons; primal \(1\)-handles
+give the tensor-unit projectors; and the unique primal \(0\)-handle performs
+the final RT closure in \(S^3\).  Their composite is exactly the displayed
+sum.
+\end{proof}
 
 \begin{proposition}[Dependence on the three-handle data]
 \label{prop:evaluator-three-handle-dependence}
-Although a special Kirby presentation contains the full attaching embeddings
+Although a one-ended Kirby presentation contains the full attaching embeddings
 of its \(3\)-handles, the marked evaluator uses that data only through
 \[
   h_3(\mathcal H)
@@ -204,7 +238,8 @@ attaching embeddings enters the formula.
 
 \begin{proposition}[Finiteness of the evaluator]
 \label{prop:evaluator-finiteness}
-The sum in \eqref{eq:twisted-handle-evaluator} is finite.
+For a one-ended Kirby datum, the sum in
+\eqref{eq:twisted-handle-evaluator} is finite.
 \end{proposition}
 
 \begin{proof}
