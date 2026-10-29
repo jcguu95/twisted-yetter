@@ -1,15 +1,15 @@
-\subsection{Kirby calculus for closed oriented four-manifolds}
+\subsection{Kirby calculus for closed oriented 4-manifolds}
 \label{subsec:topological-input}
 
 This subsection reviews textbook-level handle and Kirby calculus.  We follow
 \cite[Chapters~4 and~5]{GompfStipsicz1999}; the original framed-link calculus
-is due to Kirby \cite{Kirby1978}.  Throughout, four-manifolds are closed,
+is due to Kirby \cite{Kirby1978}.  Throughout, 4-manifolds are closed,
 connected, oriented, and smooth.  We do not impose a unique minimum or
 maximum on a handle decomposition.
 
 \begin{definition}[Handle attachment]
 \label{def:handle-attachment}
-Let \(W\) be an oriented smooth four-manifold with boundary.  An
+Let \(W\) be an oriented smooth 4-manifold with boundary.  An
 \emph{index-\(k\) handle attachment} is a smooth embedding
 \[
   \phi\colon S^{k-1}\times D^{4-k}\hookrightarrow\partial W.
@@ -53,7 +53,7 @@ The \emph{realization} of \(\mathcal H\) is
     \bigsqcup_{q\in I_4(\mathcal H)}B_q^4.
 \]
 A \emph{Kirby presentation} of a closed connected oriented smooth
-four-manifold \(X\) is a pair
+4-manifold \(X\) is a pair
 \[
   (\mathcal H,\rho),\qquad
   \rho\colon|\mathcal H|\xrightarrow{\ \cong\ }X,
@@ -120,7 +120,7 @@ definition of the full Kirby datum.
 
 \begin{proposition}[Existence and one-ended reduction]
 \label{prop:kirby-presentation-existence}
-Every closed connected oriented smooth four-manifold admits a Kirby
+Every closed connected oriented smooth 4-manifold admits a Kirby
 presentation.  Moreover, every Kirby presentation can be changed, by
 same-index slides and cancellations of \(0\)--\(1\) and \(3\)--\(4\) pairs,
 to a one-ended Kirby presentation of the same manifold.
@@ -182,7 +182,7 @@ the following thirteen directed types:
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item\label{move:framed-isotopy} level isotopy of attaching data;
   \item\label{move:one-over-one} a \(1/1\) slide;
-  \item\label{move:two-over-one} a \(2/1\) slide;
+  \item\label{move:two-over-one} a \(2/1\) passage through a dotted handle;
   \item\label{move:two-over-two} a \(2/2\) slide;
   \item\label{move:three-over-three} a \(3/3\) slide;
   \item a \(0\)--\(1\) birth;
@@ -194,6 +194,13 @@ the following thirteen directed types:
   \item a \(3\)--\(4\) birth; or
   \item a \(3\)--\(4\) death.
 \end{enumerate}
+There is no \(3/2\) slide in this list.  A handle slide is intrinsically a
+same-index \(k/k\) operation.  The \(2/1\) passage is listed separately only
+because dotted-circle notation turns an ambient isotopy in the boundary of
+the \(0\)--\(1\) subhandlebody into an additional diagrammatic move.  The
+full attaching data for the \(3\)-handles are retained in a Kirby datum, so
+their isotopies past the \(2\)-handle region remain ordinary level isotopies
+and create no analogous reduced-diagram generator.
 \end{definition}
 
 \begin{proposition}[Realization of an elementary move]
@@ -235,12 +242,27 @@ is a finite sequence of elementary moves
 and choices of the realization maps in
 \cref{prop:elementary-move-realization} such that, for
 \(\mu:=|m_N|\circ\cdots\circ|m_1|\),
+the diagram
+\begin{equation}
+\label{eq:cerf-realizes-diffeomorphism}
+\begin{array}{ccc}
+  |\mathcal H_0| & \xrightarrow{\ \mu\ } & |\mathcal H_1| \\
+  {\scriptstyle\rho_0}\!\downarrow &&
+    \downarrow\!{\scriptstyle\rho_1} \\
+  X_0 & \xrightarrow{\ f\ } & X_1
+\end{array}
+\qquad\text{commutes up to smooth isotopy.}
+\tag{KC}
+\end{equation}
+Precisely, there is a smooth family
+\(F_t\colon|\mathcal H_0|\to X_1\), \(0\leq t\leq1\), of
+orientation-preserving diffeomorphisms such that
 \[
-  \rho_1\circ\mu\simeq f\circ\rho_0
-  \tag{KC}\label{eq:cerf-realizes-diffeomorphism}
+  F_0=\rho_1\circ\mu,
+  \qquad
+  F_1=f\circ\rho_0.
 \]
-through orientation-preserving diffeomorphisms.  Thus the Kirby movie
-realizes the prescribed isotopy class of \(f\).
+Thus the Kirby movie realizes the prescribed isotopy class of \(f\).
 \end{theorem}
 
 \begin{proof}

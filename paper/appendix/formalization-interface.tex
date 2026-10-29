@@ -66,11 +66,11 @@ the paper.  This does not yet certify the claim: the inherited laws inside
 \texttt{BundledPremodularCategory} and \texttt{TensorIdentityCharacter} must be
 flattened and reviewed in the category-law subsection.
 
-\item \textbf{Four-manifold vocabulary.}
+\item \textbf{4-manifold vocabulary.}
 
 \emph{Human statement.}
 The intended input $X$ is a closed, connected, oriented smooth
-four-manifold, and it has an underlying topological space.
+4-manifold, and it has an underlying topological space.
 
 \emph{Lean declarations.}
 \begin{verbatim}
@@ -84,7 +84,7 @@ They occur in \texttt{EntranceAxioms.lean}, lines 332--336, under
 
 \emph{Classification and judgment.}
 These are explicit foundational vocabulary axioms; Lean does not construct
-smooth four-manifolds from more primitive objects.  Connectedness is now part
+smooth 4-manifolds from more primitive objects.  Connectedness is now part
 of the primitive type's stated meaning and name, rather than being inferred
 indirectly from a later presentation-existence axiom.  This exactly matches
 the manifold scope of the paper.  Status: \texttt{MATCH}.
@@ -92,7 +92,7 @@ the manifold scope of the paper.  Status: \texttt{MATCH}.
 \item \textbf{Oriented diffeomorphism.}
 
 \emph{Human statement.}
-For four-manifolds $X$ and $Y$, an input $f$ is an orientation-preserving
+For 4-manifolds $X$ and $Y$, an input $f$ is an orientation-preserving
 diffeomorphism $X\to Y$.  Forgetting smooth structure gives a homeomorphism of
 their underlying topological spaces.
 
@@ -120,7 +120,7 @@ topology-boundary audit.
 \item \textbf{Integral second homology and its transport.}
 
 \emph{Human statement.}
-For a four-manifold $X$,
+For a 4-manifold $X$,
 \[
   \operatorname{ManifoldH}_2(X)=H_2(X;\mathbb Z).
 \]
@@ -383,7 +383,7 @@ separate explicit-axiom subsection.  Status:
 
 The transitive project-defined algebraic input therefore contains no
 evaluator equality, Kirby-move invariance, representative independence, or
-four-manifold realization claim.  The proof fields exposed above define the
+4-manifold realization claim.  The proof fields exposed above define the
 standard algebraic domain itself.  The next audit unit is the combinatorial
 special Kirby diagram supplied to the evaluator.
 
@@ -587,7 +587,7 @@ cut-open, homology, and realization layers.  Status:
 This audit unit therefore establishes that the planar trace and its
 closed-circle conditions are transparent.  It does not yet certify the
 topological meaning of the stored handle boundary, the omitted closing
-$3$-handle data, or the relation between this syntax and a four-manifold.
+$3$-handle data, or the relation between this syntax and a 4-manifold.
 
 \subsection{Dotted cut-open data}
 \label{app:lean-dotted-cut-input}
@@ -948,7 +948,7 @@ Status: \nolinkurl{MATCH_WITH_VISIBLE_COORDINATE_CERTIFICATES}.
 The homology layer therefore does not replace manifold $H_2$ by a fixed copy
 of $\mathbb Z$, nor does it mistake the visible quotient for all of $H^2$.
 The two genuinely external statements are the realization of a diagram as a
-closed four-manifold and the identification of the selected THAM class with
+closed 4-manifold and the identification of the selected THAM class with
 $\operatorname{PD}(\alpha)$; both will be listed explicitly below.
 
 \subsection{Typed graphical language and evaluator}
@@ -1207,7 +1207,7 @@ The dotted role enters through the role-aware endpoint interpretation rather
 than an ordinary Kirby-colour replacement.  Status:
 \nolinkurl{PROVED_CONDITIONALLY_ON_CLEAN_SLIDE_INPUTS}.
 
-\item \textbf{The $2/1$ slide.}
+\item \textbf{The $2/1$ passage.}
 
 \emph{Human statement.}
 The moving component is ordinary and the stationary component is dotted; the
@@ -1337,7 +1337,7 @@ case and no local-invariance axiom.  Status: \texttt{DERIVED}.
 
 \end{enumerate}
 
-\subsection{Representative independence and four-manifold descent}
+\subsection{Representative independence and 4-manifold descent}
 \label{app:lean-descent}
 
 \begin{enumerate}[label=\textbf{D\arabic*.},leftmargin=*]
@@ -1577,7 +1577,7 @@ is exposed by the explicit realization axioms X1--X3, X6, X8--X11, and X16--X19.
 
 \emph{Human statement.}
 For a twisted premodular category $(\cC,\eta)$ and a marked closed connected
-oriented smooth four-manifold $(X,\alpha)$, choose a special Kirby
+oriented smooth 4-manifold $(X,\alpha)$, choose a special Kirby
 representative of $(X,\alpha)$ and evaluate it:
 \[
  \operatorname{TwistedYetter}_{\cC,\eta}(X,\alpha)
@@ -1606,7 +1606,7 @@ package is a public parameter.  Status: \texttt{MATCH}.
 \emph{Human statement.}
 For every twisted premodular category $(\cC,\eta)$ over $K$, every
 orientation-preserving diffeomorphism $f\colon X\to Y$ of closed connected
-oriented smooth four-manifolds, and every
+oriented smooth 4-manifolds, and every
 $\alpha\in H_2(X;\mathbb Z)$,
 \[
  \operatorname{TwistedYetter}_{\cC,\eta}(X,\alpha)
@@ -1732,11 +1732,11 @@ framed-ribbon isotopy between the normalized source expression and the
 normalized target expression at the transported coefficient vector.
 Judgment: \nolinkurl{HIGH_RISK_ISOTOPY--GRAPHICAL_BRIDGE}.
 
-\subsubsection*{Four-manifold vocabulary and classical topology}
+\subsubsection*{4-manifold vocabulary and classical topology}
 
 \item \nolinkurl{ClosedConnectedOrientedSmoothFourManifold}.
 This primitive type is the domain of closed, connected, oriented smooth
-four-manifolds.  Judgment: \nolinkurl{FOUNDATIONAL_VOCABULARY}.
+4-manifolds.  Judgment: \nolinkurl{FOUNDATIONAL_VOCABULARY}.
 
 \item \texttt{underlyingTopologicalSpace}.
 Every object of X12 has an underlying topological space.  Judgment:
@@ -1757,7 +1757,7 @@ induced map on Mathlib singular homology.  Judgment:
 The proposition \nolinkurl{PresentsClosedFourManifold}$(D,X)$ means that the visible
 $0$-, $1$-, and $2$-handle data of $D$ can be completed by exactly the stored
 number of unrecorded $3$-handles and the unique $4$-handle to a closed oriented
-smooth four-manifold orientation-preservingly diffeomorphic to $X$.  Judgment:
+smooth 4-manifold orientation-preservingly diffeomorphic to $X$.  Judgment:
 \nolinkurl{PRIMITIVE_CLASSICAL_TOPOLOGY_RELATION}.
 
 \item \texttt{RepresentsPoincareDualClass}.
