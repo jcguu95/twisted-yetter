@@ -70,13 +70,13 @@ diffeomorphisms
 \[
   |m|\colon |\mathcal H|\longrightarrow|\mathcal H'|.
 \]
-The transport
-\(T_m\colon H^2(\mathcal H)\to H^2(\mathcal H')\) is defined by the
-following commutative diagram:
+We use the standard pullback notation for the induced map on cohomology.
+On handle cohomology, the expression \((|m|^{-1})^*\) means the map defined
+by the following commutative diagram:
 \begin{equation}
 \label{eq:marking-transport}
 \begin{array}{ccc}
-  H^2(\mathcal H) & \xrightarrow{\ T_m\ } & H^2(\mathcal H') \\
+  H^2(\mathcal H) & \xrightarrow{\ (|m|^{-1})^*\ } & H^2(\mathcal H') \\
   {\scriptstyle\kappa_{\mathcal H}}\!\downarrow &&
     \downarrow\!{\scriptstyle\kappa_{\mathcal H'}} \\
   H^2(|\mathcal H|;\mathbb Z)
@@ -87,21 +87,24 @@ following commutative diagram:
 \end{equation}
 Equivalently,
 \[
-  T_m=\kappa_{\mathcal H'}^{-1}
+  (|m|^{-1})^*=\kappa_{\mathcal H'}^{-1}
   \circ(|m|^{-1})^*\circ\kappa_{\mathcal H}.
 \]
+The occurrence on the left is the induced map on handle cohomology; the
+occurrence on the right is the ordinary pullback on singular cohomology.
 The result of applying \(m\) to a marked Kirby datum is
 \[
-  m_*(\mathcal H,\xi):=(\mathcal H',T_m\xi).
+  \bigl(\mathcal H',(|m|^{-1})^*\xi\bigr).
 \]
 This is independent of the representative of the relative isotopy class
 of \(|m|\).  The \emph{marked Kirby--Cerf move} determined by \(m\) is the
 map of marked Kirby data
 \[
-  (\mathcal H,\xi)\longmapsto(\mathcal H',T_m\xi).
+  (\mathcal H,\xi)\longmapsto
+  \bigl(\mathcal H',(|m|^{-1})^*\xi\bigr).
 \]
 Thus its underlying topological move is \(m\), while its action on the
-marking is the canonical transport \(T_m\).
+marking is the standard pullback along the inverse realization.
 \end{definition}
 
 \begin{proposition}[Cocycle transport under Kirby--Cerf moves]
@@ -115,7 +118,8 @@ write
 \]
 Thus \(\lambda_j\) is the coordinate of the cochain \(\lambda\) in the
 oriented \(2\)-handle basis; it is not an additional topological datum.
-The transported class \(T_m\xi\) has a representative \(\lambda'\), with
+The transported class \((|m|^{-1})^*\xi\) has a representative
+\(\lambda'\), with
 coordinates \(\lambda'_j:=\lambda'(e'_j)\), satisfying the following
 formulas.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
@@ -181,7 +185,7 @@ Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary Kirby--Cerf move,
 and let \((\mathcal H,\xi)\) be a marked Kirby datum.  Then
 \[
   |m|\colon |(\mathcal H,\xi)|
-  \longrightarrow |(\mathcal H',T_m\xi)|
+  \longrightarrow |(\mathcal H',(|m|^{-1})^*\xi)|
 \]
 is a marked diffeomorphism.
 \end{proposition}
@@ -195,13 +199,14 @@ By \eqref{eq:marking-transport} and naturality of Poincar\'e duality,
   &=(|m|^{-1})^*\operatorname{PD}_{|\mathcal H|}
     (\alpha_{\mathcal H,\xi})\\
   &=(|m|^{-1})^*\kappa_{\mathcal H}(\xi)\\
-  &=\kappa_{\mathcal H'}(T_m\xi)\\
+  &=\kappa_{\mathcal H'}\bigl((|m|^{-1})^*\xi\bigr)\\
   &=\operatorname{PD}_{|\mathcal H'|}
-    (\alpha_{\mathcal H',T_m\xi}).
+    \bigl(\alpha_{\mathcal H',(|m|^{-1})^*\xi}\bigr).
   \end{aligned}
 \]
 Since Poincar\'e duality is an isomorphism,
-\(|m|_*\alpha_{\mathcal H,\xi}=\alpha_{\mathcal H',T_m\xi}\).
+\(|m|_*\alpha_{\mathcal H,\xi}
+=\alpha_{\mathcal H',(|m|^{-1})^*\xi}\).
 \end{proof}
 
 \begin{theorem}[Marked Kirby--Cerf completeness]
@@ -231,9 +236,12 @@ marked diffeomorphism.  Then:
   Its realization \(\mu:=|M|\) supplies the missing top edge and completes the
   long diagram \eqref{eq:cerf-realizes-diffeomorphism} up to smooth isotopy.
 
-  \item The composite transport along the movie satisfies
+  \item Writing \(\mu:=|M|\), the composite transport along the movie
+  satisfies
   \[
-    \bigl(T_{m_N}\circ\cdots\circ T_{m_1}\bigr)(\xi)=\xi'.
+    (\mu^{-1})^*\xi
+    =(|m_N|^{-1})^*\cdots(|m_1|^{-1})^*\xi
+    =\xi'.
   \]
   Namely, transporting the source marking through the independently
   constructed unmarked movie gives exactly the prescribed target marking,
@@ -246,9 +254,9 @@ marked diffeomorphism.  Then:
 \end{theorem}
 
 \begin{proof}
-Ordinary completeness gives \(M\); the defining naturality squares for the
-maps \(T_{m_r}\), together with Poincar\'e duality and the markedness of
-\(f\), identify both sides of (ii) under the isomorphism
+Ordinary completeness gives \(M\); functoriality of pullback, together with
+Poincar\'e duality and the markedness of \(f\), identifies both sides of
+(ii) under the isomorphism
 \(\kappa_{\mathcal H'}\), while
 \cref{cor:one-ended-diffeomorphism-realization} gives (iii).
 \end{proof}
