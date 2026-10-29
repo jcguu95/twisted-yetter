@@ -206,27 +206,21 @@ Since Poincar\'e duality is an isomorphism,
 
 \begin{theorem}[Marked Kirby--Cerf completeness]
 \label{prop:marked-kirby-cerf}
-Assume the following data.
-\begin{enumerate}[label=\textup{(A\arabic*)},ref=\textup{A\arabic*}]
-  \item A marked diffeomorphism
-  \[
-    f\colon(X,\alpha)\longrightarrow(Y,\alpha').
-  \]
-
-  \item A marked Kirby presentation
-  \[
-    \rho\colon|(\mathcal H,\xi)|\longrightarrow(X,\alpha).
-  \]
-
-  \item A marked Kirby presentation
-  \[
-    \rho'\colon|(\mathcal H',\xi')|\longrightarrow(Y,\alpha').
-  \]
-\end{enumerate}
-Then the following conclusions hold.
-\begin{enumerate}[label=\textup{(C\arabic*)},ref=\textup{C\arabic*}]
-  \item Ordinary Kirby--Cerf completeness, applied without using
-  \(\xi\) or \(\xi'\), produces a Kirby--Cerf movie
+Assume the following arrows, with the top edge deliberately absent:
+\[
+\begin{array}{ccc}
+  |(\mathcal H,\xi)| && |(\mathcal H',\xi')| \\
+  {\scriptstyle\rho}\!\downarrow &&
+    \downarrow\!{\scriptstyle\rho'} \\
+  (X,\alpha) & \xrightarrow{\ f\ } & (Y,\alpha').
+\end{array}
+\]
+Here \(\rho\) and \(\rho'\) are marked Kirby presentations and \(f\) is a
+marked diffeomorphism.  Then:
+\begin{enumerate}[label=\textup{(\roman*)},ref=\textup{\roman*}]
+  \item Ordinary Kirby--Cerf completeness, applied to the underlying
+  unmarked arrows and without using \(\xi\) or \(\xi'\), produces a
+  Kirby--Cerf movie
   \[
     M\colon
     \mathcal H=\mathcal H_0
@@ -234,33 +228,17 @@ Then the following conclusions hold.
     \longrightarrow\cdots\longrightarrow
     \mathcal H_N=\mathcal H'.
   \]
-
-  \item Writing \(\mu:=|M|\), its realization fits into the diagram
-  \[
-  \begin{array}{ccccccc}
-    |\mathcal H| & \xrightarrow{|m_1|} & |\mathcal H_1|
-      & \xrightarrow{\ \cdots\ } & |\mathcal H_{N-1}|
-      & \xrightarrow{|m_N|} & |\mathcal H'| \\
-    {\scriptstyle\rho}\!\downarrow &&&&&&
-      \downarrow\!{\scriptstyle\rho'} \\
-    X & \multicolumn{5}{c}{\xrightarrow{\hspace{9em} f\hspace{9em}}} & Y,
-  \end{array}
-  \tag{3.6}\label{eq:marked-cerf-realizes-diffeomorphism}
-  \]
-  which commutes up to smooth isotopy.  Explicitly, there is a smooth
-  family of orientation-preserving diffeomorphisms
-  \(F_t\colon|\mathcal H|\to Y\), \(0\leq t\leq1\), such that
-  \[
-    F_0=\rho'\circ\mu,
-    \qquad
-    F_1=f\circ\rho.
-  \]
+  Its realization \(\mu:=|M|\) supplies the missing top edge and completes the
+  long diagram \eqref{eq:cerf-realizes-diffeomorphism} up to smooth isotopy.
 
   \item If \(\xi_0:=\xi\) and
   \(\xi_r:=T_{m_r}\xi_{r-1}\) for \(1\leq r\leq N\), then
   \[
     \xi_N=\xi'.
   \]
+  Namely, transporting the source marking through the independently
+  constructed unmarked movie gives exactly the prescribed target marking,
+  not merely another class represented on the same terminal Kirby datum.
 
   \item If both presentations are one-ended, \(M\) may be chosen
   one-ended throughout; equivalently, it uses the nine move types other
@@ -271,8 +249,8 @@ Then the following conclusions hold.
 \begin{proof}
 Apply ordinary Kirby--Cerf completeness,
 \cref{prop:handle-movie-completeness}, to the underlying unmarked
-presentations and \(f\).  This produces the movie in \textup{(C1)} and
-the isotopy in \textup{(C2)} before any marking is considered.  Starting with
+presentations and \(f\).  This produces the movie and its realizing isotopy
+before any marking is considered.  Starting with
 \(\xi_0=\xi\), define recursively
 \[
   \xi_r:=T_{m_r}\xi_{r-1}.
@@ -281,7 +259,7 @@ By \cref{prop:kirby-move-preserves-marked-data}, every stage is a marked
 Kirby datum and the composite realization identifies its marking with the
 source marking.  At the endpoint it gives the marked presentation
 \(\rho\circ\mu^{-1}\colon|(\mathcal H',\xi_N)|\to(X,\alpha)\).  The isotopy
-in \textup{(C2)}, after reversing its parameter and composing with the
+from ordinary completeness, after reversing its parameter and composing with the
 relevant inverses, is a smooth isotopy from \(\rho\circ\mu^{-1}\) to
 \(f^{-1}\circ\rho'\).  Naturality of Poincar\'e duality gives
 \[
