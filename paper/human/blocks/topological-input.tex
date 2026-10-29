@@ -64,7 +64,7 @@ an orientation-preserving diffeomorphism of \(S^3\), which extends over
 \(B^4\) by Cerf's theorem \(\Gamma_4=0\) \cite{Cerf1968}.
 \end{definition}
 
-\begin{definition}[Derived handle chain complex]
+\begin{definition}[Derived handle chain and cochain complexes]
 \label{def:derived-handle-chain-complex}
 Put \(W^{(-1)}=\varnothing\) and \(W^{(4)}=|\mathcal H|\), and define
 \[
@@ -88,6 +88,37 @@ In particular,
 Write \(h_k(\mathcal H)=|I_k(\mathcal H)|\).  The chain complex and the
 numbers \(h_k\) are derived from the handle attachments; they are not extra
 parts of a Kirby datum.
+
+The dual handle cochain complex is
+\[
+  C^k(\mathcal H):=\operatorname{Hom}(C_k(\mathcal H),\mathbb Z),
+  \qquad
+  \delta^k(a):=a\circ\partial_{k+1},
+\]
+and we write
+\[
+  H^2(\mathcal H):=
+  \ker(\delta^2)/\operatorname{im}(\delta^1).
+\]
+The handle filtration and the cellular-to-singular comparison determine a
+natural isomorphism
+\[
+  \kappa_{\mathcal H}\colon
+  H^2(\mathcal H)\xrightarrow{\ \cong\ }
+  H^2(|\mathcal H|;\mathbb Z).
+\]
+For every closed oriented \(4\)-manifold \(M\), Poincar\'e duality gives an
+isomorphism
+\[
+  \operatorname{PD}_M\colon
+  H_2(M;\mathbb Z)\xrightarrow{\ \cong\ }H^2(M;\mathbb Z).
+\]
+It is natural under orientation-preserving diffeomorphisms: if
+\(g\colon M\to N\), then
+\[
+  (g^{-1})^*\operatorname{PD}_M(\alpha)
+  =\operatorname{PD}_N(g_*\alpha).
+\]
 \end{definition}
 
 \begin{definition}[One-ended Kirby datum]

@@ -3,38 +3,55 @@
 
 We now specify the object on which marked Kirby calculus acts.
 
-\begin{definition}[Marked Kirby datum]
-\label{def:marked-kirby-presentation}
-\label{def:handle-homology-marking}
+\begin{definition}[Marked \(4\)-manifold and marked diffeomorphism]
+\label{def:marked-four-manifold}
 An \(H_2\)-marked 4-manifold is a pair \((X,\alpha)\), where \(X\) is a
 closed, connected, oriented smooth 4-manifold and
 \(\alpha\in H_2(X;\mathbb Z)\).
+A \emph{marked diffeomorphism}
+\[
+  f\colon(X,\alpha)\longrightarrow(Y,\beta)
+\]
+is an orientation-preserving diffeomorphism \(f\colon X\to Y\) satisfying
+\(f_*\alpha=\beta\).
+\end{definition}
 
-Let \((\mathcal H,\rho)\) be a Kirby presentation of \(X\), and set
+\begin{definition}[Marked Kirby datum]
+\label{def:handle-homology-marking}
+A \emph{marked Kirby datum} is a pair \((\mathcal H,\xi)\), where
+\(\mathcal H\) is a Kirby datum and
 \[
-  H^2(\mathcal H)
-  :=
-  H^2\!\left(\operatorname{Hom}
-    (C_*(\mathcal H),\mathbb Z)\right).
+  \xi\in H^2(\mathcal H).
 \]
-The handle filtration and cellular-to-singular comparison give a natural
-isomorphism
+\end{definition}
+
+\begin{definition}[Realization of a marked Kirby datum]
+\label{def:marked-kirby-realization}
+The realization of \((\mathcal H,\xi)\) is the \(H_2\)-marked 4-manifold
 \[
-  \kappa_{\mathcal H}\colon
-  H^2(\mathcal H)\xrightarrow{\ \cong\ }H^2(|\mathcal H|;\mathbb Z).
+  |(\mathcal H,\xi)|
+  :=\bigl(|\mathcal H|,\alpha_{\mathcal H,\xi}\bigr),
+  \qquad
+  \alpha_{\mathcal H,\xi}
+  :=\operatorname{PD}_{|\mathcal H|}^{-1}
+      \bigl(\kappa_{\mathcal H}(\xi)\bigr).
 \]
-A \emph{marked Kirby datum} for \((X,\alpha)\) is a pair
-\(((\mathcal H,\rho),\xi)\), where \(\xi\in H^2(\mathcal H)\) satisfies
+\end{definition}
+
+\begin{definition}[Marked Kirby presentation]
+\label{def:marked-kirby-presentation}
+A \emph{marked Kirby presentation} of \((X,\alpha)\) is a marked Kirby
+datum \((\mathcal H,\xi)\) together with a marked diffeomorphism
+\[
+  \rho\colon |(\mathcal H,\xi)|\longrightarrow(X,\alpha).
+\]
+Equivalently, \(\rho\colon|\mathcal H|\to X\) is orientation preserving and
 \[
   \kappa_{\mathcal H}(\xi)=\rho^*\operatorname{PD}_X(\alpha).
   \tag{3.2}\label{eq:marked-presentation}
 \]
-Equivalently,
-\(\xi=\kappa_{\mathcal H}^{-1}(\rho^*\operatorname{PD}_X(\alpha))\), so the
-marking is uniquely determined once \((\mathcal H,\rho)\) and \(\alpha\) are
-fixed.  We suppress \(\rho\) when it is understood and write
-\((\mathcal H,\xi)\).  We also call this a
-\emph{marked Kirby presentation}.
+Thus \(\xi\) is uniquely determined by an unmarked presentation
+\((\mathcal H,\rho)\) and the class \(\alpha\).
 \end{definition}
 
 \begin{definition}[Transport under a Kirby--Cerf move]
@@ -57,16 +74,9 @@ Define
   \colon H^2(\mathcal H)\longrightarrow H^2(\mathcal H').
   \tag{3.3}\label{eq:marking-transport}
 \]
-If \((\mathcal H,\rho)\) presents \(X\), then the target presentation is
+The result of applying \(m\) to a marked Kirby datum is
 \[
-  (\mathcal H',\rho_m),
-  \qquad
-  \rho_m:=\rho\circ|m|^{-1}\colon|\mathcal H'|\longrightarrow X.
-\]
-The result of applying \(m\) to \(((\mathcal H,\rho),\xi)\) is
-\[
-  m_*((\mathcal H,\rho),\xi)
-  :=((\mathcal H',\rho_m),T_m\xi).
+  m_*(\mathcal H,\xi):=(\mathcal H',T_m\xi).
 \]
 This is independent of the representative of the relative isotopy class
 of \(|m|\).  A move equipped with this transport is called a
@@ -75,7 +85,7 @@ of \(|m|\).  A move equipped with this transport is called a
 
 \begin{definition}[Handle cocycle]
 \label{def:handle-cocycle}
-Let \(((\mathcal H,\rho),\xi)\) be a marked Kirby datum.  A
+Let \((\mathcal H,\xi)\) be a marked Kirby datum.  A
 \emph{handle cocycle} for \((\mathcal H,\xi)\) is a cocycle
 \[
   a\in\operatorname{Hom}(C_2(\mathcal H),\mathbb Z)
@@ -150,28 +160,38 @@ equivalences gives the death formulas.
 \begin{proposition}[Kirby--Cerf moves preserve marked data]
 \label{prop:kirby-move-preserves-marked-data}
 Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary Kirby--Cerf move,
-let \((\mathcal H,\rho)\) be a presentation of \(X\), and let
-\(\rho_m=\rho\circ|m|^{-1}\).  If
-\(((\mathcal H,\rho),\xi)\) is a marked Kirby datum for \((X,\alpha)\), then
+and let \((\mathcal H,\xi)\) be a marked Kirby datum.  Then
 \[
-  m_*((\mathcal H,\rho),\xi)
-  =
-  ((\mathcal H',\rho_m),T_m\xi)
+  |m|\colon |(\mathcal H,\xi)|
+  \longrightarrow |(\mathcal H',T_m\xi)|
 \]
-is a marked Kirby datum for the same marked manifold \((X,\alpha)\).
+is a marked diffeomorphism.  Consequently, if
+\(\rho\colon|(\mathcal H,\xi)|\to(X,\alpha)\) is a marked Kirby
+presentation, then
+\[
+  \rho_m:=\rho\circ|m|^{-1}
+  \colon|(\mathcal H',T_m\xi)|\longrightarrow(X,\alpha)
+\]
+is a marked Kirby presentation of the same marked 4-manifold.
 \end{proposition}
 
 \begin{proof}
 By \eqref{eq:marking-transport} and naturality of Poincar\'e duality,
 \[
   \begin{aligned}
-  \kappa_{\mathcal H'}(T_m\xi)
+  \operatorname{PD}_{|\mathcal H'|}
+    \bigl(|m|_*\alpha_{\mathcal H,\xi}\bigr)
+  &=(|m|^{-1})^*\operatorname{PD}_{|\mathcal H|}
+    (\alpha_{\mathcal H,\xi})\\
   &=(|m|^{-1})^*\kappa_{\mathcal H}(\xi)\\
-  &=(|m|^{-1})^*\rho^*\operatorname{PD}_X(\alpha)\\
-  &=\rho_m^*\operatorname{PD}_X(\alpha).
+  &=\kappa_{\mathcal H'}(T_m\xi)\\
+  &=\operatorname{PD}_{|\mathcal H'|}
+    (\alpha_{\mathcal H',T_m\xi}).
   \end{aligned}
 \]
-This is exactly the defining condition \eqref{eq:marked-presentation}.
+Since Poincar\'e duality is an isomorphism,
+\(|m|_*\alpha_{\mathcal H,\xi}=\alpha_{\mathcal H',T_m\xi}\).  The final
+assertion follows by composition of marked diffeomorphisms.
 \end{proof}
 
 \begin{theorem}[Marked Kirby--Cerf completeness]
@@ -180,11 +200,10 @@ Let
 \[
   f\colon(X,\alpha)\longrightarrow(Y,\alpha')
 \]
-be an orientation-preserving diffeomorphism of \(H_2\)-marked closed
-4-manifolds; thus \(f_*\alpha=\alpha'\).  Let
-\(((\mathcal H,\rho),\xi)\) and
-\(((\mathcal H',\rho'),\xi')\) be marked Kirby data for
-\((X,\alpha)\) and \((Y,\alpha')\), respectively.  Then there is a finite
+be a marked diffeomorphism.  Let
+\(\rho\colon|(\mathcal H,\xi)|\to(X,\alpha)\) and
+\(\rho'\colon|(\mathcal H',\xi')|\to(Y,\alpha')\) be marked Kirby
+presentations.  Then there is a finite
 movie
 \[
   \mathcal H=\mathcal H_0
@@ -213,8 +232,9 @@ Apply ordinary Kirby--Cerf completeness,
   \xi_r:=T_{m_r}\xi_{r-1}.
 \]
 By \cref{prop:kirby-move-preserves-marked-data}, every stage is a marked
-Kirby datum for \((X,\alpha)\), with endpoint realization
-\(\rho\circ\mu^{-1}\colon|\mathcal H'|\to X\).  The isotopy
+Kirby datum and the composite realization identifies its marking with the
+source marking.  At the endpoint it gives the marked presentation
+\(\rho\circ\mu^{-1}\colon|(\mathcal H',\xi_N)|\to(X,\alpha)\).  The isotopy
 \eqref{eq:marked-cerf-realizes-diffeomorphism} gives
 \(\rho\circ\mu^{-1}\simeq f^{-1}\circ\rho'\).  Naturality of Poincar\'e
 duality gives

@@ -1118,9 +1118,14 @@ connected Cerf movie.
 
 \begin{proposition}[Well-definedness on a marked 4-manifold]
 \label{prop:marked-manifold-evaluation-well-defined}
-Let \((\mathcal H,\xi)\) and \((\mathcal K,\zeta)\) be marked one-ended
-Kirby data
-for the same \(H_2\)-marked 4-manifold \((X,\alpha)\).  Then
+Let
+\[
+  \rho\colon|(\mathcal H,\xi)|\longrightarrow(X,\alpha),
+  \qquad
+  \sigma\colon|(\mathcal K,\zeta)|\longrightarrow(X,\alpha)
+\]
+be marked one-ended Kirby presentations of the same marked 4-manifold.
+Then
 \[
   \CY_{\cC,\eta}(\mathcal H,\xi)
   =\CY_{\cC,\eta}(\mathcal K,\zeta).
@@ -1143,7 +1148,8 @@ defining sum, by \cref{lem:pullback-presentation-evaluation} with
 \begin{definition}[Manifold-level evaluator]
 \label{def:manifold-level-evaluator}
 For a marked 4-manifold $(X,\alpha)$, choose a marked one-ended Kirby
-presentation $(\mathcal H,\xi_{\mathcal H})$ as in
+presentation
+\(\rho\colon|(\mathcal H,\xi_{\mathcal H})|\to(X,\alpha)\) as in
 \cref{prop:kirby-presentation-existence,def:marked-kirby-presentation}
 and set
 \[
@@ -1154,21 +1160,20 @@ and set
 
 \begin{theorem}[Marked diffeomorphism invariance]
 \label{prop:diffeomorphism-invariance}
-Let $X$ and $Y$ be closed connected oriented smooth 4-manifolds, let
-$f\colon X\to Y$ be an orientation-preserving diffeomorphism, and let
-$\alpha\in H_2(X;\mathbb Z)$.  Then
+Let
+\[
+  f\colon(X,\alpha)\longrightarrow(Y,\beta)
+\]
+be a marked diffeomorphism.  Then
 \[
   \CY_{\cC,\eta}(X,\alpha)
-  =\CY_{\cC,\eta}(Y,f_*\alpha).
+  =\CY_{\cC,\eta}(Y,\beta).
 \]
 \end{theorem}
 
 \begin{proof}
-Choose marked one-ended Kirby presentations of the two marked manifolds and
-pull the target presentation back along $f$.  It is a marked Kirby datum for
-$(X,\alpha)$ by naturality of Poincar\'e duality.  Its value equals the value
-of the chosen source datum by
-\cref{prop:marked-manifold-evaluation-well-defined}, and it equals the target
-value by \cref{lem:pullback-presentation-evaluation}.  This proves the
-displayed equality.
+Choose marked one-ended Kirby presentations of the two marked manifolds.
+By \cref{prop:marked-kirby-cerf}, a marked Kirby--Cerf movie connects them
+and realizes \(f\).  Apply \cref{thm:elementary-kirby-invariance} along the
+movie and induct on its length.
 \end{proof}
