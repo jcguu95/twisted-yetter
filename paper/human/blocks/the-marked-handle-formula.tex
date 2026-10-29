@@ -1,145 +1,5 @@
-\subsection{Categorical ingredients and the marked handle formula}
+\subsection{The marked handle evaluator}
 \label{subsec:graphical-construction}
-
-\begin{definition}[Twisted categorical input]
-\label{def:twisted-categorical-input}
-A twisted categorical input is a pair \((\cC,\eta)\), where \(\cC\) is a
-premodular fusion category over \(\mathbb C\) and
-\[
-  \eta\in A_{\cC}
-  =\operatorname{Aut}_{\otimes}(\operatorname{Id}_{\cC}).
-\]
-\end{definition}
-
-\begin{definition}[Cohomological marking and handle cocycle]
-\label{def:handle-cocycle}
-Let \((\mathcal H,\beta)\) be a marked Kirby datum.  Dualize the handle
-chain complex of \cref{def:derived-handle-chain-complex}:
-\[
-  C^k(\mathcal H):=\operatorname{Hom}(C_k(\mathcal H),\mathbb Z),
-  \qquad
-  \delta^k(\omega):=\omega\circ\partial_{k+1},
-\]
-and write
-\[
-  H^2(\mathcal H):=
-  \ker(\delta^2)/\operatorname{im}(\delta^1).
-\]
-The cellular comparison isomorphism
-\[
-  \kappa_{\mathcal H}\colon
-  H^2(\mathcal H)\xrightarrow{\ \cong\ }
-  H^2(|\mathcal H|;\mathbb Z)
-\]
-and Poincar\'e duality determine the evaluator class
-\[
-  \xi_{\mathcal H,\beta}
-  :=\kappa_{\mathcal H}^{-1}
-    \bigl(\operatorname{PD}_{|\mathcal H|}(\beta)\bigr)
-  \in H^2(\mathcal H).
-\]
-A \emph{handle cocycle} for \((\mathcal H,\beta)\) is a cocycle
-\[
-  \omega\in C^2(\mathcal H)
-\]
-representing \(\xi_{\mathcal H,\beta}\).  If \(e_j\) is the oriented
-\(2\)-handle generator corresponding to the \(j\)th framed component, set
-\[
-  \omega_j:=\omega(e_j)\in\mathbb Z.
-\]
-These integers, and only these integers, are used as character exponents in
-the evaluator.
-\end{definition}
-
-\begin{proposition}[Cocycle coordinates under Kirby--Cerf moves]
-\label{prop:marking-coordinate-transport}
-Let \(m\colon(\mathcal H,\beta)\to
-(\mathcal H',|m|_*\beta)\) be a marked elementary move, and let \(\omega\)
-be a handle cocycle for \((\mathcal H,\beta)\).  The target evaluator class
-has a representative \(\omega'\) with the following coordinates.
-\begin{enumerate}[label=(\roman*),ref=\roman*]
-  \item For framed isotopy, a \(1/1\) slide, a \(2/1\) passage, a
-  \(3/3\) slide, a \(0\)--\(1\) birth or death, or a \(3\)--\(4\) birth or
-  death, the \(2\)-handle generators are canonically identified and
-  \(\omega'=\omega\).
-
-  \item For a \(2/2\) slide, let \(e_x\) be the moving generator,
-  \(e_y\) the stationary generator, and let
-  \(\varepsilon\in\{\pm1\}\) be fixed by the oriented handle-slide
-  convention.  Then
-  \begin{equation}
-    \omega_x'=\omega_x+\varepsilon\omega_y,
-    \qquad
-    \omega_y'=\omega_y.
-    \label{eq:two-two-marking-transport}
-  \end{equation}
-  while every uninvolved coordinate is unchanged.
-
-  \item A \(1\)--\(2\) birth admits \(\omega'=\omega\oplus0\); every
-  representative of the target class is cohomologous to one whose new
-  \(2\)-handle coordinate is zero.
-
-  \item For a \(2\)--\(3\) birth, the cocycle equation forces the new
-  \(2\)-handle coordinate to be zero, so again
-  \(\omega'=\omega\oplus0\).
-\end{enumerate}
-The death formulas are the inverses of the corresponding birth formulas.
-\end{proposition}
-
-\begin{proof}
-Poincar\'e duality is natural, so the evaluator class attached to
-\(|m|_*\beta\) is the cellular transport of the class attached to \(\beta\).
-The standard cellular map of each local move now gives the formulas above:
-a \(2/2\) slide sends the new moving generator to
-\(e_x+\varepsilon e_y\), while adjacent-index birth adds the corresponding
-acyclic two-term complex.  See
-\cite[Sections~4.1--4.2]{DurstGeigesKegel2019}.
-\end{proof}
-
-Two standard categorical ingredients enter the formula.
-
-\begin{definition}[Kirby colour and tensor-unit projector]
-\label{def:kirby-colour}
-\label{def:tensor-unit-projector}
-Let \(\cC\) be a premodular fusion category.  Its Kirby colour is
-\begin{equation}
-  \Omega_{\cC}:=
-  \sum_{i\in\operatorname{Irr}(\cC)}d_i\,i.
-  \label{eq:kirby-colour}
-\end{equation}
-For an object \(W\), choose a basis
-\(u_\mu\colon\mathbf1\to W\) and its composition-dual basis
-\(\widehat u_\mu\colon W\to\mathbf1\), and set
-\begin{equation}
-  P_{\mathbf1,W}:=
-  \sum_\mu u_\mu\widehat u_\mu
-  \in\operatorname{End}_{\cC}(W).
-  \label{eq:tensor-unit-projector}
-\end{equation}
-We also write
-\(\operatorname{Cut}_{\cC}(W):=P_{\mathbf1,W}\); no global-dimension factor is
-included in this notation.
-\end{definition}
-
-\begin{lemma}[Basis independence of the tensor-unit projector]
-\label{lem:tensor-unit-projector-basis-independence}
-Let \(\cC\) be a premodular fusion category and let \(W\in\cC\).
-The endomorphism \(P_{\mathbf1,W}\) in
-\eqref{eq:tensor-unit-projector} is independent of the chosen pair of dual
-bases.
-\end{lemma}
-
-\begin{proof}
-If \(v_\nu=\sum_\mu A_{\nu\mu}u_\mu\), then its dual basis is
-\(\widehat v_\nu=\sum_\rho(A^{-1})_{\rho\nu}\widehat u_\rho\).  Hence
-\[
-  \sum_\nu v_\nu\widehat v_\nu
-  =\sum_{\mu,\rho}
-    \left(\sum_\nu A_{\nu\mu}(A^{-1})_{\rho\nu}\right)
-    u_\mu\widehat u_\rho
-  =\sum_\mu u_\mu\widehat u_\mu.
-\]
-\end{proof}
 
 \begin{definition}[Handle-operator evaluation]
 \label{def:general-handle-operator-evaluation}
@@ -163,29 +23,14 @@ index-\(0\) vacuum creation operators.  Only the index-\(2\) operators carry
 the homological character coupons.
 \end{definition}
 
-\begin{definition}[Cut-open tangle at a dotted component]
-\label{def:cut-open-dotted-tangle}
-Let \(\mathcal H\) be a one-ended Kirby presentation, written as a
-three-dimensional dotted--framed link
-\[
-  D_{\mathcal H}=D_{\mathrm{dot}}\sqcup D_{\mathrm{fr}}\subset S^3.
-\]
-For a dotted component \(\delta\), choose a spanning disk
-\(\Delta_\delta\subset S^3\) transverse to \(D_{\mathrm{fr}}\); because
-\(D_{\mathrm{dot}}\) is an unlink, these disks may be chosen mutually
-disjoint.  Cutting the framed ribbon link along a small product neighborhood
-\(\Delta_\delta\times(-\epsilon,\epsilon)\) replaces every transverse
-intersection by one endpoint on each of the two faces
-\(\Delta_\delta^-\) and \(\Delta_\delta^+\).  The result is a
-three-dimensional framed ribbon tangle with boundary.
-
-Fix a simple-label assignment \(\lambda\) on the framed components.  Using
-the product coordinates, bunch the endpoints on each face into a standard
-ordered row.  Their oriented labels form a boundary word; denote its tensor
-product by \(B_\delta\).  The two faces carry respectively \(B_\delta\) and
-its oppositely oriented boundary state.  After the exterior tangle is fixed,
-inserting an endomorphism of \(B_\delta\) between these faces and regluing
-defines a linear functional
+\begin{definition}[Categorical boundary state of a cut-open dotted component]
+\label{def:categorical-cut-boundary-state}
+Fix a simple-label assignment \(\lambda\) on the framed components in the
+cut-open tangle of \cref{def:cut-open-dotted-tangle}.  The ordered oriented
+boundary word on the positive face determines a tensor product
+\(B_\delta\); the opposite face carries its orientation-dual boundary
+state.  After the exterior tangle is fixed, inserting an endomorphism of
+\(B_\delta\) between these faces and regluing defines a linear functional
 \[
   \mathcal E_\delta\colon
   \operatorname{End}_{\cC}(B_\delta)\longrightarrow\mathbb C.

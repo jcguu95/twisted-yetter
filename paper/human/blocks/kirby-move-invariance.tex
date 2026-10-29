@@ -33,62 +33,6 @@ same exterior ribbon graph is restored after the calculation.
 
 The rest of this subsection proves precisely these six assertions.
 
-The character coupons disappear on the tensor-unit channel for a formal
-reason that will be used repeatedly.
-
-\begin{lemma}[Absorption by the tensor-unit projector]
-\label{lem:unit-projector-absorbs-character}
-For every object $W\in\cC$ and every $n\in\mathbb Z$,
-\[
-  P_{\mathbf1,W}\eta_W^n=P_{\mathbf1,W}
-  =\eta_W^nP_{\mathbf1,W}.
-\]
-\end{lemma}
-
-\begin{proof}
-Write $P_{\mathbf1,W}=\sum_\mu u_\mu\widehat u_\mu$ as in
-\cref{def:tensor-unit-projector}.  Monoidality gives
-$\eta_{\mathbf1}=\operatorname{id}_{\mathbf1}$.  Naturality, first for
-$u_\mu\colon\mathbf1\to W$ and then for
-$\widehat u_\mu\colon W\to\mathbf1$, gives
-\[
-  \eta_W^n u_\mu=u_\mu,
-  \qquad
-  \widehat u_\mu\eta_W^n=\widehat u_\mu.
-\]
-Summing these identities proves both equalities.
-\end{proof}
-
-\begin{lemma}[Naturality of the tensor-unit projector]
-\label{lem:unit-projector-naturality}
-For every morphism $f\colon U\to V$ in $\cC$,
-\[
-  fP_{\mathbf1,U}=P_{\mathbf1,V}f.
-\]
-\end{lemma}
-
-\begin{proof}
-Finite semisimplicity decomposes every object as a direct sum of its simple
-isotypic summands.  By Schur's lemma, a morphism has no matrix entries
-between the tensor-unit isotypic summand and a nonisomorphic simple
-isotypic summand.  It therefore preserves the tensor-unit summand, which is
-exactly the displayed identity.
-\end{proof}
-
-\begin{corollary}[Finite transport of the tensor-unit projector]
-\label{cor:finite-unit-projector-transport}
-A tensor-unit projector may be moved through any finite composite of
-crossings, cups, caps, twists, and morphism coupons, with the source and
-target projectors changed according to the boundary objects.
-\end{corollary}
-
-\begin{proof}
-Apply \cref{lem:unit-projector-naturality} successively to the elementary
-morphisms in the ribbon expression.  Graphically, this is the tunnelling
-property of the completeness idempotent in
-\cite[Lemmas~2.27--2.28]{Tham2021}.
-\end{proof}
-
 \begin{lemma}[Local form of a dotted-handle operation]
 \label{lem:dotted-collar-factorization}
 Let \(\mathcal H\) be a one-ended Kirby presentation, let
@@ -303,54 +247,6 @@ For a marked Kirby datum \((\mathcal H,\beta)\), we therefore write
 \]
 for the value of any handle cocycle representing
 \(\xi_{\mathcal H,\beta}\) from \cref{def:handle-cocycle}.
-
-\begin{lemma}[Character transport along a ribbon]
-\label{lem:finite-coupon-transport}
-Let $n\in\mathbb Z$.
-\begin{enumerate}[label=(\roman*),ref=\roman*]
-  \item For every morphism $f\colon U\to V$ in \(\cC\),
-  \[
-    (\eta^n)_Vf=f(\eta^n)_U.
-  \]
-
-  \item The same naturality identity applies to braidings and twists.
-
-  \item For every object \(X\in\cC\), at a dual bend the transported
-  component is its mate:
-  \[
-    \operatorname{ev}_X
-      (\operatorname{id}_{X^*}\otimes(\eta^n)_X)
-    =
-    \operatorname{ev}_X
-      ((\eta^{-n})_{X^*}\otimes\operatorname{id}_X),
-  \]
-  with the analogous coevaluation identity.
-\end{enumerate}
-Consequently a character decoration may be transported along any compact
-ribbon through the finitely many crossings, extrema, twists, and coupons of
-a generic diagram.
-\end{lemma}
-
-\begin{proof}
-The first statement is naturality of the monoidal natural automorphism
-$\eta^n$; braiding and twist are particular morphisms.  Naturality for
-$\operatorname{ev}_X$ gives
-\[
- \operatorname{ev}_X
- ((\eta^n)_{X^*}\otimes(\eta^n)_X)=\operatorname{ev}_X.
-\]
-Precompose with $(\eta^{-n})_{X^*}\otimes\operatorname{id}_X$ to obtain the
-displayed bend identity; the coevaluation formula is dual.  Applying these
-identities successively along the finite route proves the final assertion.
-\end{proof}
-
-\begin{remark}[Scope of coupon naturality]
-\label{rem:coupon-naturality-scope}
-The first identity transports the automorphism of the whole boundary object
-through a multivalent coupon; it does not route one factor through an
-arbitrary leg.  At a dual bend, expressing the same oriented route on the
-dual strand replaces the local exponent \(n\) by \(-n\).
-\end{remark}
 
 \begin{lemma}[Index-$3$ handle-slide identity]
 \label{lem:index-three-handle-slide}
@@ -827,60 +723,6 @@ For every one-ended Kirby presentation \(\mathcal H\) and every
 
 \begin{proof}
 This is \cref{def:twisted-handle-evaluator,def:unnormalized-graph-sum}.
-\end{proof}
-
-\begin{lemma}[Cochain normal forms for cancelling pairs]
-\label{lem:cancellation-cochain-normal-forms}
-Let \(\mathcal H\to\mathcal H^+\) be a birth in the isolated standard local
-form of \cref{prop:local-movie-normal-forms}.  For a $1$--$2$ birth,
-extension by zero on the new primal
-$2$-handle sends a source $2$-cocycle to a target $2$-cocycle representing
-the transported class.  Conversely, every target $2$-cocycle is cohomologous
-to one whose new $2$-handle coordinate is zero.  The same statement applies
-to an isolated $1$--$2$ death after the slide reduction in
-\cref{item:cancellation-normal-form}.  For a standard $2$--$3$ birth or
-death, every cocycle on the side containing the pair has zero coordinate on
-the added $2$-handle.
-\end{lemma}
-
-\begin{proof}
-After the other incidence entries have been cleared by the $2/2$ slides in
-\cref{item:cancellation-normal-form}, the handle cochain complex of the
-isolated cancelling $1$--$2$ pair contains a direct
-summand
-\[
-  \mathbb Z\xrightarrow{\,\pm1\,}\mathbb Z
-\]
-in degrees $1$ and $2$.  Extension by zero is the inclusion of the
-complementary cochain complex.  Subtracting the coboundary of the appropriate
-multiple of the new degree-$1$ basis cochain makes the new degree-$2$
-coordinate zero, without changing its cohomology class.
-
-For a cancelling $2$--$3$ pair the corresponding direct summand lies in
-degrees $2$ and $3$, again with differential $\pm1$.  The cocycle equation
-in degree $3$ therefore forces the new degree-$2$ coordinate itself to be
-zero.  These are precisely the two isolated local cancellation complexes.
-We do not claim that an arbitrary, non-isolated presentation already splits
-before the slide reduction.
-\end{proof}
-
-\begin{lemma}[Local cancellation sums]
-\label{lem:local-cancellation-sums}
-For the simple-label set of $\cC$,
-\begin{equation}
-  \sum_i d_i\,\operatorname{tr}_i(P_{\mathbf1,i})=1,
-  \qquad
-  \sum_i d_i\,\operatorname{tr}_i(\operatorname{id}_i)
-  =\operatorname{Dim}(\cC).                  \label{eq:local-cancellation-sums}
-\end{equation}
-\end{lemma}
-
-\begin{proof}
-If $i$ is simple, then $P_{\mathbf1,i}$ is the identity for
-$i\cong\mathbf1$ and zero otherwise.  Since $d_{\mathbf1}=1$, the first sum
-is $1$.  Spherical trace gives
-$\operatorname{tr}_i(\operatorname{id}_i)=d_i$, so the second sum is
-$\sum_i d_i^2=\operatorname{Dim}(\cC)$.
 \end{proof}
 
 \begin{lemma}[$1$--$2$ cancellation identity]

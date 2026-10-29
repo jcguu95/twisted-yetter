@@ -1,0 +1,180 @@
+\subsubsection{Categorical constructions used by the evaluator}
+\label{subsec:categorical-evaluator-constructions}
+
+\begin{definition}[Twisted categorical input]
+\label{def:twisted-categorical-input}
+A twisted categorical input is a pair \((\cC,\eta)\), where \(\cC\) is a
+premodular fusion category over \(\mathbb C\) and
+\[
+  \eta\in A_{\cC}
+  =\operatorname{Aut}_{\otimes}(\operatorname{Id}_{\cC}).
+\]
+\end{definition}
+
+\begin{definition}[Kirby colour and tensor-unit projector]
+\label{def:kirby-colour}
+\label{def:tensor-unit-projector}
+Let \(\cC\) be a premodular fusion category.  Its Kirby colour is
+\begin{equation}
+  \Omega_{\cC}:=
+  \sum_{i\in\operatorname{Irr}(\cC)}d_i\,i.
+  \label{eq:kirby-colour}
+\end{equation}
+For an object \(W\), choose a basis
+\(u_\mu\colon\mathbf1\to W\) and its composition-dual basis
+\(\widehat u_\mu\colon W\to\mathbf1\), and set
+\begin{equation}
+  P_{\mathbf1,W}:=
+  \sum_\mu u_\mu\widehat u_\mu
+  \in\operatorname{End}_{\cC}(W).
+  \label{eq:tensor-unit-projector}
+\end{equation}
+We also write
+\(\operatorname{Cut}_{\cC}(W):=P_{\mathbf1,W}\); no global-dimension factor is
+included in this notation.
+\end{definition}
+
+\begin{lemma}[Basis independence of the tensor-unit projector]
+\label{lem:tensor-unit-projector-basis-independence}
+Let \(\cC\) be a premodular fusion category and let \(W\in\cC\).
+The endomorphism \(P_{\mathbf1,W}\) in
+\eqref{eq:tensor-unit-projector} is independent of the chosen pair of dual
+bases.
+\end{lemma}
+
+\begin{proof}
+If \(v_\nu=\sum_\mu A_{\nu\mu}u_\mu\), then its dual basis is
+\(\widehat v_\nu=\sum_\rho(A^{-1})_{\rho\nu}\widehat u_\rho\).  Hence
+\[
+  \sum_\nu v_\nu\widehat v_\nu
+  =\sum_{\mu,\rho}
+    \left(\sum_\nu A_{\nu\mu}(A^{-1})_{\rho\nu}\right)
+    u_\mu\widehat u_\rho
+  =\sum_\mu u_\mu\widehat u_\mu.
+\]
+\end{proof}
+
+\begin{lemma}[Absorption by the tensor-unit projector]
+\label{lem:unit-projector-absorbs-character}
+Let \((\cC,\eta)\) be a twisted categorical input.
+For every object $W\in\cC$ and every $n\in\mathbb Z$,
+\[
+  P_{\mathbf1,W}\eta_W^n=P_{\mathbf1,W}
+  =\eta_W^nP_{\mathbf1,W}.
+\]
+\end{lemma}
+
+\begin{proof}
+Write $P_{\mathbf1,W}=\sum_\mu u_\mu\widehat u_\mu$ as in
+\cref{def:tensor-unit-projector}.  Monoidality gives
+$\eta_{\mathbf1}=\operatorname{id}_{\mathbf1}$.  Naturality for
+$u_\mu\colon\mathbf1\to W$ and
+$\widehat u_\mu\colon W\to\mathbf1$ gives
+\[
+  \eta_W^n u_\mu=u_\mu,
+  \qquad
+  \widehat u_\mu\eta_W^n=\widehat u_\mu.
+\]
+Summing proves both equalities.
+\end{proof}
+
+\begin{lemma}[Naturality of the tensor-unit projector]
+\label{lem:unit-projector-naturality}
+Let \(\cC\) be a premodular fusion category.
+For every morphism $f\colon U\to V$ in $\cC$,
+\[
+  fP_{\mathbf1,U}=P_{\mathbf1,V}f.
+\]
+\end{lemma}
+
+\begin{proof}
+Finite semisimplicity decomposes every object into simple isotypic summands.
+By Schur's lemma, a morphism has no matrix entries between the tensor-unit
+isotypic summand and any nonisomorphic simple isotypic summand.  It therefore
+preserves the tensor-unit summand.
+\end{proof}
+
+\begin{corollary}[Finite transport of the tensor-unit projector]
+\label{cor:finite-unit-projector-transport}
+Let \(\cC\) be a premodular fusion category.
+A tensor-unit projector may be moved through any finite composite of
+crossings, cups, caps, twists, and morphism coupons, with the source and
+target projectors changed according to the boundary objects.
+\end{corollary}
+
+\begin{proof}
+Apply \cref{lem:unit-projector-naturality} successively to the elementary
+morphisms in the ribbon expression.  Graphically, this is the tunnelling
+property of the completeness idempotent in
+\cite[Lemmas~2.27--2.28]{Tham2021}.
+\end{proof}
+
+\begin{lemma}[Character transport along a ribbon]
+\label{lem:finite-coupon-transport}
+Let \((\cC,\eta)\) be a twisted categorical input and let
+$n\in\mathbb Z$.
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item For every morphism $f\colon U\to V$ in \(\cC\),
+  \[
+    (\eta^n)_Vf=f(\eta^n)_U.
+  \]
+
+  \item The same naturality identity applies to braidings and twists.
+
+  \item For every object \(X\in\cC\), at a dual bend the transported
+  component is its mate:
+  \[
+    \operatorname{ev}_X
+      (\operatorname{id}_{X^*}\otimes(\eta^n)_X)
+    =
+    \operatorname{ev}_X
+      ((\eta^{-n})_{X^*}\otimes\operatorname{id}_X),
+  \]
+  with the analogous coevaluation identity.
+\end{enumerate}
+Consequently a character decoration may be transported along any compact
+ribbon through the finitely many crossings, extrema, twists, and coupons of
+a generic diagram.
+\end{lemma}
+
+\begin{proof}
+The first statement is naturality of the monoidal natural automorphism
+$\eta^n$; braiding and twist are particular morphisms.  Naturality for
+$\operatorname{ev}_X$ gives
+\[
+ \operatorname{ev}_X
+ ((\eta^n)_{X^*}\otimes(\eta^n)_X)=\operatorname{ev}_X.
+\]
+Precompose with $(\eta^{-n})_{X^*}\otimes\operatorname{id}_X$ to obtain the
+displayed bend identity; the coevaluation formula is dual.  Applying these
+identities successively along the finite route proves the final assertion.
+\end{proof}
+
+\begin{remark}[Scope of coupon naturality]
+\label{rem:coupon-naturality-scope}
+The first identity transports the automorphism of the whole boundary object
+through a multivalent coupon; it does not route one factor through an
+arbitrary leg.  At a dual bend, expressing the same oriented route on the
+dual strand replaces the local exponent \(n\) by \(-n\).
+\end{remark}
+
+\begin{lemma}[Two categorical cancellation sums]
+\label{lem:local-cancellation-sums}
+Let \(\cC\) be a premodular fusion category.
+For the simple-label set of $\cC$,
+\begin{equation}
+  \sum_i d_i\,\operatorname{tr}_i(P_{\mathbf1,i})=1,
+  \qquad
+  \sum_i d_i\,\operatorname{tr}_i(\operatorname{id}_i)
+  =\operatorname{Dim}(\cC).
+  \label{eq:local-cancellation-sums}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+If $i$ is simple, then $P_{\mathbf1,i}$ is the identity for
+$i\cong\mathbf1$ and zero otherwise.  Since $d_{\mathbf1}=1$, the first sum
+is $1$.  Spherical trace gives
+$\operatorname{tr}_i(\operatorname{id}_i)=d_i$, so the second sum is
+$\sum_i d_i^2=\operatorname{Dim}(\cC)$.
+\end{proof}

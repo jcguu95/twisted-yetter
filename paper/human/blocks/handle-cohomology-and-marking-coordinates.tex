@@ -1,0 +1,112 @@
+\subsubsection{Handle cohomology and marking coordinates}
+\label{subsec:handle-cohomology-markings}
+
+\begin{definition}[Cohomological marking and handle cocycle]
+\label{def:handle-cocycle}
+Let \((\mathcal H,\beta)\) be a marked Kirby datum.  Dualize the handle
+chain complex of \cref{def:derived-handle-chain-complex}:
+\[
+  C^k(\mathcal H):=\operatorname{Hom}(C_k(\mathcal H),\mathbb Z),
+  \qquad
+  \delta^k(\omega):=\omega\circ\partial_{k+1},
+\]
+and write
+\[
+  H^2(\mathcal H):=
+  \ker(\delta^2)/\operatorname{im}(\delta^1).
+\]
+The cellular comparison isomorphism
+\[
+  \kappa_{\mathcal H}\colon
+  H^2(\mathcal H)\xrightarrow{\ \cong\ }
+  H^2(|\mathcal H|;\mathbb Z)
+\]
+and Poincar\'e duality determine the class
+\[
+  \xi_{\mathcal H,\beta}
+  :=\kappa_{\mathcal H}^{-1}
+    \bigl(\operatorname{PD}_{|\mathcal H|}(\beta)\bigr)
+  \in H^2(\mathcal H).
+\]
+A \emph{handle cocycle} for \((\mathcal H,\beta)\) is a cocycle
+\(\omega\in C^2(\mathcal H)\) representing \(\xi_{\mathcal H,\beta}\).
+If \(e_j\) is the oriented (2)-handle generator corresponding to the
+\(j\)th framed component, set
+\[
+  \omega_j:=\omega(e_j)\in\mathbb Z.
+\]
+\end{definition}
+
+\begin{proposition}[Cocycle coordinates under Kirby--Cerf moves]
+\label{prop:marking-coordinate-transport}
+Let \(m\colon(\mathcal H,\beta)\to
+(\mathcal H',|m|_*\beta)\) be a marked elementary move, and let \(\omega\)
+be a handle cocycle for \((\mathcal H,\beta)\).  The target class has a
+representative \(\omega'\) with the following coordinates.
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item For framed isotopy, a \(1/1\) slide, a \(2/1\) passage, a
+  \(3/3\) slide, a \(0\)--\(1\) birth or death, or a \(3\)--\(4\) birth or
+  death, the \(2\)-handle generators are canonically identified and
+  \(\omega'=\omega\).
+
+  \item For a \(2/2\) slide, let \(e_x\) be the moving generator,
+  \(e_y\) the stationary generator, and let
+  \(\varepsilon\in\{\pm1\}\) be fixed by the oriented handle-slide
+  convention.  Then
+  \begin{equation}
+    \omega_x'=\omega_x+\varepsilon\omega_y,
+    \qquad
+    \omega_y'=\omega_y,
+    \label{eq:two-two-marking-transport}
+  \end{equation}
+  while every uninvolved coordinate is unchanged.
+
+  \item A \(1\)--\(2\) birth admits \(\omega'=\omega\oplus0\); every
+  representative of the target class is cohomologous to one whose new
+  \(2\)-handle coordinate is zero.
+
+  \item For a \(2\)--\(3\) birth, the cocycle equation forces the new
+  \(2\)-handle coordinate to be zero, so again
+  \(\omega'=\omega\oplus0\).
+\end{enumerate}
+The death formulas are the inverses of the corresponding birth formulas.
+\end{proposition}
+
+\begin{proof}
+Poincar\'e duality is natural, so the class attached to \(|m|_*\beta\) is
+the cellular transport of the class attached to \(\beta\).  The standard
+cellular map of each local move gives the formulas above: a \(2/2\) slide
+sends the new moving generator to \(e_x+\varepsilon e_y\), while an
+adjacent-index birth adds the corresponding acyclic two-term complex.  See
+\cite[Sections~4.1--4.2]{DurstGeigesKegel2019}.
+\end{proof}
+
+\begin{lemma}[Cochain normal forms for cancelling pairs]
+\label{lem:cancellation-cochain-normal-forms}
+Let \(\mathcal H\to\mathcal H^+\) be a birth in the isolated standard local
+form of \cref{prop:local-movie-normal-forms}.  For a $1$--$2$ birth,
+extension by zero on the new primal $2$-handle sends a source $2$-cocycle
+to a target $2$-cocycle representing the transported class.  Conversely,
+every target $2$-cocycle is cohomologous to one whose new $2$-handle
+coordinate is zero.  The same statement applies to an isolated $1$--$2$
+death after the slide reduction in \cref{item:cancellation-normal-form}.
+For a standard $2$--$3$ birth or death, every cocycle on the side containing
+the pair has zero coordinate on the added $2$-handle.
+\end{lemma}
+
+\begin{proof}
+After the other incidence entries have been cleared by the $2/2$ slides in
+\cref{item:cancellation-normal-form}, the handle cochain complex of the
+isolated cancelling $1$--$2$ pair contains the direct summand
+\[
+  \mathbb Z\xrightarrow{\,\pm1\,}\mathbb Z
+\]
+in degrees $1$ and $2$.  Extension by zero is the inclusion of the
+complementary cochain complex.  Subtracting the coboundary of an appropriate
+multiple of the new degree-$1$ basis cochain makes the new degree-$2$
+coordinate zero without changing its cohomology class.
+
+For a cancelling $2$--$3$ pair the corresponding direct summand lies in
+degrees $2$ and $3$, again with differential $\pm1$.  The cocycle equation
+in degree $3$ therefore forces the new degree-$2$ coordinate to vanish.
+\end{proof}

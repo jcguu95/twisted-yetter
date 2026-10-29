@@ -1,0 +1,61 @@
+\subsubsection{Topological models used by the evaluator}
+\label{subsec:topological-evaluator-models}
+
+\begin{definition}[Cut-open tangle at a dotted component]
+\label{def:cut-open-dotted-tangle}
+Let \(\mathcal H\) be a one-ended Kirby presentation, written as a
+three-dimensional dotted--framed link
+\[
+  D_{\mathcal H}=D_{\mathrm{dot}}\sqcup D_{\mathrm{fr}}\subset S^3.
+\]
+For a dotted component \(\delta\), choose a spanning disk
+\(\Delta_\delta\subset S^3\) transverse to \(D_{\mathrm{fr}}\); because
+\(D_{\mathrm{dot}}\) is an unlink, these disks may be chosen mutually
+disjoint.  Cutting the framed ribbon link along a small product neighborhood
+\(\Delta_\delta\times(-\epsilon,\epsilon)\) replaces every transverse
+intersection by one endpoint on each of the two faces
+\(\Delta_\delta^-\) and \(\Delta_\delta^+\).  The result is a
+three-dimensional framed ribbon tangle with boundary.
+
+Using the product coordinates, bunch the endpoints on each face into a
+standard ordered row.  Their oriented strands form an ordered boundary word;
+the opposite face carries its reversed orientation-dual word.  Regluing the
+two faces by the identity matching of corresponding endpoints reconstructs
+the original framed link.  No categorical label or morphism is part of this
+topological construction.
+\end{definition}
+
+\begin{proposition}[Local movie normal forms]
+\label{prop:local-movie-normal-forms}
+The standard Kirby moves may be arranged as follows.
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item\label{item:slide-normal-form}
+  After framed isotopy, every slide is supported in a \(3\)-ball and is a
+  clean attachment, transport along the stationary component through
+  finitely many local ribbon features, and a clean detachment.  For a
+  \(1/1\) slide, the target dotted sublink is again an unlink and the source
+  and target admit disjoint cross-sections agreeing outside the supporting
+  ball.
+
+  \item\label{item:cancellation-normal-form}
+  A birth inserts an isolated standard cancelling pair.  Before a death,
+  the remaining handles may be slid away from the pair so that the death
+  removes an isolated standard pair.
+
+  \item\label{item:fixed-exterior}
+  Outside the supporting neighborhood, the framed tangle and all uninvolved
+  components remain fixed.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+These are the standard band-slide and cancelling-pair models of Kirby
+calculus; compare \cite[Sections~5.1 and~5.4]{GompfStipsicz1999} and
+\cite[Table~2]{BarenzBarrett2018}.  Compact collars at the two ends of a
+slide band can be made clean by a small isotopy.  Along the compact
+stationary circle, generic position leaves only finitely many crossings,
+extrema, and framing twists to pass.  For a cancelling \(1\)--\(2\) pair,
+slide every other \(2\)-handle off the cancelling \(1\)-handle; the
+\(2\)--\(3\) case is the upside-down analogue.  These reductions take place
+inside the stated neighborhoods and leave the exterior fixed.
+\end{proof}
