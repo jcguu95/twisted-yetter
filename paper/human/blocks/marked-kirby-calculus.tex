@@ -231,10 +231,9 @@ marked diffeomorphism.  Then:
   Its realization \(\mu:=|M|\) supplies the missing top edge and completes the
   long diagram \eqref{eq:cerf-realizes-diffeomorphism} up to smooth isotopy.
 
-  \item If \(\xi_0:=\xi\) and
-  \(\xi_r:=T_{m_r}\xi_{r-1}\) for \(1\leq r\leq N\), then
+  \item The composite transport along the movie satisfies
   \[
-    \xi_N=\xi'.
+    \bigl(T_{m_N}\circ\cdots\circ T_{m_1}\bigr)(\xi)=\xi'.
   \]
   Namely, transporting the source marking through the independently
   constructed unmarked movie gives exactly the prescribed target marking,
@@ -247,29 +246,9 @@ marked diffeomorphism.  Then:
 \end{theorem}
 
 \begin{proof}
-Apply ordinary Kirby--Cerf completeness,
-\cref{prop:handle-movie-completeness}, to the underlying unmarked
-presentations and \(f\).  This produces the movie and its realizing isotopy
-before any marking is considered.  Starting with
-\(\xi_0=\xi\), define recursively
-\[
-  \xi_r:=T_{m_r}\xi_{r-1}.
-\]
-By \cref{prop:kirby-move-preserves-marked-data}, every stage is a marked
-Kirby datum and the composite realization identifies its marking with the
-source marking.  At the endpoint it gives the marked presentation
-\(\rho\circ\mu^{-1}\colon|(\mathcal H',\xi_N)|\to(X,\alpha)\).  The isotopy
-from ordinary completeness, after reversing its parameter and composing with the
-relevant inverses, is a smooth isotopy from \(\rho\circ\mu^{-1}\) to
-\(f^{-1}\circ\rho'\).  Naturality of Poincar\'e duality gives
-\[
-  (f^{-1})^*\operatorname{PD}_X(\alpha)
-  =\operatorname{PD}_Y(\alpha').
-\]
-It follows that \(\xi_N\) and \(\xi'\) have the same image under
-\(\kappa_{\mathcal H'}\).  Since \(\kappa_{\mathcal H'}\) is an
-isomorphism, \(\xi_N=\xi'\).
-When both endpoints are one-ended, use the connected Cerf refinement in
-\cref{cor:one-ended-diffeomorphism-realization}; the same
-marking-transport argument applies at every stage.
+Ordinary completeness gives \(M\); the defining naturality squares for the
+maps \(T_{m_r}\), together with Poincar\'e duality and the markedness of
+\(f\), identify both sides of (ii) under the isomorphism
+\(\kappa_{\mathcal H'}\), while
+\cref{cor:one-ended-diffeomorphism-realization} gives (iii).
 \end{proof}
