@@ -172,6 +172,36 @@ Fix a twisted categorical input \((\cC,\eta)\), a special Kirby presentation
 \]
 \end{definition}
 
+\begin{proposition}[Dependence on the three-handle data]
+\label{prop:evaluator-three-handle-dependence}
+Although a special Kirby presentation contains the full attaching embeddings
+of its \(3\)-handles, the marked evaluator uses that data only through
+\[
+  h_3(\mathcal H)
+  \quad\text{and}\quad
+  \operatorname{im}(\partial_3)\subset C_2(\mathcal H).
+\]
+More precisely, the scalar in
+\eqref{eq:twisted-handle-evaluator} reads \(h_3(\mathcal H)\) in its
+normalization, while the requirement that
+\(a\in Z^2(\mathcal H)\) depends on \(\partial_3\) only through the condition
+that \(a\) vanish on \(\operatorname{im}(\partial_3)\).
+\end{proposition}
+
+\begin{proof}
+The coloured ribbon graph and its label sum are constructed entirely from
+the dotted--framed \(1\)- and \(2\)-handle diagram.  The displayed formula
+contains the \(3\)-handles explicitly only in the exponent
+\(1-h_3(\mathcal H)\).  Finally,
+\[
+  a\in Z^2(\mathcal H)
+  \quad\Longleftrightarrow\quad
+  a\circ\partial_3=0,
+\]
+which depends only on the image of \(\partial_3\).  No other part of the
+attaching embeddings enters the formula.
+\end{proof}
+
 \begin{proposition}[Finiteness of the evaluator]
 \label{prop:evaluator-finiteness}
 The sum in \eqref{eq:twisted-handle-evaluator} is finite.

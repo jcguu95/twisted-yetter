@@ -24,11 +24,23 @@ resulting \(1\)-handlebody.  We write
 \begin{definition}[Special Kirby presentation]
 \label{def:special-kirby-presentation}
 Let \(X\) be a closed, connected, oriented smooth four-manifold.  A
-\emph{special Kirby presentation} \(\mathcal H\) of \(X\) is a handle
-decomposition with one \(0\)-handle and one \(4\)-handle, together with its
-dotted--framed Kirby diagram \(D_{\mathcal H}\).  The diagram displays the
-\(1\)- and \(2\)-handles; the \(3\)-handles close
-\(W^{(2)}_{D_{\mathcal H}}\) before the final \(4\)-handle is attached.
+\emph{special Kirby presentation} \(\mathcal H\) of \(X\) consists of the
+following standard handle data:
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item a handle decomposition of \(X\) with one \(0\)-handle and one
+  \(4\)-handle;
+  \item its dotted--framed Kirby diagram \(D_{\mathcal H}\), displaying the
+  complete attaching data of the \(1\)- and \(2\)-handles; and
+  \item the complete collection of disjoint framed attaching embeddings
+  \[
+    S^2\times D^1\longrightarrow
+    \partial W^{(2)}_{D_{\mathcal H}}
+  \]
+  for the \(3\)-handles, together with the final \(4\)-handle attachment.
+\end{enumerate}
+Thus the dotted--framed link alone is not the whole presentation: it records
+the \(0\)-, \(1\)-, and \(2\)-handlebody, while the remaining attaching data
+complete it to \(X\).
 
 After orienting the handles, the part of the integral handle complex relevant
 to degree two is
@@ -43,14 +55,6 @@ The oriented framed components give the preferred basis of
 \(h_3(\mathcal H)=\operatorname{rank}C_3(\mathcal H)\).
 \end{definition}
 
-\begin{convention}[Retained three-handle data]
-\label{conv:retained-three-handle-data}
-For a special Kirby presentation \(\mathcal H\), we retain from the
-\(3\)-handles the integer \(h_3(\mathcal H)\) and the subgroup
-\(\operatorname{im}(\partial_3)\subset C_2(\mathcal H)\).  We do not choose
-explicit drawings of their attaching spheres.
-\end{convention}
-
 \begin{proposition}[Existence of special presentations]
 \label{prop:special-presentation-existence}
 Let \(X\) be a closed, connected, oriented smooth four-manifold.  Then \(X\)
@@ -63,17 +67,19 @@ handle decomposition.  This is \cite[Proposition~4.2.13]{GompfStipsicz1999}
 together with its dual argument.
 \end{proof}
 
-\begin{definition}[Elementary Kirby move]
+\begin{definition}[Elementary Kirby--Cerf move]
 \label{def:kirby-move}
 Let \(\mathcal H\) and \(\mathcal H'\) be special Kirby presentations.  An
-elementary move \(m\colon\mathcal H\to\mathcal H'\) is one of the following
-eight directed modifications:
+elementary Kirby--Cerf move
+\(m\colon\mathcal H\to\mathcal H'\) is one of the following nine directed
+modifications of the complete handle data:
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item\label{move:framed-isotopy} a level isotopy of attaching data, seen
   as framed isotopy when it changes the dotted--framed diagram;
   \item\label{move:one-over-one} a \(1/1\) slide;
   \item\label{move:two-over-one} a \(2/1\) slide;
   \item\label{move:two-over-two} a \(2/2\) slide;
+  \item\label{move:three-over-three} a \(3/3\) slide;
   \item\label{move:one-two-birth} a \(1\)--\(2\) birth;
   \item\label{move:one-two-death} a \(1\)--\(2\) death;
   \item\label{move:two-three-birth} a \(2\)--\(3\) birth; or
@@ -82,8 +88,9 @@ eight directed modifications:
 For an \(r/s\) slide, \(r\) is the index of the moving handle and \(s\) the
 index of the stationary handle.  Outside the supporting ball or
 cancelling-pair neighborhood, the handle decomposition is unchanged.
-The first move also includes isotopy of a \(3\)-handle attaching sphere;
-such an isotopy is invisible in the dotted--framed diagram.
+Level isotopy and a \(3/3\) slide act on the actual \(3\)-handle attaching
+embeddings even though that change is invisible in the dotted--framed
+diagram.
 \end{definition}
 
 \begin{convention}[Standard local models]
@@ -92,9 +99,11 @@ The names in \cref{def:kirby-move} have their standard meanings in Kirby
 calculus.  The \(1/1\) and \(2/1\) moves are the dotted-circle moves in
 \cite[Figures~5.39 and~5.36]{GompfStipsicz1999}; a \(2/2\) move is an oriented
 band sum with a framed push-off of the stationary component
-\cite[Section~5.1]{GompfStipsicz1999}; and births insert the isolated standard
-cancelling pairs, with deaths as their inverses.  This convention fixes the
-topology of each source and target and nothing more.
+\cite[Section~5.1]{GompfStipsicz1999}; a \(3/3\) move is the corresponding
+same-index slide of one \(3\)-handle attaching sphere over another; and
+births insert the isolated standard cancelling pairs, with deaths as their
+inverses.  This convention fixes the topology of each source and target and
+nothing more.
 \end{convention}
 
 \begin{theorem}[Kirby--Cerf completeness for special presentations]
@@ -108,8 +117,8 @@ movie on the fixed manifold \(X_0\),
 \[
   \mathcal H_0\rightsquigarrow f^*\mathcal H_1,
 \]
-consisting of the eight moves in \cref{def:kirby-move} and slides among
-\(3\)-handles.  Its endpoint identification is isotopic to
+consisting of the nine moves in \cref{def:kirby-move}.  Its endpoint
+identification is isotopic to
 \(\operatorname{id}_{X_0}\).  Following that movie by the tautological
 endpoint identification
 \[
@@ -140,9 +149,10 @@ are generated by framed isotopy and the \(2/1\) move
 \cite[Figure~5.36]{GompfStipsicz1999}, and index-\(2\) slides are the framed
 band sums of \cite[Section~5.1]{GompfStipsicz1999}.  The two possible
 adjacent-index cancellations give the four birth/death moves.  Thus the Cerf
-movie has precisely the asserted form, including level isotopies and slides
-of the \(3\)-handle attaching data.  Every operation takes place on the fixed
-manifold \(X_0\), so the resulting endpoint identification with
+movie has precisely the asserted form: same-index slides include the
+\(3/3\) move on the full \(3\)-handle attaching data, and level isotopies
+include isotopies of those attaching spheres.  Every operation takes place
+on the fixed manifold \(X_0\), so the resulting endpoint identification with
 \(f^*\mathcal H_1\) is isotopic to the identity.  The map \(f\) is not hidden
 inside this movie: it is the final tautological identification of the
 pulled-back endpoint with \(\mathcal H_1\).  Their composite therefore

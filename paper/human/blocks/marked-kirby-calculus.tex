@@ -36,15 +36,10 @@ fixed.  We also call \((\mathcal H,\xi)\) a
 \emph{marked special Kirby presentation}.
 \end{definition}
 
-\begin{definition}[Transport under a Kirby move]
+\begin{definition}[Transport under a Kirby--Cerf move]
 \label{def:marked-kirby-move}
-Let \(m\colon\mathcal H\to\mathcal H'\) be one of the elementary moves in
-\cref{def:kirby-move}, or a \(3/3\) slide.  We list the latter separately
-because the eight moves of \cref{def:kirby-move} modify the retained
-dotted--framed Kirby data, whereas a \(3/3\) slide only changes the chosen
-basis of \(C_3(\mathcal H)\): it is invisible in \(D_{\mathcal H}\) and
-preserves both \(h_3(\mathcal H)\) and
-\(\operatorname{im}(\partial_3)\).  Its standard local model
+Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary Kirby--Cerf move
+in \cref{def:kirby-move}.  Its standard local model
 determines a relative isotopy class of orientation-preserving
 diffeomorphisms
 \[
@@ -66,7 +61,7 @@ The result of applying \(m\) to \((\mathcal H,\xi)\) is
 \]
 This is independent of the representative of the relative isotopy class
 of \(\phi_m\).  A move equipped with this transport is called a
-\emph{marked Kirby move}.
+\emph{marked Kirby--Cerf move}.
 \end{definition}
 
 \begin{definition}[Handle cocycle]
@@ -80,13 +75,14 @@ representing \(\xi\).  If \(e_j\) is the oriented \(2\)-handle generator
 corresponding to the \(j\)th framed component, write \(a_j:=a(e_j)\).
 \end{definition}
 
-\begin{proposition}[Coordinate form of move transport]
+\begin{proposition}[Cocycle transport under Kirby--Cerf moves]
 \label{prop:marking-coordinate-transport}
-Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary Kirby move, let
-\(\xi\in H^2(\mathcal H)\), and let \(a\) be a handle cocycle representing
-\(\xi\).  Thus \(T_m\xi\) is the transported cohomology class and \(a\) is
-the integer cocycle whose coordinates are used by the evaluator.  The class
-\(T_m\xi\) has a representative \(a'\) with the following coordinates.
+Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary Kirby--Cerf move,
+let \(\xi\in H^2(\mathcal H)\), and let \(a\) be a handle cocycle
+representing \(\xi\).  Thus \(T_m\xi\) is the transported cohomology class
+and \(a\) is the integer cocycle whose coordinates are used by the
+evaluator.  The class \(T_m\xi\) has a representative \(a'\) with the
+following coordinates.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item For framed isotopy, a \(1/1\) slide, a \(2/1\) slide, or a
   \(3/3\) slide, the \(2\)-handle generators are canonically identified and
@@ -140,10 +136,10 @@ equation now forces the new coordinate to vanish.  Reversing these chain
 equivalences gives the death formulas.
 \end{proof}
 
-\begin{proposition}[Kirby moves preserve marked data]
+\begin{proposition}[Kirby--Cerf moves preserve marked data]
 \label{prop:kirby-move-preserves-marked-data}
-Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary Kirby move, and
-let \(\phi_m\colon X_{\mathcal H}\to X_{\mathcal H'}\) be the
+Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary Kirby--Cerf move,
+and let \(\phi_m\colon X_{\mathcal H}\to X_{\mathcal H'}\) be the
 orientation-preserving diffeomorphism represented by its standard local
 model, as in \cref{def:marked-kirby-move}.  If
 \((\mathcal H,\xi)\) is a marked Kirby datum for \((X,\alpha)\), then
@@ -184,7 +180,7 @@ be an orientation-preserving diffeomorphism of \(H_2\)-marked closed
 four-manifolds; thus \(f_*\alpha=\alpha'\).  Let
 \((\mathcal H,\xi)\) and \((\mathcal H',\xi')\) be marked Kirby data for
 \((X,\alpha)\) and \((Y,\alpha')\), respectively.  Then there is a finite
-movie of marked Kirby moves from \((\mathcal H,\xi)\) to the pullback of
+movie of marked Kirby--Cerf moves from \((\mathcal H,\xi)\) to the pullback of
 \((\mathcal H',\xi')\) on \(X\).  Following that movie by the tautological
 endpoint identification induced by \(f\) represents the prescribed isotopy
 class of the marked diffeomorphism \(f\).

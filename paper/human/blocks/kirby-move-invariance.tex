@@ -1,4 +1,4 @@
-\subsection{Kirby-move invariance}
+\subsection{Kirby--Cerf-move invariance}
 \label{subsec:kirby-invariance}
 
 Throughout this subsection, fix a twisted categorical input \((\cC,\eta)\).
@@ -22,12 +22,16 @@ same exterior ribbon graph is restored after the calculation.
   character coupon by naturality, and apply the inverse resolution at
   detachment.
 
+  \item[\(3/3\) slides.]
+  Only the basis of \(C_3\) changes; the number of \(3\)-handles and
+  \(\operatorname{im}(\partial_3)\) remain fixed.
+
   \item[\(1\)--\(2\) and \(2\)--\(3\) cancellations.]
   Put the pair in standard position.  The new character exponent is zero, and
   the remaining local scalar is cancelled by the change in normalization.
 \end{description}
 
-The rest of this subsection proves precisely these five assertions.
+The rest of this subsection proves precisely these six assertions.
 
 The character coupons disappear on the tensor-unit channel for a formal
 reason that will be used repeatedly.
@@ -973,7 +977,8 @@ the new boundary map is \(\partial_3A\), which has the same image as
 \(\partial_3\).  Thus the cocycle condition and its quotient by
 \(\operatorname{im}(\partial_2^*)\) are unchanged.  The dotted--framed Kirby
 diagram, every character exponent, and every RT summand are unchanged, as is
-\(h_3\).  The two sides of
+\(h_3\).  Equivalently, this is exactly the dependence isolated in
+\cref{prop:evaluator-three-handle-dependence}.  The two sides of
 \eqref{eq:three-handle-slide-evaluation} are therefore the same defining
 sum.
 \end{proof}
@@ -1008,13 +1013,13 @@ Representative independence, \cref{prop:representative-independence}, removes
 the initial choice of cocycle.
 \end{proof}
 
-\begin{theorem}[Elementary Kirby-move invariance]
+\begin{theorem}[Elementary Kirby--Cerf-move invariance]
 \label{thm:elementary-kirby-invariance}
 Let
 \[
   m\colon(\mathcal H,\xi)\longrightarrow(\mathcal H',\xi')
 \]
-be a marked Kirby move.  Then
+be a marked Kirby--Cerf move.  Then
 \[
   \CY_{\cC,\eta}(\mathcal H,\xi)
   =\CY_{\cC,\eta}(\mathcal H',\xi').
@@ -1069,6 +1074,12 @@ Kirby colour.  Thus
 by \cref{lem:character-aware-two-two}.  A $2/2$ slide does not change
 $h_3$, so this raw equality is the required evaluator equality.
 
+\emph{$3/3$ slide.}
+The equality is \eqref{eq:three-handle-slide-evaluation}: the move changes
+only the basis of \(C_3\), preserving \(h_3\),
+\(\operatorname{im}(\partial_3)\), every cocycle coordinate on \(C_2\), and
+the entire dotted--framed ribbon graph.
+
 \emph{$1$--$2$ birth and death.}
 For birth, and for death after the explicit $2/2$ slide reduction of
 \cref{item:cancellation-normal-form}, the pair is isolated from the exterior.
@@ -1085,7 +1096,7 @@ The cocycle equation gives $a'=a\oplus0$.  The two explicit equalities in
 one factor of $\operatorname{Dim}(\cC)$ while the normalization acquires its
 inverse.  Their product is $1$.  The death case is the reverse equality.
 
-These are all eight directed moves of \cref{def:kirby-move}.
+These are all nine directed moves of \cref{def:kirby-move}.
 \end{proof}
 
 \begin{proposition}[Well-definedness on a marked four-manifold]
@@ -1102,12 +1113,11 @@ Thus the presentation-level evaluation depends only on \((X,\alpha)\).
 \begin{proof}
 Apply marked Kirby--Cerf completeness,
 \cref{prop:marked-kirby-cerf}, to the identity marked diffeomorphism of
-\((X,\alpha)\).  It gives a finite marked Kirby movie from
+\((X,\alpha)\).  It gives a finite marked Kirby--Cerf movie from
 \((\mathcal H,\xi)\) to \((\mathcal K,\zeta)\), up to the tautological
 endpoint identification.  Apply
-\cref{thm:elementary-kirby-invariance} at every elementary step and
-\cref{lem:three-handle-slides} at every \(3/3\) slide, then induct on the
-length of the movie.  The endpoint identification changes no term of the
+\cref{thm:elementary-kirby-invariance} at every elementary step, then induct
+on the length of the movie.  The endpoint identification changes no term of the
 defining sum, by \cref{lem:pullback-presentation-evaluation} with
 \(f=\operatorname{id}_X\).
 \end{proof}
