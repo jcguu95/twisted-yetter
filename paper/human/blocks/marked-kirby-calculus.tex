@@ -33,9 +33,15 @@ The realization of \((\mathcal H,\xi)\) is the \(H_2\)-marked 4-manifold
   :=\bigl(|\mathcal H|,\alpha_{\mathcal H,\xi}\bigr),
   \qquad
   \alpha_{\mathcal H,\xi}
+  \in H_2(|\mathcal H|;\mathbb Z),
+  \qquad
+  \alpha_{\mathcal H,\xi}
   :=\operatorname{PD}_{|\mathcal H|}^{-1}
       \bigl(\kappa_{\mathcal H}(\xi)\bigr).
 \]
+Here \(\kappa_{\mathcal H}\colon H^2(\mathcal H)\to
+H^2(|\mathcal H|;\mathbb Z)\) is the cellular-to-singular comparison
+isomorphism of \cref{def:derived-handle-chain-complex}.
 \end{definition}
 
 \begin{definition}[Marked Kirby presentation]
@@ -64,34 +70,38 @@ diffeomorphisms
 \[
   |m|\colon |\mathcal H|\longrightarrow|\mathcal H'|.
 \]
-Define
+The transport
+\(T_m\colon H^2(\mathcal H)\to H^2(\mathcal H')\) is defined by the
+following commutative diagram:
+\begin{equation}
+\label{eq:marking-transport}
+\begin{array}{ccc}
+  H^2(\mathcal H) & \xrightarrow{\ T_m\ } & H^2(\mathcal H') \\
+  {\scriptstyle\kappa_{\mathcal H}}\!\downarrow &&
+    \downarrow\!{\scriptstyle\kappa_{\mathcal H'}} \\
+  H^2(|\mathcal H|;\mathbb Z)
+  & \xrightarrow{\ (|m|^{-1})^*\ } &
+  H^2(|\mathcal H'|;\mathbb Z).
+\end{array}
+\tag{3.3}
+\end{equation}
+Equivalently,
 \[
-  T_m
-  :=
-  \kappa_{\mathcal H'}^{-1}
-  \circ(|m|^{-1})^*
-  \circ\kappa_{\mathcal H}
-  \colon H^2(\mathcal H)\longrightarrow H^2(\mathcal H').
-  \tag{3.3}\label{eq:marking-transport}
+  T_m=\kappa_{\mathcal H'}^{-1}
+  \circ(|m|^{-1})^*\circ\kappa_{\mathcal H}.
 \]
 The result of applying \(m\) to a marked Kirby datum is
 \[
   m_*(\mathcal H,\xi):=(\mathcal H',T_m\xi).
 \]
 This is independent of the representative of the relative isotopy class
-of \(|m|\).  A move equipped with this transport is called a
-\emph{marked Kirby--Cerf move}.
-\end{definition}
-
-\begin{definition}[Handle cocycle]
-\label{def:handle-cocycle}
-Let \((\mathcal H,\xi)\) be a marked Kirby datum.  A
-\emph{handle cocycle} for \((\mathcal H,\xi)\) is a cocycle
+of \(|m|\).  The \emph{marked Kirby--Cerf move} determined by \(m\) is the
+map of marked Kirby data
 \[
-  a\in\operatorname{Hom}(C_2(\mathcal H),\mathbb Z)
+  (\mathcal H,\xi)\longmapsto(\mathcal H',T_m\xi).
 \]
-representing \(\xi\).  If \(e_j\) is the oriented \(2\)-handle generator
-corresponding to the \(j\)th framed component, write \(a_j:=a(e_j)\).
+Thus its underlying topological move is \(m\), while its action on the
+marking is the canonical transport \(T_m\).
 \end{definition}
 
 \begin{proposition}[Cocycle transport under Kirby--Cerf moves]
