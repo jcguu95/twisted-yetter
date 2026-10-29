@@ -25,7 +25,8 @@ with pairwise disjoint images.
 \begin{definition}[Special Kirby datum]
 \label{def:special-kirby-datum}
 A \emph{special Kirby datum} \(\mathcal H\) consists of three finite labelled
-families of attaching embeddings, constructed successively as follows.
+families of attaching embeddings and a closing map, constructed successively
+as follows.
 Write \(\Phi^k\) for the disjoint union of all index-\(k\) attaching
 embeddings.  Start with \(W^{(0)}=B^4\), and set
 \begin{align*}
@@ -42,30 +43,20 @@ embeddings.  Start with \(W^{(0)}=B^4\), and set
   &W^{(3)}&:=W^{(2)}\cup_{\Phi^3}
     \bigsqcup_\ell(D^3\times D^1).
 \end{align*}
-We require \(\partial W^{(3)}\) to be orientation-preservingly
-diffeomorphic to \(S^3\).  The unique \(0\)-handle and the final
-\(4\)-handle are therefore implicit rather than additional entries of the
-datum.
-
-After orienting the handles, the part of the integral handle complex relevant
-to degree two is
+The closing map is an orientation-reversing diffeomorphism
 \[
-  C_3(\mathcal H)\xrightarrow{\partial_3}
-  C_2(\mathcal H)\xrightarrow{\partial_2}
-  C_1(\mathcal H).
-  \tag{3.1}\label{eq:handle-complex}
+  \gamma_{\mathcal H}\colon
+  \partial B^4\xrightarrow{\ \cong\ }\partial W^{(3)}.
 \]
-The oriented framed components give the preferred basis of
-\(C_2(\mathcal H)\).  We write
-\(h_3(\mathcal H)=\operatorname{rank}C_3(\mathcal H)\).
+Thus the datum has one implicit initial \(0\)-handle and one explicitly
+attached final \(4\)-handle.
 \end{definition}
 
 \begin{definition}[Realization and presentation]
 \label{def:special-kirby-presentation}
-Choose an orientation-reversing diffeomorphism
-\(\partial B^4\to\partial W^{(3)}\) and define the \emph{realization}
+The \emph{realization} of \(\mathcal H\) is
 \[
-  |\mathcal H|:=W^{(3)}\cup_{S^3}B^4.
+  |\mathcal H|:=W^{(3)}\cup_{\gamma_{\mathcal H}}B^4.
 \]
 Its oriented diffeomorphism type is independent of the closing map: two
 closing maps differ by an orientation-preserving diffeomorphism of \(S^3\),
@@ -83,6 +74,40 @@ understood, we suppress \(\rho\) and simply call \(\mathcal H\) a
 presentation of \(X\).
 \end{definition}
 
+\begin{definition}[Derived handle chain complex]
+\label{def:derived-handle-chain-complex}
+For each \(k\), let \(I_k(\mathcal H)\) be the finite set of index-\(k\) handles
+in \(\mathcal H\), and put \(W^{(-1)}=\varnothing\) and
+\(W^{(4)}=|\mathcal H|\).  Define
+\[
+  C_k(\mathcal H):=
+  H_k\bigl(W^{(k)},W^{(k-1)};\mathbb Z\bigr).
+\]
+After choosing orientations of the handle cores, the handle classes give an
+identification
+\[
+  C_k(\mathcal H)\cong
+  \bigoplus_{h\in I_k(\mathcal H)}\mathbb Z[h].
+\]
+The triples in the handle filtration give boundary maps
+\(\partial_k\colon C_k(\mathcal H)\to C_{k-1}(\mathcal H)\): the coefficient
+of an index-\((k-1)\) handle in \(\partial_k h\) is the signed intersection
+number of the attaching sphere of \(h\) with the belt sphere of that
+index-\((k-1)\) handle.  These maps form the integral handle chain complex.
+In particular, its degree-two portion is
+\[
+  C_3(\mathcal H)\xrightarrow{\partial_3}
+  C_2(\mathcal H)\xrightarrow{\partial_2}
+  C_1(\mathcal H).
+  \tag{3.1}\label{eq:handle-complex}
+\]
+The oriented framed components give the chosen basis of
+\(C_2(\mathcal H)\), and
+\(h_3(\mathcal H):=\operatorname{rank}C_3(\mathcal H)\) is the number of
+index-\(3\) handles.  None of this chain-level information is additional
+Kirby datum; it is derived from the handle attachments.
+\end{definition}
+
 \begin{remark}[Reduced records]
 \label{rem:reduced-kirby-records}
 The preceding definitions retain the full attaching embeddings.  Up to
@@ -96,8 +121,9 @@ dotted--framed link
 \[
   D_{\mathcal H}=D_{\mathrm{dot}}\sqcup D_{\mathrm{fr}}\subset S^3.
 \]
-These reductions are notation for the full datum, not replacements for its
-definition.
+The closing map is normally suppressed because its choice does not change the
+oriented diffeomorphism type of the realization.  These reductions are
+notation for the full datum, not replacements for its definition.
 \end{remark}
 
 \begin{proposition}[Existence of special presentations]
