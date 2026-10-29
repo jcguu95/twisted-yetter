@@ -47,19 +47,21 @@ $\mathbb C$ and a monoidal natural automorphism
 \]
 First, choose a marked Kirby presentation of $(X,\alpha)$.  Standard
 \(0\)--\(1\) and \(3\)--\(4\) cancellations reduce it to a marked one-ended
-presentation $(\mathcal H,\xi_{\mathcal H})$; choose a cellular
-$2$-cocycle $a=(a_k)$ representing $\xi_{\mathcal H}$, whose image in
-$H^2(X;\mathbb Z)$ is $\operatorname{PD}_X(\alpha)$.  Second, decorate each framed $2$-handle by the
-Kirby colour and the character coupon $(\eta^{a_k})$, and let every dotted
+presentation $(\mathcal H,\beta)$, where
+$\beta\in H_2(|\mathcal H|;\mathbb Z)$ maps to $\alpha$.  At the evaluator
+stage, Poincar\'e duality and the cellular comparison isomorphism turn
+$\beta$ into a handle-cohomology class; choose a cellular $2$-cocycle
+$\omega=(\omega_k)$ representing that class.  Second, decorate each framed $2$-handle by the
+Kirby colour and the character coupon $(\eta^{\omega_k})$, and let every dotted
 $1$-handle project the ribbons passing through it onto their tensor-unit
 channel.  This gives the finite handle formula
 \[
-  \CY_{\cC,\eta}(\mathcal H,a)
+  \CY_{\cC,\eta}(\mathcal H,\omega)
   =\operatorname{Dim}(\cC)^{1-h_3(\mathcal H)}
     \sum_{\lambda}
       \left(\prod_kd_{\lambda_k}\right)
       \operatorname{RT}_{\cC}
-        \bigl(S^3,\Gamma(\mathcal H,a;\lambda)\bigr).
+        \bigl(S^3,\Gamma(\mathcal H,\omega;\lambda)\bigr).
 \]
 Third, check the Kirby--Cerf moves together with their induced transport of
 the handle cocycle.  The projector absorbs coboundary character coupons and

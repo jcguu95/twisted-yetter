@@ -1,4 +1,4 @@
-\subsection{Kirby calculus for closed oriented marked 4-manifolds}
+\subsubsection{Kirby calculus for closed oriented marked 4-manifolds}
 \label{subsec:marked-kirby-calculus}
 
 We now specify the object on which marked Kirby calculus acts.
@@ -18,49 +18,38 @@ is an orientation-preserving diffeomorphism \(f\colon X\to Y\) satisfying
 
 \begin{definition}[Marked Kirby datum]
 \label{def:handle-homology-marking}
-A \emph{marked Kirby datum} is a pair \((\mathcal H,\xi)\), where
+A \emph{marked Kirby datum} is a pair \((\mathcal H,\beta)\), where
 \(\mathcal H\) is a Kirby datum and
 \[
-  \xi\in H^2(\mathcal H).
+  \beta\in H_2(|\mathcal H|;\mathbb Z).
 \]
 \end{definition}
 
 \begin{definition}[Realization of a marked Kirby datum]
 \label{def:marked-kirby-realization}
-The realization of \((\mathcal H,\xi)\) is the \(H_2\)-marked 4-manifold
+The realization of \((\mathcal H,\beta)\) is the \(H_2\)-marked 4-manifold
 \[
-  |(\mathcal H,\xi)|
-  :=\bigl(|\mathcal H|,\alpha_{\mathcal H,\xi}\bigr),
-  \qquad
-  \alpha_{\mathcal H,\xi}
-  \in H_2(|\mathcal H|;\mathbb Z),
-  \qquad
-  \alpha_{\mathcal H,\xi}
-  :=\operatorname{PD}_{|\mathcal H|}^{-1}
-      \bigl(\kappa_{\mathcal H}(\xi)\bigr).
+  |(\mathcal H,\beta)|:=\bigl(|\mathcal H|,\beta\bigr).
 \]
-Here \(\kappa_{\mathcal H}\colon H^2(\mathcal H)\to
-H^2(|\mathcal H|;\mathbb Z)\) is the cellular-to-singular comparison
-isomorphism of \cref{def:derived-handle-chain-complex}.
 \end{definition}
 
 \begin{definition}[Marked Kirby presentation]
 \label{def:marked-kirby-presentation}
 A \emph{marked Kirby presentation} of \((X,\alpha)\) is a marked Kirby
-datum \((\mathcal H,\xi)\) together with a marked diffeomorphism
+datum \((\mathcal H,\beta)\) together with a marked diffeomorphism
 \[
-  \rho\colon |(\mathcal H,\xi)|\longrightarrow(X,\alpha).
+  \rho\colon |(\mathcal H,\beta)|\longrightarrow(X,\alpha).
 \]
 Equivalently, \(\rho\colon|\mathcal H|\to X\) is orientation preserving and
-\[
-  \kappa_{\mathcal H}(\xi)=\rho^*\operatorname{PD}_X(\alpha).
-  \tag{3.2}\label{eq:marked-presentation}
-\]
-Thus \(\xi\) is uniquely determined by an unmarked presentation
+\begin{equation}
+  \rho_*\beta=\alpha.
+  \label{eq:marked-presentation}
+\end{equation}
+Thus \(\beta\) is uniquely determined by an unmarked presentation
 \((\mathcal H,\rho)\) and the class \(\alpha\).
 \end{definition}
 
-\begin{definition}[Transport under a Kirby--Cerf move]
+\begin{definition}[Marked Kirby--Cerf move]
 \label{def:marked-kirby-move}
 Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary Kirby--Cerf move
 in \cref{def:kirby-move}.  By
@@ -70,151 +59,25 @@ diffeomorphisms
 \[
   |m|\colon |\mathcal H|\longrightarrow|\mathcal H'|.
 \]
-We use the standard pullback notation for the induced map on cohomology.
-On handle cohomology, the expression \((|m|^{-1})^*\) means the map defined
-by the following commutative diagram:
-\begin{equation}
-\label{eq:marking-transport}
-\begin{array}{ccc}
-  H^2(\mathcal H) & \xrightarrow{\ (|m|^{-1})^*\ } & H^2(\mathcal H') \\
-  {\scriptstyle\kappa_{\mathcal H}}\!\downarrow &&
-    \downarrow\!{\scriptstyle\kappa_{\mathcal H'}} \\
-  H^2(|\mathcal H|;\mathbb Z)
-  & \xrightarrow{\ (|m|^{-1})^*\ } &
-  H^2(|\mathcal H'|;\mathbb Z).
-\end{array}
-\tag{3.3}
-\end{equation}
-Equivalently,
+The marked move determined by \(m\) is
 \[
-  (|m|^{-1})^*=\kappa_{\mathcal H'}^{-1}
-  \circ(|m|^{-1})^*\circ\kappa_{\mathcal H}.
+  (\mathcal H,\beta)\longmapsto
+  \bigl(\mathcal H',|m|_*\beta\bigr).
 \]
-The occurrence on the left is the induced map on handle cohomology; the
-occurrence on the right is the ordinary pullback on singular cohomology.
-The result of applying \(m\) to a marked Kirby datum is
+By definition, its realization
 \[
-  \bigl(\mathcal H',(|m|^{-1})^*\xi\bigr).
-\]
-This is independent of the representative of the relative isotopy class
-of \(|m|\).  The \emph{marked Kirby--Cerf move} determined by \(m\) is the
-map of marked Kirby data
-\[
-  (\mathcal H,\xi)\longmapsto
-  \bigl(\mathcal H',(|m|^{-1})^*\xi\bigr).
-\]
-Thus its underlying topological move is \(m\), while its action on the
-marking is the standard pullback along the inverse realization.
-\end{definition}
-
-\begin{proposition}[Cocycle transport under Kirby--Cerf moves]
-\label{prop:marking-coordinate-transport}
-Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary Kirby--Cerf move,
-let \(\xi\in H^2(\mathcal H)\), and let \(\lambda\) be a handle cocycle
-representing \(\xi\).  For each oriented \(2\)-handle generator \(e_j\),
-write
-\[
-  \lambda_j:=\lambda(e_j)\in\mathbb Z.
-\]
-Thus \(\lambda_j\) is the coordinate of the cochain \(\lambda\) in the
-oriented \(2\)-handle basis; it is not an additional topological datum.
-The transported class \((|m|^{-1})^*\xi\) has a representative
-\(\lambda'\), with
-coordinates \(\lambda'_j:=\lambda'(e'_j)\), satisfying the following
-formulas.
-\begin{enumerate}[label=(\roman*),ref=\roman*]
-  \item For framed isotopy, a \(1/1\) slide, a \(2/1\) passage, a
-  \(3/3\) slide, a \(0\)--\(1\) birth or death, or a \(3\)--\(4\) birth or
-  death, the \(2\)-handle generators are canonically identified and
-  \(\lambda'=\lambda\).
-
-  \item For a \(2/2\) slide, let \(e_x\) be the moving generator,
-  \(e_y\) the stationary generator, and let
-  \(\varepsilon\in\{\pm1\}\) be fixed by the oriented handle-slide
-  convention.  Then
-  \[
-    \lambda_x'=\lambda_x+\varepsilon\lambda_y,
-    \qquad
-    \lambda_y'=\lambda_y,
-    \tag{3.4}\label{eq:two-two-marking-transport}
-  \]
-  while every uninvolved coordinate is unchanged.
-
-  \item A \(1\)--\(2\) birth admits \(\lambda'=\lambda\oplus0\); every representative
-  of the transported class is cohomologous to one whose new \(2\)-handle
-  coordinate is zero.
-
-  \item For a \(2\)--\(3\) birth, the cocycle equation forces the new
-  \(2\)-handle coordinate to be zero, so again
-  \(\lambda'=\lambda\oplus0\).
-\end{enumerate}
-The death formulas are the inverses of the corresponding birth formulas.
-\end{proposition}
-
-\begin{proof}
-The handle complex is the cellular chain complex of the handle filtration,
-and cellular comparison is natural.  It is therefore enough to use the
-standard cellular map for each local move
-\cite[Sections~4.1--4.2]{DurstGeigesKegel2019}.
-
-Isotopy, \(1/1\), \(2/1\), \(3/3\), \(0\)--\(1\), and \(3\)--\(4\) moves
-act as the identity on \(C_2\).  For a \(2/2\) slide, the target-to-source
-basis change sends the
-new moving generator to \(e_x+\varepsilon e_y\) and fixes the other
-generators.  Precomposing \(\lambda\) with this basis change gives
-\[
-  \lambda_x'=\lambda(e_x+\varepsilon e_y)
-  =\lambda_x+\varepsilon\lambda_y.
-\]
-
-A \(1\)--\(2\) birth adds the acyclic complex
-\[
-  0\longrightarrow\mathbb Z
-  \xrightarrow{\ \pm1\ }\mathbb Z\longrightarrow0
-\]
-in degrees \(2\) and \(1\).  Its new degree-two cochain is a coboundary, so
-that coordinate may be chosen to be zero.  A \(2\)--\(3\) birth adds the
-same acyclic complex in degrees \(3\) and \(2\); the degree-two cocycle
-equation now forces the new coordinate to vanish.  Reversing these chain
-equivalences gives the death formulas.
-\end{proof}
-
-\begin{proposition}[Kirby--Cerf moves preserve marked data]
-\label{prop:kirby-move-preserves-marked-data}
-Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary Kirby--Cerf move,
-and let \((\mathcal H,\xi)\) be a marked Kirby datum.  Then
-\[
-  |m|\colon |(\mathcal H,\xi)|
-  \longrightarrow |(\mathcal H',(|m|^{-1})^*\xi)|
+  |m|\colon|(\mathcal H,\beta)|
+  \longrightarrow|(\mathcal H',|m|_*\beta)|
 \]
 is a marked diffeomorphism.
-\end{proposition}
-
-\begin{proof}
-By \eqref{eq:marking-transport} and naturality of Poincar\'e duality,
-\[
-  \begin{aligned}
-  \operatorname{PD}_{|\mathcal H'|}
-    \bigl(|m|_*\alpha_{\mathcal H,\xi}\bigr)
-  &=(|m|^{-1})^*\operatorname{PD}_{|\mathcal H|}
-    (\alpha_{\mathcal H,\xi})\\
-  &=(|m|^{-1})^*\kappa_{\mathcal H}(\xi)\\
-  &=\kappa_{\mathcal H'}\bigl((|m|^{-1})^*\xi\bigr)\\
-  &=\operatorname{PD}_{|\mathcal H'|}
-    \bigl(\alpha_{\mathcal H',(|m|^{-1})^*\xi}\bigr).
-  \end{aligned}
-\]
-Since Poincar\'e duality is an isomorphism,
-\(|m|_*\alpha_{\mathcal H,\xi}
-=\alpha_{\mathcal H',(|m|^{-1})^*\xi}\).
-\end{proof}
+\end{definition}
 
 \begin{theorem}[Marked Kirby--Cerf completeness]
 \label{prop:marked-kirby-cerf}
 Assume the following arrows, with the top edge deliberately absent:
 \[
 \begin{array}{ccc}
-  |(\mathcal H,\xi)| && |(\mathcal H',\xi')| \\
+  |(\mathcal H,\beta)| && |(\mathcal H',\beta')| \\
   {\scriptstyle\rho}\!\downarrow &&
     \downarrow\!{\scriptstyle\rho'} \\
   (X,\alpha) & \xrightarrow{\ f\ } & (Y,\alpha').
@@ -224,7 +87,7 @@ Here \(\rho\) and \(\rho'\) are marked Kirby presentations and \(f\) is a
 marked diffeomorphism.  Then:
 \begin{enumerate}[label=\textup{(\roman*)},ref=\textup{\roman*}]
   \item Ordinary Kirby--Cerf completeness, applied to the underlying
-  unmarked arrows and without using \(\xi\) or \(\xi'\), produces a
+  unmarked arrows and without using \(\beta\) or \(\beta'\), produces a
   Kirby--Cerf movie
   \[
     M\colon
@@ -239,9 +102,9 @@ marked diffeomorphism.  Then:
   \item Writing \(\mu:=|M|\), the composite transport along the movie
   satisfies
   \[
-    (\mu^{-1})^*\xi
-    =(|m_N|^{-1})^*\cdots(|m_1|^{-1})^*\xi
-    =\xi'.
+    \mu_*\beta
+    =\bigl(|m_N|_*\circ\cdots\circ|m_1|_*\bigr)(\beta)
+    =\beta'.
   \]
   Namely, transporting the source marking through the independently
   constructed unmarked movie gives exactly the prescribed target marking,
@@ -254,9 +117,9 @@ marked diffeomorphism.  Then:
 \end{theorem}
 
 \begin{proof}
-Ordinary completeness gives \(M\); functoriality of pullback, together with
-Poincar\'e duality and the markedness of \(f\), identifies both sides of
-(ii) under the isomorphism
-\(\kappa_{\mathcal H'}\), while
+Ordinary completeness gives \(M\); functoriality of homology, together with
+the markedness of \(\rho\), \(\rho'\), and \(f\), gives
+\(\rho'_*\mu_*\beta=f_*\rho_*\beta=\alpha'=\rho'_*\beta'\), hence (ii)
+because \(\rho'_*\) is an isomorphism; while
 \cref{cor:one-ended-diffeomorphism-realization} gives (iii).
 \end{proof}

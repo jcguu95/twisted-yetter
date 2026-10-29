@@ -11,26 +11,111 @@ premodular fusion category over \(\mathbb C\) and
 \]
 \end{definition}
 
+\begin{definition}[Cohomological marking and handle cocycle]
+\label{def:handle-cocycle}
+Let \((\mathcal H,\beta)\) be a marked Kirby datum.  Dualize the handle
+chain complex of \cref{def:derived-handle-chain-complex}:
+\[
+  C^k(\mathcal H):=\operatorname{Hom}(C_k(\mathcal H),\mathbb Z),
+  \qquad
+  \delta^k(\omega):=\omega\circ\partial_{k+1},
+\]
+and write
+\[
+  H^2(\mathcal H):=
+  \ker(\delta^2)/\operatorname{im}(\delta^1).
+\]
+The cellular comparison isomorphism
+\[
+  \kappa_{\mathcal H}\colon
+  H^2(\mathcal H)\xrightarrow{\ \cong\ }
+  H^2(|\mathcal H|;\mathbb Z)
+\]
+and Poincar\'e duality determine the evaluator class
+\[
+  \xi_{\mathcal H,\beta}
+  :=\kappa_{\mathcal H}^{-1}
+    \bigl(\operatorname{PD}_{|\mathcal H|}(\beta)\bigr)
+  \in H^2(\mathcal H).
+\]
+A \emph{handle cocycle} for \((\mathcal H,\beta)\) is a cocycle
+\[
+  \omega\in C^2(\mathcal H)
+\]
+representing \(\xi_{\mathcal H,\beta}\).  If \(e_j\) is the oriented
+\(2\)-handle generator corresponding to the \(j\)th framed component, set
+\[
+  \omega_j:=\omega(e_j)\in\mathbb Z.
+\]
+These integers, and only these integers, are used as character exponents in
+the evaluator.
+\end{definition}
+
+\begin{proposition}[Cocycle coordinates under Kirby--Cerf moves]
+\label{prop:marking-coordinate-transport}
+Let \(m\colon(\mathcal H,\beta)\to
+(\mathcal H',|m|_*\beta)\) be a marked elementary move, and let \(\omega\)
+be a handle cocycle for \((\mathcal H,\beta)\).  The target evaluator class
+has a representative \(\omega'\) with the following coordinates.
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item For framed isotopy, a \(1/1\) slide, a \(2/1\) passage, a
+  \(3/3\) slide, a \(0\)--\(1\) birth or death, or a \(3\)--\(4\) birth or
+  death, the \(2\)-handle generators are canonically identified and
+  \(\omega'=\omega\).
+
+  \item For a \(2/2\) slide, let \(e_x\) be the moving generator,
+  \(e_y\) the stationary generator, and let
+  \(\varepsilon\in\{\pm1\}\) be fixed by the oriented handle-slide
+  convention.  Then
+  \begin{equation}
+    \omega_x'=\omega_x+\varepsilon\omega_y,
+    \qquad
+    \omega_y'=\omega_y.
+    \label{eq:two-two-marking-transport}
+  \end{equation}
+  while every uninvolved coordinate is unchanged.
+
+  \item A \(1\)--\(2\) birth admits \(\omega'=\omega\oplus0\); every
+  representative of the target class is cohomologous to one whose new
+  \(2\)-handle coordinate is zero.
+
+  \item For a \(2\)--\(3\) birth, the cocycle equation forces the new
+  \(2\)-handle coordinate to be zero, so again
+  \(\omega'=\omega\oplus0\).
+\end{enumerate}
+The death formulas are the inverses of the corresponding birth formulas.
+\end{proposition}
+
+\begin{proof}
+Poincar\'e duality is natural, so the evaluator class attached to
+\(|m|_*\beta\) is the cellular transport of the class attached to \(\beta\).
+The standard cellular map of each local move now gives the formulas above:
+a \(2/2\) slide sends the new moving generator to
+\(e_x+\varepsilon e_y\), while adjacent-index birth adds the corresponding
+acyclic two-term complex.  See
+\cite[Sections~4.1--4.2]{DurstGeigesKegel2019}.
+\end{proof}
+
 Two standard categorical ingredients enter the formula.
 
 \begin{definition}[Kirby colour and tensor-unit projector]
 \label{def:kirby-colour}
 \label{def:tensor-unit-projector}
 Let \(\cC\) be a premodular fusion category.  Its Kirby colour is
-\[
+\begin{equation}
   \Omega_{\cC}:=
   \sum_{i\in\operatorname{Irr}(\cC)}d_i\,i.
-  \tag{4.1}\label{eq:kirby-colour}
-\]
+  \label{eq:kirby-colour}
+\end{equation}
 For an object \(W\), choose a basis
 \(u_\mu\colon\mathbf1\to W\) and its composition-dual basis
 \(\widehat u_\mu\colon W\to\mathbf1\), and set
-\[
+\begin{equation}
   P_{\mathbf1,W}:=
   \sum_\mu u_\mu\widehat u_\mu
   \in\operatorname{End}_{\cC}(W).
-  \tag{4.2}\label{eq:tensor-unit-projector}
-\]
+  \label{eq:tensor-unit-projector}
+\end{equation}
 We also write
 \(\operatorname{Cut}_{\cC}(W):=P_{\mathbf1,W}\); no global-dimension factor is
 included in this notation.
@@ -58,18 +143,19 @@ If \(v_\nu=\sum_\mu A_{\nu\mu}u_\mu\), then its dual basis is
 
 \begin{definition}[Handle-operator evaluation]
 \label{def:general-handle-operator-evaluation}
-Let \((\mathcal H,a)\) be a Kirby datum equipped with a handle \(2\)-cocycle.
+Let \((\mathcal H,\omega)\) be a Kirby datum equipped with a handle
+\(2\)-cocycle.
 Turn the handle decomposition over.  This reverses the handle order and sends
 each primal index-\(k\) handle to a dual index-\((4-k)\) elementary
 cobordism.  Assign to it the corresponding skein operator of
 \cite[Definition~5.11]{Tham2021}.  For a primal \(2\)-handle \(e_j\), modify
 that operator by inserting the natural-automorphism coupon
-\((\eta^{a_j})\) on its attaching ribbon.  Compose the resulting operators in
+\((\eta^{\omega_j})\) on its attaching ribbon.  Compose the resulting operators in
 the turned-over handle order.  Since the incoming and outgoing boundaries are empty, the
 composite is an endomorphism of the vacuum line and hence a scalar.  Denote it
 by
 \[
-  \CY_{\cC,\eta}(\mathcal H,a)\in\mathbb C.
+  \CY_{\cC,\eta}(\mathcal H,\omega)\in\mathbb C.
 \]
 The definition permits arbitrary finite numbers of \(0\)- and \(4\)-handles;
 their operators are, respectively, the turned-over index-\(4\) RT closure and
@@ -114,16 +200,16 @@ Let \(\cC\) be a premodular fusion category and use the cut-open tangle of
 \cref{def:cut-open-dotted-tangle}.  The dotted \(1\)-handle replaces the
 ordinary regluing morphism \(\operatorname{id}_{B_\delta}\) by the
 tensor-unit projector.  Thus the operation assigned to \(\delta\) is
-\[
+\begin{equation}
   \operatorname{Cut}_{\cC}(B_\delta)
   =P_{\mathbf1,B_\delta}.
-  \tag{4.3}\label{eq:dotted-operation}
-\]
+  \label{eq:dotted-operation}
+\end{equation}
 Equivalently, its contribution after regluing the exterior is
-\[
+\begin{equation}
   \mathcal E_\delta(P_{\mathbf1,B_\delta}).
-  \tag{4.4}\label{eq:intrinsic-dotted-context}
-\]
+  \label{eq:intrinsic-dotted-context}
+\end{equation}
 \end{definition}
 
 \begin{remark}[Planar diagrams are notation]
@@ -148,9 +234,9 @@ one-ended case as a single RT graph sum.
 \label{def:colored-graph-sum}
 Fix a twisted categorical input \((\cC,\eta)\).  Let \(\mathcal H\) be a
 one-ended Kirby presentation and let
-\(a\in Z^2(\mathcal H)\) represent the marking.  For every assignment
+\(\omega\in Z^2(\mathcal H)\) represent the evaluator class.  For every assignment
 \(\lambda=(\lambda_k)\) of simple objects to the framed components, form a
-finite linear combination \(\Gamma(\mathcal H,a;\lambda)\) of closed coloured
+finite linear combination \(\Gamma(\mathcal H,\omega;\lambda)\) of closed coloured
 ribbon graphs by the following rules.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item The \(k\)th framed component receives the simple label
@@ -159,8 +245,8 @@ ribbon graphs by the following rules.
 
   \item On that component insert the character coupon
   \[
-    (\eta^{a_k})_{\lambda_k}
-    =\eta_{\lambda_k}^{a_k}\operatorname{id}_{\lambda_k}.
+    (\eta^{\omega_k})_{\lambda_k}
+    =\eta_{\lambda_k}^{\omega_k}\operatorname{id}_{\lambda_k}.
   \]
 
   \item At every dotted component \(\delta\), insert
@@ -172,7 +258,7 @@ ribbon graphs by the following rules.
   ribbon graphical calculus.
 
   \item Include all projector-expansion coefficients and character coupons
-  in \(\Gamma(\mathcal H,a;\lambda)\), but leave the Kirby-colour weight
+  in \(\Gamma(\mathcal H,\omega;\lambda)\), but leave the Kirby-colour weight
   \(\prod_kd_{\lambda_k}\) outside this graph sum.
 \end{enumerate}
 \end{definition}
@@ -180,19 +266,19 @@ ribbon graphs by the following rules.
 \begin{proposition}[One-ended handle formula]
 \label{def:twisted-handle-evaluator}
 Fix a twisted categorical input \((\cC,\eta)\), a one-ended Kirby presentation
-\(\mathcal H\), and a cocycle \(a\in Z^2(\mathcal H)\).  Then the handle
+\(\mathcal H\), and a cocycle \(\omega\in Z^2(\mathcal H)\).  Then the handle
 operator evaluation is
-\[
+\begin{equation}
   \boxed{
-  \CY_{\cC,\eta}(\mathcal H,a)
+  \CY_{\cC,\eta}(\mathcal H,\omega)
   :=
   \operatorname{Dim}(\cC)^{1-h_3(\mathcal H)}
   \sum_{\lambda}
     \left(\prod_k d_{\lambda_k}\right)
     \operatorname{RT}_{\cC}
-      \bigl(S^3,\Gamma(\mathcal H,a;\lambda)\bigr).}
-  \tag{4.5}\label{eq:twisted-handle-evaluator}
-\]
+      \bigl(S^3,\Gamma(\mathcal H,\omega;\lambda)\bigr).}
+  \label{eq:twisted-handle-evaluator}
+\end{equation}
 \end{proposition}
 
 \begin{proof}
@@ -218,8 +304,8 @@ of its \(3\)-handles, the marked evaluator uses that data only through
 More precisely, the scalar in
 \eqref{eq:twisted-handle-evaluator} reads \(h_3(\mathcal H)\) in its
 normalization, while the requirement that
-\(a\in Z^2(\mathcal H)\) depends on \(\partial_3\) only through the condition
-that \(a\) vanish on \(\operatorname{im}(\partial_3)\).
+\(\omega\in Z^2(\mathcal H)\) depends on \(\partial_3\) only through the
+condition that \(\omega\) vanish on \(\operatorname{im}(\partial_3)\).
 \end{proposition}
 
 \begin{proof}
@@ -228,9 +314,9 @@ the dotted--framed \(1\)- and \(2\)-handle diagram.  The displayed formula
 contains the \(3\)-handles explicitly only in the exponent
 \(1-h_3(\mathcal H)\).  Finally,
 \[
-  a\in Z^2(\mathcal H)
+  \omega\in Z^2(\mathcal H)
   \quad\Longleftrightarrow\quad
-  a\circ\partial_3=0,
+  \omega\circ\partial_3=0,
 \]
 which depends only on the image of \(\partial_3\).  No other part of the
 attaching embeddings enters the formula.
@@ -261,7 +347,7 @@ replacement is used in the premodular construction; compare
 
 \begin{remark}[Intrinsic meaning]
 \label{rem:graph-sum-intrinsic-meaning}
-The expression \(\Gamma(\mathcal H,a;\lambda)\) denotes the resulting
+The expression \(\Gamma(\mathcal H,\omega;\lambda)\) denotes the resulting
 intrinsic composite modulo ribbon graphical relations, not a preferred planar
 drawing.  In particular, the orientation of a ribbon determines whether its
 label is \(X\) or \(X^*\); its passage through a dotted-handle cross-section

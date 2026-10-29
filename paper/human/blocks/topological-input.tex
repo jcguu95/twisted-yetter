@@ -1,4 +1,4 @@
-\subsection{Kirby calculus for closed oriented 4-manifolds}
+\subsubsection{Kirby calculus for closed oriented 4-manifolds}
 \label{subsec:topological-input}
 
 This subsection reviews textbook-level handle and Kirby calculus.  We follow
@@ -79,63 +79,15 @@ After orienting the handle cores, their classes identify
 The boundary maps are the connecting maps of the handle filtration; their
 matrix entries are the signed intersections of attaching and belt spheres.
 In particular,
-\[
+\begin{equation}
   C_3(\mathcal H)\xrightarrow{\partial_3}
   C_2(\mathcal H)\xrightarrow{\partial_2}
   C_1(\mathcal H).
-  \tag{3.1}\label{eq:handle-complex}
-\]
+  \label{eq:handle-complex}
+\end{equation}
 Write \(h_k(\mathcal H)=|I_k(\mathcal H)|\).  The chain complex and the
 numbers \(h_k\) are derived from the handle attachments; they are not extra
 parts of a Kirby datum.
-
-The dual handle cochain complex is
-\[
-  C^k(\mathcal H):=\operatorname{Hom}(C_k(\mathcal H),\mathbb Z),
-  \qquad
-  \delta^k(a):=a\circ\partial_{k+1},
-\]
-and we write
-\[
-  H^2(\mathcal H):=
-  \ker(\delta^2)/\operatorname{im}(\delta^1).
-\]
-The handle filtration and the cellular-to-singular comparison determine a
-natural isomorphism
-\[
-  \kappa_{\mathcal H}\colon
-  H^2(\mathcal H)\xrightarrow{\ \cong\ }
-  H^2(|\mathcal H|;\mathbb Z).
-\]
-For every closed oriented \(4\)-manifold \(M\), Poincar\'e duality gives an
-isomorphism
-\[
-  \operatorname{PD}_M\colon
-  H_2(M;\mathbb Z)\xrightarrow{\ \cong\ }H^2(M;\mathbb Z).
-\]
-It is natural under orientation-preserving diffeomorphisms: if
-\(g\colon M\to N\), then
-\[
-  (g^{-1})^*\operatorname{PD}_M(\alpha)
-  =\operatorname{PD}_N(g_*\alpha).
-\]
-\end{definition}
-
-\begin{definition}[Handle cocycle]
-\label{def:handle-cocycle}
-Let \(\xi\in H^2(\mathcal H)\).  A \emph{handle cocycle} representing
-\(\xi\) is a degree-two cocycle
-\[
-  \lambda\in C^2(\mathcal H)
-  =\operatorname{Hom}(C_2(\mathcal H),\mathbb Z)
-\]
-whose cohomology class is \(\xi\).  If \(e_j\) is the oriented
-\(2\)-handle generator corresponding to the \(j\)th framed component, write
-\[
-  \lambda_j:=\lambda(e_j)\in\mathbb Z.
-\]
-The integers \(\lambda_j\) are the \emph{handle coordinates} of
-\(\lambda\) in the oriented \(2\)-handle basis.
 \end{definition}
 
 \begin{definition}[One-ended Kirby datum]
@@ -307,7 +259,7 @@ and choices of the realization maps in
 \cref{prop:elementary-move-realization} such that, for
 \(\mu:=|M|\),
 the diagram
-\begin{equation}
+\begin{equation*}
 \label{eq:cerf-realizes-diffeomorphism}
 \begin{array}{ccccccc}
   |\mathcal H_0| & \xrightarrow{|m_1|} & |\mathcal K_1|
@@ -319,7 +271,7 @@ the diagram
 \end{array}
 \qquad\text{commutes up to smooth isotopy.}
 \tag{KC}
-\end{equation}
+\end{equation*}
 Precisely, there is an isotopy, that is, a smooth one-parameter family
 \(F_t\colon|\mathcal H_0|\to X_1\), \(0\leq t\leq1\), of
 orientation-preserving diffeomorphisms such that

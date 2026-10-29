@@ -92,7 +92,7 @@ property of the completeness idempotent in
 \begin{lemma}[Local form of a dotted-handle operation]
 \label{lem:dotted-collar-factorization}
 Let \(\mathcal H\) be a one-ended Kirby presentation, let
-\(a\in Z^2(\mathcal H)\), fix an ordinary-label state $\lambda$, and let
+\(\omega\in Z^2(\mathcal H)\), fix an ordinary-label state $\lambda$, and let
 $\delta$ be an oriented dotted component of \(D_{\mathcal H}\) equipped with
 a dotted-handle section.  Its positive face determines
 the signed word $w_\delta$ and the boundary-state object
@@ -104,10 +104,10 @@ defines a linear functional
   \operatorname{End}_{\cC}(B_\delta)\longrightarrow\mathbb C.
 \]
 The dotted operation in that term is
-\[
+\begin{equation}
   \mathcal E_\delta(P_{\mathbf1,B_\delta}).
-  \tag{4.7}\label{eq:dotted-section}
-\]
+  \label{eq:dotted-section}
+\end{equation}
 For every puncture $p$ on the $k$th ordinary component, the following four
 features remain distinct.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
@@ -119,11 +119,11 @@ features remain distinct.
   sign $\epsilon(p)$.  This is both its contribution to $\partial_2$ and the
   variance of the corresponding boundary point in the signed cut word.
 
-  \item The marking representative supplies $a_k$ and hence the actual coupon
-  $(\eta^{a_k})_{\lambda_k}$.  The disk supplies neither this exponent nor its
+  \item The marking representative supplies $\omega_k$ and hence the actual coupon
+  $(\eta^{\omega_k})_{\lambda_k}$.  The disk supplies neither this exponent nor its
   sign.
 
-  \item Neither the oriented label nor \(a_k\) depends on the dotted-handle
+  \item Neither the oriented label nor \(\omega_k\) depends on the dotted-handle
   section.  A negative boundary occurrence uses the rigid dual of the
   already fixed oriented label; it does not recolour the component.
 \end{enumerate}
@@ -154,7 +154,7 @@ follows from them.
 \begin{proposition}[Independence of auxiliary graphical choices]
 \label{prop:graphical-auxiliary-independence}
 For a one-ended Kirby presentation $\mathcal H$ and a handle cocycle
-\(a\in Z^2(\mathcal H)\),
+\(\omega\in Z^2(\mathcal H)\),
 the evaluator is independent of the dual bases used to expand the
 tensor-unit projectors and of the dotted-handle sections used to draw them.
 \end{proposition}
@@ -176,7 +176,7 @@ interchange law for tensor products of morphisms.
 \begin{proposition}[Independence of auxiliary orientations]
 \label{prop:orientation-choice-independence}
 Let \(\mathcal H\) be a one-ended Kirby presentation and let
-\(a\in Z^2(\mathcal H)\).  The evaluator is unchanged when any auxiliary
+\(\omega\in Z^2(\mathcal H)\).  The evaluator is unchanged when any auxiliary
 oriented handle generator and
 its tied Kirby component orientation are reversed as in
 \cref{conv:orientation-reversal}.
@@ -223,12 +223,12 @@ Let \(\mathcal H\) be a one-ended Kirby presentation, let \(\lambda\) be a
 simple-label state, and let $e_\delta^*$ be the cellular $1$-cochain dual to
 a dotted primal $1$-handle \(\delta\).  Let $w_\delta$ be the signed boundary
 word of \cref{lem:dotted-collar-factorization}.  For every $m\in\mathbb Z$,
-\[
+\begin{equation}
   \prod_k\eta_{\lambda_k}^{m(\delta^1e_\delta^*)_k}
   =
   \chi_\eta(w_\delta)^m.
-  \tag{4.8}\label{eq:dotted-incidence-character}
-\]
+  \label{eq:dotted-incidence-character}
+\end{equation}
 Moreover the scalar on either side acts trivially on the closed term
 $\mathcal E_\delta(P_{\mathbf1,B_\delta})$.
 \end{lemma}
@@ -248,7 +248,7 @@ grouping equal component labels proves
 \eqref{eq:dotted-incidence-character}.  This bookkeeping uses the disk only
 to record the signed boundary occurrence; the ordinary component was already
 coloured by $\lambda_{k(p)}$, and the disk supplies neither that colour nor
-the exponent $a_{k(p)}$.
+the exponent $\omega_{k(p)}$.
 
 By rigidity and \cref{lem:character-identities}, the component of $\eta^m$
 on the boundary-state object $B_\delta=|w_\delta|$ is exactly the scalar
@@ -263,28 +263,28 @@ $\mathcal E_\delta$ proves the final assertion.
 \begin{proposition}[Representative independence]
 \label{prop:representative-independence}
 Let \(\mathcal H\) be a one-ended Kirby presentation.  If two integral
-cellular $2$-cocycles $a,a'\in Z^2(\mathcal H)$ represent the same class
+cellular $2$-cocycles $\omega,\omega'\in Z^2(\mathcal H)$ represent the same class
 in $H^2(\mathcal H)$, then
 \[
-  \CY_{\cC,\eta}(\mathcal H,a)=\CY_{\cC,\eta}(\mathcal H,a').
+  \CY_{\cC,\eta}(\mathcal H,\omega)=\CY_{\cC,\eta}(\mathcal H,\omega').
 \]
-Consequently the value depends only on the marked class
-$\xi_{\mathcal H}\in H^2(\mathcal H)$.
+Consequently the value depends only on the cohomology class represented by
+the cocycle.
 \end{proposition}
 
 \begin{proof}
-Since $a$ and $a'$ represent the same cellular cohomology class, there is a
+Since $\omega$ and $\omega'$ represent the same cellular cohomology class, there is a
 $1$-cochain $b\in C^1(\mathcal H)$ such that
 \[
-  a'-a=\delta^1b.
+  \omega'-\omega=\delta^1b.
 \]
 The group $C^1(\mathcal H)$ is freely generated by the primal $1$-handles, so it is
 enough to prove the assertion when $b=m e^*_{\delta}$ for one dotted
 component $\delta$ and one integer $m$, and then induct over the finite
 support of $b$.
 
-Fix an ordinary-label state $\lambda$.  Replacing $a$ by
-$a+m\delta^1e_\delta^*$ multiplies its character weight by
+Fix an ordinary-label state $\lambda$.  Replacing $\omega$ by
+$\omega+m\delta^1e_\delta^*$ multiplies its character weight by
 \[
   \prod_k\eta_{\lambda_k}^{m(\delta^1e_\delta^*)_k}.
 \]
@@ -297,9 +297,12 @@ $\lambda$, and then applying the argument successively to the finitely many
 generators in the support of $b$, proves the claim.
 \end{proof}
 
-We therefore write
-$\CY_{\cC,\eta}(\mathcal H,\xi_{\mathcal H})$ for the value of any cellular
-$2$-cocycle representing $\xi_{\mathcal H}$.
+For a marked Kirby datum \((\mathcal H,\beta)\), we therefore write
+\[
+  \CY_{\cC,\eta}(\mathcal H,\beta)
+\]
+for the value of any handle cocycle representing
+\(\xi_{\mathcal H,\beta}\) from \cref{def:handle-cocycle}.
 
 \begin{lemma}[Character transport along a ribbon]
 \label{lem:finite-coupon-transport}
@@ -362,12 +365,12 @@ outgoing level boundaries outside the supporting ball, let
 \(\mathsf H^{(3)}_{\mathrm{tgt}}\) be the composites of the two intrinsic
 index-$3$ handle maps on the source and target sides.  Then, for every
 decorated incoming skein $\Gamma$,
-\[
+\begin{equation}
   \mathsf H^{(3)}_{\mathrm{src}}([\Gamma])
   =
   \mathsf H^{(3)}_{\mathrm{tgt}}([\Gamma]).
-  \tag{4.9}\label{eq:one-one-index-three-interface}
-\]
+  \label{eq:one-one-index-three-interface}
+\end{equation}
 \end{lemma}
 
 \begin{remark}[Multiplicity indices in the $1/1$ identity]
@@ -394,13 +397,13 @@ full multiplicity indices; the trace-dual resolution coefficients are
 absorbed into the notation $[\Gamma_{i,j;\mu,\nu}]$.  By
 \cite[Definition~5.11, $k=3$]{Tham2021}, the
 two source handle maps act termwise as
-\[
+\begin{equation}
   \mathsf H^{(3)}_{\mathrm{src}}
     ([\Gamma_{i,j;\mu,\nu}])
   =\delta_{i,\mathbf1}\delta_{j,\mathbf1}
     [\Gamma_{i,j;\mu,\nu}].
-  \tag{4.10}\label{eq:one-one-simple-channel-action}
-\]
+  \label{eq:one-one-simple-channel-action}
+\end{equation}
 
 The standard $1/1$ source and target are the same-index slide models of
 \cref{def:handle-slide}, realized as in
@@ -436,19 +439,19 @@ ribbon label, and let $a\in\mathbb Z$ be the moving character exponent.
 There is a common exterior closure functional on
 $\operatorname{Hom}_{\cC}(B\otimes x,x\otimes B)$ under which the positive
 source and target local tangles are respectively the two sides of
-\[
+\begin{equation}
   c_{B,x}\bigl(P_{\mathbf1,B}\otimes(\eta^a)_x\bigr)
   =
   \bigl((\eta^a)_x\otimes P_{\mathbf1,B}\bigr)c_{B,x}.
-  \tag{4.11}\label{eq:positive-two-one-interface}
-\]
+  \label{eq:positive-two-one-interface}
+\end{equation}
 For the opposite crossing orientation they are the two sides of
-\[
+\begin{equation}
   c_{x,B}^{-1}\bigl(P_{\mathbf1,B}\otimes(\eta^a)_x\bigr)
   =
   \bigl((\eta^a)_x\otimes P_{\mathbf1,B}\bigr)c_{x,B}^{-1}.
-  \tag{4.12}\label{eq:negative-two-one-interface}
-\]
+  \label{eq:negative-two-one-interface}
+\end{equation}
 The clean attaching collar is the left factorization, the band transport is
 the displayed braiding followed by transport along the
 stationary component, and the clean detaching collar is the right
@@ -487,10 +490,10 @@ Applying that common exterior context proves the local evaluation equality.
 \begin{lemma}[Dotted-handle slides]
 \label{lem:dotted-handle-slides}
 Let \(m\colon\mathcal H\to\mathcal H'\) be either a $1/1$ slide or a $2/1$
-passage, and let \(\xi\in H^2(\mathcal H)\).  Then
+passage, and let \(\beta\in H_2(|\mathcal H|;\mathbb Z)\).  Then
 \[
-  \CY_{\cC,\eta}(\mathcal H,\xi)
-  =\CY_{\cC,\eta}\bigl(\mathcal H',(|m|^{-1})^*\xi\bigr).
+  \CY_{\cC,\eta}(\mathcal H,\beta)
+  =\CY_{\cC,\eta}\bigl(\mathcal H',|m|_*\beta\bigr).
 \]
 \end{lemma}
 
@@ -699,10 +702,10 @@ identity resolution by the corresponding character equality proves both rows.
 \begin{lemma}[Character-aware $2/2$ slide]
 \label{lem:character-aware-two-two}
 Let \(m\colon\mathcal H\to\mathcal H'\) be either orientation of a $2/2$
-slide, and let \(\xi\in H^2(\mathcal H)\).  Then
+slide, and let \(\beta\in H_2(|\mathcal H|;\mathbb Z)\).  Then
 \[
-  \CY_{\cC,\eta}(\mathcal H,\xi)
-  =\CY_{\cC,\eta}\bigl(\mathcal H',(|m|^{-1})^*\xi\bigr).
+  \CY_{\cC,\eta}(\mathcal H,\beta)
+  =\CY_{\cC,\eta}\bigl(\mathcal H',|m|_*\beta\bigr).
 \]
 \end{lemma}
 
@@ -800,25 +803,25 @@ orientations.
 \begin{definition}[Unnormalized graph sum]
 \label{def:unnormalized-graph-sum}
 For a one-ended Kirby presentation \(\mathcal H\) and
-\(a\in Z^2(\mathcal H)\), define
-\[
-  \mathcal R_{\cC,\eta}(\mathcal H,a)
+\(\omega\in Z^2(\mathcal H)\), define
+\begin{equation}
+  \mathcal R_{\cC,\eta}(\mathcal H,\omega)
   :=\sum_{\lambda}
       \left(\prod_k d_{\lambda_k}\right)
       \operatorname{RT}_{\cC}
-        \bigl(S^3,\Gamma(\mathcal H,a;\lambda)\bigr).
-  \tag{4.13}\label{eq:raw-graph-sum}
-\]
+        \bigl(S^3,\Gamma(\mathcal H,\omega;\lambda)\bigr).
+  \label{eq:raw-graph-sum}
+\end{equation}
 \end{definition}
 
 \begin{lemma}[Normalization identity]
 \label{lem:normalization-identity}
 For every one-ended Kirby presentation \(\mathcal H\) and every
-\(a\in Z^2(\mathcal H)\),
+\(\omega\in Z^2(\mathcal H)\),
 \[
-  \CY_{\cC,\eta}(\mathcal H,a)
+  \CY_{\cC,\eta}(\mathcal H,\omega)
   =\operatorname{Dim}(\cC)^{1-h_3(\mathcal H)}
-   \mathcal R_{\cC,\eta}(\mathcal H,a).
+   \mathcal R_{\cC,\eta}(\mathcal H,\omega).
 \]
 \end{lemma}
 
@@ -864,12 +867,12 @@ before the slide reduction.
 \begin{lemma}[Local cancellation sums]
 \label{lem:local-cancellation-sums}
 For the simple-label set of $\cC$,
-\[
+\begin{equation}
   \sum_i d_i\,\operatorname{tr}_i(P_{\mathbf1,i})=1,
   \qquad
   \sum_i d_i\,\operatorname{tr}_i(\operatorname{id}_i)
-  =\operatorname{Dim}(\cC).                  \tag{4.14}\label{eq:local-cancellation-sums}
-\]
+  =\operatorname{Dim}(\cC).                  \label{eq:local-cancellation-sums}
+\end{equation}
 \end{lemma}
 
 \begin{proof}
@@ -884,21 +887,21 @@ $\sum_i d_i^2=\operatorname{Dim}(\cC)$.
 \label{lem:one-two-cancellation-evaluation}
 Let \(\mathcal H\) be a one-ended Kirby presentation, and let
 \(\mathcal H^+\) be obtained from it by inserting an isolated standard
-cancelling \(1\)--\(2\) pair.  For \(a\in Z^2(\mathcal H)\), let
-\(a^+=a\oplus0\) be the
+cancelling \(1\)--\(2\) pair.  For \(\omega\in Z^2(\mathcal H)\), let
+\(\omega^+=\omega\oplus0\) be the
 transported cocycle of
 \cref{prop:marking-coordinate-transport}.  Then
-\[
-  \mathcal R_{\cC,\eta}(\mathcal H^+,a^+)
-  =\mathcal R_{\cC,\eta}(\mathcal H,a),
+\begin{equation}
+  \mathcal R_{\cC,\eta}(\mathcal H^+,\omega^+)
+  =\mathcal R_{\cC,\eta}(\mathcal H,\omega),
   \qquad
   h_3(\mathcal H^+)=h_3(\mathcal H),
-  \tag{4.15}\label{eq:one-two-cancellation-evaluation}
-\]
+  \label{eq:one-two-cancellation-evaluation}
+\end{equation}
 and hence
 \[
-  \CY_{\cC,\eta}(\mathcal H^+,a^+)
-  =\CY_{\cC,\eta}(\mathcal H,a).
+  \CY_{\cC,\eta}(\mathcal H^+,\omega^+)
+  =\CY_{\cC,\eta}(\mathcal H,\omega).
 \]
 The reverse equality holds for an isolated \(1\)--\(2\) death.
 \end{lemma}
@@ -923,20 +926,20 @@ calculation backwards proves the death statement.
 \label{lem:two-three-cancellation-evaluation}
 Let \(\mathcal H\) be a one-ended Kirby presentation, and let
 \(\mathcal H^+\) be obtained from it by inserting an isolated standard
-cancelling \(2\)--\(3\) pair.  For \(a\in Z^2(\mathcal H)\), let
-\(a^+=a\oplus0\).  Then
-\[
-  \mathcal R_{\cC,\eta}(\mathcal H^+,a^+)
+cancelling \(2\)--\(3\) pair.  For \(\omega\in Z^2(\mathcal H)\), let
+\(\omega^+=\omega\oplus0\).  Then
+\begin{equation}
+  \mathcal R_{\cC,\eta}(\mathcal H^+,\omega^+)
   =\operatorname{Dim}(\cC)\,
-   \mathcal R_{\cC,\eta}(\mathcal H,a),
+   \mathcal R_{\cC,\eta}(\mathcal H,\omega),
   \qquad
   h_3(\mathcal H^+)=h_3(\mathcal H)+1,
-  \tag{4.16}\label{eq:two-three-cancellation-evaluation}
-\]
+  \label{eq:two-three-cancellation-evaluation}
+\end{equation}
 and hence
 \[
-  \CY_{\cC,\eta}(\mathcal H^+,a^+)
-  =\CY_{\cC,\eta}(\mathcal H,a).
+  \CY_{\cC,\eta}(\mathcal H^+,\omega^+)
+  =\CY_{\cC,\eta}(\mathcal H,\omega).
 \]
 The reverse equality holds for an isolated \(2\)--\(3\) death.
 \end{lemma}
@@ -960,16 +963,16 @@ calculation proves the death case.
 \label{lem:three-handle-slides}
 Fix a twisted categorical input \((\cC,\eta)\).  Let \(\mathcal H'\) be
 obtained from a one-ended Kirby presentation \(\mathcal H\) by sliding one
-\(3\)-handle over another, and let \(a\in Z^2(\mathcal H)\).  The slide
+\(3\)-handle over another, and let \(\omega\in Z^2(\mathcal H)\).  The slide
 changes only the chosen basis of \(C_3(\mathcal H)\).  It preserves both
 \(h_3(\mathcal H)\) and
-\(\operatorname{im}(\partial_3)\).  The same coordinate tuple \(a\)
+\(\operatorname{im}(\partial_3)\).  The same coordinate tuple \(\omega\)
 represents the transported marking, and
-\[
-  \CY_{\cC,\eta}(\mathcal H,a)
-  =\CY_{\cC,\eta}(\mathcal H',a).
-  \tag{4.17}\label{eq:three-handle-slide-evaluation}
-\]
+\begin{equation}
+  \CY_{\cC,\eta}(\mathcal H,\omega)
+  =\CY_{\cC,\eta}(\mathcal H',\omega).
+  \label{eq:three-handle-slide-evaluation}
+\end{equation}
 \end{lemma}
 
 \begin{proof}
@@ -982,36 +985,6 @@ diagram, every character exponent, and every RT summand are unchanged, as is
 \cref{prop:evaluator-three-handle-dependence}.  The two sides of
 \eqref{eq:three-handle-slide-evaluation} are therefore the same defining
 sum.
-\end{proof}
-
-\begin{lemma}[Pullback relabelling]
-\label{lem:pullback-presentation-evaluation}
-Let \(f\colon X\to Y\) be an orientation-preserving diffeomorphism, let
-\((\mathcal H',\xi_{\mathcal H'})\) be a marked one-ended Kirby presentation
-of \((Y,\alpha')\), and let
-\((f^*\mathcal H',\widetilde\xi_{\mathcal H'})\) be its pullback to \(X\).
-Then
-\[
-  \CY_{\cC,\eta}
-    (f^*\mathcal H',\widetilde\xi_{\mathcal H'})
-  =
-  \CY_{\cC,\eta}(\mathcal H',\xi_{\mathcal H'}).
-  \tag{4.18}\label{eq:pullback-presentation-evaluation}
-\]
-\end{lemma}
-
-\begin{proof}
-Choose a handle cocycle representing \(\xi_{\mathcal H'}\).  Transporting
-the handles along \(f^{-1}\) gives a cocycle on \(f^*\mathcal H'\) with the
-same integer coordinate on every corresponding oriented \(2\)-handle; by
-cellular naturality it represents
-\(\widetilde\xi_{\mathcal H'}\).  The two presentations have the same
-dotted--framed diagram, handle counts, framings, component orientations, and
-ordinary label states.  For corresponding label states, the categorical
-ribbon expression, every character coupon, and every Kirby-colour
-coefficient are therefore identical.  The defining sums agree term by term.
-Representative independence, \cref{prop:representative-independence}, removes
-the initial choice of cocycle.
 \end{proof}
 
 \begin{proposition}[Extreme-handle cancellation]
@@ -1032,19 +1005,20 @@ composite is the identity on the common exterior state space.
 \label{thm:elementary-kirby-invariance}
 Let
 \[
-  m\colon(\mathcal H,\xi)\longrightarrow(\mathcal H',\xi')
+  m\colon(\mathcal H,\beta)\longrightarrow(\mathcal H',\beta')
 \]
 be a marked Kirby--Cerf move between one-ended Kirby data, chosen from the
 nine types that preserve the one-ended condition.  Then
 \[
-  \CY_{\cC,\eta}(\mathcal H,\xi)
-  =\CY_{\cC,\eta}(\mathcal H',\xi').
+  \CY_{\cC,\eta}(\mathcal H,\beta)
+  =\CY_{\cC,\eta}(\mathcal H',\beta').
 \]
 \end{theorem}
 
 \begin{proof}
-Choose a cocycle $a$ representing $\xi$, and in each case choose the
-target representative $a'$ of $\xi'=(|m|^{-1})^*\xi$ prescribed by
+Choose a cocycle $\omega$ representing $\xi_{\mathcal H,\beta}$, and in each
+case choose the target representative $\omega'$ of
+$\xi_{\mathcal H',\beta'}$ prescribed by
 \cref{prop:marking-coordinate-transport}.  By
 \cref{prop:representative-independence}, proving the equality for these
 representatives proves it for the transported cohomology class.  We use the
@@ -1052,7 +1026,7 @@ local forms of \cref{prop:local-movie-normal-forms}; the exterior graph and
 all labels not mentioned below remain fixed.
 
 \emph{Level isotopy.}
-Here $a'=a$, the label states are canonically identified, and
+Here $\omega'=\omega$, the label states are canonically identified, and
 \(h_3(\mathcal H')=h_3(\mathcal H)\).  If the move is a level isotopy of a
 \(3\)-handle attaching sphere, then the dotted--framed diagram,
 \(\operatorname{im}(\partial_3)\), and the defining sum are literally
@@ -1060,16 +1034,16 @@ unchanged.  Otherwise, for every label state $\lambda$, ribbon graphical
 coherence \cite[Theorem~6.1]{Shum1994} gives
 \[
   \operatorname{RT}_{\cC}
-    \bigl(S^3,\Gamma(\mathcal H,a;\lambda)\bigr)
+    \bigl(S^3,\Gamma(\mathcal H,\omega;\lambda)\bigr)
   =
   \operatorname{RT}_{\cC}
-    \bigl(S^3,\Gamma(\mathcal H',a';\lambda)\bigr).
+    \bigl(S^3,\Gamma(\mathcal H',\omega';\lambda)\bigr).
 \]
 The Kirby-colour coefficients agree termwise, so summing proves the desired
 equality.
 
 \emph{$1/1$ slides and $2/1$ passages.}
-For both moves $a'=a$ on the canonically identified $2$-handle
+For both moves $\omega'=\omega$ on the canonically identified $2$-handle
 generators, and $h_3$ is unchanged.  For a $1/1$ slide the required local
 equality is exactly \eqref{eq:one-one-index-three-interface}.  For a $2/1$
 passage it is \eqref{eq:positive-two-one-interface} or
@@ -1099,7 +1073,7 @@ the entire dotted--framed ribbon graph.
 \emph{$1$--$2$ birth and death.}
 For birth, and for death after the explicit $2/2$ slide reduction of
 \cref{item:cancellation-normal-form}, the pair is isolated from the exterior.
-The marking rule gives $a'=a\oplus0$, and
+The marking rule gives $\omega'=\omega\oplus0$, and
 \eqref{eq:one-two-cancellation-evaluation} proves the isolated equality.
 For death, the preceding $2/2$ slides preserve the marked evaluator by
 \cref{lem:character-aware-two-two}; representative independence supplies the
@@ -1107,7 +1081,7 @@ zero-coordinate representative, and
 \cref{lem:one-two-cancellation-evaluation} is read backwards.
 
 \emph{$2$--$3$ birth and death.}
-The cocycle equation gives $a'=a\oplus0$.  The two explicit equalities in
+The cocycle equation gives $\omega'=\omega\oplus0$.  The two explicit equalities in
 \eqref{eq:two-three-cancellation-evaluation} show that the raw sum acquires
 one factor of $\operatorname{Dim}(\cC)$ while the normalization acquires its
 inverse.  Their product is $1$.  The death case is the reverse equality.
@@ -1120,15 +1094,15 @@ connected Cerf movie.
 \label{prop:marked-manifold-evaluation-well-defined}
 Let
 \[
-  \rho\colon|(\mathcal H,\xi)|\longrightarrow(X,\alpha),
+  \rho\colon|(\mathcal H,\beta)|\longrightarrow(X,\alpha),
   \qquad
-  \sigma\colon|(\mathcal K,\zeta)|\longrightarrow(X,\alpha)
+  \sigma\colon|(\mathcal K,\gamma)|\longrightarrow(X,\alpha)
 \]
 be marked one-ended Kirby presentations of the same marked 4-manifold.
 Then
 \[
-  \CY_{\cC,\eta}(\mathcal H,\xi)
-  =\CY_{\cC,\eta}(\mathcal K,\zeta).
+  \CY_{\cC,\eta}(\mathcal H,\beta)
+  =\CY_{\cC,\eta}(\mathcal K,\gamma).
 \]
 Thus the presentation-level evaluation depends only on \((X,\alpha)\).
 \end{proposition}
@@ -1137,24 +1111,22 @@ Thus the presentation-level evaluation depends only on \((X,\alpha)\).
 Apply marked Kirby--Cerf completeness,
 \cref{prop:marked-kirby-cerf}, to the identity marked diffeomorphism of
 \((X,\alpha)\).  It gives a finite marked Kirby--Cerf movie from
-\((\mathcal H,\xi)\) to \((\mathcal K,\zeta)\), up to the tautological
+\((\mathcal H,\beta)\) to \((\mathcal K,\gamma)\), up to the tautological
 endpoint identification.  Apply
 \cref{thm:elementary-kirby-invariance} at every elementary step, then induct
-on the length of the movie.  The endpoint identification changes no term of the
-defining sum, by \cref{lem:pullback-presentation-evaluation} with
-\(f=\operatorname{id}_X\).
+on the length of the movie.
 \end{proof}
 
 \begin{definition}[Manifold-level evaluator]
 \label{def:manifold-level-evaluator}
 For a marked 4-manifold $(X,\alpha)$, choose a marked one-ended Kirby
 presentation
-\(\rho\colon|(\mathcal H,\xi_{\mathcal H})|\to(X,\alpha)\) as in
+\(\rho\colon|(\mathcal H,\beta_{\mathcal H})|\to(X,\alpha)\) as in
 \cref{prop:kirby-presentation-existence,def:marked-kirby-presentation}
 and set
 \[
   \CY_{\cC,\eta}(X,\alpha)
-  :=\CY_{\cC,\eta}(\mathcal H,\xi_{\mathcal H}).
+  :=\CY_{\cC,\eta}(\mathcal H,\beta_{\mathcal H}).
 \]
 \end{definition}
 
