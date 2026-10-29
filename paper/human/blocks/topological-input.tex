@@ -126,12 +126,16 @@ It is natural under orientation-preserving diffeomorphisms: if
 Let \(\xi\in H^2(\mathcal H)\).  A \emph{handle cocycle} representing
 \(\xi\) is a degree-two cocycle
 \[
-  a\in C^2(\mathcal H)
+  \lambda\in C^2(\mathcal H)
   =\operatorname{Hom}(C_2(\mathcal H),\mathbb Z)
 \]
 whose cohomology class is \(\xi\).  If \(e_j\) is the oriented
 \(2\)-handle generator corresponding to the \(j\)th framed component, write
-\(a_j:=a(e_j)\).
+\[
+  \lambda_j:=\lambda(e_j)\in\mathbb Z.
+\]
+The integers \(\lambda_j\) are the \emph{handle coordinates} of
+\(\lambda\) in the oriented \(2\)-handle basis.
 \end{definition}
 
 \begin{definition}[One-ended Kirby datum]
@@ -271,21 +275,37 @@ passage through a dotted handle, and oriented framed band sum of
 \cite[Figures~5.39 and~5.36 and Section~5.1]{GompfStipsicz1999}.
 \end{proof}
 
+\paragraph{Kirby--Cerf movies.}
+A \emph{Kirby--Cerf movie} \(M\) from \(\mathcal H_0\) to
+\(\mathcal H_N\) is a
+finite composable sequence of elementary moves
+\[
+  \mathcal H_0\xrightarrow{m_1}\mathcal H_1
+  \longrightarrow\cdots\longrightarrow
+  \mathcal H_{N-1}\xrightarrow{m_N}\mathcal H_N.
+\]
+Its realization is the orientation-preserving diffeomorphism
+\[
+  |M|:=|m_N|\circ\cdots\circ|m_1|
+  \colon|\mathcal H_0|\longrightarrow|\mathcal H_N|.
+\]
+The empty movie has realization \(\operatorname{id}_{|\mathcal H_0|}\).
+
 \begin{theorem}[Kirby--Cerf completeness]
 \label{prop:handle-movie-completeness}
 Let \((\mathcal H_0,\rho_0)\) and \((\mathcal H_1,\rho_1)\) be Kirby
 presentations of \(X_0\) and \(X_1\), and let
 \(f\colon X_0\to X_1\) be an orientation-preserving diffeomorphism.  There
-is a finite sequence of elementary moves
+is a Kirby--Cerf movie
 \[
-  \mathcal H_0=\mathcal K_0
+  M\colon\mathcal H_0=\mathcal K_0
   \xrightarrow{m_1}\mathcal K_1
   \longrightarrow\cdots\longrightarrow
   \mathcal K_N=\mathcal H_1
 \]
 and choices of the realization maps in
 \cref{prop:elementary-move-realization} such that, for
-\(\mu:=|m_N|\circ\cdots\circ|m_1|\),
+\(\mu:=|M|\),
 the diagram
 \begin{equation}
 \label{eq:cerf-realizes-diffeomorphism}

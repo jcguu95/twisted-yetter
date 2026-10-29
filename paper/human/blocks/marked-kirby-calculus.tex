@@ -107,35 +107,42 @@ marking is the canonical transport \(T_m\).
 \begin{proposition}[Cocycle transport under Kirby--Cerf moves]
 \label{prop:marking-coordinate-transport}
 Let \(m\colon\mathcal H\to\mathcal H'\) be an elementary Kirby--Cerf move,
-let \(\xi\in H^2(\mathcal H)\), and let \(a\) be a handle cocycle
-representing \(\xi\).  Thus \(T_m\xi\) is the transported cohomology class
-and \(a\) is the integer cocycle whose coordinates are used by the
-evaluator.  The class \(T_m\xi\) has a representative \(a'\) with the
-following coordinates.
+let \(\xi\in H^2(\mathcal H)\), and let \(\lambda\) be a handle cocycle
+representing \(\xi\).  For each oriented \(2\)-handle generator \(e_j\),
+write
+\[
+  \lambda_j:=\lambda(e_j)\in\mathbb Z.
+\]
+Thus \(\lambda_j\) is the coordinate of the cochain \(\lambda\) in the
+oriented \(2\)-handle basis; it is not an additional topological datum.
+The transported class \(T_m\xi\) has a representative \(\lambda'\), with
+coordinates \(\lambda'_j:=\lambda'(e'_j)\), satisfying the following
+formulas.
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item For framed isotopy, a \(1/1\) slide, a \(2/1\) passage, a
   \(3/3\) slide, a \(0\)--\(1\) birth or death, or a \(3\)--\(4\) birth or
   death, the \(2\)-handle generators are canonically identified and
-  \(a'=a\).
+  \(\lambda'=\lambda\).
 
   \item For a \(2/2\) slide, let \(e_x\) be the moving generator,
   \(e_y\) the stationary generator, and let
   \(\varepsilon\in\{\pm1\}\) be fixed by the oriented handle-slide
   convention.  Then
   \[
-    a_x'=a_x+\varepsilon a_y,
+    \lambda_x'=\lambda_x+\varepsilon\lambda_y,
     \qquad
-    a_y'=a_y,
+    \lambda_y'=\lambda_y,
     \tag{3.4}\label{eq:two-two-marking-transport}
   \]
   while every uninvolved coordinate is unchanged.
 
-  \item A \(1\)--\(2\) birth admits \(a'=a\oplus0\); every representative
+  \item A \(1\)--\(2\) birth admits \(\lambda'=\lambda\oplus0\); every representative
   of the transported class is cohomologous to one whose new \(2\)-handle
   coordinate is zero.
 
   \item For a \(2\)--\(3\) birth, the cocycle equation forces the new
-  \(2\)-handle coordinate to be zero, so again \(a'=a\oplus0\).
+  \(2\)-handle coordinate to be zero, so again
+  \(\lambda'=\lambda\oplus0\).
 \end{enumerate}
 The death formulas are the inverses of the corresponding birth formulas.
 \end{proposition}
@@ -150,9 +157,10 @@ Isotopy, \(1/1\), \(2/1\), \(3/3\), \(0\)--\(1\), and \(3\)--\(4\) moves
 act as the identity on \(C_2\).  For a \(2/2\) slide, the target-to-source
 basis change sends the
 new moving generator to \(e_x+\varepsilon e_y\) and fixes the other
-generators.  Precomposing \(a\) with this basis change gives
+generators.  Precomposing \(\lambda\) with this basis change gives
 \[
-  a_x'=a(e_x+\varepsilon e_y)=a_x+\varepsilon a_y.
+  \lambda_x'=\lambda(e_x+\varepsilon e_y)
+  =\lambda_x+\varepsilon\lambda_y.
 \]
 
 A \(1\)--\(2\) birth adds the acyclic complex
@@ -175,14 +183,7 @@ and let \((\mathcal H,\xi)\) be a marked Kirby datum.  Then
   |m|\colon |(\mathcal H,\xi)|
   \longrightarrow |(\mathcal H',T_m\xi)|
 \]
-is a marked diffeomorphism.  Consequently, if
-\(\rho\colon|(\mathcal H,\xi)|\to(X,\alpha)\) is a marked Kirby
-presentation, then
-\[
-  \rho_m:=\rho\circ|m|^{-1}
-  \colon|(\mathcal H',T_m\xi)|\longrightarrow(X,\alpha)
-\]
-is a marked Kirby presentation of the same marked 4-manifold.
+is a marked diffeomorphism.
 \end{proposition}
 
 \begin{proof}
@@ -200,43 +201,78 @@ By \eqref{eq:marking-transport} and naturality of Poincar\'e duality,
   \end{aligned}
 \]
 Since Poincar\'e duality is an isomorphism,
-\(|m|_*\alpha_{\mathcal H,\xi}=\alpha_{\mathcal H',T_m\xi}\).  The final
-assertion follows by composition of marked diffeomorphisms.
+\(|m|_*\alpha_{\mathcal H,\xi}=\alpha_{\mathcal H',T_m\xi}\).
 \end{proof}
 
 \begin{theorem}[Marked Kirby--Cerf completeness]
 \label{prop:marked-kirby-cerf}
-Let
-\[
-  f\colon(X,\alpha)\longrightarrow(Y,\alpha')
-\]
-be a marked diffeomorphism.  Let
-\(\rho\colon|(\mathcal H,\xi)|\to(X,\alpha)\) and
-\(\rho'\colon|(\mathcal H',\xi')|\to(Y,\alpha')\) be marked Kirby
-presentations.  Then there is a finite
-movie
-\[
-  \mathcal H=\mathcal H_0
-  \xrightarrow{m_1}\mathcal H_1
-  \longrightarrow\cdots\longrightarrow
-  \mathcal H_N=\mathcal H'
-\]
-such that, if \(\mu=|m_N|\circ\cdots\circ|m_1|\), then
-\[
-  \rho'\circ\mu\simeq f\circ\rho,
+Assume the following data.
+\begin{enumerate}[label=\textup{(A\arabic*)},ref=\textup{A\arabic*}]
+  \item A marked diffeomorphism
+  \[
+    f\colon(X,\alpha)\longrightarrow(Y,\alpha').
+  \]
+
+  \item A marked Kirby presentation
+  \[
+    \rho\colon|(\mathcal H,\xi)|\longrightarrow(X,\alpha).
+  \]
+
+  \item A marked Kirby presentation
+  \[
+    \rho'\colon|(\mathcal H',\xi')|\longrightarrow(Y,\alpha').
+  \]
+\end{enumerate}
+Then the following conclusions hold.
+\begin{enumerate}[label=\textup{(C\arabic*)},ref=\textup{C\arabic*}]
+  \item Ordinary Kirby--Cerf completeness, applied without using
+  \(\xi\) or \(\xi'\), produces a Kirby--Cerf movie
+  \[
+    M\colon
+    \mathcal H=\mathcal H_0
+    \xrightarrow{m_1}\mathcal H_1
+    \longrightarrow\cdots\longrightarrow
+    \mathcal H_N=\mathcal H'.
+  \]
+
+  \item Writing \(\mu:=|M|\), its realization fits into the diagram
+  \[
+  \begin{array}{ccccccc}
+    |\mathcal H| & \xrightarrow{|m_1|} & |\mathcal H_1|
+      & \xrightarrow{\ \cdots\ } & |\mathcal H_{N-1}|
+      & \xrightarrow{|m_N|} & |\mathcal H'| \\
+    {\scriptstyle\rho}\!\downarrow &&&&&&
+      \downarrow\!{\scriptstyle\rho'} \\
+    X & \multicolumn{5}{c}{\xrightarrow{\hspace{9em} f\hspace{9em}}} & Y,
+  \end{array}
   \tag{3.6}\label{eq:marked-cerf-realizes-diffeomorphism}
-\]
-and successive transport by the maps \(T_{m_i}\) carries \(\xi\) to
-\(\xi'\).
-If both presentations are one-ended, the movie may be chosen one-ended
-throughout; equivalently, it uses the nine move types other than
-\(0\)--\(1\) and \(3\)--\(4\) birth/death.
+  \]
+  which commutes up to smooth isotopy.  Explicitly, there is a smooth
+  family of orientation-preserving diffeomorphisms
+  \(F_t\colon|\mathcal H|\to Y\), \(0\leq t\leq1\), such that
+  \[
+    F_0=\rho'\circ\mu,
+    \qquad
+    F_1=f\circ\rho.
+  \]
+
+  \item If \(\xi_0:=\xi\) and
+  \(\xi_r:=T_{m_r}\xi_{r-1}\) for \(1\leq r\leq N\), then
+  \[
+    \xi_N=\xi'.
+  \]
+
+  \item If both presentations are one-ended, \(M\) may be chosen
+  one-ended throughout; equivalently, it uses the nine move types other
+  than \(0\)--\(1\) and \(3\)--\(4\) birth/death.
+\end{enumerate}
 \end{theorem}
 
 \begin{proof}
 Apply ordinary Kirby--Cerf completeness,
-\cref{prop:handle-movie-completeness}, to obtain the displayed movie and
-\eqref{eq:marked-cerf-realizes-diffeomorphism}.  Starting with
+\cref{prop:handle-movie-completeness}, to the underlying unmarked
+presentations and \(f\).  This produces the movie in \textup{(C1)} and
+the isotopy in \textup{(C2)} before any marking is considered.  Starting with
 \(\xi_0=\xi\), define recursively
 \[
   \xi_r:=T_{m_r}\xi_{r-1}.
@@ -245,9 +281,9 @@ By \cref{prop:kirby-move-preserves-marked-data}, every stage is a marked
 Kirby datum and the composite realization identifies its marking with the
 source marking.  At the endpoint it gives the marked presentation
 \(\rho\circ\mu^{-1}\colon|(\mathcal H',\xi_N)|\to(X,\alpha)\).  The isotopy
-\eqref{eq:marked-cerf-realizes-diffeomorphism} gives
-\(\rho\circ\mu^{-1}\simeq f^{-1}\circ\rho'\).  Naturality of Poincar\'e
-duality gives
+in \textup{(C2)}, after reversing its parameter and composing with the
+relevant inverses, is a smooth isotopy from \(\rho\circ\mu^{-1}\) to
+\(f^{-1}\circ\rho'\).  Naturality of Poincar\'e duality gives
 \[
   (f^{-1})^*\operatorname{PD}_X(\alpha)
   =\operatorname{PD}_Y(\alpha').
