@@ -7,9 +7,9 @@ Throughout this subsection, fix a twisted categorical input \((\cC,\eta)\).
 \label{def:normalized-invariant}
 For a marked 4-manifold \((X,\alpha)\), set
 \[
-  \widehat{\CY}_{\cC,\eta}(X,\alpha)
+  \widehat{\CY}_{\cC,\eta}\bigl([(X,\alpha)]\bigr)
   :=\operatorname{Dim}(\cC)^{-1}
-    \CY_{\cC,\eta}(X,\alpha).
+    \CY_{\cC,\eta}\bigl([(X,\alpha)]\bigr).
 \]
 \end{definition}
 
@@ -23,16 +23,16 @@ use the canonical splitting
 \]
 to regard $\alpha\oplus\beta$ as a marking on $X\#Y$.  Then
 \[
-  \CY_{\cC,\eta}(X\#Y,\alpha\oplus\beta)
+  \CY_{\cC,\eta}\bigl([(X\#Y,\alpha\oplus\beta)]\bigr)
   =\operatorname{Dim}(\cC)^{-1}
-   \CY_{\cC,\eta}(X,\alpha)
-   \CY_{\cC,\eta}(Y,\beta).
+   \CY_{\cC,\eta}\bigl([(X,\alpha)]\bigr)
+   \CY_{\cC,\eta}\bigl([(Y,\beta)]\bigr).
 \]
 Equivalently,
 \[
-  \widehat{\CY}_{\cC,\eta}(X\#Y,\alpha\oplus\beta)
-  =\widehat{\CY}_{\cC,\eta}(X,\alpha)
-   \widehat{\CY}_{\cC,\eta}(Y,\beta).
+  \widehat{\CY}_{\cC,\eta}\bigl([(X\#Y,\alpha\oplus\beta)]\bigr)
+  =\widehat{\CY}_{\cC,\eta}\bigl([(X,\alpha)]\bigr)
+   \widehat{\CY}_{\cC,\eta}\bigl([(Y,\beta)]\bigr).
 \]
 \end{proposition}
 
@@ -69,7 +69,7 @@ normalized formula.
 Put $H=S^2\times S^2$ and define
 \[
   h_{\cC,\eta}:=
-    \widehat{\CY}_{\cC,\eta}(H,0).
+    \widehat{\CY}_{\cC,\eta}\bigl([(H,0)]\bigr).
 \]
 \end{definition}
 
@@ -78,9 +78,9 @@ Put $H=S^2\times S^2$ and define
 Let \((X,\alpha)\) be a marked 4-manifold.  For every $r\geq0$,
 \[
   \widehat{\CY}_{\cC,\eta}
-    \bigl(X\#rH,\alpha\oplus0\bigr)
+    \bigl([(X\#rH,\alpha\oplus0)]\bigr)
   =h_{\cC,\eta}^{r}
-    \widehat{\CY}_{\cC,\eta}(X,\alpha).
+    \widehat{\CY}_{\cC,\eta}\bigl([(X,\alpha)]\bigr).
 \]
 Moreover $h_{\cC,\eta}\neq0$.  Consequently, for every marked 4-manifold
 \((M,\beta)\) and all \(r,s\geq0\), if
@@ -90,8 +90,8 @@ Moreover $h_{\cC,\eta}\neq0$.  Consequently, for every marked 4-manifold
 \]
 then
 \[
-  \widehat{\CY}_{\cC,\eta}(X,\alpha)
-  =\widehat{\CY}_{\cC,\eta}(M,\beta)
+  \widehat{\CY}_{\cC,\eta}\bigl([(X,\alpha)]\bigr)
+  =\widehat{\CY}_{\cC,\eta}\bigl([(M,\beta)]\bigr)
    h_{\cC,\eta}^{s-r}.
 \]
 \end{proposition}
