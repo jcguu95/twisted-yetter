@@ -82,7 +82,8 @@ by expanding the same regular-colour sliding identity.
 
 Write
 \[
-  \Omega=\sum_{i\in\operatorname{Irr}(\cC)}d_i\,i
+  \Omega=\sum_{i\in\operatorname{Irr}(\cC)}
+    d_i\,\operatorname{id}_i
 \]
 for the regular colouring.  The untwisted proof is the sliding lemma
 \cite[Lemma~2.30]{Tham2021}: after the identity on the attaching band is
@@ -164,7 +165,8 @@ The four directed move types are grouped into two inverse pairs.
   The new framed component is coloured by the full Kirby colour
   \[
     \Omega_{\cC}
-    =\sum_{i\in\operatorname{Irr}(\cC)}d_i\,i,
+    =\sum_{i\in\operatorname{Irr}(\cC)}
+      d_i\,\operatorname{id}_i,
   \]
   rather than by an arbitrarily chosen object.  The dotted component applies
   the tensor-unit projector to the strand passing through it.  Since every
@@ -232,16 +234,6 @@ The four directed move types are grouped into two inverse pairs.
 \end{itemize}
 \end{itemize}
 
-For the identity character, the cited handle-decomposition invariance proves
-the required local ribbon identity together with its label weights and
-normalization factor.  The checks above show, move by move, that inserting the
-transported character coupons preserves the corresponding untwisted local
-identity.  For a \(2/2\) slide this comparison is termwise only after both
-sides have been expanded into the common complete fusion-channel sum; it is
-not termwise in the original simple labels.  Summing the resulting local
-identities gives the asserted equality of presentation-level scalars.  In a
-death move, the replacement by a zero-coordinate source representative does
-not change the scalar by \cref{prop:representative-independence}.
 \end{proof}
 
 \begin{theorem}[Marked Kirby--Cerf descent]
