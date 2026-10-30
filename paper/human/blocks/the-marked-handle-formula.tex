@@ -118,7 +118,7 @@ canonical duality identification.
 
 \begin{definition}[Intrinsic decorated Kirby morphism]
 \label{def:intrinsic-decorated-kirby-morphism}
-The common value
+By \cref{prop:graphical-auxiliary-independence}, the common value
 \[
   L^\eta_{\lambda,\omega}(\mathcal H)
   \in\operatorname{End}_{\cC}(\mathbf1)
@@ -139,6 +139,12 @@ Assume the following data.
 \item a one-ended Kirby presentation \(\mathcal H\);
 \item a handle cocycle \(\omega\in Z^2(\mathcal H)\).
 \end{enumerate}
+Write \(F_2(\mathcal H)\) for the finite set of framed components and
+\[
+  \operatorname{Lab}_{\cC}(\mathcal H)
+  =\prod_{k\in F_2(\mathcal H)}\operatorname{Irr}(\cC)
+\]
+for its simple-label states, as in \cref{def:decorated-kirby-graph}.
 The resulting scalar is
 \begin{equation}
   \boxed{
@@ -168,26 +174,23 @@ In this formula:
 If \(\eta=\operatorname{id}\), every character coupon is an identity and
 \(\CY_{\cC,\operatorname{id}}(\mathcal H,\omega)\) is independent of
 \(\omega\).  It is the closed one-ended handle formula obtained from
-\cite[Definition~5.11]{Tham2021} on the reversed handle decomposition:
-primal \(2\)-handles give its regular-colour sum, primal \(1\)-handles give
-its index-\(3\) tensor-unit projection, primal \(3\)-handles give the inverse
-global-dimension factors, and the primal \(4\)-handle gives the remaining
-global-dimension factor.  Thus the normalization is
-\(\operatorname{Dim}(\cC)^{1-h_3(\mathcal H)}\).  In this specialization,
+\cite[Definition~5.11]{Tham2021} on the reversed handle decomposition.
+In that formula, the unique index-\(0\) handle contributes
+\(\operatorname{Dim}(\cC)\), each index-\(1\) handle contributes
+\(\operatorname{Dim}(\cC)^{-1}\), the index-\(2\) handles contribute the
+regular-colour sums, and the index-\(3\) handles contribute the tensor-unit
+projections.  Reversing the primal decomposition sends its unique
+\(4\)-handle to index \(0\) and its \(h_3(\mathcal H)\) many \(3\)-handles
+to index \(1\).  Hence the scalar factors outside the graph multiply to
+\[
+  \operatorname{Dim}(\cC)\,
+  \operatorname{Dim}(\cC)^{-h_3(\mathcal H)}
+  =\operatorname{Dim}(\cC)^{1-h_3(\mathcal H)}.
+\]
+In this specialization,
 Kirby--Cerf invariance is \cite[Proposition~5.13]{Tham2021}; agreement with
 the PLCW and original Crane--Yetter state sums is
 \cite[Theorems~5.26 and~3.61]{Tham2021}.
-\end{remark}
-
-\begin{remark}[Three-dimensional meaning]
-\label{rem:planar-projection-after-cutting}
-The dotted--framed link and the decorated graph of
-\cref{def:decorated-kirby-graph} live in the standard
-\(S^3=\partial B^4\).  To draw them, choose a point at infinity disjoint from
-the graph and identify its complement with \(\mathbb R^3\), then choose a
-generic projection \(\mathbb R^3\to\mathbb R^2\).  Changing either choice
-changes only the ribbon diagram, not the embedded coloured ribbon graph.
-Ribbon graphical coherence therefore gives the same RT evaluation.
 \end{remark}
 
 \begin{proposition}[Dependence on the three-handle data]
