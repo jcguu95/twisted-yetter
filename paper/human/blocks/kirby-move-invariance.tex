@@ -149,7 +149,7 @@ not assert a false termwise equality before the fusion resolutions are
 inserted.
 
 \item \textbf{Adjacent-index births and deaths.}
-These are the following four directed move types.
+The four directed move types are grouped into two inverse pairs.
 \begin{itemize}
   \item \textbf{A cancelling \(1\)--\(2\) pair, in either direction.}
   In the birth direction, the new \(2\)-handle attaching circle goes
@@ -184,17 +184,52 @@ These are the following four directed move types.
   also agree.  Reading this single equality from left to right proves birth
   invariance, and reading it from right to left proves death invariance.
 
-  \item \textbf{A \(2\)--\(3\) birth.}
-  The cocycle equation forces the new \(2\)-handle coordinate to be zero, so
-  the new coupon is \(\eta^0=\operatorname{id}\).
+  \item \textbf{A cancelling \(2\)--\(3\) pair, in either direction.}
+  In the birth direction, let \(e_2\) and \(e_3\) denote the new
+  \(2\)- and \(3\)-handle generators.  The isolated standard cancelling
+  pair adds the acyclic direct summand
+  \[
+    0\longrightarrow \mathbb Z\langle e_3\rangle
+      \xrightarrow{\;\partial_3=\pm1\;}
+    \mathbb Z\langle e_2\rangle
+      \longrightarrow0,
+    \qquad
+    \partial_3(e_3)=\pm e_2.
+  \]
+  If \(\omega'\) represents the target marking, its cocycle equation gives
+  \[
+    0=\omega'(\partial_3e_3)=\pm\omega'(e_2),
+    \qquad\text{hence}\qquad
+    \omega'(e_2)=0.
+  \]
+  Thus cancellation does not erase a nontrivial character: the contractible
+  \(2\)-handle direction could not carry one in the first place.  A nonzero
+  value on \(e_2\) would define a cochain that is not closed.  Equivalently,
+  \(e_2\) is a chain boundary and every cocycle vanishes on it; this does not
+  assert that \(\omega'\) is a cochain coboundary.  The new character coupon
+  is therefore \(\eta^0=\operatorname{id}\).
 
-  \item \textbf{A \(2\)--\(3\) death.}
-  This is the reverse calculation: the cocycle equation forces the
-  disappearing \(2\)-handle coordinate, and hence its character exponent,
-  to be zero.
+  The new \(2\)-handle is an isolated zero-framed unknot coloured by
+  \(\Omega_{\cC}\).  For a simple label \(i\), its ribbon evaluation is
+  \(d_i\), while the Kirby-colour coefficient contributes another \(d_i\).
+  Hence the unnormalised label sum is multiplied by
+  \[
+    \sum_{i\in\operatorname{Irr}(\cC)}d_i^2
+    =\operatorname{Dim}(\cC).
+  \]
+  At the same time \(h_3\) increases by one, so the normalization changes by
+  the inverse factor:
+  \[
+    \operatorname{Dim}(\cC)^{1-(h_3+1)}
+    =\operatorname{Dim}(\cC)^{-1}
+      \operatorname{Dim}(\cC)^{1-h_3}.
+  \]
+  These two factors cancel.  In the death direction the cocycle equation
+  already forces the disappearing \(2\)-handle coordinate to be zero; the
+  raw sum loses a factor \(\operatorname{Dim}(\cC)\), while the normalization
+  gains the same factor.  This proves birth and death invariance by the same
+  equality read in opposite directions.
 \end{itemize}
-For the \(2\)--\(3\) pair, the untwisted cancellation and normalization
-identities therefore apply without alteration.
 \end{itemize}
 
 For the identity character, the cited handle-decomposition invariance proves
