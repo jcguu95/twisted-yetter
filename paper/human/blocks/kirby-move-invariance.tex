@@ -1,42 +1,11 @@
-\subsection{Kirby--Cerf-move invariance}
+\subsubsection{Cocycle-representative independence}
 \label{subsec:kirby-invariance}
 
-Throughout this subsection, fix \(\cC\) and \(\eta\).  Every move proof is
-organized in two layers.  The first is the untwisted premodular identity; the
-second checks only what happens to the newly inserted character coupons.
-\begin{description}[style=nextline,leftmargin=2.2em]
-  \item[Changing the cocycle representative.]
-  There is no untwisted obligation.  The new coboundary coupons assemble on a
-  dotted through-channel and are absorbed because
-  \(\eta_{\mathbf1}=\operatorname{id}_{\mathbf1}\).
-
-  \item[Framed isotopy.]
-  The untwisted graph is preserved by ribbon coherence.  Naturality transports
-  every character coupon through the same isotopy.
-
-  \item[\(1/1\) slides and \(2/1\) passages.]
-  The untwisted identity is the tensor-unit projector calculation at the
-  stationary dotted handle.  The new coupons are either carried as arbitrary
-  exterior decorations or transported by naturality.
-
-  \item[\(2/2\) slides.]
-  The untwisted identity is fusion attachment, finite band transport, and
-  trace-dual detachment.  Monoidality of \(\eta\), together with the induced
-  cocycle-coordinate change, matches the character factors on every fusion
-  channel.
-
-  \item[\(3/3\) slides.]
-  The untwisted graph is unchanged.  So are all \(2\)-handle cocycle
-  coordinates, because only the basis of \(C_3\) changes.
-
-  \item[\(1\)--\(2\) and \(2\)--\(3\) cancellations.]
-  The untwisted local sum gives the familiar normalization factor.  The new
-  handle has cocycle coordinate zero, so its character coupon is the identity.
-\end{description}
-
-Thus the topology and the underlying ribbon identities are the untwisted
-ones.  The lemmas below isolate, rather than hide, every additional character
-calculation.
+Throughout this subsection, fix \(\cC\) and \(\eta\).  The untwisted
+evaluator has no cocycle representative to choose.  The only new obligation
+is therefore to prove that a coboundary changes the decorated graph by
+character coupons which act trivially through the dotted tensor-unit
+projectors.
 
 \begin{lemma}[Dotted-handle local form and separation of the character data]
 \label{lem:dotted-collar-factorization}
@@ -205,6 +174,17 @@ For a marked Kirby datum \((\mathcal H,\beta)\), we therefore write
 \]
 for the value of any handle cocycle representing
 \(\xi_{\mathcal H,\beta}\) from \cref{def:handle-cocycle}.
+
+\input{local-kirby-models}
+
+\subsubsection{Marked Kirby--Cerf-move invariance}
+\label{subsubsec:marked-kirby-move-invariance}
+
+For every move, the underlying local ribbon identity is the untwisted one.
+The proof below checks only the additional character obligation: naturality
+for isotopy and \(2/1\) passages, monoidality for \(2/2\) slides, unchanged
+\(2\)-handle coordinates for \(3/3\) slides, and exponent zero on a newly
+created cancelling handle.
 
 \begin{lemma}[Untwisted dotted $1$-handle-slide identity]
 \label{lem:dotted-one-handle-slide}
@@ -881,6 +861,9 @@ case is their reverse.
 These are precisely the nine directed moves occurring in a one-ended
 connected Cerf movie.
 \end{proof}
+
+\subsubsection{Descent from presentations to marked manifolds}
+\label{subsubsec:marked-manifold-descent}
 
 \begin{proposition}[Well-definedness on a marked 4-manifold]
 \label{prop:marked-manifold-evaluation-well-defined}

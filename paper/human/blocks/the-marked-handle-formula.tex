@@ -1,4 +1,4 @@
-\subsection{From the untwisted handle morphism to the homological twist}
+\subsection{The presentation-level evaluator}
 \label{subsec:graphical-construction}
 
 \begin{definition}[Untwisted premodular handle morphism]
@@ -24,6 +24,13 @@ as \(K_k\), and define the finite set of simple-label states by
 Thus a state \(\lambda\in\operatorname{Lab}_{\cC}(\mathcal H)\)
 is a tuple \((\lambda_k)_{k\in F_2(\mathcal H)}\) assigning one
 simple object to each framed component.
+For a closed \(\cC\)-coloured ribbon graph \(G\subset S^3\), write
+\[
+  \operatorname{ev}_{\cC}(G)\in
+  \operatorname{End}_{\cC}(\mathbf1)
+\]
+for its graphical-interpretation morphism from
+\cref{def:rt-graph-evaluation}.
 The framed component \(K_k\) is coloured by \(\lambda_k\), with no additional
 coupon.  A dotted component \(\delta\) is not coloured: cut its handle, insert
 \[
@@ -33,7 +40,7 @@ on the ordered boundary object, and reglue.  This gives a closed ribbon
 diagram \(G_\lambda(\mathcal H;\mathfrak a)\) and hence
 \[
   L_\lambda(\mathcal H;\mathfrak a)
-  :=\bigl[\!\bigl[G_\lambda(\mathcal H;\mathfrak a)\bigr]\!\bigr]_{\cC}
+  :=\operatorname{ev}_{\cC}\bigl(G_\lambda(\mathcal H;\mathfrak a)\bigr)
   \in\operatorname{End}_{\cC}(\mathbf1).
 \]
 The Kirby-colour coefficient
@@ -116,8 +123,8 @@ where \(\eta_{\lambda_k}\in\mathbb C^\times\) is the scalar of
 \(G^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)\), and set
 \[
   L^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)
-  :=\bigl[\!\bigl[G^\eta_{\lambda,\omega}
-       (\mathcal H;\mathfrak a)\bigr]\!\bigr]_{\cC}
+  :=\operatorname{ev}_{\cC}\bigl(
+       G^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)\bigr)
   \in\operatorname{End}_{\cC}(\mathbf1).
 \]
 This coupon is the only modification: every dotted component still inserts
