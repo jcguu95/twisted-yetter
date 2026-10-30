@@ -1,88 +1,33 @@
 \subsection{The marked handle evaluator}
 \label{subsec:graphical-construction}
 
-\begin{definition}[Categorical boundary state of a cut-open dotted component]
-\label{def:categorical-cut-boundary-state}
-Fix a simple-label assignment \(\lambda\) on the framed components in the
-cut-open tangle of \cref{def:cut-open-dotted-tangle}.  The ordered oriented
-boundary word on the positive face determines a tensor product
-\(B_\delta\); the opposite face carries its orientation-dual boundary
-state.  After the exterior tangle is fixed, inserting an endomorphism of
-\(B_\delta\) between these faces and regluing defines a linear functional
-\[
-  \mathcal E_\delta\colon
-  \operatorname{End}_{\cC}(B_\delta)\longrightarrow\mathbb C.
-\]
-Inserting \(\operatorname{id}_{B_\delta}\) reconstructs the original
-coloured framed link.
-\end{definition}
-
-\begin{definition}[The operation represented by a dotted circle]
+\begin{definition}[Decorated Kirby ribbon graph]
+\label{def:decorated-kirby-graph}
 \label{def:dotted-circle-translation}
-Let \(\cC\) be a premodular fusion category and use the cut-open tangle of
-\cref{def:cut-open-dotted-tangle}.  The dotted \(1\)-handle replaces the
-ordinary regluing morphism \(\operatorname{id}_{B_\delta}\) by the
-tensor-unit projector.  Thus the operation assigned to \(\delta\) is
-\begin{equation}
-  \operatorname{Cut}_{\cC}(B_\delta)
-  =P_{\mathbf1,B_\delta}.
-  \label{eq:dotted-operation}
-\end{equation}
-Equivalently, its contribution after regluing the exterior is
-\begin{equation}
-  \mathcal E_\delta(P_{\mathbf1,B_\delta}).
-  \label{eq:intrinsic-dotted-context}
-\end{equation}
-\end{definition}
-
-\begin{remark}[Planar diagrams are notation]
-\label{rem:planar-projection-after-cutting}
-The cutting and regluing above take place in three dimensions.  A planar
-ribbon diagram is obtained only afterwards, by choosing a regular projection
-of the cut-open tangle.  Different regular projections represent the same
-ribbon morphism by graphical coherence, so the planar projection is not an
-additional input to the evaluator.
-\end{remark}
-
-\begin{convention}[Suppressed label-state dependence]
-\label{conv:suppressed-label-state-dependence}
-Here and below, the dependence of \(B_\delta\) and \(\mathcal E_\delta\) on
-the currently fixed label state \(\lambda\) is suppressed from the notation.
-\end{convention}
-
-We now assemble these local rules into a scalar.
-
-\begin{definition}[The coloured graph sum]
 \label{def:colored-graph-sum}
 Fix a twisted categorical input \((\cC,\eta)\).  Let \(\mathcal H\) be a
-one-ended Kirby presentation and let
-\(\omega\in Z^2(\mathcal H)\) represent the evaluator class.  For every assignment
-\(\lambda=(\lambda_k)\) of simple objects to the framed components, form a
-finite linear combination \(\Gamma(\mathcal H,\omega;\lambda)\) of closed coloured
-ribbon graphs by the following rules.
-\begin{enumerate}[label=(\roman*),ref=\roman*]
-  \item The \(k\)th framed component receives the simple label
-  \(\lambda_k\), with external Kirby-colour coefficient
-  \(d_{\lambda_k}\).
-
-  \item On that component insert the character coupon
-  \[
-    (\eta^{\omega_k})_{\lambda_k}
-    =\eta_{\lambda_k}^{\omega_k}\operatorname{id}_{\lambda_k}.
-  \]
-
-  \item At every dotted component \(\delta\), insert
-  \(P_{\mathbf1,B_\delta}\) on the through-channel described in
-  \cref{def:dotted-circle-translation}.
-
-  \item Expand the projectors in dual bases, reglue the cut-open local
-  tangles, and interpret every crossing, cup, cap, twist, and coupon by the
-  ribbon graphical calculus.
-
-  \item Include all projector-expansion coefficients and character coupons
-  in \(\Gamma(\mathcal H,\omega;\lambda)\), but leave the Kirby-colour weight
-  \(\prod_kd_{\lambda_k}\) outside this graph sum.
-\end{enumerate}
+one-ended Kirby presentation, let \(\omega\in Z^2(\mathcal H)\), and assign a
+simple object \(\lambda_k\) to every framed component \(K_k\).  We write
+\[
+  L^\eta_{\lambda,\omega}(\mathcal H)
+\]
+for the following closed coloured ribbon graph, understood as a finite linear
+combination whenever a projector is expanded.  The component \(K_k\) is
+coloured by \(\lambda_k\) and carries the coupon
+\[
+  (\eta^{\omega_k})_{\lambda_k}
+  =\eta_{\lambda_k}^{\omega_k}\operatorname{id}_{\lambda_k}.
+\]
+A dotted component \(\delta\) is not coloured.  Instead, cut its handle as in
+\cref{def:cut-open-dotted-tangle}.  If \(B_\delta\) is the tensor product
+specified by the ordered oriented strands on one cut face, insert the
+canonical projector
+\[
+  P_{\mathbf1,B_\delta}\colon B_\delta\longrightarrow B_\delta
+\]
+and reglue the two faces.  Doing this at every dotted component gives
+\(L^\eta_{\lambda,\omega}(\mathcal H)\).  The Kirby-colour coefficient
+\(\prod_k d_{\lambda_k}\) is not included in this notation.
 \end{definition}
 
 \begin{definition}[Homologically twisted Crane--Yetter evaluator]
@@ -98,10 +43,18 @@ evaluator is
   \sum_{\lambda}
     \left(\prod_k d_{\lambda_k}\right)
     \operatorname{RT}_{\cC}
-      \bigl(S^3,\Gamma(\mathcal H,\omega;\lambda)\bigr).}
+      \bigl(S^3,L^\eta_{\lambda,\omega}(\mathcal H)\bigr).}
   \label{eq:twisted-handle-evaluator}
 \end{equation}
 \end{definition}
+
+\begin{remark}[Three-dimensional meaning]
+\label{rem:planar-projection-after-cutting}
+The cutting, projector insertion, and regluing in
+\cref{def:decorated-kirby-graph} take place in three dimensions.  A planar
+ribbon diagram is only a drawing of the resulting graph.  Different regular
+projections give the same morphism by ribbon graphical coherence.
+\end{remark}
 
 \begin{proposition}[Dependence on the three-handle data]
 \label{prop:evaluator-three-handle-dependence}
@@ -157,7 +110,7 @@ replacement is used in the premodular construction.
 
 \begin{remark}[Intrinsic meaning]
 \label{rem:graph-sum-intrinsic-meaning}
-The expression \(\Gamma(\mathcal H,\omega;\lambda)\) denotes the resulting
+The expression \(L^\eta_{\lambda,\omega}(\mathcal H)\) denotes the resulting
 intrinsic composite modulo ribbon graphical relations, not a preferred planar
 drawing.  In particular, the orientation of a ribbon determines whether its
 label is \(X\) or \(X^*\); its passage through a dotted-handle cross-section
