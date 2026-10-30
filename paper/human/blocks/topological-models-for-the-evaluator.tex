@@ -59,3 +59,33 @@ slide every other \(2\)-handle off the cancelling \(1\)-handle; the
 \(2\)--\(3\) case is the upside-down analogue.  These reductions take place
 inside the stated neighborhoods and leave the exterior fixed.
 \end{proof}
+
+\begin{lemma}[Cochain normal forms for cancelling pairs]
+\label{lem:cancellation-cochain-normal-forms}
+Let \(\mathcal H\to\mathcal H^+\) be a birth in the isolated standard local
+form of \cref{prop:local-movie-normal-forms}.  For a $1$--$2$ birth,
+extension by zero on the new primal $2$-handle sends a source $2$-cocycle
+to a target $2$-cocycle representing the transported class.  Conversely,
+every target $2$-cocycle is cohomologous to one whose new $2$-handle
+coordinate is zero.  The same statement applies to an isolated $1$--$2$
+death after the slide reduction in \cref{item:cancellation-normal-form}.
+For a standard $2$--$3$ birth or death, every cocycle on the side containing
+the pair has zero coordinate on the added $2$-handle.
+\end{lemma}
+
+\begin{proof}
+After the other incidence entries have been cleared by the $2/2$ slides in
+\cref{item:cancellation-normal-form}, the handle cochain complex of the
+isolated cancelling $1$--$2$ pair contains the direct summand
+\[
+  \mathbb Z\xrightarrow{\,\pm1\,}\mathbb Z
+\]
+in degrees $1$ and $2$.  Extension by zero is the inclusion of the
+complementary cochain complex.  Subtracting the coboundary of an appropriate
+multiple of the new degree-$1$ basis cochain makes the new degree-$2$
+coordinate zero without changing its cohomology class.
+
+For a cancelling $2$--$3$ pair the corresponding direct summand lies in
+degrees $2$ and $3$, again with differential $\pm1$.  The cocycle equation
+in degree $3$ therefore forces the new degree-$2$ coordinate to vanish.
+\end{proof}
