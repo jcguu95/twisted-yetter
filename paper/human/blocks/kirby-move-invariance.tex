@@ -1,5 +1,5 @@
 \subsubsection{Cocycle-representative independence}
-\label{subsec:kirby-invariance}
+\label{subsubsec:representative-independence}
 
 Throughout this subsection, fix \(\cC\) and \(\eta\).  Changing the cocycle
 representative changes only the character coupons.  We prove that the
@@ -167,12 +167,36 @@ $\lambda$, and then applying the argument successively to the finitely many
 generators in the support of $b$, proves the claim.
 \end{proof}
 
-For a marked Kirby datum \((\mathcal H,\beta)\), we therefore write
+\begin{definition}[Evaluator on a cohomology class]
+\label{def:cohomological-handle-evaluator}
+For \(\xi\in H^2(\mathcal H;\mathbb Z)\), define
+\[
+  \CY_{\cC,\eta}(\mathcal H,\xi)
+\]
+to be \(\CY_{\cC,\eta}(\mathcal H,\omega)\) for any handle cocycle
+\(\omega\) representing \(\xi\).  This is well defined by
+\cref{prop:representative-independence}.  For a marked Kirby datum
+\((\mathcal H,\beta)\), define
 \[
   \CY_{\cC,\eta}(\mathcal H,\beta)
 \]
-for the value of any handle cocycle representing
-\(\xi_{\mathcal H,\beta}\) from \cref{def:handle-cocycle}.
+by taking \(\xi=\xi_{\mathcal H,\beta}\) from
+\cref{def:handle-cocycle}.
+\end{definition}
+
+\subsection{Marked Kirby--Cerf invariance and manifold descent}
+\label{subsec:kirby-invariance}
+
+We now prove that the cohomological evaluator is preserved by every marked
+Kirby--Cerf move.  For each move, the underlying local ribbon identity is the
+established identity for the identity character.  We therefore keep that
+identity fixed and verify only the additional character data: naturality
+transports coupons through isotopies and local morphisms, monoidality governs
+\(2/2\) slides, duality handles reversed orientations, and the transported
+cocycle coordinates give exponent zero on newly created cancelling handles.
+Finite-movie induction then gives presentation independence, and marked
+Kirby--Cerf completeness descends the value to an \(H_2\)-marked
+\(4\)-manifold.
 
 \input{local-kirby-models}
 
