@@ -17,11 +17,15 @@ Assume the following data.
   composition-dual bases for the tensor-unit projectors, and a regular planar
   drawing; denote this collection by \(\mathfrak a\).
 \end{enumerate}
-Write \(F_2(\mathcal H)\) for the finite set of framed components, indexed
-as \(K_k\), and put
+Recall from \cref{def:kirby-datum} that \(I_2(\mathcal H)\) is the finite
+index set of the \(2\)-handles.  In the one-ended dotted--framed record of
+\cref{def:one-ended-kirby-datum}, each \(k\in I_2(\mathcal H)\) corresponds
+to a framed attaching component \(K_k\subset D_{\mathrm{fr}}\).  Thus
+\(D_{\mathrm{fr}}\) is the geometric framed link, whereas
+\(I_2(\mathcal H)\) is the finite set indexing its components.  Put
 \[
   \operatorname{Lab}_{\cC}(\mathcal H)
-  :=\prod_{k\in F_2(\mathcal H)}\operatorname{Irr}(\cC).
+  :=\prod_{k\in I_2(\mathcal H)}\operatorname{Irr}(\cC).
 \]
 Thus \(\lambda\in\operatorname{Lab}_{\cC}(\mathcal H)\) assigns a simple
 object \(\lambda_k\) to each framed component.  For a closed
@@ -56,7 +60,7 @@ diagram is denoted by
   \in\operatorname{End}_{\cC}(\mathbf1).
 \]
 The Kirby-colour coefficient
-\(\prod_{k\in F_2(\mathcal H)}d_{\lambda_k}\) is not included in this
+\(\prod_{k\in I_2(\mathcal H)}d_{\lambda_k}\) is not included in this
 notation.
 \end{definition}
 
@@ -139,12 +143,11 @@ Assume the following data.
 \item a one-ended Kirby presentation \(\mathcal H\);
 \item a handle cocycle \(\omega\in Z^2(\mathcal H)\).
 \end{enumerate}
-Write \(F_2(\mathcal H)\) for the finite set of framed components and
-\[
-  \operatorname{Lab}_{\cC}(\mathcal H)
-  =\prod_{k\in F_2(\mathcal H)}\operatorname{Irr}(\cC)
-\]
-for its simple-label states, as in \cref{def:decorated-kirby-graph}.
+As in \cref{def:decorated-kirby-graph}, \(I_2(\mathcal H)\) indexes the
+\(2\)-handles, equivalently the framed components \(K_k\subset
+D_{\mathrm{fr}}\), and
+\(\operatorname{Lab}_{\cC}(\mathcal H)\) is the set of their simple-label
+states.
 The resulting scalar is
 \begin{equation}
   \boxed{
@@ -152,7 +155,7 @@ The resulting scalar is
   :=
   \operatorname{Dim}(\cC)^{1-h_3(\mathcal H)}
   \sum_{\lambda\in\operatorname{Lab}_{\cC}(\mathcal H)}
-    \left(\prod_{k\in F_2(\mathcal H)} d_{\lambda_k}\right)
+    \left(\prod_{k\in I_2(\mathcal H)} d_{\lambda_k}\right)
       \bigl\langle L^\eta_{\lambda,\omega}(\mathcal H)\bigr\rangle.}
   \label{eq:twisted-handle-evaluator}
 \end{equation}
