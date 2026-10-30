@@ -78,30 +78,75 @@ their source cocycle coordinates.  The coordinate transport from
   (a,b)\longmapsto(a-b,b),
 \]
 according to the two orientations.  The two oriented local models are checked
-separately:
+by expanding the same regular-colour sliding identity.
+
+Write
+\[
+  \Omega=\sum_{i\in\operatorname{Irr}(\cC)}d_i\,i
+\]
+for the regular colouring.  The untwisted proof is the sliding lemma
+\cite[Lemma~2.30]{Tham2021}: after the identity on the attaching band is
+resolved through all simple fusion channels and all multiplicity basis
+vectors, the source and target \(\Omega\)-coloured graphs become the same
+finite sum.  In particular, this is an identity of the \emph{complete}
+regular-colour sums.  It does not identify a source graph with fixed labels
+\((x,y)\) with a target graph carrying the same fixed labels.
+
+More explicitly, for the positive local orientation choose composition-dual
+bases
+\[
+  u_{z,\mu}\colon z\longrightarrow x\otimes y^*,
+  \qquad
+  p_{z,\mu}\colon x\otimes y^*\longrightarrow z,
+\]
+and for the negative orientation choose the analogous bases with
+\(x\otimes y\) in place of \(x\otimes y^*\).  Semisimplicity gives
+\begin{align*}
+  \operatorname{id}_{x\otimes y^*}
+  &=\sum_{z,\mu}u_{z,\mu}\circ p_{z,\mu}
+    &&\text{in the positive model},\\
+  \operatorname{id}_{x\otimes y}
+  &=\sum_{z,\mu}u_{z,\mu}\circ p_{z,\mu}
+    &&\text{in the negative model}.
+\end{align*}
+Inserting the appropriate resolution at attachment and contracting the same
+dual bases at detachment is precisely the fusion-channel expansion used in
+the proof of the untwisted sliding lemma.
+Thus both sides have the same indices \((x,y,z,\mu)\), the same quantum
+dimension coefficients, the same exterior graph, and the same normalization.
+Only the character multiplier still has to be compared.
+
+For each summand of this \emph{common expansion}, the comparison is as
+follows.
 \begin{itemize}
   \item \textbf{The positive \(2/2\) slide.}
-  Its channel condition is \(z\subset x\otimes y^*\).  Monoidality and
-  duality give
+  Its channel condition is \(z\subset x\otimes y^*\).  The source
+  multiplier is \(\eta_x^a\eta_y^b\), whereas after attachment and cocycle
+  transport the same channel carries
   \[
     \eta_x^{a+b}\eta_{z^*}^{b}
-    =\eta_x^{a+b}(\eta_x\eta_y^{-1})^{-b}
     =\eta_x^a\eta_y^b,
   \]
-  so its character factor is preserved.
+  by \cref{lem:two-over-two-character-factors}.
 
   \item \textbf{The negative \(2/2\) slide.}
-  Its channels satisfy \(z\subset x\otimes y\), and
+  Its channels satisfy \(z\subset x\otimes y\).  The corresponding target
+  multiplier is
 \[
   \eta_x^{a-b}\eta_z^b
-  =\eta_x^{a-b}(\eta_x\eta_y)^b
   =\eta_x^a\eta_y^b.
 \]
-  Thus its character factor is preserved as well.
+  This is the second identity of
+  \cref{lem:two-over-two-character-factors}.
 \end{itemize}
-Thus every fusion-channel term has exactly the same character factor before
-and after attachment.  Naturality transports that factor along the band, and
-the trace-dual detachment used in the untwisted proof preserves it.
+The equalities hold for every multiplicity index \(\mu\).  Naturality moves
+the coupons through the inclusion, projection, braiding, and exterior
+morphisms occurring in that summand.  Consequently the source and target
+decorate the common untwisted fusion expansion by exactly the same scalar on
+each term.  Summing over \(x,y,z,\mu\) now gives equality of the two complete
+decorated regular-colour sums.  This proves the \(2/2\) slide identity; it does
+not assert a false termwise equality before the fusion resolutions are
+inserted.
 
 \item \textbf{Adjacent-index births and deaths.}
 These are the following four directed move types.
@@ -159,11 +204,13 @@ therefore apply without alteration.
 For the identity character, the cited handle-decomposition invariance proves
 the required local ribbon identity together with its label weights and
 normalization factor.  The checks above show, move by move, that inserting the
-transported character coupons preserves that identity on every labelled
-summand.  Summing over the simple labels therefore gives the asserted equality
-of presentation-level scalars.  In a death move, the replacement by a
-zero-coordinate source representative does not change the scalar by
-\cref{prop:representative-independence}.
+transported character coupons preserves the corresponding untwisted local
+identity.  For a \(2/2\) slide this comparison is termwise only after both
+sides have been expanded into the common complete fusion-channel sum; it is
+not termwise in the original simple labels.  Summing the resulting local
+identities gives the asserted equality of presentation-level scalars.  In a
+death move, the replacement by a zero-coordinate source representative does
+not change the scalar by \cref{prop:representative-independence}.
 \end{proof}
 
 \begin{theorem}[Elementary marked Kirby--Cerf invariance]

@@ -158,6 +158,46 @@ arbitrary leg.  At a dual bend, expressing the same oriented route on the
 dual strand replaces the local exponent \(n\) by \(-n\).
 \end{remark}
 
+\begin{lemma}[Character factors in the two oriented fusion resolutions]
+\label{lem:two-over-two-character-factors}
+Let \(x,y,z\in\operatorname{Irr}(\cC)\) and let \(a,b\in\mathbb Z\).
+The character factors occurring in the two oriented fusion resolutions
+satisfy the following identities.
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item If \(z\) is a simple summand of \(x\otimes y^*\), then
+  \[
+    \eta_x^{a+b}\eta_{z^*}^{b}
+    =\eta_x^a\eta_y^b.
+  \]
+
+  \item If \(z\) is a simple summand of \(x\otimes y\), then
+  \[
+    \eta_x^{a-b}\eta_z^{b}
+    =\eta_x^a\eta_y^b.
+  \]
+\end{enumerate}
+Both identities are independent of the multiplicity index of the chosen
+fusion inclusion or projection.
+\end{lemma}
+
+\begin{proof}
+By \cref{lem:character-identities}, in the first case
+\(\eta_z=\eta_x\eta_y^{-1}\), and hence
+\[
+  \eta_x^{a+b}\eta_{z^*}^{b}
+  =\eta_x^{a+b}(\eta_x\eta_y^{-1})^{-b}
+  =\eta_x^a\eta_y^b.
+\]
+In the second case \(\eta_z=\eta_x\eta_y\), and therefore
+\[
+  \eta_x^{a-b}\eta_z^b
+  =\eta_x^{a-b}(\eta_x\eta_y)^b
+  =\eta_x^a\eta_y^b.
+\]
+The scalar by which a natural automorphism acts on a simple summand depends
+only on that summand, not on a basis vector in its multiplicity space.
+\end{proof}
+
 \begin{lemma}[Two categorical cancellation sums]
 \label{lem:local-cancellation-sums}
 Let \(\cC\) be a premodular fusion category.
