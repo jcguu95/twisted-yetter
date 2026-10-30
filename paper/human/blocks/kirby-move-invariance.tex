@@ -1,39 +1,44 @@
 \subsection{Kirby--Cerf-move invariance}
 \label{subsec:kirby-invariance}
 
-Throughout this subsection, fix a twisted categorical input \((\cC,\eta)\).
-
-The proof can be read from the following list.  Each item is local, and the
-same exterior ribbon graph is restored after the calculation.
+Throughout this subsection, fix \(\cC\) and \(\eta\).  Every move proof is
+organized in two layers.  The first is the untwisted premodular identity; the
+second checks only what happens to the newly inserted character coupons.
 \begin{description}[style=nextline,leftmargin=2.2em]
   \item[Changing the cocycle representative.]
-  A coboundary inserts character coupons around a dotted handle; the
-  tensor-unit projector absorbs them.
+  There is no untwisted obligation.  The new coboundary coupons assemble on a
+  dotted through-channel and are absorbed because
+  \(\eta_{\mathbf1}=\operatorname{id}_{\mathbf1}\).
 
   \item[Framed isotopy.]
-  Ribbon graphical coherence preserves the RT evaluation.
+  The untwisted graph is preserved by ribbon coherence.  Naturality transports
+  every character coupon through the same isotopy.
 
   \item[\(1/1\) slides and \(2/1\) passages.]
-  Cut at the stationary dotted handle.  Only the tensor-unit channel survives,
-  and that channel is transparent to the slide.
+  The untwisted identity is the tensor-unit projector calculation at the
+  stationary dotted handle.  The new coupons are either carried as arbitrary
+  exterior decorations or transported by naturality.
 
   \item[\(2/2\) slides.]
-  Resolve the band attachment into simple fusion channels, transport the
-  character coupon by naturality, and apply the inverse resolution at
-  detachment.
+  The untwisted identity is fusion attachment, finite band transport, and
+  trace-dual detachment.  Monoidality of \(\eta\), together with the induced
+  cocycle-coordinate change, matches the character factors on every fusion
+  channel.
 
   \item[\(3/3\) slides.]
-  Only the basis of \(C_3\) changes; the number of \(3\)-handles and
-  \(\operatorname{im}(\partial_3)\) remain fixed.
+  The untwisted graph is unchanged.  So are all \(2\)-handle cocycle
+  coordinates, because only the basis of \(C_3\) changes.
 
   \item[\(1\)--\(2\) and \(2\)--\(3\) cancellations.]
-  Put the pair in standard position.  The new character exponent is zero, and
-  the remaining local scalar is cancelled by the change in normalization.
+  The untwisted local sum gives the familiar normalization factor.  The new
+  handle has cocycle coordinate zero, so its character coupon is the identity.
 \end{description}
 
-The rest of this subsection proves precisely these six assertions.
+Thus the topology and the underlying ribbon identities are the untwisted
+ones.  The lemmas below isolate, rather than hide, every additional character
+calculation.
 
-\begin{lemma}[Local form of a dotted-handle operation]
+\begin{lemma}[Dotted-handle local form and separation of the character data]
 \label{lem:dotted-collar-factorization}
 Let \(\mathcal H\) be a one-ended Kirby presentation, let
 \(\omega\in Z^2(\mathcal H)\), fix an ordinary-label state $\lambda$, and let
@@ -74,6 +79,11 @@ features remain distinct.
 \end{lemma}
 
 \begin{proof}
+The underlying cut, projector, and regluing are precisely the untwisted
+dotted-handle operation.  The marking enters only through the already placed
+coupons, so it remains to keep their exponents separate from the intersection
+signs used to describe the cut.
+
 Read the punctures on the positive collar face.  The explicit realization
 $B_\delta=|w_\delta|$ uses the rigid dual for a negative boundary occurrence
 but does not change the label of the underlying oriented component.  The
@@ -161,6 +171,10 @@ the cocycle.
 \end{proposition}
 
 \begin{proof}
+The untwisted evaluator has no cocycle representative to choose.  Thus the
+entire new obligation is to show that the extra coupons produced by a
+coboundary act trivially after the untwisted dotted projector is inserted.
+
 Since $\omega$ and $\omega'$ represent the same cellular cohomology class, there is a
 $1$-cochain $b\in C^1(\mathcal H)$ such that
 \[
@@ -192,7 +206,7 @@ For a marked Kirby datum \((\mathcal H,\beta)\), we therefore write
 for the value of any handle cocycle representing
 \(\xi_{\mathcal H,\beta}\) from \cref{def:handle-cocycle}.
 
-\begin{lemma}[Dotted $1$-handle-slide identity]
+\begin{lemma}[Untwisted dotted $1$-handle-slide identity]
 \label{lem:dotted-one-handle-slide}
 Let \(m\colon\mathcal H\to\mathcal H'\) be a $1/1$ slide between one-ended
 Kirby presentations in the local form of
@@ -262,7 +276,7 @@ Kirby source and target, while the common exterior is applied only after the
 local morphism equality has been established.
 \end{proof}
 
-\begin{lemma}[Projector naturality for a $2/1$ passage]
+\begin{lemma}[Character transport through an untwisted $2/1$ passage]
 \label{lem:two-one-projector-naturality}
 Let \(m\colon\mathcal H\to\mathcal H'\) be a $2/1$ passage between one-ended
 Kirby presentations.  Put \(m\) into the clean local form of
@@ -361,7 +375,7 @@ the same answer by \cref{prop:representative-independence}.  Summing over all
 ordinary labels proves the lemma.
 \end{proof}
 
-\begin{lemma}[Trace-dual band-transport identity]
+\begin{lemma}[Untwisted trace-dual band-transport identity]
 \label{lem:weighted-kirby-colour-slide}
 Let \(x\in\operatorname{Irr}(\cC)\).  Fix an $x$-coloured moving ribbon, an
 oriented band, and a common exterior tangle \(E\), with no character coupon
@@ -427,6 +441,11 @@ stationary orientation, replacing every label by its dual, and using
 $\Omega_{\cC}^*=\Omega_{\cC}$ gives the negative orientation; spherical
 duality preserves $d_y d_z$ and every multiplicity index.
 \end{proof}
+
+The preceding lemma is the complete untwisted \(2/2\) band-slide
+calculation.  The next lemma does not repeat it; it proves only that the new
+character factors agree with the transported cocycle coordinates on every
+fusion channel.
 
 \begin{lemma}[Character-aware fusion attachment]
 \label{lem:character-aware-fusion-attachment}
@@ -685,14 +704,13 @@ The reverse equality holds for an isolated \(1\)--\(2\) death.
 \end{lemma}
 
 \begin{proof}
-Fix every exterior label.  The new \(2\)-handle coordinate is zero, so its
-character coupon is
-\((\eta^0)_i=\operatorname{id}_i\).  The new dotted circle and its cancelling
-meridian contribute exactly
+Fix every exterior label.  The untwisted local calculation is
 \[
   \sum_i d_i\,\operatorname{tr}_i(P_{\mathbf1,i})=1
 \]
-by \cref{lem:local-cancellation-sums}.  Thus every fixed exterior summand is
+by \cref{lem:local-cancellation-sums}.  The only character check is that the
+new \(2\)-handle coordinate is zero, so its coupon is
+\((\eta^0)_i=\operatorname{id}_i\).  Thus every fixed exterior summand is
 unchanged, proving the first equality in
 \eqref{eq:one-two-cancellation-evaluation}.  This birth changes neither the
 number of \(3\)-handles nor the normalization.  Substitution into
@@ -723,14 +741,15 @@ The reverse equality holds for an isolated \(2\)--\(3\) death.
 \end{lemma}
 
 \begin{proof}
-The cocycle equation forces the new \(2\)-handle coordinate to vanish, so its
-character coupon is the identity.  For every fixed exterior labeling, the
-new \(0\)-framed component contributes
+For every fixed exterior labeling, the untwisted new \(0\)-framed component
+contributes
 \[
   \sum_i d_i\,\operatorname{tr}_i(\operatorname{id}_i)
   =\operatorname{Dim}(\cC)
 \]
-by \cref{lem:local-cancellation-sums}.  This gives the raw-sum equality in
+by \cref{lem:local-cancellation-sums}.  The only character check is that the
+cocycle equation forces the new \(2\)-handle coordinate to vanish, so its
+coupon is the identity.  This gives the raw-sum equality in
 \eqref{eq:two-three-cancellation-evaluation}.  Meanwhile the new \(3\)-handle
 changes the normalization by
 \(\operatorname{Dim}(\cC)^{-1}\).  The two factors cancel.  Reversing the
@@ -791,11 +810,14 @@ all labels not mentioned below remain fixed.
 
 \emph{Level isotopy.}
 Here $\omega'=\omega$, the label states are canonically identified, and
-\(h_3(\mathcal H')=h_3(\mathcal H)\).  If the move is a level isotopy of a
+\(h_3(\mathcal H')=h_3(\mathcal H)\).
+\emph{Untwisted part:} if the move is a level isotopy of a
 \(3\)-handle attaching sphere, then the dotted--framed diagram,
 \(\operatorname{im}(\partial_3)\), and the defining sum are literally
 unchanged.  Otherwise, for every label state $\lambda$, ribbon graphical
-coherence \cite[Theorem~6.1]{Shum1994} gives
+coherence \cite[Theorem~6.1]{Shum1994} preserves the underlying handle
+morphism.  \emph{Character part:} naturality carries each coupon through the
+same isotopy, so
 \[
   \bigl\langle L^\eta_{\lambda,\omega}(\mathcal H)\bigr\rangle
   =
@@ -806,19 +828,23 @@ equality.
 
 \emph{$1/1$ slides and $2/1$ passages.}
 For both moves $\omega'=\omega$ on the canonically identified $2$-handle
-generators, and $h_3$ is unchanged.  For a $1/1$ slide the required local
-equality is exactly \eqref{eq:dotted-one-handle-slide-interface}.  For a $2/1$
-passage it is \eqref{eq:positive-two-one-interface} or
-\eqref{eq:negative-two-one-interface}, according to the crossing orientation.
-After applying the common exterior closure and summing over ordinary labels,
-\cref{lem:dotted-handle-slides} gives the normalized equality.
+generators, and $h_3$ is unchanged.  \emph{Untwisted part:} for a $1/1$ slide
+the required projector identity is
+\eqref{eq:dotted-one-handle-slide-interface}; for a $2/1$ passage it is the
+same tensor-unit through-channel transported across the indicated braiding.
+\emph{Character part:} the $1/1$ identity accepts an arbitrary decorated
+exterior input, while the $2/1$ coupon crosses the braiding by naturality,
+as written in \eqref{eq:positive-two-one-interface} and
+\eqref{eq:negative-two-one-interface}.  Applying the common exterior closure
+and summing gives \cref{lem:dotted-handle-slides}.
 
 \emph{$2/2$ slide.}
-Use the positive or negative coordinate rule
-\eqref{eq:two-two-marking-transport}.  The attach calculation identifies the
-source character factor with the transported target factor; finite transport
-preserves each term; and the trace-dual detachment recombines the target
-Kirby colour.  Thus
+\emph{Untwisted part:} the trace-dual attachment, finite band transport, and
+detachment calculation of \cref{lem:weighted-kirby-colour-slide} recombines
+the target Kirby colour.  \emph{Character part:} use the positive or negative
+coordinate rule \eqref{eq:two-two-marking-transport}.  Monoidality identifies
+the source factor with the transported fusion-channel factor, and naturality
+preserves it during transport.  Hence
 \[
   Z_{\mathrm{src}}^\varepsilon
   =Z_{\mathrm{tgt}}^\varepsilon
@@ -827,26 +853,30 @@ by \cref{lem:character-aware-two-two}.  A $2/2$ slide does not change
 $h_3$, so this raw equality is the required evaluator equality.
 
 \emph{$3/3$ slide.}
-The equality is \eqref{eq:three-handle-slide-evaluation}: the move changes
-only the basis of \(C_3\), preserving \(h_3\),
-\(\operatorname{im}(\partial_3)\), every cocycle coordinate on \(C_2\), and
-the entire dotted--framed ribbon graph.
+\emph{Untwisted part:} the move changes only the basis of \(C_3\), preserving
+\(h_3\), \(\operatorname{im}(\partial_3)\), and the entire dotted--framed
+ribbon graph.  \emph{Character part:} every cocycle coordinate on \(C_2\)
+is unchanged.  This is \eqref{eq:three-handle-slide-evaluation}.
 
 \emph{$1$--$2$ birth and death.}
 For birth, and for death after the explicit $2/2$ slide reduction of
 \cref{item:cancellation-normal-form}, the pair is isolated from the exterior.
-The marking rule gives $\omega'=\omega\oplus0$, and
-\eqref{eq:one-two-cancellation-evaluation} proves the isolated equality.
+\emph{Untwisted part:} the isolated local projector sum is the identity and
+the normalization is unchanged.  \emph{Character part:} the marking rule
+gives $\omega'=\omega\oplus0$, so the new coupon is \(\eta^0=\operatorname{id}\).
+Equation~\eqref{eq:one-two-cancellation-evaluation} proves the isolated equality.
 For death, the preceding $2/2$ slides preserve the marked evaluator by
 \cref{lem:character-aware-two-two}; representative independence supplies the
 zero-coordinate representative, and
 \cref{lem:one-two-cancellation-evaluation} is read backwards.
 
 \emph{$2$--$3$ birth and death.}
-The cocycle equation gives $\omega'=\omega\oplus0$.  The two explicit equalities in
-\eqref{eq:two-three-cancellation-evaluation} show that the raw sum acquires
-one factor of $\operatorname{Dim}(\cC)$ while the normalization acquires its
-inverse.  Their product is $1$.  The death case is the reverse equality.
+\emph{Untwisted part:} the raw sum acquires one factor of
+$\operatorname{Dim}(\cC)$ while the normalization acquires its inverse.
+\emph{Character part:} the cocycle equation gives
+$\omega'=\omega\oplus0$, so the new coupon is again the identity.  These are
+the two equalities in \eqref{eq:two-three-cancellation-evaluation}; the death
+case is their reverse.
 
 These are precisely the nine directed moves occurring in a one-ended
 connected Cerf movie.

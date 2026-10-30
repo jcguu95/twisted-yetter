@@ -1,140 +1,143 @@
-\subsection{The marked handle evaluator}
+\subsection{From the untwisted handle morphism to the homological twist}
 \label{subsec:graphical-construction}
 
-\begin{definition}[Raw decorated Kirby morphism]
-\label{def:decorated-kirby-graph}
+\begin{definition}[Untwisted premodular handle morphism]
+\label{def:untwisted-handle-morphism}
 \label{def:dotted-circle-translation}
-\label{def:colored-graph-sum}
 Assume the following data.
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item \emph{Categorical input:}
-  \begin{enumerate}[label=\textup{(\alph*)}]
-  \item a premodular fusion category \(\cC\) over \(\mathbb C\);
-  \item a monoidal natural automorphism
-    \(\eta\colon\operatorname{Id}_{\cC}\Rightarrow
-    \operatorname{Id}_{\cC}\).
-  \end{enumerate}
-\item \emph{Marked handle input:}
-  \begin{enumerate}[label=\textup{(\alph*)}]
-  \item a one-ended Kirby presentation \(\mathcal H\), whose dotted--framed
-    link lies in the standard \(S^3=\partial B^4\);
-  \item a handle cocycle \(\omega\in Z^2(\mathcal H)\).
-  \end{enumerate}
-\item \emph{Label state:} a simple object
-  \(\lambda_k\in\operatorname{Irr}(\cC)\) for every framed component
-  \(K_k\).
-\item \emph{Auxiliary drawing datum} \(\mathfrak a\), consisting of
-  \begin{enumerate}[label=\textup{(\alph*)}]
-  \item orientations of the framed and dotted components;
-  \item an admissible section system for the dotted components;
-  \item composition-dual bases used to expand each tensor-unit projector;
-  \item a point at infinity outside the resulting graph and a generic planar
-    projection of its \(\mathbb R^3\)-model.
-  \end{enumerate}
+\item a premodular fusion category \(\cC\) over \(\mathbb C\);
+\item a one-ended Kirby presentation \(\mathcal H\), whose dotted--framed
+  link lies in the standard \(S^3=\partial B^4\);
+\item a simple object \(\lambda_k\in\operatorname{Irr}(\cC)\) for every
+  framed component \(K_k\);
+\item auxiliary orientations, an admissible dotted-handle section system,
+  composition-dual bases for the tensor-unit projectors, and a regular planar
+  drawing; denote this collection by \(\mathfrak a\).
 \end{enumerate}
-
-Write \(e_k\) for the oriented \(2\)-handle generator selected by
-\(\mathfrak a\), and put
-\[
-  \omega_k:=\omega(e_k)\in\mathbb Z.
-\]
-The datum above first produces a closed coloured ribbon diagram
-\[
-  G^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a).
-\]
-The component \(K_k\) is coloured by \(\lambda_k\) and carries the coupon
-\[
-  (\eta^{\omega_k})_{\lambda_k}
-  =\eta_{\lambda_k}^{\omega_k}\operatorname{id}_{\lambda_k}.
-\]
-Here \(\eta^{\omega_k}\) is the integer power of \(\eta\), using its inverse
-when \(\omega_k<0\), and
-\(\eta_{\lambda_k}\in\mathbb C^\times\) is the simple-object scalar of
-\cref{lem:simple-object-character-scalars}.
-
-A dotted component \(\delta\) is not coloured.  Instead, cut its handle as in
-\cref{def:cut-open-dotted-tangle}.  If \(B_\delta\) is the tensor product
-specified by the ordered oriented strands on one cut face, insert the
-canonical projector
+The framed component \(K_k\) is coloured by \(\lambda_k\), with no additional
+coupon.  A dotted component \(\delta\) is not coloured: cut its handle, insert
 \[
   P_{\mathbf1,B_\delta}\colon B_\delta\longrightarrow B_\delta
 \]
-and reglue the two faces.  Doing this at every dotted component completes
-\(G^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)\).  Interpreting this
-closed diagram in \(\cC\) gives
+on the ordered boundary object, and reglue.  This gives a closed ribbon
+diagram \(G_\lambda(\mathcal H;\mathfrak a)\) and hence
 \[
-  L^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)
-  :=\bigl[\!\bigl[ G^\eta_{\lambda,\omega}
-       (\mathcal H;\mathfrak a)\bigr]\!\bigr]_{\cC}
+  L_\lambda(\mathcal H;\mathfrak a)
+  :=\bigl[\!\bigl[G_\lambda(\mathcal H;\mathfrak a)\bigr]\!\bigr]_{\cC}
   \in\operatorname{End}_{\cC}(\mathbf1).
 \]
-Thus \(L^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)\) is a morphism,
-not a planar drawing.  The Kirby-colour coefficient
-\(\prod_k d_{\lambda_k}\) is not included in this notation.
+The Kirby-colour coefficient \(\prod_kd_{\lambda_k}\) is not included in
+this notation.
 \end{definition}
 
-\begin{proposition}[Independence of the auxiliary drawing datum]
-\label{prop:graphical-auxiliary-independence}
-Fix \(\cC,\eta,\mathcal H,\omega\), and a label state \(\lambda\) as in
-\cref{def:decorated-kirby-graph}.  The endomorphism
-\[
-  L^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)
-  \in\operatorname{End}_{\cC}(\mathbf1)
-\]
-is independent of the composition-dual bases, the admissible section system,
-the point at infinity, and the regular planar projection.  Reversing an
-auxiliary orientation has the same effect as replacing the corresponding
-oriented generator, cocycle coordinate, and simple label by
-\[
-  (e_k,\omega_k,\lambda_k)
-  \longmapsto(-e_k,-\omega_k,\lambda_k^*),
-\]
-and leaves the resulting endomorphism unchanged under the canonical
+\begin{proposition}[Untwisted auxiliary-choice independence]
+\label{prop:untwisted-auxiliary-independence}
+The family \(L_\lambda(\mathcal H;\mathfrak a)\) is independent of the
+projector bases, section system, point at infinity, and planar projection.
+Reversing an auxiliary component orientation and replacing its label by the
+dual label gives the same endomorphism under the canonical
 orientation--duality identification.
 \end{proposition}
 
 \begin{proof}
-The sum \(\sum_\mu u_\mu\widehat u_\mu\) is the canonical projector onto the
-full tensor-unit isotypic summand, so it is independent of the chosen
-composition-dual bases.
+Composition-dual resolutions give the canonical tensor-unit projector and
+are therefore basis independent.  A generic isotopy between two admissible
+section systems meets the compact framed link in finitely many elementary
+ribbon events; projector naturality across each event and induction give the
+same reglued morphism.  Ribbon coherence
+\cite[Theorem~6.1]{Shum1994} removes the choices of point at infinity and
+planar projection.  Finally, rigid duality replaces a reversed framed label
+by its dual and carries a reversed dotted boundary word, together with its
+tensor-unit projector, to the pivotal transpose.  Spherical evaluation is
+unchanged.
+\end{proof}
 
-Any two admissible section systems for the dotted unlink are connected by an
-isotopy relative to their boundary circles.  Put the isotopy in generic
-position with respect to the compact framed link.  Its finitely many
-exceptional parameters are adjacent interchanges, births or deaths of a dual
-pair at a cup or cap, and passages across crossings, twists, or coupons.
-Projector naturality, in the form of
-\cref{cor:finite-unit-projector-transport}, identifies the inserted
-endomorphisms across each event.  Induction over the finite event list proves
-independence of the section system.  Disjoint dotted-handle neighborhoods
-give tensor-independent insertions.
+\begin{definition}[Intrinsic untwisted handle morphism]
+\label{def:intrinsic-untwisted-handle-morphism}
+The preceding proposition defines
+\[
+  L_\lambda(\mathcal H)\in\operatorname{End}_{\cC}(\mathbf1)
+\]
+without recording \(\mathfrak a\), up to the canonical dual reindexing of
+label states.
+\end{definition}
 
-Changing the point at infinity or the regular projection changes only the
-drawing of the same embedded ribbon graph.  Ribbon graphical coherence
-\cite[Theorem~6.1]{Shum1994} therefore preserves its endomorphism.
+\begin{definition}[Untwisted premodular handle evaluator]
+\label{def:untwisted-handle-evaluator}
+The untwisted value of a one-ended Kirby presentation is
+\[
+  \CY^{\mathrm{un}}_{\cC}(\mathcal H)
+  :=
+  \operatorname{Dim}(\cC)^{1-h_3(\mathcal H)}
+  \sum_\lambda
+    \left(\prod_kd_{\lambda_k}\right)
+    \bigl\langle L_\lambda(\mathcal H)\bigr\rangle,
+\]
+where \(\langle-\rangle\) is the canonical scalar identification
+\(\operatorname{End}_{\cC}(\mathbf1)\cong\mathbb C\).
+\end{definition}
 
-Finally, reverse one auxiliary component orientation.  For a framed
-component, rigid duality replaces \(\lambda_k\) by \(\lambda_k^*\), while
-\(e_k\) and \(\omega_k\) both change sign.  Since
-\(d_{\lambda_k^*}=d_{\lambda_k}\) and
-\(\eta_{\lambda_k^*}=\eta_{\lambda_k}^{-1}\), the dualized coupon represents
-the same oriented morphism.  For a dotted component, the boundary word is
-replaced by its reversed rigid dual; pivotal duality carries the canonical
-tensor-unit projector to the canonical projector of the dual boundary
-object.  Spherical graphical evaluation is unchanged.
+\begin{definition}[Homological character decoration]
+\label{def:decorated-kirby-graph}
+In addition, let
+\[
+  \eta\colon\operatorname{Id}_{\cC}\Rightarrow\operatorname{Id}_{\cC}
+\]
+be a monoidal natural automorphism and let
+\(\omega\in Z^2(\mathcal H)\).  If \(e_k\) is the oriented \(2\)-handle
+generator selected by \(\mathfrak a\), put
+\(\omega_k:=\omega(e_k)\in\mathbb Z\).  Starting from the untwisted diagram,
+place on \(K_k\) the single coupon
+\[
+  (\eta^{\omega_k})_{\lambda_k}
+  =\eta_{\lambda_k}^{\omega_k}\operatorname{id}_{\lambda_k},
+\]
+where \(\eta_{\lambda_k}\in\mathbb C^\times\) is the scalar of
+\cref{lem:simple-object-character-scalars}.  Denote the resulting diagram by
+\(G^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)\), and set
+\[
+  L^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)
+  :=\bigl[\!\bigl[G^\eta_{\lambda,\omega}
+       (\mathcal H;\mathfrak a)\bigr]\!\bigr]_{\cC}
+  \in\operatorname{End}_{\cC}(\mathbf1).
+\]
+This coupon is the only modification: every dotted component still inserts
+the same tensor-unit projector \(P_{\mathbf1,B_\delta}\).
+\end{definition}
+
+\begin{proposition}[The twist preserves auxiliary-choice independence]
+\label{prop:graphical-auxiliary-independence}
+The endomorphism family
+\(L^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)\) has the same
+auxiliary-choice independence as the untwisted family.  Under orientation
+reversal the precise reindexing is
+\[
+  (e_k,\omega_k,\lambda_k)
+  \longmapsto(-e_k,-\omega_k,\lambda_k^*).
+\]
+\end{proposition}
+
+\begin{proof}
+Only the character coupons are new.  Naturality transports them across every
+ribbon event, monoidality handles tensor products, and
+\(\eta_{\mathbf1}=\operatorname{id}_{\mathbf1}\) leaves the tensor-unit
+projectors unchanged.  Under orientation reversal,
+\(\eta_{X^*}=\eta_X^{-1}\) identifies the dualized coupon after both the
+generator and its cocycle coordinate change sign.  These are exactly the
+additional checks beyond
+\cref{prop:untwisted-auxiliary-independence}.
 \end{proof}
 
 \begin{definition}[Intrinsic decorated Kirby morphism]
 \label{def:intrinsic-decorated-kirby-morphism}
-By \cref{prop:graphical-auxiliary-independence}, the common value
+The common value
 \[
   L^\eta_{\lambda,\omega}(\mathcal H)
   \in\operatorname{End}_{\cC}(\mathbf1)
 \]
-is well defined without recording \(\mathfrak a\).  Since the tensor unit is
-simple, the canonical identification
-\(\operatorname{End}_{\cC}(\mathbf1)\cong\mathbb C\) also assigns a scalar to
-this endomorphism; we denote that scalar by
+is well defined without \(\mathfrak a\).  Under
+\(\operatorname{End}_{\cC}(\mathbf1)\cong\mathbb C\), denote its scalar by
 \(\langle L^\eta_{\lambda,\omega}(\mathcal H)\rangle\).
 \end{definition}
 
@@ -171,6 +174,30 @@ In this formula:
   \cref{def:intrinsic-decorated-kirby-morphism}.
 \end{enumerate}
 \end{definition}
+
+\begin{proposition}[Exact untwisted specialization]
+\label{prop:exact-untwisted-specialization}
+For every \(\mathcal H,\lambda\), and \(\omega\),
+\[
+  L^{\operatorname{id}}_{\lambda,\omega}(\mathcal H)
+  =L_\lambda(\mathcal H),
+  \qquad
+  L^\eta_{\lambda,0}(\mathcal H)=L_\lambda(\mathcal H).
+\]
+Consequently,
+\[
+  \CY_{\cC,\operatorname{id}}(\mathcal H,\omega)
+  =\CY^{\mathrm{un}}_{\cC}(\mathcal H),
+  \qquad
+  \CY_{\cC,\eta}(\mathcal H,0)
+  =\CY^{\mathrm{un}}_{\cC}(\mathcal H).
+\]
+\end{proposition}
+
+\begin{proof}
+In either case every character coupon is an identity; all remaining labels,
+projectors, and regluing operations are exactly the untwisted ones.
+\end{proof}
 
 \begin{remark}[Three-dimensional meaning]
 \label{rem:planar-projection-after-cutting}
