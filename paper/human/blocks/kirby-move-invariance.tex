@@ -28,19 +28,20 @@ be a marked elementary Kirby--Cerf move between one-ended Kirby data.  Let
 \end{lemma}
 
 \begin{proof}
-The nine directed move types available in a one-ended movie divide into
+The eight directed move types available in a one-ended movie divide into
 three kinds of character check.  We list every type explicitly.
 
 \begin{itemize}
 \item \textbf{Moves that do not change the relevant \(2\)-handle
 coordinates.}
-These are the following four move types.
+These are the following three move types.
 \begin{itemize}
   \item \textbf{Level isotopy.}
   Here a level isotopy means a framing-preserving ambient isotopy of the
   attaching embeddings in the boundary of the lower-handle submanifold,
   performed between two adjacent critical values.  No handle slide, birth,
-  or death occurs.
+  or death occurs.  This includes isotopies which, in a dotted-circle picture,
+  are drawn by passing a \(2\)-handle strand through a dotted circle.
   It carries each labelled \(2\)-handle component, together with its coupon
   \((\eta_{\lambda_k})^{\omega_k}\), to the corresponding target component.
   Thus the source and target are framed-isotopic decorated ribbon graphs.
@@ -54,26 +55,6 @@ These are the following four move types.
   Thus the slide only changes a piece that has already been reduced to the
   identity into a piece that is again reduced to the identity, so the
   evaluation is unchanged.
-
-  \item \textbf{A \(2/1\) dotted-handle passage.}
-  Recall from \cref{def:handle-slide} that this is not a handle slide: it is
-  the ambient isotopy of a \(2\)-handle attaching circle which, in dotted
-  notation, is drawn by passing one strand through a dotted component.  Cut
-  open that dotted handle, let \(B\) be its through-object, let
-  \(P_{\mathbf1,B}\colon B\to B\) be the tensor-unit projector, and let the
-  moving strand have label \(X\) and exponent \(a\).  For either local
-  crossing orientation, write
-  \(b\colon B\otimes X\to X\otimes B\) for the corresponding braiding or
-  inverse braiding.  The source and target local morphisms are the two sides
-  of
-  \[
-    b\circ\bigl(P_{\mathbf1,B}\otimes(\eta_X)^a\bigr)
-    =
-    \bigl((\eta_X)^a\otimes P_{\mathbf1,B}\bigr)\circ b.
-  \]
-  This is the naturality equation for the braiding.  Closing both sides by the
-  common exterior tangle proves equality of the decorated local evaluations;
-  the label weights and normalization factor are unchanged.
 
   \item \textbf{A \(3/3\) slide.}
   The slide changes the boundary map \(\partial_3\) by precomposition with an
@@ -126,14 +107,36 @@ the trace-dual detachment used in the untwisted proof preserves it.
 These are the following four directed move types.
 \begin{itemize}
   \item \textbf{A \(1\)--\(2\) birth.}
-  The transported cohomology class has a representative
-  \(\omega'=\omega\oplus0\), so the new coupon is
-  \(\eta^0=\operatorname{id}\).
+  The new \(2\)-handle attaching circle goes geometrically once over the new
+  dotted \(1\)-handle, and no other strand meets this cancelling local model.
+  Hence, for a simple label \(\lambda\) on the new \(2\)-handle, the
+  through-object at the dotted disk is \(\lambda\) or \(\lambda^*\).  The
+  target cocycle may be represented by \(\omega'=\omega\oplus0\), so its new
+  character coupon is the identity.  Since the tensor unit is simple,
+  \[
+    \operatorname{tr}
+      \bigl(P_{\mathbf1,\lambda}\bigr)
+    =\dim\operatorname{Hom}_{\cC}
+      (\mathbf1,\lambda)
+    =\delta_{\lambda,\mathbf1}.
+  \]
+  The same equation holds with \(\lambda^*\) in place of \(\lambda\), so the
+  local orientation does not affect the result.
+  The entire new local contribution to the label sum is therefore
+  \[
+    \sum_{\lambda\in\operatorname{Irr}(\cC)}
+      d_\lambda\,
+      \operatorname{tr}
+        \bigl(P_{\mathbf1,\lambda}\bigr)
+    =d_{\mathbf1}=1.
+  \]
+  Thus adding the cancelling pair does not change the evaluator.
 
   \item \textbf{A \(1\)--\(2\) death.}
   Cohomological descent permits a representative whose disappearing
-  \(2\)-handle coordinate is zero.  Its coupon is therefore the identity
-  before the pair is removed.
+  \(2\)-handle coordinate is zero.  The same geometric-intersection-one
+  calculation shows that the isolated pair contributes the scalar \(1\), so
+  removing it does not change the evaluator.
 
   \item \textbf{A \(2\)--\(3\) birth.}
   The cocycle equation forces the new \(2\)-handle coordinate to be zero, so
@@ -144,6 +147,11 @@ These are the following four directed move types.
   disappearing \(2\)-handle coordinate, and hence its character exponent,
   to be zero.
 \end{itemize}
+The calculation for the \(1\)--\(2\) pair uses essentially that each label
+state assigns a simple object to every \(2\)-handle component.  For a general
+object such as \(\mathbf1\oplus\mathbf1\), the trace of the tensor-unit
+projector would be \(2\); such an object is not a single label state in the
+evaluator.
 In all four cases the untwisted cancellation and normalization identities
 therefore apply without alteration.
 \end{itemize}

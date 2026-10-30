@@ -141,7 +141,7 @@ standard reduction to a handle decomposition with one minimum and one maximum;
 see \cite[Sections~4.2 and~5.1]{GompfStipsicz1999}.
 \end{proof}
 
-\begin{definition}[Handle slide and passage through a dotted handle]
+\begin{definition}[Handle slide]
 \label{def:handle-slide}
 Let the handles of index less than \(k\) already be attached.
 A \emph{same-index \(k/k\) slide} replaces the attaching sphere of a moving
@@ -152,13 +152,15 @@ subhandlebody, disjoint from all other attaching regions.  The normal
 framing is the band sum of the two given framings.  All other attaching data
 are unchanged outside a neighborhood of this band.
 
-In a one-ended dotted--framed record, a \emph{\(2/1\) passage} is an ambient
-isotopy of a \(2\)-handle attaching circle in the boundary of the
-\(0\)--\(1\) subhandlebody.  In the \(S^3\) picture this isotopy is drawn by
-passing a strand through a dotted component.  It does not slide an
-index-\(2\) handle over an index-\(1\) handle in the Morse-theoretic sense;
-it is an additional diagrammatic move created by dotted-circle notation.
 \end{definition}
+
+\begin{remark}[Level isotopy in dotted notation]
+An ambient isotopy of a \(2\)-handle attaching circle in the boundary of the
+\(0\)--\(1\) subhandlebody may be drawn in the \(S^3\) dotted-circle picture
+by passing a strand through a dotted component.  This is a depiction of level
+isotopy, not an additional Kirby--Cerf move and not a slide of an index-\(2\)
+handle over an index-\(1\) handle.
+\end{remark}
 
 \begin{definition}[Cancelling handle pair]
 \label{def:cancelling-handle-pair}
@@ -181,13 +183,11 @@ and belt-sphere conditions.
 \label{def:kirby-move}
 An elementary Kirby--Cerf move \(m\colon\mathcal H\to\mathcal H'\) is a
 level isotopy, a same-index handle slide as in \cref{def:handle-slide}, the
-birth or death of a pair satisfying \cref{def:cancelling-handle-pair}, or,
-in a dotted--framed record, a \(2/1\) passage.  In dimension four these are
-the following thirteen directed types:
+birth or death of a pair satisfying \cref{def:cancelling-handle-pair}.  In
+dimension four these are the following twelve directed types:
 \begin{enumerate}[label=(\roman*),ref=\roman*]
   \item\label{move:framed-isotopy} level isotopy of attaching data;
   \item\label{move:one-over-one} a \(1/1\) slide;
-  \item\label{move:two-over-one} a \(2/1\) passage through a dotted handle;
   \item\label{move:two-over-two} a \(2/2\) slide;
   \item\label{move:three-over-three} a \(3/3\) slide;
   \item a \(0\)--\(1\) birth;
@@ -200,12 +200,8 @@ the following thirteen directed types:
   \item a \(3\)--\(4\) death.
 \end{enumerate}
 There is no \(3/2\) slide in this list.  A handle slide is intrinsically a
-same-index \(k/k\) operation.  The \(2/1\) passage is listed separately only
-because dotted-circle notation turns an ambient isotopy in the boundary of
-the \(0\)--\(1\) subhandlebody into an additional diagrammatic move.  The
-full attaching data for the \(3\)-handles are retained in a Kirby datum, so
-their isotopies past the \(2\)-handle region remain ordinary level isotopies
-and create no analogous reduced-diagram generator.
+same-index \(k/k\) operation.  Isotopies which look like a strand passing
+through a dotted circle are already included under level isotopy.
 \end{definition}
 
 \begin{proposition}[Realization of an elementary move]
@@ -218,8 +214,8 @@ of its supporting neighborhood, an orientation-preserving diffeomorphism
 \]
 For a same-index slide this is the standard handle-slide diffeomorphism; for
 a birth or death it is the diffeomorphism supplied by cancellation of the
-standard local pair; and for a \(2/1\) passage it is induced by the ambient
-isotopy in the boundary of the \(0\)--\(1\) subhandlebody.
+standard local pair; and for a level isotopy it is the induced ambient
+isotopy of the corresponding attaching data.
 \end{proposition}
 
 \begin{proof}
@@ -227,9 +223,11 @@ These are the local realization statements of handle calculus.  The
 attaching-sphere and framing descriptions above are exactly the hypotheses
 of the handle-slide and handle-cancellation theorems.  The maps are the
 identity outside the displayed supporting neighborhoods.  In one-ended
-dotted notation the corresponding pictures are the dotted-circle slide,
-passage through a dotted handle, and oriented framed band sum of
+dotted notation the corresponding handle-slide pictures are the
+dotted-circle slide and the oriented framed band sum of
 \cite[Figures~5.39 and~5.36 and Section~5.1]{GompfStipsicz1999}.
+A strand drawn as passing through a dotted circle instead represents an
+ambient isotopy of the attaching data.
 \end{proof}
 
 \paragraph{Kirby--Cerf movies.}
@@ -304,9 +302,10 @@ data meets only the codimension-one strata of Cerf theory.  The regular
 intervals give level isotopies, exchanges of critical values reorder
 disjoint handle attachments, isolated same-index connecting trajectories in
 the pseudo-gradient family give handle slides, and the birth--death strata
-give cancelling adjacent-index pairs.  In dotted notation one may further
-subdivide level isotopies into the \(2/1\) passages of
-\cref{def:handle-slide}.  This produces the finite movie above.
+  give cancelling adjacent-index pairs.  In dotted notation a level isotopy
+  may be drawn as a sequence of strand motions through dotted circles, but
+  these are not additional Kirby--Cerf moves.  This produces the finite movie
+  above.
 
 Track the level identifications and pseudo-gradient flows throughout the
 path.  Their composite identifies the terminal handle decomposition with
@@ -321,7 +320,7 @@ of the standard Cerf comparison theorem; see \cite{Cerf1970} and
 \label{cor:one-ended-diffeomorphism-realization}
 If both presentations in \cref{prop:handle-movie-completeness} are
 one-ended, the realizing movie may be chosen one-ended throughout.  Hence it
-uses the nine move types other than \(0\)--\(1\) and \(3\)--\(4\)
+uses the eight move types other than \(0\)--\(1\) and \(3\)--\(4\)
 birth/death.
 \end{corollary}
 
