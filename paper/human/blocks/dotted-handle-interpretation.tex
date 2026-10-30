@@ -1,93 +1,158 @@
 \subsection{Cohomological descent}
 \label{subsec:dotted-handle-interpretation}
 
-We prove that the presentation-level evaluator factors through the quotient
-\(Z^2(\mathcal H)\to H^2(\mathcal H)\).  If
-\(\omega'-\omega=\delta^1 b\), linearity reduces the problem to a single
-degree-\(1\) basis cochain, hence to one dotted \(1\)-handle.  Its cellular
-incidence numbers assemble the additional character coupons into one
-component of \(\eta\) on the dotted through-channel.  The tensor-unit
-projector absorbs that component.  We first record this local dotted-handle
-calculation and then apply it to the finite support of \(b\).
+The dependence on a handle cocycle is multiplicative at the level of
+character coupons.  We use this observation to prove the stronger statement
+that adding a coboundary leaves every fixed-label graphical summand unchanged.
+The full evaluator then descends immediately from \(Z^2(\mathcal H)\) to
+\(H^2(\mathcal H)\).
 
-\subsubsection{The dotted-handle input for representative independence}
-\label{subsubsec:dotted-representative-input}
-
-The dotted-handle operation in the evaluator is independent of \(\eta\).
-We recall only the local information needed to show that changing a cocycle
-representative does not change the value.
-
-\begin{lemma}[A cross-section of a dotted handle]
-\label{lem:dotted-handle-sections}
-Let \(\mathcal H\) be a one-ended Kirby presentation and let \(\delta\) be a
-dotted component of \(D_{\mathcal H}\).  Choose standard pair-of-balls
-coordinates on the corresponding \(1\)-handle.  A cooriented cross-section
-\(\Delta_\delta\), transverse to the framed attaching link, meets it in a
-finite ordered list \(p_1,\ldots,p_r\).  Each occurrence remembers its framed
-component \(k(p_j)\), its oriented strand, and its local intersection sign
-\(\epsilon(p_j)\in\{+1,-1\}\).  After a simple-label state is fixed, the
-occurrence inherits the label of that already oriented strand.  The signed
-incidence numbers
+\begin{proposition}[The dotted-handle operation]
+\label{prop:dotted-handle-projector}
+Let \(\delta\) be a dotted component of a one-ended Kirby presentation
+\(\mathcal H\).  Choose a cooriented cross-section of the corresponding
+\(1\)-handle, transverse to the framed attaching link.  For a fixed
+simple-label state \(\lambda\), let \(B_\delta\) be the ordered tensor product
+of the oriented labels meeting that cross-section, with the rigid dual used
+at an oppositely oriented boundary occurrence.  The evaluator inserts
 \[
-  I_\delta(k):=
-  \sum_{j:\,k(p_j)=k}\epsilon(p_j)
+  P_{\mathbf1,B_\delta}
+  \in\operatorname{End}_{\cC}(B_\delta).
 \]
-recover the cellular boundary map:
+If \(e_k\) is the oriented \(2\)-handle generator corresponding to
+\(K_k\subset D_{\mathrm{fr}}\), then
 \begin{equation}
-  \partial_2(e_k)=\sum_\delta I_\delta(k)e_\delta.
+  \partial_2(e_k)=\sum_\delta I_\delta(k)e_\delta,
   \label{eq:dotted-cellular-boundary}
 \end{equation}
-Cross-sections for distinct dotted handles may be chosen with disjoint
-supports.
-\end{lemma}
-
-\begin{proof}
-Use the standard pair-of-balls models supplied by the handle decomposition and
-perturb the sections to be transverse to the compact framed attaching link.
-The usual signed-intersection computation of the cellular attaching map gives
-\eqref{eq:dotted-cellular-boundary}.
-\end{proof}
-
-\begin{proposition}[Dotted-handle projector]
-\label{prop:dotted-handle-projector}
-Let \(\cC\) be a premodular fusion category, let \(\mathcal H\) be a one-ended
-Kirby presentation, fix a simple-label state \(\lambda\), and let \(\delta\)
-be a dotted component of \(D_{\mathcal H}\).  Let \(B_\delta\) be the
-boundary object determined by \(\lambda\) and the ordered cross-section of
-\cref{lem:dotted-handle-sections}.  The local morphism inserted by the
-evaluator at this cut is
-\[
-  P_{\mathbf1,B_\delta}.
-\]
-For several dotted handles, the operations tensor independently because their
-handle neighborhoods are disjoint.
+where \(I_\delta(k)\) is the signed intersection number of \(K_k\) with the
+chosen cross-section of \(\delta\).
 \end{proposition}
 
 \begin{proof}
-The cross-section of \cref{lem:dotted-handle-sections} is exactly the
-cut-open tangle used in \cref{def:cut-open-dotted-tangle}; hence its ordered
-boundary word realizes the object \(B_\delta\).  The claim is then the
-dotted-circle rule in \cref{def:dotted-circle-translation}.  Disjoint handle
-neighborhoods give tensor-independent insertions.
+The first assertion is the dotted-circle rule in
+\cref{def:dotted-circle-translation}, applied to the cut-open tangle of
+\cref{def:cut-open-dotted-tangle}.  The second assertion is the standard
+signed-intersection description of the cellular boundary map for a handle
+decomposition.
 \end{proof}
 
-\begin{convention}[Three independent pieces of information]
-\label{conv:three-sign-sources}
-Fix a twisted categorical input \((\cC,\eta)\), a one-ended Kirby presentation
-\(\mathcal H\), a cocycle \(\omega\in Z^2(\mathcal H)\), and a simple-label state
-\(\lambda\).
-For a ribbon meeting a dotted-handle cross-section, keep the following data
-separate.
-\begin{enumerate}[label=(\roman*),ref=\roman*]
-  \item The orientation of the ribbon determines whether the oriented label is
-  written as \(X\) or \(X^*\).
-  \item The cross-section and attaching-circle orientations determine the
-  signed incidence in \eqref{eq:dotted-cellular-boundary} and whether a
-  boundary occurrence is incoming or outgoing.
-  \item The handle cocycle supplies the integer \(\omega_k\) in the character
-  coupon \((\eta^{\omega_k})_{\lambda_k}\).
-\end{enumerate}
-Neither the ribbon label nor the exponent is chosen by the dotted
-cross-section.  The cross-section only displays the intrinsic operation and is
-not additional input to the manifold invariant.
-\end{convention}
+\begin{lemma}[Addition of character decorations]
+\label{lem:addition-of-character-decorations}
+Fix \(\mathcal H\), a simple-label state \(\lambda\), and the auxiliary data
+\(\mathfrak a\).  For \(\omega,\omega'\in Z^2(\mathcal H)\), the decorated
+graph for \(\omega+\omega'\) is obtained from the graph for \(\omega\) by
+composing, on every framed component \(K_k\), the additional coupon
+\((\eta^{\omega'_k})_{\lambda_k}\).  In particular, addition of cocycles acts
+multiplicatively on the character decorations.
+\end{lemma}
+
+\begin{proof}
+On \(K_k\), the required identity is
+\[
+  (\eta^{\omega_k+\omega'_k})_{\lambda_k}
+  =
+  (\eta^{\omega_k})_{\lambda_k}
+  \circ
+  (\eta^{\omega'_k})_{\lambda_k}.
+\]
+This holds because \(\eta_{\lambda_k}\) is an automorphism.  All other local
+morphisms are unchanged.
+\end{proof}
+
+\begin{proposition}[Coboundaries act trivially on each fixed-label summand]
+\label{prop:fixed-label-coboundary-triviality}
+Let \(\omega\in Z^2(\mathcal H)\), let \(b\in C^1(\mathcal H)\), and fix a
+simple-label state \(\lambda\).  Then
+\[
+  L^\eta_{\lambda,\omega+\delta^1b}(\mathcal H)
+  =
+  L^\eta_{\lambda,\omega}(\mathcal H)
+  \quad\text{in }\operatorname{End}_{\cC}(\mathbf1).
+\]
+\end{proposition}
+
+\begin{proof}
+The group \(C^1(\mathcal H)\) is freely generated by the dotted
+\(1\)-handles.  By \cref{lem:addition-of-character-decorations}, it is enough
+to consider \(b=m e_\delta^*\) for one dotted component \(\delta\) and one
+integer \(m\).
+
+By \eqref{eq:dotted-cellular-boundary}, the extra exponent on the framed
+component \(K_k\) is \(mI_\delta(k)\).  Monoidality of \(\eta\), together
+with \(\eta_{X^*}=\eta_X^{-1}\), therefore assembles all additional coupons
+meeting the cross-section into the single endomorphism
+\[
+  (\eta^m)_{B_\delta}\in\operatorname{End}_{\cC}(B_\delta).
+\]
+Here the orientation of each framed component fixes its label before the
+cross-section is chosen; the intersection signs only record the variance of
+its occurrences in \(B_\delta\).
+
+The dotted-handle operation is \(P_{\mathbf1,B_\delta}\).  Since this
+projector retains only the tensor-unit channel and
+\((\eta^m)_{\mathbf1}=\operatorname{id}_{\mathbf1}\),
+\cref{lem:unit-projector-absorbs-character} gives
+\[
+  P_{\mathbf1,B_\delta}\circ(\eta^m)_{B_\delta}
+  =P_{\mathbf1,B_\delta}.
+\]
+Thus the additional coboundary decoration disappears before the common
+exterior tangle is reglued.  Repeating this argument over the finite support
+of \(b\) proves the claim.
+\end{proof}
+
+\begin{proposition}[Cohomological descent]
+\label{prop:representative-independence}
+If \(\omega,\omega'\in Z^2(\mathcal H)\) represent the same class in
+\(H^2(\mathcal H;\mathbb Z)\), then
+\[
+  \CY_{\cC,\eta}(\mathcal H,\omega)
+  =
+  \CY_{\cC,\eta}(\mathcal H,\omega').
+\]
+\end{proposition}
+
+\begin{proof}
+Write \(\omega'-\omega=\delta^1b\).  By
+\cref{prop:fixed-label-coboundary-triviality}, the two graphical morphisms
+are equal for every label state \(\lambda\).  Their quantum-dimension weights
+are identical, so summing over \(\lambda\) proves the equality.
+\end{proof}
+
+\begin{definition}[Evaluator on a cohomology class]
+\label{def:cohomological-handle-evaluator}
+For \(\xi\in H^2(\mathcal H;\mathbb Z)\), define
+\[
+  \CY_{\cC,\eta}(\mathcal H,\xi)
+\]
+to be \(\CY_{\cC,\eta}(\mathcal H,\omega)\) for any handle cocycle
+\(\omega\) representing \(\xi\).  This is well defined by
+\cref{prop:representative-independence}.  For a marked Kirby datum
+\((\mathcal H,\beta)\), define
+\[
+  \CY_{\cC,\eta}(\mathcal H,\beta)
+\]
+by taking \(\xi=\xi_{\mathcal H,\beta}\) from
+\cref{def:handle-cocycle}.
+\end{definition}
+
+\begin{remark}[Multiplicativity occurs before evaluation]
+\label{rem:decoration-not-evaluator-multiplicativity}
+The identity in \cref{lem:addition-of-character-decorations} concerns the
+composition of coupons on one fixed labelled graph.  In general it does not
+imply
+\[
+  \bigl\langle L^\eta_{\lambda,\omega+\omega'}(\mathcal H)\bigr\rangle
+  =
+  \bigl\langle L^\eta_{\lambda,\omega}(\mathcal H)\bigr\rangle
+  \bigl\langle L^\eta_{\lambda,\omega'}(\mathcal H)\bigr\rangle
+  \quad\text{or}\quad
+  \CY_{\cC,\eta}(\mathcal H,\omega+\omega')
+  =\CY_{\cC,\eta}(\mathcal H,\omega)
+   \CY_{\cC,\eta}(\mathcal H,\omega').
+\]
+The conclusion proved here is instead that coboundary decorations act as the
+identity after the dotted projectors are inserted, so the evaluator factors
+through \(H^2(\mathcal H;\mathbb Z)\).
+\end{remark}
