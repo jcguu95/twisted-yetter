@@ -2,8 +2,8 @@
 \label{subsec:dotted-handle-interpretation}
 
 The only nonstandard part of \eqref{eq:twisted-handle-evaluator} is the rule
-for a dotted circle.  We now relate it to the turned-over handle operation of
-\cite[Definition~5.11]{Tham2021}.
+for a dotted circle.  We now spell out how its topological cross-section
+produces the boundary object on which the tensor-unit projector acts.
 
 \begin{lemma}[A cross-section of a dotted handle]
 \label{lem:dotted-handle-sections}
@@ -36,18 +36,14 @@ The usual signed-intersection computation of the cellular attaching map gives
 \eqref{eq:dotted-cellular-boundary}.
 \end{proof}
 
-\begin{proposition}[Turned-over interpretation]
-\label{prop:dotted-section-index-three}
+\begin{proposition}[Dotted-handle projector]
+\label{prop:dotted-handle-projector}
 Let \(\cC\) be a premodular fusion category, let \(\mathcal H\) be a one-ended
 Kirby presentation, fix a simple-label state \(\lambda\), and let \(\delta\)
 be a dotted component of \(D_{\mathcal H}\).  Let \(B_\delta\) be the
 boundary object determined by \(\lambda\) and the ordered cross-section of
-\cref{lem:dotted-handle-sections}.  After turning the handle
-decomposition over, the primal dotted \(1\)-handle \(\delta\) is a
-dual index-\(3\) handle.  The ordered boundary word on
-\(\Delta_\delta\) is the ribbon word transverse to the co-core of that dual
-handle.  The index-\(3\) operation of
-\cite[Definition~5.11, \(k=3\)]{Tham2021} is therefore precisely
+\cref{lem:dotted-handle-sections}.  The local morphism inserted by the
+evaluator at this cut is
 \[
   P_{\mathbf1,B_\delta}.
 \]
@@ -56,15 +52,11 @@ handle neighborhoods are disjoint.
 \end{proposition}
 
 \begin{proof}
-In the pair-of-balls model \(D^1\times D^3\), a dotted-circle cross-section
-records the arcs entering one attaching \(3\)-ball and leaving the other; see
-\cite[Section~2.3.2, Figure~1]{BarenzBarrett2018}.  Turning the decomposition
-over replaces this handle by a dual index-\(3\) handle.  The same ribbons may
-be bunched and made transverse to its co-core, as in
-\cite[proof of Proposition~9.4, p.~96]{Tham2021}.  Definition~5.11 kills every
-resolved simple through-channel except the tensor unit and is the identity on
-the unit channel.  Summing over multiplicities gives exactly the canonical
-projector \(P_{\mathbf1,B_\delta}\).
+The cross-section of \cref{lem:dotted-handle-sections} is exactly the
+cut-open tangle used in \cref{def:cut-open-dotted-tangle}; hence its ordered
+boundary word realizes the object \(B_\delta\).  The claim is then the
+dotted-circle rule in \cref{def:dotted-circle-translation}.  Disjoint handle
+neighborhoods give tensor-independent insertions.
 \end{proof}
 
 \begin{convention}[Three independent pieces of information]
@@ -86,22 +78,4 @@ separate.
 Neither the ribbon label nor the exponent is chosen by the dotted
 cross-section.  The cross-section only displays the intrinsic operation and is
 not additional input to the manifold invariant.
-\end{convention}
-
-\begin{convention}[Primal and turned-over indices]
-\label{conv:primal-turned-over}
-Let \(\mathcal H\) be a one-ended Kirby presentation.  Our topological handle
-names are primal, whereas Tham's evaluator is applied
-to the turned-over decomposition.  Thus
-\[
-  h^{\mathrm{Tham}}_1=h^{\mathrm{pr}}_3,
-  \qquad
-  h^{\mathrm{Tham}}_2=h^{\mathrm{pr}}_2,
-  \qquad
-  h^{\mathrm{Tham}}_3=h^{\mathrm{pr}}_1.
-\]
-This explains both the dotted index-\(3\) operation and the exponent
-\(1-h_3(\mathcal H)\) in \eqref{eq:twisted-handle-evaluator}; compare
-\cite[Section~4.2]{GompfStipsicz1999} and
-\cite[Definition~5.11]{Tham2021}.
 \end{convention}

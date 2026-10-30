@@ -1,28 +1,6 @@
 \subsection{The marked handle evaluator}
 \label{subsec:graphical-construction}
 
-\begin{definition}[Handle-operator evaluation]
-\label{def:general-handle-operator-evaluation}
-Let \((\mathcal H,\omega)\) be a Kirby datum equipped with a handle
-\(2\)-cocycle.
-Turn the handle decomposition over.  This reverses the handle order and sends
-each primal index-\(k\) handle to a dual index-\((4-k)\) elementary
-cobordism.  Assign to it the corresponding skein operator of
-\cite[Definition~5.11]{Tham2021}.  For a primal \(2\)-handle \(e_j\), modify
-that operator by inserting the natural-automorphism coupon
-\((\eta^{\omega_j})\) on its attaching ribbon.  Compose the resulting operators in
-the turned-over handle order.  Since the incoming and outgoing boundaries are empty, the
-composite is an endomorphism of the vacuum line and hence a scalar.  Denote it
-by
-\[
-  \CY_{\cC,\eta}(\mathcal H,\omega)\in\mathbb C.
-\]
-The definition permits arbitrary finite numbers of \(0\)- and \(4\)-handles;
-their operators are, respectively, the turned-over index-\(4\) RT closure and
-index-\(0\) vacuum creation operators.  Only the index-\(2\) operators carry
-the homological character coupons.
-\end{definition}
-
 \begin{definition}[Categorical boundary state of a cut-open dotted component]
 \label{def:categorical-cut-boundary-state}
 Fix a simple-label assignment \(\lambda\) on the framed components in the
@@ -72,8 +50,7 @@ Here and below, the dependence of \(B_\delta\) and \(\mathcal E_\delta\) on
 the currently fixed label state \(\lambda\) is suppressed from the notation.
 \end{convention}
 
-We can now expand \cref{def:general-handle-operator-evaluation} in the
-one-ended case as a single RT graph sum.
+We now assemble these local rules into a scalar.
 
 \begin{definition}[The coloured graph sum]
 \label{def:colored-graph-sum}
@@ -108,11 +85,11 @@ ribbon graphs by the following rules.
 \end{enumerate}
 \end{definition}
 
-\begin{proposition}[One-ended handle formula]
+\begin{definition}[Homologically twisted Crane--Yetter evaluator]
 \label{def:twisted-handle-evaluator}
 Fix a twisted categorical input \((\cC,\eta)\), a one-ended Kirby presentation
 \(\mathcal H\), and a cocycle \(\omega\in Z^2(\mathcal H)\).  Then the handle
-operator evaluation is
+evaluator is
 \begin{equation}
   \boxed{
   \CY_{\cC,\eta}(\mathcal H,\omega)
@@ -124,18 +101,7 @@ operator evaluation is
       \bigl(S^3,\Gamma(\mathcal H,\omega;\lambda)\bigr).}
   \label{eq:twisted-handle-evaluator}
 \end{equation}
-\end{proposition}
-
-\begin{proof}
-Turn the handle decomposition over and expand the operators of
-\cite[Definition~5.11]{Tham2021}.  The unique primal \(4\)-handle contributes
-the index-\(0\) vacuum factor \(\operatorname{Dim}(\cC)\); each primal
-\(3\)-handle contributes the inverse factor; primal \(2\)-handles give the
-Kirby-colour sums with the displayed character coupons; primal \(1\)-handles
-give the tensor-unit projectors; and the unique primal \(0\)-handle performs
-the final RT closure in \(S^3\).  Their composite is exactly the displayed
-sum.
-\end{proof}
+\end{definition}
 
 \begin{proposition}[Dependence on the three-handle data]
 \label{prop:evaluator-three-handle-dependence}
@@ -186,8 +152,7 @@ A dotted circle is not a coloured ribbon component and is never assigned the
 Kirby colour.  It denotes the projector onto the tensor-unit through-channel.
 In a modular category that projector admits an alternative encircling
 description using \(\operatorname{Dim}(\cC)^{-1}\Omega_{\cC}\), but no such
-replacement is used in the premodular construction; compare
-\cite[Definition~5.11 and Lemma~2.31]{Tham2021}.
+replacement is used in the premodular construction.
 \end{remark}
 
 \begin{remark}[Intrinsic meaning]

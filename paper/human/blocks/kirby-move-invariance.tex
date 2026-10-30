@@ -82,11 +82,9 @@ opposite face is the reversed rigid dual, exactly as in
 outside the section defines the linear context $\mathcal E_\delta$.
 
 Inside the product neighborhood, bunch the transverse ribbons and insert the
-dimension-weighted simple-channel resolution of
-\cite[Lemma~2.27]{Tham2021}.  Definition~5.11, $k=3$, sends a resulting simple
-channel $i$ to zero unless $i\cong\mathbf1$, in which case it removes that
-channel.  Summing the surviving multiplicity terms is precisely the canonical
-projector $P_{\mathbf1,B_\delta}$, so regluing gives
+composition-dual resolution of the tensor-unit isotypic summand from
+\cref{def:tensor-unit-projector}.  Summing its multiplicity terms is precisely
+the canonical projector $P_{\mathbf1,B_\delta}$, so regluing gives
 \eqref{eq:dotted-section}.  Notice that the projector is inserted on
 the through-channel before closure; no currying of the whole exterior tangle
 is involved.  The second item is the standard signed-intersection formula for
@@ -106,10 +104,9 @@ tensor-unit projectors and of the dotted-handle sections used to draw them.
 \begin{proof}
 The sum $\sum_\mu u_\mu\widehat u_\mu$ is the canonical projector onto the
 full tensor-unit isotypic summand, so a change of composition-dual bases does
-not change its morphism.  The evaluator is defined by composing the
-intrinsic handle maps.  By \cref{prop:dotted-section-index-three}, a
-dotted-handle section only draws those fixed maps.  Two drawings of the same
-intrinsic composite have the same
+not change its morphism.  By \cref{prop:dotted-handle-projector}, a
+dotted-handle section only draws the canonical projector specified by the
+evaluator.  Two drawings of the same intrinsic composite have the same
 morphism by ribbon graphical coherence \cite[Theorem~6.1]{Shum1994}; no
 comparison theorem for arbitrary spanning-disk systems is required.  For
 several dotted handles, their actual handle neighborhoods are disjoint, so
@@ -248,24 +245,21 @@ For a marked Kirby datum \((\mathcal H,\beta)\), we therefore write
 for the value of any handle cocycle representing
 \(\xi_{\mathcal H,\beta}\) from \cref{def:handle-cocycle}.
 
-\begin{lemma}[Index-$3$ handle-slide identity]
-\label{lem:index-three-handle-slide}
+\begin{lemma}[Dotted $1$-handle-slide identity]
+\label{lem:dotted-one-handle-slide}
 Let \(m\colon\mathcal H\to\mathcal H'\) be a $1/1$ slide between one-ended
 Kirby presentations in the local form of
-\cref{prop:local-movie-normal-forms}.  Turn the handle decompositions over,
-and denote the two involved dual index-$3$ handles before the slide by
-$H_m^\vee,H_s^\vee$ and after the slide by
-$H_m^{\vee\prime},H_s^{\vee\prime}$.  After identifying the incoming and
-outgoing level boundaries outside the supporting ball, let
-\(\mathsf H^{(3)}_{\mathrm{src}}\) and
-\(\mathsf H^{(3)}_{\mathrm{tgt}}\) be the composites of the two intrinsic
-index-$3$ handle maps on the source and target sides.  Then, for every
-decorated incoming skein $\Gamma$,
+\cref{prop:local-movie-normal-forms}.  Cut open the two involved dotted
+handles on the source and target sides, and identify the exterior tangles
+outside the supporting ball.  Let
+\(P_{\mathrm{src}}\) and \(P_{\mathrm{tgt}}\) denote the respective
+composites of the two tensor-unit projectors.  Then, for every decorated
+exterior input $\Gamma$,
 \begin{equation}
-  \mathsf H^{(3)}_{\mathrm{src}}([\Gamma])
+  P_{\mathrm{src}}([\Gamma])
   =
-  \mathsf H^{(3)}_{\mathrm{tgt}}([\Gamma]).
-  \label{eq:one-one-index-three-interface}
+  P_{\mathrm{tgt}}([\Gamma]).
+  \label{eq:dotted-one-handle-slide-interface}
 \end{equation}
 \end{lemma}
 
@@ -273,15 +267,15 @@ decorated incoming skein $\Gamma$,
 \label{rem:one-one-multiplicity-data}
 At dotted-handle sections, each side is expanded using the full
 composition-dual resolution of the tensor-unit isotypic summand for each of
-the two handles.  Equation~\eqref{eq:one-one-index-three-interface} retains
+the two handles.  Equation~\eqref{eq:dotted-one-handle-slide-interface} retains
 every multiplicity index separately: it does \emph{not} replace two
 projectors by a single projector on the tensor product of their
 through-objects.
 \end{remark}
 
 \begin{proof}
-By \cref{prop:dotted-section-index-three}, the two projectors are the
-graphical expressions of the actual dual index-$3$ handle maps.  Expand the
+By \cref{prop:dotted-handle-projector}, the two projectors are the local
+morphisms prescribed by the evaluator.  Expand the
 incoming skein simultaneously across the two co-cores using complete simple
 resolutions.  Write its summands as
 \[
@@ -290,9 +284,8 @@ resolutions.  Write its summands as
 \]
 where $i,j$ are the two transverse simple channels and $\mu,\nu$ are their
 full multiplicity indices; the trace-dual resolution coefficients are
-absorbed into the notation $[\Gamma_{i,j;\mu,\nu}]$.  By
-\cite[Definition~5.11, $k=3$]{Tham2021}, the
-two source handle maps act termwise as
+absorbed into the notation $[\Gamma_{i,j;\mu,\nu}]$.  The two source
+projectors act termwise as
 \begin{equation}
   \mathsf H^{(3)}_{\mathrm{src}}
     ([\Gamma_{i,j;\mu,\nu}])
@@ -305,17 +298,15 @@ The standard $1/1$ source and target are the same-index slide models of
 \cref{def:handle-slide}, realized as in
 \cref{prop:elementary-move-realization}.  Moving from the source pair of
 co-cores to the target pair changes the two complete resolutions by the
-tunnelling isomorphism of
-\cite[Lemma~2.28, Equation~(2.17)]{Tham2021}.  This isomorphism is obtained
-from the same composition-dual bases, is invertible on every multiplicity
-space, and carries the $(\mathbf1,\mathbf1)$ summand identically to the
-$(\mathbf1,\mathbf1)$ summand.  Applying the target index-$3$ maps therefore
+tunnelling isomorphism obtained from the associator, braiding, and rigidity
+maps.  Naturality and the composition-dual identities make it invertible on
+every multiplicity space and carry the $(\mathbf1,\mathbf1)$ summand
+identically to the $(\mathbf1,\mathbf1)$ summand.  Applying the target
+projectors therefore
 again gives the right-hand side of
 \eqref{eq:one-one-simple-channel-action}, with the same surviving
 $\mu,\nu$.  Summing the resolved terms proves
-\eqref{eq:one-one-index-three-interface}.  This is the algebraic expansion
-of the final $1$-handle-slide relation in the proof of
-\cite[Proposition~5.13, pp.~53--54]{Tham2021}.
+\eqref{eq:dotted-one-handle-slide-interface}.
 
 The input is an arbitrary decorated skein, so all character coupons and
 uninvolved morphisms remain present.  The supporting-ball model and
@@ -361,7 +352,7 @@ regluing maps agree outside the supporting ball.
 In the pair-of-balls model for the stationary $1$-handle, a $2/1$ passage
 pulls the moving attaching arc through one ball and returns it through the
 other.  Cutting at the positive face of
-\cref{prop:dotted-section-index-three} identifies the source local
+\cref{prop:dotted-handle-projector} identifies the source local
 tangle with the left composite of \eqref{eq:positive-two-one-interface} and
 the referenced target local tangle with the right composite.  Reversing the
 local crossing gives
@@ -374,8 +365,7 @@ type.
 Both equalities are the naturality square for the braiding, applied to
 $P_{\mathbf1,B}\colon B\to B$ and
 $(\eta^a)_x\colon x\to x$.  Equivalently, expand $P_{\mathbf1,B}$ as the full
-composition-dual resolution and specialize the tunnelling identity
-\cite[Lemma~2.28, Equation~(2.17), p.~8]{Tham2021} to the morphism
+composition-dual resolution and apply braiding naturality to
 $f=(\eta^a)_x$; every unit multiplicity index remains in the sum.  Every
 event between the two clean collars is handled by
 \cref{lem:finite-coupon-transport}; cups and caps use the displayed mate
@@ -397,8 +387,8 @@ passage, and let \(\beta\in H_2(|\mathcal H|;\mathbb Z)\).  Then
 Put the slide into the clean local form of
 \cref{prop:local-movie-normal-forms} and keep the exterior fixed.
 
-For a $1/1$ slide, \cref{lem:index-three-handle-slide} identifies the
-source and target composites of the two dual index-$3$ maps.  Because the
+For a $1/1$ slide, \cref{lem:dotted-one-handle-slide} identifies the
+source and target composites of the two dotted-handle projectors.  Because the
 identity is an equality on every decorated input skein, it retains all
 character coupons already present on ordinary strands.  It also retains the
 two full unit-projector resolutions separately, including all multiplicity
@@ -829,20 +819,6 @@ diagram, every character exponent, and every RT summand are unchanged, as is
 sum.
 \end{proof}
 
-\begin{proposition}[Extreme-handle cancellation]
-\label{prop:extreme-handle-cancellation}
-The general handle-operator evaluation of
-\cref{def:general-handle-operator-evaluation} is unchanged by a
-\(0\)--\(1\) or \(3\)--\(4\) birth or death.
-\end{proposition}
-
-\begin{proof}
-These moves do not change \(C_2\), hence they introduce no character coupon.
-The two adjacent elementary handle operators are the inverse cancellation
-maps of \cite[Definition~5.11 and Proposition~5.13]{Tham2021}.  Their
-composite is the identity on the common exterior state space.
-\end{proof}
-
 \begin{theorem}[One-ended elementary Kirby--Cerf-move invariance]
 \label{thm:elementary-kirby-invariance}
 Let
@@ -887,7 +863,7 @@ equality.
 \emph{$1/1$ slides and $2/1$ passages.}
 For both moves $\omega'=\omega$ on the canonically identified $2$-handle
 generators, and $h_3$ is unchanged.  For a $1/1$ slide the required local
-equality is exactly \eqref{eq:one-one-index-three-interface}.  For a $2/1$
+equality is exactly \eqref{eq:dotted-one-handle-slide-interface}.  For a $2/1$
 passage it is \eqref{eq:positive-two-one-interface} or
 \eqref{eq:negative-two-one-interface}, according to the crossing orientation.
 After applying the common exterior closure and summing over ordinary labels,
