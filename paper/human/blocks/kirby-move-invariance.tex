@@ -37,8 +37,10 @@ coordinates.}
 These are the following four move types.
 \begin{itemize}
   \item \textbf{Level isotopy.}
-  Here a level isotopy means a framed ambient isotopy of the attaching data
-  inside a regular boundary level, with no handle slide, birth, or death.
+  Here a level isotopy means a framing-preserving ambient isotopy of the
+  attaching embeddings in the boundary of the lower-handle submanifold,
+  performed between two adjacent critical values.  No handle slide, birth,
+  or death occurs.
   It carries each labelled \(2\)-handle component, together with its coupon
   \((\eta_{\lambda_k})^{\omega_k}\), to the corresponding target component.
   Thus the source and target are framed-isotopic decorated ribbon graphs.
@@ -46,32 +48,22 @@ These are the following four move types.
   normalization factor are unchanged.
 
   \item \textbf{A \(1/1\) slide.}
-  Cut open the two dotted handles involved in the slide.  Denote the source
-  and target local composites of tensor-unit projectors by
-  \(Q_{\mathrm{src}}\) and \(Q_{\mathrm{tgt}}\), and denote by
-  \(E_{\lambda,\omega}[-]\) the common exterior ribbon tangle, including all
-  labels and character coupons.  The standard local \(1/1\) projector
-  identity is an equality of morphisms with the same boundary,
-  \[
-    Q_{\mathrm{src}}=Q_{\mathrm{tgt}}.
-  \]
-  To see this equality, expand both tensor-unit projectors in complete simple
-  resolutions.  Every term vanishes unless both through-channels are the
-  tensor unit.  On the surviving \(\mathbf1\)-channels, the handle slide is
-  reduced to the unitors and associators, and monoidal coherence identifies
-  the source and target composites.  Thus the equality holds before any
-  exterior tangle is attached.
-  Applying the same exterior context to both sides gives
-  \[
-    \operatorname{ev}_{\cC}
-      \bigl(E_{\lambda,\omega}[Q_{\mathrm{src}}]\bigr)
-    =
-    \operatorname{ev}_{\cC}
-      \bigl(E_{\lambda,\omega}[Q_{\mathrm{tgt}}]\bigr).
-  \]
-  The \(2\)-handle labels and cocycle coordinates are canonically identified,
-  so this is equality of the decorated source and target summands, not merely
-  of their undecorated versions.
+  Cut open both dotted handles involved in the slide.  At either cut, the
+  evaluator applies the tensor-unit projector: every non-unit through-channel
+  is killed, while the surviving channel is the identity strand
+  \(\operatorname{id}_{\mathbf1}\).  Any character coupon on that surviving
+  channel is also the identity because \(\eta_{\mathbf1}=\operatorname{id}_{
+  \mathbf1}\).  Consequently, after both cuts the local source tangle is just
+  two tensor-unit identity strands inside the common exterior tangle.
+
+  Perform the \(1/1\) slide and apply the same two cuts to the target.  They
+  again replace both local through-channels by tensor-unit identity strands.
+  The apparent slide is now a slide of one identity unit strand past another,
+  which is the same identity by monoidal coherence.  Thus the cut-open source
+  and target morphisms are equal.  Regluing them into the same labelled and
+  character-decorated exterior gives equal evaluator summands.  The
+  \(2\)-handle coordinates, label weights, and normalization factor have not
+  changed.
 
   \item \textbf{A \(2/1\) dotted-handle passage.}
   Recall from \cref{def:handle-slide} that this is not a handle slide: it is
