@@ -213,67 +213,63 @@ death move, the replacement by a zero-coordinate source representative does
 not change the scalar by \cref{prop:representative-independence}.
 \end{proof}
 
-\begin{theorem}[Elementary marked Kirby--Cerf invariance]
-\label{thm:elementary-kirby-invariance}
-Let
-\[
-  m\colon(\mathcal H,\beta)\longrightarrow(\mathcal H',\beta')
-\]
-be a marked elementary Kirby--Cerf move between one-ended Kirby data.  Then
-\[
-  \CY_{\cC,\eta}(\mathcal H,\beta)
-  =\CY_{\cC,\eta}(\mathcal H',\beta').
-\]
+\begin{theorem}[Marked Kirby--Cerf invariance and presentation independence]
+\label{thm:marked-kirby-invariance-descent}
+The marked evaluator has the following three invariance properties.
+\begin{enumerate}[label=(\roman*),ref=\roman*]
+  \item\label{item:elementary-marked-invariance}
+  If
+  \[
+    m\colon(\mathcal H,\beta)\longrightarrow(\mathcal H',\beta')
+  \]
+  is a marked elementary Kirby--Cerf move between one-ended Kirby data, then
+  \[
+    \CY_{\cC,\eta}(\mathcal H,\beta)
+    =\CY_{\cC,\eta}(\mathcal H',\beta').
+  \]
+
+  \item\label{item:finite-marked-movie-invariance}
+  If a finite marked Kirby--Cerf movie connects
+  \((\mathcal H,\beta)\) to \((\mathcal K,\gamma)\), then
+  \[
+    \CY_{\cC,\eta}(\mathcal H,\beta)
+    =\CY_{\cC,\eta}(\mathcal K,\gamma).
+  \]
+
+  \item\label{item:marked-presentation-independence}
+  If
+  \[
+    \rho\colon|(\mathcal H,\beta)|\longrightarrow(X,\alpha),
+    \qquad
+    \sigma\colon|(\mathcal K,\gamma)|\longrightarrow(X,\alpha)
+  \]
+  are marked one-ended Kirby presentations of the same marked
+  \(4\)-manifold, then
+  \[
+    \CY_{\cC,\eta}(\mathcal H,\beta)
+    =\CY_{\cC,\eta}(\mathcal K,\gamma).
+  \]
+\end{enumerate}
 \end{theorem}
 
 \begin{proof}
-Choose a source cocycle \(\omega\), and choose a target cocycle \(\omega'\)
-as in \cref{prop:marking-coordinate-transport}.  By
-\cref{lem:character-compatibility-elementary-moves}, their presentation-level
-evaluations are equal.  The definition on cohomology classes and
-\cref{prop:representative-independence} identify these two values with the
-displayed marked evaluations.
-\end{proof}
+For part~\ref{item:elementary-marked-invariance}, choose a source cocycle
+\(\omega\) and a target cocycle \(\omega'\) as in
+\cref{prop:marking-coordinate-transport}.  Their presentation-level
+evaluations are equal by
+\cref{lem:character-compatibility-elementary-moves}; passage to cohomology
+classes is justified by \cref{prop:representative-independence}.
 
-\begin{corollary}[Finite marked-movie invariance]
-\label{cor:finite-marked-movie-invariance}
-If a finite marked Kirby--Cerf movie connects
-\((\mathcal H,\beta)\) to \((\mathcal K,\gamma)\), then
-\[
-  \CY_{\cC,\eta}(\mathcal H,\beta)
-  =\CY_{\cC,\eta}(\mathcal K,\gamma).
-\]
-\end{corollary}
-
-\begin{proof}
-Apply \cref{thm:elementary-kirby-invariance} at each step and induct on the
-length of the movie.
+Part~\ref{item:finite-marked-movie-invariance} follows by applying
+part~\ref{item:elementary-marked-invariance} at each step and inducting on the
+length of the movie.  Finally, marked Kirby--Cerf completeness,
+\cref{prop:marked-kirby-cerf}, supplies such a finite marked movie between the
+two presentations in part~\ref{item:marked-presentation-independence}; apply
+part~\ref{item:finite-marked-movie-invariance}.
 \end{proof}
 
 \subsubsection{Descent to marked 4-manifolds}
 \label{subsubsec:marked-manifold-descent}
-
-\begin{proposition}[Well-definedness on a marked \(4\)-manifold]
-\label{prop:marked-manifold-evaluation-well-defined}
-Let
-\[
-  \rho\colon|(\mathcal H,\beta)|\longrightarrow(X,\alpha),
-  \qquad
-  \sigma\colon|(\mathcal K,\gamma)|\longrightarrow(X,\alpha)
-\]
-be marked one-ended Kirby presentations of the same marked \(4\)-manifold.
-Then
-\[
-  \CY_{\cC,\eta}(\mathcal H,\beta)
-  =\CY_{\cC,\eta}(\mathcal K,\gamma).
-\]
-\end{proposition}
-
-\begin{proof}
-Marked Kirby--Cerf completeness, \cref{prop:marked-kirby-cerf}, supplies a
-finite marked movie between the two presentations.  Apply
-\cref{cor:finite-marked-movie-invariance}.
-\end{proof}
 
 \begin{definition}[Manifold-level evaluator]
 \label{def:manifold-level-evaluator}
@@ -287,7 +283,9 @@ and define
   \CY_{\cC,\eta}(X,\alpha)
   :=\CY_{\cC,\eta}(\mathcal H,\beta).
 \]
-This is independent of the chosen presentation by the preceding proposition.
+This is independent of the chosen presentation by
+part~\ref{item:marked-presentation-independence} of
+\cref{thm:marked-kirby-invariance-descent}.
 \end{definition}
 
 \begin{theorem}[Marked diffeomorphism invariance]
@@ -306,6 +304,10 @@ be a marked diffeomorphism.  Then
 \begin{proof}
 Choose marked one-ended Kirby presentations of the source and target.
 Marked Kirby--Cerf completeness gives a finite marked movie realizing
-\(f\), and \cref{cor:finite-marked-movie-invariance} identifies their
-values.
+\(f\), and part~\ref{item:finite-marked-movie-invariance} of
+\cref{thm:marked-kirby-invariance-descent} identifies their values.
 \end{proof}
+
+Therefore \(\CY_{\cC,\eta}\) is an invariant of marked
+orientation-preserving diffeomorphism classes of closed, connected, oriented
+smooth \(4\)-manifolds equipped with a class in \(H_2(-;\mathbb Z)\).
