@@ -213,34 +213,24 @@ death move, the replacement by a zero-coordinate source representative does
 not change the scalar by \cref{prop:representative-independence}.
 \end{proof}
 
-\subsubsection{Descent to marked 4-manifolds}
-\label{subsubsec:marked-manifold-descent}
-
 \begin{theorem}[Marked Kirby--Cerf descent]
 \label{thm:marked-kirby-invariance-descent}
-Let \((X,\alpha)\) be a marked \(4\)-manifold.  For any marked one-ended
-Kirby presentation
+Let \((\mathcal H,\beta)\) and \((\mathcal K,\gamma)\) be marked one-ended
+Kirby data, let
 \[
-  \rho\colon|(\mathcal H,\beta)|\longrightarrow(X,\alpha)
+  \rho\colon|(\mathcal H,\beta)|\longrightarrow(X,\alpha),
+  \qquad
+  \sigma\colon|(\mathcal K,\gamma)|\longrightarrow(Y,\delta)
 \]
-the scalar
+be marked Kirby presentations, and suppose that
 \[
-  \CY_{\cC,\eta}(X,\alpha)
-  :=\CY_{\cC,\eta}(\mathcal H,\beta)
+  f\colon(X,\alpha)\longrightarrow(Y,\delta)
 \]
-is independent of the chosen presentation.  Moreover, every marked
-diffeomorphism
+is a marked diffeomorphism.  Then
 \[
-  f\colon(X,\alpha)\longrightarrow(Y,\beta)
+  \CY_{\cC,\eta}(\mathcal H,\beta)
+  =\CY_{\cC,\eta}(\mathcal K,\gamma).
 \]
-satisfies
-\[
-  \CY_{\cC,\eta}(X,\alpha)
-  =\CY_{\cC,\eta}(Y,\beta).
-\]
-Consequently, \(\CY_{\cC,\eta}\) is an invariant of marked
-orientation-preserving diffeomorphism classes of closed, connected, oriented
-smooth \(4\)-manifolds equipped with a class in \(H_2(-;\mathbb Z)\).
 \end{theorem}
 
 \begin{proof}
@@ -251,9 +241,29 @@ evaluations agree by \cref{lem:character-compatibility-elementary-moves}, and
 corresponding cohomology-class evaluations.  Induction on the length of a
 finite marked movie therefore proves invariance along the movie.
 
-Marked Kirby--Cerf completeness, \cref{prop:marked-kirby-cerf}, supplies such
-a movie between any two marked presentations of \((X,\alpha)\), proving that
-the displayed definition is independent of \(\rho\).  Applied to marked
-presentations of the source and target of \(f\), the same theorem supplies a
-movie realizing \(f\), and hence proves the asserted equality.
+Marked Kirby--Cerf completeness, \cref{prop:marked-kirby-cerf}, supplies a
+finite marked movie from \((\mathcal H,\beta)\) to
+\((\mathcal K,\gamma)\) realizing \(f\).  Invariance along that movie proves
+the asserted equality.
 \end{proof}
+
+\begin{definition}[Twisted Crane--Yetter invariant]
+\label{def:twisted-crane-yetter-invariant}
+Fix a twisted categorical input \((\cC,\eta)\).  Given a marked
+orientation-preserving diffeomorphism class represented by an
+\(H_2\)-marked \(4\)-manifold \((X,\alpha)\), choose a marked one-ended Kirby
+datum \((\mathcal H,\beta)\) and a marked Kirby presentation
+\[
+  \rho\colon|(\mathcal H,\beta)|\longrightarrow(X,\alpha).
+\]
+The \emph{homologically twisted Crane--Yetter invariant} is
+\[
+  \CY_{\cC,\eta}(X,\alpha)
+  :=\CY_{\cC,\eta}(\mathcal H,\beta).
+\]
+\Cref{thm:marked-kirby-invariance-descent} shows that this value is
+independent of the representative \((X,\alpha)\), the marked Kirby datum, and
+the marked Kirby presentation.  Thus \(\CY_{\cC,\eta}\) is an invariant of
+marked orientation-preserving diffeomorphism classes of closed, connected,
+oriented smooth \(4\)-manifolds.
+\end{definition}
