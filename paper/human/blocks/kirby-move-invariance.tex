@@ -249,21 +249,24 @@ the asserted equality.
 
 \begin{definition}[Twisted Crane--Yetter invariant]
 \label{def:twisted-crane-yetter-invariant}
-Fix a twisted categorical input \((\cC,\eta)\).  Given a marked
-orientation-preserving diffeomorphism class represented by an
-\(H_2\)-marked \(4\)-manifold \((X,\alpha)\), choose a marked one-ended Kirby
-datum \((\mathcal H,\beta)\) and a marked Kirby presentation
+Fix the following data:
+\begin{itemize}
+  \item a twisted categorical input \((\cC,\eta)\);
+  \item a marked orientation-preserving diffeomorphism class
+  \(\bigl[(X,\alpha)\bigr]\), represented by an \(H_2\)-marked
+  \(4\)-manifold \((X,\alpha)\).
+\end{itemize}
+Choose a marked one-ended Kirby datum \((\mathcal H,\beta)\) together with a
+marked Kirby presentation
 \[
   \rho\colon|(\mathcal H,\beta)|\longrightarrow(X,\alpha).
 \]
 The \emph{homologically twisted Crane--Yetter invariant} is
 \[
-  \CY_{\cC,\eta}(X,\alpha)
+  \CY_{\cC,\eta}\bigl([(X,\alpha)]\bigr)
   :=\CY_{\cC,\eta}(\mathcal H,\beta).
 \]
 \Cref{thm:marked-kirby-invariance-descent} shows that this value is
-independent of the representative \((X,\alpha)\), the marked Kirby datum, and
-the marked Kirby presentation.  Thus \(\CY_{\cC,\eta}\) is an invariant of
-marked orientation-preserving diffeomorphism classes of closed, connected,
-oriented smooth \(4\)-manifolds.
+independent of the representative \((X,\alpha)\) and of the chosen marked
+Kirby presentation, hence also of its underlying marked Kirby datum.
 \end{definition}
