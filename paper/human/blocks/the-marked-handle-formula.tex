@@ -1,142 +1,71 @@
 \subsection{The presentation-level evaluator}
 \label{subsec:graphical-construction}
 
-\begin{definition}[Untwisted premodular handle morphism]
-\label{def:untwisted-handle-morphism}
+\begin{definition}[Homologically decorated handle morphism]
+\label{def:decorated-kirby-graph}
 \label{def:dotted-circle-translation}
 Assume the following data.
 \begin{enumerate}[label=\textup{(\roman*)}]
 \item a premodular fusion category \(\cC\) over \(\mathbb C\);
+\item a monoidal natural automorphism
+  \(\eta\colon\operatorname{Id}_{\cC}\Rightarrow
+  \operatorname{Id}_{\cC}\);
 \item a one-ended Kirby presentation \(\mathcal H\), whose dotted--framed
   link lies in the standard \(S^3=\partial B^4\);
-\item a simple object \(\lambda_k\in\operatorname{Irr}(\cC)\) for every
-  framed component \(K_k\);
+\item a handle cocycle \(\omega\in Z^2(\mathcal H)\);
 \item auxiliary orientations, an admissible dotted-handle section system,
   composition-dual bases for the tensor-unit projectors, and a regular planar
   drawing; denote this collection by \(\mathfrak a\).
 \end{enumerate}
 Write \(F_2(\mathcal H)\) for the finite set of framed components, indexed
-as \(K_k\), and define the finite set of simple-label states by
+as \(K_k\), and put
 \[
   \operatorname{Lab}_{\cC}(\mathcal H)
   :=\prod_{k\in F_2(\mathcal H)}\operatorname{Irr}(\cC).
 \]
-Thus a state \(\lambda\in\operatorname{Lab}_{\cC}(\mathcal H)\)
-is a tuple \((\lambda_k)_{k\in F_2(\mathcal H)}\) assigning one
-simple object to each framed component.
-For a closed \(\cC\)-coloured ribbon graph \(G\subset S^3\), write
+Thus \(\lambda\in\operatorname{Lab}_{\cC}(\mathcal H)\) assigns a simple
+object \(\lambda_k\) to each framed component.  For a closed
+\(\cC\)-coloured ribbon graph \(G\subset S^3\), write
 \[
-  \operatorname{ev}_{\cC}(G)\in
-  \operatorname{End}_{\cC}(\mathbf1)
+  \operatorname{ev}_{\cC}(G)
+  \in\operatorname{End}_{\cC}(\mathbf1)
 \]
 for its graphical-interpretation morphism from
 \cref{def:rt-graph-evaluation}.
-The framed component \(K_k\) is coloured by \(\lambda_k\), with no additional
-coupon.  A dotted component \(\delta\) is not coloured: cut its handle, insert
-\[
-  P_{\mathbf1,B_\delta}\colon B_\delta\longrightarrow B_\delta
-\]
-on the ordered boundary object, and reglue.  This gives a closed ribbon
-diagram \(G_\lambda(\mathcal H;\mathfrak a)\) and hence
-\[
-  L_\lambda(\mathcal H;\mathfrak a)
-  :=\operatorname{ev}_{\cC}\bigl(G_\lambda(\mathcal H;\mathfrak a)\bigr)
-  \in\operatorname{End}_{\cC}(\mathbf1).
-\]
-The Kirby-colour coefficient
-\(\prod_{k\in F_2(\mathcal H)}d_{\lambda_k}\) is not included in
-this notation.
-\end{definition}
 
-\begin{proposition}[Untwisted auxiliary-choice independence]
-\label{prop:untwisted-auxiliary-independence}
-The family \(L_\lambda(\mathcal H;\mathfrak a)\) is independent of the
-projector bases, section system, point at infinity, and planar projection.
-Reversing an auxiliary component orientation and replacing its label by the
-dual label gives the same endomorphism under the canonical
-orientation--duality identification.
-\end{proposition}
-
-\begin{proof}
-This is the fixed-presentation well-posedness contained in the handle maps of
-\cite[Definition~5.11]{Tham2021}; the independence of the resulting
-untwisted theory from its handle decomposition is
-\cite[Proposition~5.13]{Tham2021}.  In the present cut-open notation, the
-checks are as follows.  Composition-dual resolutions give the canonical
-tensor-unit projector and are therefore basis independent.  A generic
-isotopy between two admissible section systems meets the compact framed link
-in finitely many elementary ribbon events; projector naturality across each
-event and induction give the same reglued morphism.  This is the local
-completeness/tunnelling calculation used for the index-\(3\) handle map in
-\cite[Definition~5.11 and Lemma~2.28]{Tham2021}.  The isotopy invariance of
-the resulting coloured graph is
-\cite[Propositions~3.33--3.34]{Tham2021}, equivalently ribbon coherence
-\cite[Theorem~6.1]{Shum1994}; it removes the choices of point at infinity
-and planar projection.  Finally, rigid duality replaces a reversed framed
-label by its dual and carries a reversed dotted boundary word, together with
-its tensor-unit projector, to the pivotal transpose.  Spherical evaluation
-is unchanged.
-\end{proof}
-
-\begin{definition}[Intrinsic untwisted handle morphism]
-\label{def:intrinsic-untwisted-handle-morphism}
-The preceding proposition defines
-\[
-  L_\lambda(\mathcal H)\in\operatorname{End}_{\cC}(\mathbf1)
-\]
-without recording \(\mathfrak a\), up to the canonical dual reindexing of
-label states.
-\end{definition}
-
-\begin{definition}[Untwisted premodular handle evaluator]
-\label{def:untwisted-handle-evaluator}
-The untwisted value of a one-ended Kirby presentation is
-\[
-  \CY^{\mathrm{un}}_{\cC}(\mathcal H)
-  :=
-  \operatorname{Dim}(\cC)^{1-h_3(\mathcal H)}
-  \sum_{\lambda\in\operatorname{Lab}_{\cC}(\mathcal H)}
-    \left(\prod_{k\in F_2(\mathcal H)}d_{\lambda_k}\right)
-    \bigl\langle L_\lambda(\mathcal H)\bigr\rangle,
-\]
-where \(\langle-\rangle\) is the canonical scalar identification
-\(\operatorname{End}_{\cC}(\mathbf1)\cong\mathbb C\).
-\end{definition}
-
-\begin{definition}[Homological character decoration]
-\label{def:decorated-kirby-graph}
-In addition, let
-\[
-  \eta\colon\operatorname{Id}_{\cC}\Rightarrow\operatorname{Id}_{\cC}
-\]
-be a monoidal natural automorphism and let
-\(\omega\in Z^2(\mathcal H)\).  If \(e_k\) is the oriented \(2\)-handle
-generator selected by \(\mathfrak a\), put
-\(\omega_k:=\omega(e_k)\in\mathbb Z\).  Starting from the untwisted diagram,
-place on \(K_k\) the single coupon
+If \(e_k\) is the oriented \(2\)-handle generator selected by
+\(\mathfrak a\), put \(\omega_k:=\omega(e_k)\).  Colour \(K_k\) by
+\(\lambda_k\) and place on it the coupon
 \[
   (\eta^{\omega_k})_{\lambda_k}
   =\eta_{\lambda_k}^{\omega_k}\operatorname{id}_{\lambda_k},
 \]
 where \(\eta_{\lambda_k}\in\mathbb C^\times\) is the scalar of
-\cref{lem:simple-object-character-scalars}.  Denote the resulting diagram by
-\(G^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)\), and set
+\cref{lem:simple-object-character-scalars}.  A dotted component \(\delta\)
+is not coloured: cut its handle, insert
+\[
+  P_{\mathbf1,B_\delta}\colon B_\delta\longrightarrow B_\delta
+\]
+on the ordered boundary object, and reglue.  The resulting closed ribbon
+diagram is denoted by
+\(G^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)\), and
 \[
   L^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)
   :=\operatorname{ev}_{\cC}\bigl(
        G^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)\bigr)
   \in\operatorname{End}_{\cC}(\mathbf1).
 \]
-This coupon is the only modification: every dotted component still inserts
-the same tensor-unit projector \(P_{\mathbf1,B_\delta}\).
+The Kirby-colour coefficient
+\(\prod_{k\in F_2(\mathcal H)}d_{\lambda_k}\) is not included in this
+notation.
 \end{definition}
 
-\begin{proposition}[The twist preserves auxiliary-choice independence]
+\begin{proposition}[Auxiliary-choice independence]
 \label{prop:graphical-auxiliary-independence}
 The endomorphism family
-\(L^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)\) has the same
-auxiliary-choice independence as the untwisted family.  Under orientation
-reversal the precise reindexing is
+\(L^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)\) is independent of the
+projector bases, section system, point at infinity, and planar projection.
+Under reversal of a framed-component orientation, the precise reindexing is
 \[
   (e_k,\omega_k,\lambda_k)
   \longmapsto(-e_k,-\omega_k,\lambda_k^*).
@@ -144,79 +73,48 @@ reversal the precise reindexing is
 \end{proposition}
 
 \begin{proof}
-By \cref{prop:untwisted-auxiliary-independence}, the underlying untwisted
-endomorphism is already independent of every listed choice.  We therefore
-keep the untwisted proof fixed and verify, choice by choice, that its local
-identifications also carry the added character coupons.
-
-\emph{Projector bases.}
+The underlying ribbon identities are the fixed-presentation checks in
+\cite[Definition~5.11 and Lemma~2.28]{Tham2021}; the only extra morphisms are
+the character coupons.  We check every auxiliary choice explicitly.
+\begin{itemize}
+\item \textbf{Projector bases.}
 Changing a composition-dual basis does not move or alter any character
 coupon.  Both decorated expressions use the same canonical endomorphism
 \(P_{\mathbf1,B_\delta}\), by
 \cref{lem:tensor-unit-projector-basis-independence}.
 
-\emph{Dotted-handle sections.}
+\item \textbf{Dotted-handle sections.}
 Choose a generic isotopy between the two section systems.  Its trace meets
-the compact decorated graph in finitely many elementary ribbon events.  The
-finitely many coupon vertices may first be moved, by naturality, away from
-the next event.  Across that event the untwisted proof transports the
-projector by \cref{lem:unit-projector-naturality}; the coupon is transported
-through the same local morphism by
-\cref{lem:finite-coupon-transport}.  Induction over the finite event list
-therefore gives the same decorated reglued morphism.  Notice that this does
-\emph{not} assert that a projector absorbs arbitrary coupons with unrelated
-exponents.
+the compact decorated graph in finitely many elementary ribbon events.  Move
+the finitely many coupons away from each next event by naturality.  Across
+that event, transport the projector by
+\cref{lem:unit-projector-naturality} and the coupon by
+\cref{lem:finite-coupon-transport}.  Induction over the event list gives the
+same reglued morphism.  This does not assert that a projector absorbs
+arbitrary coupons with unrelated exponents.
 
-\emph{Point at infinity and planar projection.}
-The embedded decorated ribbon graph in \(S^3\) is unchanged.  Only its planar
-presentation changes.  Since every character coupon is an actual morphism
-of \(\cC\), the ordinary coloured-ribbon-graph isotopy theorem applies
-without modification; see \cite[Propositions~3.33--3.34]{Tham2021} or
+\item \textbf{Point at infinity and planar projection.}
+The embedded decorated ribbon graph in \(S^3\) is unchanged.  Since every
+character coupon is a morphism of \(\cC\), coloured-ribbon-graph isotopy
+invariance applies without modification; see
+\cite[Propositions~3.33--3.34]{Tham2021} or
 \cite[Theorem~6.1]{Shum1994}.
 
-\emph{Orientation of a framed component.}
-Reversing \(K_k\) sends its oriented generator and cocycle coordinate to
-\(-e_k\) and \(-\omega_k\), and reindexes its label by
-\(\lambda_k\mapsto\lambda_k^*\).  The new coupon is therefore
-\[
-  (\eta^{-\omega_k})_{\lambda_k^*}.
-\]
-By \cref{lem:character-identities},
-\(\eta_{\lambda_k^*}=\eta_{\lambda_k}^{-1}\), so this is
-the pivotal dual of
-\((\eta^{\omega_k})_{\lambda_k}\).  It is exactly the coupon
-carried by the orientation--duality identification in the untwisted proof.
+\item \textbf{Orientation of a framed component.}
+Reversing \(K_k\) sends \((e_k,\omega_k,\lambda_k)\) to
+\((-e_k,-\omega_k,\lambda_k^*)\).  The new coupon is
+\((\eta^{-\omega_k})_{\lambda_k^*}\).  By
+\cref{lem:character-identities},
+\(\eta_{\lambda_k^*}=\eta_{\lambda_k}^{-1}\), so this is exactly the
+pivotal dual of \((\eta^{\omega_k})_{\lambda_k}\).
 
-\emph{Orientation of a dotted component.}
+\item \textbf{Orientation of a dotted component.}
 No character exponent is assigned to a dotted component.  Reversing its
-orientation replaces the ordered boundary word and its tensor-unit
-projector by their pivotal duals, exactly as in the untwisted proof; the
-coupons on the framed ribbons are merely carried along by that canonical
-duality identification.
-
-These five checks prove the asserted independence and the displayed
-reindexing.
+orientation replaces its boundary word and tensor-unit projector by their
+pivotal duals; the framed-ribbon coupons are carried along by the same
+canonical duality identification.
+\end{itemize}
 \end{proof}
-
-\begin{remark}[Reference and normalization of the untwisted formula]
-\label{rem:untwisted-handle-formula-reference}
-The formula of \cref{def:untwisted-handle-evaluator} is the closed one-ended
-handle formula obtained from \cite[Definition~5.11]{Tham2021} by applying
-its elementary handle maps to the reversed handle decomposition.  Under
-reversal, a primal \(2\)-handle is again an index-\(2\) handle and
-contributes the regular-colour sum
-\(\sum_{i\in\operatorname{Irr}(\cC)}d_i,i\); a primal
-\(1\)-handle becomes an index-\(3\) handle and contributes the
-tensor-unit projection; each primal \(3\)-handle becomes an index-\(1\)
-handle and contributes \(\operatorname{Dim}(\cC)^{-1}\); and the
-unique primal \(4\)-handle becomes the index-\(0\) handle contributing
-\(\operatorname{Dim}(\cC)\).  Hence the total normalization is
-\(\operatorname{Dim}(\cC)^{1-h_3(\mathcal H)}\).
-The resulting value is independent of the handle decomposition by
-\cite[Proposition~5.13]{Tham2021}; its agreement with the PLCW and original
-Crane--Yetter state sums is
-\cite[Theorems~5.26 and~3.61]{Tham2021}.
-\end{remark}
 
 \begin{definition}[Intrinsic decorated Kirby morphism]
 \label{def:intrinsic-decorated-kirby-morphism}
@@ -265,29 +163,21 @@ In this formula:
 \end{enumerate}
 \end{definition}
 
-\begin{proposition}[Exact untwisted specialization]
-\label{prop:exact-untwisted-specialization}
-For every \(\mathcal H,\lambda\), and \(\omega\),
-\[
-  L^{\operatorname{id}}_{\lambda,\omega}(\mathcal H)
-  =L_\lambda(\mathcal H),
-  \qquad
-  L^\eta_{\lambda,0}(\mathcal H)=L_\lambda(\mathcal H).
-\]
-Consequently,
-\[
-  \CY_{\cC,\operatorname{id}}(\mathcal H,\omega)
-  =\CY^{\mathrm{un}}_{\cC}(\mathcal H),
-  \qquad
-  \CY_{\cC,\eta}(\mathcal H,0)
-  =\CY^{\mathrm{un}}_{\cC}(\mathcal H).
-\]
-\end{proposition}
-
-\begin{proof}
-In either case every character coupon is an identity; all remaining labels,
-projectors, and regluing operations are exactly the untwisted ones.
-\end{proof}
+\begin{remark}[Identity-character specialization]
+\label{rem:identity-character-specialization}
+If \(\eta=\operatorname{id}\), every character coupon is an identity and
+\(\CY_{\cC,\operatorname{id}}(\mathcal H,\omega)\) is independent of
+\(\omega\).  It is the closed one-ended handle formula obtained from
+\cite[Definition~5.11]{Tham2021} on the reversed handle decomposition:
+primal \(2\)-handles give its regular-colour sum, primal \(1\)-handles give
+its index-\(3\) tensor-unit projection, primal \(3\)-handles give the inverse
+global-dimension factors, and the primal \(4\)-handle gives the remaining
+global-dimension factor.  Thus the normalization is
+\(\operatorname{Dim}(\cC)^{1-h_3(\mathcal H)}\).  In this specialization,
+Kirby--Cerf invariance is \cite[Proposition~5.13]{Tham2021}; agreement with
+the PLCW and original Crane--Yetter state sums is
+\cite[Theorems~5.26 and~3.61]{Tham2021}.
+\end{remark}
 
 \begin{remark}[Three-dimensional meaning]
 \label{rem:planar-projection-after-cutting}
