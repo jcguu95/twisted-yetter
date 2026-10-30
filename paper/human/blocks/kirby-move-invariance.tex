@@ -151,37 +151,38 @@ inserted.
 \item \textbf{Adjacent-index births and deaths.}
 These are the following four directed move types.
 \begin{itemize}
-  \item \textbf{A \(1\)--\(2\) birth.}
-  The new \(2\)-handle attaching circle goes geometrically once over the new
-  dotted \(1\)-handle, and no other strand meets this cancelling local model.
-  Hence, for a simple label \(\lambda\) on the new \(2\)-handle, the
-  through-object at the dotted disk is \(\lambda\) or \(\lambda^*\).  The
-  target cocycle may be represented by \(\omega'=\omega\oplus0\), so its new
-  character coupon is the identity.  Since the tensor unit is simple,
-  \[
-    \operatorname{tr}
-      \bigl(P_{\mathbf1,\lambda}\bigr)
-    =\dim\operatorname{Hom}_{\cC}
-      (\mathbf1,\lambda)
-    =\delta_{\lambda,\mathbf1}.
-  \]
-  The same equation holds with \(\lambda^*\) in place of \(\lambda\), so the
-  local orientation does not affect the result.
-  The entire new local contribution to the label sum is therefore
-  \[
-    \sum_{\lambda\in\operatorname{Irr}(\cC)}
-      d_\lambda\,
-      \operatorname{tr}
-        \bigl(P_{\mathbf1,\lambda}\bigr)
-    =d_{\mathbf1}=1.
-  \]
-  Thus adding the cancelling pair does not change the evaluator.
+  \item \textbf{A cancelling \(1\)--\(2\) pair, in either direction.}
+  In the birth direction, the new \(2\)-handle attaching circle goes
+  geometrically once over the new dotted \(1\)-handle, and no other strand
+  meets this local model.  The added two-term handle complex is acyclic, so
+  the target cocycle may be represented by \(\omega'=\omega\oplus0\).  In
+  the death direction, \cref{prop:representative-independence} permits the
+  same choice of zero coordinate on the disappearing \(2\)-handle.  Thus the
+  only character coupon on the cancelling component is
+  \(\eta^0=\operatorname{id}\).
 
-  \item \textbf{A \(1\)--\(2\) death.}
-  Cohomological descent permits a representative whose disappearing
-  \(2\)-handle coordinate is zero.  The same geometric-intersection-one
-  calculation shows that the isolated pair contributes the scalar \(1\), so
-  removing it does not change the evaluator.
+  The new framed component is coloured by the full Kirby colour
+  \[
+    \Omega_{\cC}
+    =\sum_{i\in\operatorname{Irr}(\cC)}d_i\,i,
+  \]
+  rather than by an arbitrarily chosen object.  The dotted component applies
+  the tensor-unit projector to the strand passing through it.  Since every
+  \(i\) in the displayed sum is simple, this projector annihilates every
+  term except \(i=\mathbf1\).  Thus its contribution to the weighted label
+  sum is
+  \[
+    \sum_{i\in\operatorname{Irr}(\cC)}
+      d_i\,\delta_{i,\mathbf1}
+    =d_{\mathbf1}
+    =1.
+  \]
+  The standard cancelling local model contains no additional coupon; cups,
+  caps, and framing on the surviving tensor-unit strand contribute the
+  canonical scalar \(1\).  Hence the entire local pair contributes \(1\).
+  The number of \(3\)-handles is unchanged, so the normalization factors
+  also agree.  Reading this single equality from left to right proves birth
+  invariance, and reading it from right to left proves death invariance.
 
   \item \textbf{A \(2\)--\(3\) birth.}
   The cocycle equation forces the new \(2\)-handle coordinate to be zero, so
@@ -192,13 +193,8 @@ These are the following four directed move types.
   disappearing \(2\)-handle coordinate, and hence its character exponent,
   to be zero.
 \end{itemize}
-The calculation for the \(1\)--\(2\) pair uses essentially that each label
-state assigns a simple object to every \(2\)-handle component.  For a general
-object such as \(\mathbf1\oplus\mathbf1\), the trace of the tensor-unit
-projector would be \(2\); such an object is not a single label state in the
-evaluator.
-In all four cases the untwisted cancellation and normalization identities
-therefore apply without alteration.
+For the \(2\)--\(3\) pair, the untwisted cancellation and normalization
+identities therefore apply without alteration.
 \end{itemize}
 
 For the identity character, the cited handle-decomposition invariance proves
