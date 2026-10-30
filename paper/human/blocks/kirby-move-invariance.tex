@@ -98,20 +98,33 @@ follows from them.
 For a one-ended Kirby presentation $\mathcal H$ and a handle cocycle
 \(\omega\in Z^2(\mathcal H)\),
 the evaluator is independent of the dual bases used to expand the
-tensor-unit projectors and of the dotted-handle sections used to draw them.
+tensor-unit projectors, the admissible section system, the point at infinity,
+and the regular planar projection.
 \end{proposition}
 
 \begin{proof}
 The sum $\sum_\mu u_\mu\widehat u_\mu$ is the canonical projector onto the
 full tensor-unit isotypic summand, so a change of composition-dual bases does
-not change its morphism.  By \cref{prop:dotted-handle-projector}, a
-dotted-handle section only draws the canonical projector specified by the
-evaluator.  Two drawings of the same intrinsic composite have the same
-morphism by ribbon graphical coherence \cite[Theorem~6.1]{Shum1994}; no
-comparison theorem for arbitrary spanning-disk systems is required.  For
-several dotted handles, their actual handle neighborhoods are disjoint, so
-their maps tensor independently.  Exchanging their written order is the
-interchange law for tensor products of morphisms.
+not change its morphism.
+
+Any two admissible section systems for the dotted unlink are connected by an
+isotopy relative to their boundary circles.  Put such an isotopy in generic
+position with respect to the compact framed link.  Away from finitely many
+parameters it merely isotopes the cut-open tangle.  At an exceptional
+parameter, the boundary word changes by one elementary ribbon event: an
+adjacent interchange, the creation or cancellation of a dual pair at a cup
+or cap, or passage across a crossing, twist, or coupon.  Naturality of
+$P_{\mathbf1,-}$, in the form of
+\cref{cor:finite-unit-projector-transport}, identifies the projector
+insertions before and after each event.  Induction over this finite list
+shows that the reglued morphism is independent of the section system.  For
+several dotted components the disks remain disjoint, and their projectors
+tensor independently.
+
+Finally, changing the point at infinity or the generic planar projection
+changes only the drawing of the same embedded ribbon graph.  Ribbon
+graphical coherence \cite[Theorem~6.1]{Shum1994} preserves its morphism and
+hence its RT evaluation.
 \end{proof}
 
 \begin{proposition}[Independence of auxiliary orientations]
