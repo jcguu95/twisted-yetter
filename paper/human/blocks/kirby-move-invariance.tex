@@ -93,72 +93,6 @@ first and third items were fixed before the disk was chosen, and the fourth
 follows from them.
 \end{proof}
 
-\begin{proposition}[Independence of auxiliary graphical choices]
-\label{prop:graphical-auxiliary-independence}
-For a one-ended Kirby presentation $\mathcal H$ and a handle cocycle
-\(\omega\in Z^2(\mathcal H)\),
-the evaluator is independent of the dual bases used to expand the
-tensor-unit projectors, the admissible section system, the point at infinity,
-and the regular planar projection.
-\end{proposition}
-
-\begin{proof}
-The sum $\sum_\mu u_\mu\widehat u_\mu$ is the canonical projector onto the
-full tensor-unit isotypic summand, so a change of composition-dual bases does
-not change its morphism.
-
-Any two admissible section systems for the dotted unlink are connected by an
-isotopy relative to their boundary circles.  Put such an isotopy in generic
-position with respect to the compact framed link.  Away from finitely many
-parameters it merely isotopes the cut-open tangle.  At an exceptional
-parameter, the boundary word changes by one elementary ribbon event: an
-adjacent interchange, the creation or cancellation of a dual pair at a cup
-or cap, or passage across a crossing, twist, or coupon.  Naturality of
-$P_{\mathbf1,-}$, in the form of
-\cref{cor:finite-unit-projector-transport}, identifies the projector
-insertions before and after each event.  Induction over this finite list
-shows that the reglued morphism is independent of the section system.  For
-several dotted components the disks remain disjoint, and their projectors
-tensor independently.
-
-Finally, changing the point at infinity or the generic planar projection
-changes only the drawing of the same embedded ribbon graph.  Ribbon
-graphical coherence \cite[Theorem~6.1]{Shum1994} preserves its morphism and
-hence its RT evaluation.
-\end{proof}
-
-\begin{proposition}[Independence of auxiliary orientations]
-\label{prop:orientation-choice-independence}
-Let \(\mathcal H\) be a one-ended Kirby presentation and let
-\(\omega\in Z^2(\mathcal H)\).  The evaluator is unchanged when any auxiliary
-oriented handle generator and
-its tied Kirby component orientation are reversed as in
-\cref{conv:orientation-reversal}.
-\end{proposition}
-
-\begin{proof}
-For an ordinary component, reindex its simple-label sum by
-$i\leftrightarrow i^*$.  Ribbon orientation reversal is precisely the
-standard dual-label convention, $d_{i^*}=d_i$, and
-\[
-  (\eta^{-a})_{i^*}
-  =\eta_{i^*}^{-a}\operatorname{id}_{i^*}
-  =\eta_i^a\operatorname{id}_{i^*}.
-\]
-Thus every reindexed summand gives the same RT morphism under the canonical
-orientation--duality identification and has the same coefficient.  For a
-dotted component, reversing the $1$-handle generator also reverses the disk
-coorientation.  The signed boundary word is replaced by its rigid dual, with
-reversed order; pivotal duality carries the canonical projector onto the
-tensor-unit summand to the canonical projector on the dual boundary object,
-and the exterior closure is carried to its pivotal transpose.  Spherical
-graphical evaluation is unchanged.  The incidence
-coefficient and the dual $1$-cochain generator both reverse, so the
-representative calculation below is covariant.  A $C_3$ orientation change
-does not change $\operatorname{im}(\partial_3)$ and hence does not change
-    $H^2(\mathcal H)$ or its marking.
-\end{proof}
-
 For an ordered signed boundary word
 $w=((X_1,\sigma_1),\ldots,(X_r,\sigma_r))$, with
 $\sigma_j\in\{+1,-1\}$, set
@@ -590,7 +524,7 @@ factor is
   =\eta_x^{a-b}\eta_z^b.
 \]
 Now reverse the auxiliary target orientation back.  By
-\cref{prop:orientation-choice-independence}, this changes neither the RT term
+\cref{prop:graphical-auxiliary-independence}, this changes neither the graph term
 nor its coefficient, and it converts the target label and coordinate to the
 negative row of the table.  Spherical duality preserves the trace-dual pairing,
 $d_{y^*}=d_y$, and $d_{z^*}=d_z$, so every multiplicity term and the single
@@ -707,8 +641,7 @@ For a one-ended Kirby presentation \(\mathcal H\) and
   \mathcal R_{\cC,\eta}(\mathcal H,\omega)
   :=\sum_{\lambda}
       \left(\prod_k d_{\lambda_k}\right)
-      \operatorname{RT}_{\cC}
-        \bigl(S^3,L^\eta_{\lambda,\omega}(\mathcal H)\bigr).
+      \bigl\langle L^\eta_{\lambda,\omega}(\mathcal H)\bigr\rangle.
   \label{eq:raw-graph-sum}
 \end{equation}
 \end{definition}
@@ -864,11 +797,9 @@ Here $\omega'=\omega$, the label states are canonically identified, and
 unchanged.  Otherwise, for every label state $\lambda$, ribbon graphical
 coherence \cite[Theorem~6.1]{Shum1994} gives
 \[
-  \operatorname{RT}_{\cC}
-    \bigl(S^3,L^\eta_{\lambda,\omega}(\mathcal H)\bigr)
+  \bigl\langle L^\eta_{\lambda,\omega}(\mathcal H)\bigr\rangle
   =
-  \operatorname{RT}_{\cC}
-    \bigl(S^3,L^\eta_{\lambda,\omega'}(\mathcal H')\bigr).
+  \bigl\langle L^\eta_{\lambda,\omega'}(\mathcal H')\bigr\rangle.
 \]
 The Kirby-colour coefficients agree termwise, so summing proves the desired
 equality.

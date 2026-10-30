@@ -1,38 +1,56 @@
 \subsection{The marked handle evaluator}
 \label{subsec:graphical-construction}
 
-\begin{definition}[Decorated Kirby ribbon graph]
+\begin{definition}[Raw decorated Kirby morphism]
 \label{def:decorated-kirby-graph}
 \label{def:dotted-circle-translation}
 \label{def:colored-graph-sum}
-Fix a twisted categorical input \((\cC,\eta)\).  Let \(\mathcal H\) be a
-one-ended Kirby presentation, let \(\omega\in Z^2(\mathcal H)\), and assign a
-simple object \(\lambda_k\in\operatorname{Irr}(\cC)\) to every framed
-component \(K_k\).  Choose auxiliary orientations of the framed components,
-write \(e_k\) for the corresponding oriented \(2\)-handle generator, and put
+Assume the following data.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Categorical input:}
+  \begin{enumerate}[label=\textup{(\alph*)}]
+  \item a premodular fusion category \(\cC\) over \(\mathbb C\);
+  \item a monoidal natural automorphism
+    \(\eta\colon\operatorname{Id}_{\cC}\Rightarrow
+    \operatorname{Id}_{\cC}\).
+  \end{enumerate}
+\item \emph{Marked handle input:}
+  \begin{enumerate}[label=\textup{(\alph*)}]
+  \item a one-ended Kirby presentation \(\mathcal H\), whose dotted--framed
+    link lies in the standard \(S^3=\partial B^4\);
+  \item a handle cocycle \(\omega\in Z^2(\mathcal H)\).
+  \end{enumerate}
+\item \emph{Label state:} a simple object
+  \(\lambda_k\in\operatorname{Irr}(\cC)\) for every framed component
+  \(K_k\).
+\item \emph{Auxiliary drawing datum} \(\mathfrak a\), consisting of
+  \begin{enumerate}[label=\textup{(\alph*)}]
+  \item orientations of the framed and dotted components;
+  \item an admissible section system for the dotted components;
+  \item composition-dual bases used to expand each tensor-unit projector;
+  \item a point at infinity outside the resulting graph and a generic planar
+    projection of its \(\mathbb R^3\)-model.
+  \end{enumerate}
+\end{enumerate}
+
+Write \(e_k\) for the oriented \(2\)-handle generator selected by
+\(\mathfrak a\), and put
 \[
   \omega_k:=\omega(e_k)\in\mathbb Z.
 \]
-Choose also an admissible section system for the dotted components.  We write
+The datum above first produces a closed coloured ribbon diagram
 \[
-  L^\eta_{\lambda,\omega}(\mathcal H)
+  G^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a).
 \]
-for the following closed coloured ribbon graph, understood as a finite linear
-combination whenever a projector is expanded.  The component \(K_k\) is
-coloured by \(\lambda_k\) and carries the coupon
+The component \(K_k\) is coloured by \(\lambda_k\) and carries the coupon
 \[
   (\eta^{\omega_k})_{\lambda_k}
   =\eta_{\lambda_k}^{\omega_k}\operatorname{id}_{\lambda_k}.
 \]
-Here \(\eta\colon\operatorname{Id}_{\cC}\Rightarrow
-\operatorname{Id}_{\cC}\) is the character in
-\cref{def:twisted-categorical-input}; \(\eta^{\omega_k}\) is its integer
-power, using the inverse when \(\omega_k<0\); and
+Here \(\eta^{\omega_k}\) is the integer power of \(\eta\), using its inverse
+when \(\omega_k<0\), and
 \(\eta_{\lambda_k}\in\mathbb C^\times\) is the simple-object scalar of
-\cref{lem:simple-object-character-scalars}.  Reversing the auxiliary
-orientation of \(K_k\) replaces \(e_k,\omega_k,\lambda_k\) by
-\(-e_k,-\omega_k,\lambda_k^*\); this does not change the evaluator by
-\cref{prop:orientation-choice-independence}.
+\cref{lem:simple-object-character-scalars}.
 
 A dotted component \(\delta\) is not coloured.  Instead, cut its handle as in
 \cref{def:cut-open-dotted-tangle}.  If \(B_\delta\) is the tensor product
@@ -41,16 +59,97 @@ canonical projector
 \[
   P_{\mathbf1,B_\delta}\colon B_\delta\longrightarrow B_\delta
 \]
-and reglue the two faces.  Doing this at every dotted component gives
-\(L^\eta_{\lambda,\omega}(\mathcal H)\).  The Kirby-colour coefficient
+and reglue the two faces.  Doing this at every dotted component completes
+\(G^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)\).  Interpreting this
+closed diagram in \(\cC\) gives
+\[
+  L^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)
+  :=\bigl[\!\bigl[ G^\eta_{\lambda,\omega}
+       (\mathcal H;\mathfrak a)\bigr]\!\bigr]_{\cC}
+  \in\operatorname{End}_{\cC}(\mathbf1).
+\]
+Thus \(L^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)\) is a morphism,
+not a planar drawing.  The Kirby-colour coefficient
 \(\prod_k d_{\lambda_k}\) is not included in this notation.
+\end{definition}
+
+\begin{proposition}[Independence of the auxiliary drawing datum]
+\label{prop:graphical-auxiliary-independence}
+Fix \(\cC,\eta,\mathcal H,\omega\), and a label state \(\lambda\) as in
+\cref{def:decorated-kirby-graph}.  The endomorphism
+\[
+  L^\eta_{\lambda,\omega}(\mathcal H;\mathfrak a)
+  \in\operatorname{End}_{\cC}(\mathbf1)
+\]
+is independent of the composition-dual bases, the admissible section system,
+the point at infinity, and the regular planar projection.  Reversing an
+auxiliary orientation has the same effect as replacing the corresponding
+oriented generator, cocycle coordinate, and simple label by
+\[
+  (e_k,\omega_k,\lambda_k)
+  \longmapsto(-e_k,-\omega_k,\lambda_k^*),
+\]
+and leaves the resulting endomorphism unchanged under the canonical
+orientation--duality identification.
+\end{proposition}
+
+\begin{proof}
+The sum \(\sum_\mu u_\mu\widehat u_\mu\) is the canonical projector onto the
+full tensor-unit isotypic summand, so it is independent of the chosen
+composition-dual bases.
+
+Any two admissible section systems for the dotted unlink are connected by an
+isotopy relative to their boundary circles.  Put the isotopy in generic
+position with respect to the compact framed link.  Its finitely many
+exceptional parameters are adjacent interchanges, births or deaths of a dual
+pair at a cup or cap, and passages across crossings, twists, or coupons.
+Projector naturality, in the form of
+\cref{cor:finite-unit-projector-transport}, identifies the inserted
+endomorphisms across each event.  Induction over the finite event list proves
+independence of the section system.  Disjoint dotted-handle neighborhoods
+give tensor-independent insertions.
+
+Changing the point at infinity or the regular projection changes only the
+drawing of the same embedded ribbon graph.  Ribbon graphical coherence
+\cite[Theorem~6.1]{Shum1994} therefore preserves its endomorphism.
+
+Finally, reverse one auxiliary component orientation.  For a framed
+component, rigid duality replaces \(\lambda_k\) by \(\lambda_k^*\), while
+\(e_k\) and \(\omega_k\) both change sign.  Since
+\(d_{\lambda_k^*}=d_{\lambda_k}\) and
+\(\eta_{\lambda_k^*}=\eta_{\lambda_k}^{-1}\), the dualized coupon represents
+the same oriented morphism.  For a dotted component, the boundary word is
+replaced by its reversed rigid dual; pivotal duality carries the canonical
+tensor-unit projector to the canonical projector of the dual boundary
+object.  Spherical graphical evaluation is unchanged.
+\end{proof}
+
+\begin{definition}[Intrinsic decorated Kirby morphism]
+\label{def:intrinsic-decorated-kirby-morphism}
+By \cref{prop:graphical-auxiliary-independence}, the common value
+\[
+  L^\eta_{\lambda,\omega}(\mathcal H)
+  \in\operatorname{End}_{\cC}(\mathbf1)
+\]
+is well defined without recording \(\mathfrak a\).  Since the tensor unit is
+simple, the canonical identification
+\(\operatorname{End}_{\cC}(\mathbf1)\cong\mathbb C\) also assigns a scalar to
+this endomorphism; we denote that scalar by
+\(\langle L^\eta_{\lambda,\omega}(\mathcal H)\rangle\).
 \end{definition}
 
 \begin{definition}[Homologically twisted Crane--Yetter evaluator]
 \label{def:twisted-handle-evaluator}
-Fix a twisted categorical input \((\cC,\eta)\), a one-ended Kirby presentation
-\(\mathcal H\), and a cocycle \(\omega\in Z^2(\mathcal H)\).  Then the handle
-evaluator is
+Assume the following data.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item a premodular fusion category \(\cC\) over \(\mathbb C\);
+\item a monoidal natural automorphism
+  \(\eta\colon\operatorname{Id}_{\cC}\Rightarrow
+  \operatorname{Id}_{\cC}\);
+\item a one-ended Kirby presentation \(\mathcal H\);
+\item a handle cocycle \(\omega\in Z^2(\mathcal H)\).
+\end{enumerate}
+The resulting scalar is
 \begin{equation}
   \boxed{
   \CY_{\cC,\eta}(\mathcal H,\omega)
@@ -58,16 +157,19 @@ evaluator is
   \operatorname{Dim}(\cC)^{1-h_3(\mathcal H)}
   \sum_{\lambda}
     \left(\prod_k d_{\lambda_k}\right)
-    \operatorname{RT}_{\cC}
-      \bigl(S^3,L^\eta_{\lambda,\omega}(\mathcal H)\bigr).}
+      \bigl\langle L^\eta_{\lambda,\omega}(\mathcal H)\bigr\rangle.}
   \label{eq:twisted-handle-evaluator}
 \end{equation}
-Here the sum runs over all assignments of simple objects to the framed
-components; \(d_{\lambda_k}\) is the quantum dimension of the assigned
-simple object; \(\operatorname{Dim}(\cC)=\sum_i d_i^2\) is the global
-dimension; \(h_3(\mathcal H)\) is the number of \(3\)-handles; and
-\(\operatorname{RT}_{\cC}(S^3,-)\) is the closed ribbon-graph evaluation of
-\cref{def:rt-graph-evaluation}.
+In this formula:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \(\lambda\) ranges over all assignments of simple objects to the framed
+  components;
+\item \(d_{\lambda_k}\) is the quantum dimension of the label on \(K_k\);
+\item \(\operatorname{Dim}(\cC)=\sum_i d_i^2\) is the global dimension;
+\item \(h_3(\mathcal H)\) is the number of \(3\)-handles;
+\item \(\langle-\rangle\) is the scalar identification of
+  \cref{def:intrinsic-decorated-kirby-morphism}.
+\end{enumerate}
 \end{definition}
 
 \begin{remark}[Three-dimensional meaning]
