@@ -1,0 +1,163 @@
+\section{Invariance under the Two-over-Two Move}
+\label{app:two-over-two-invariance}
+
+This appendix gives the complete local calculation for the only Kirby move
+whose invariance is not visible at a fixed pair of simple labels.  Let
+\(\cC\) be a premodular fusion category over \(\mathbb C\), and let
+\(\eta\colon\operatorname{Id}_{\cC}\Rightarrow
+\operatorname{Id}_{\cC}\) be a monoidal natural automorphism.  Choose simple
+representatives \(\operatorname{Irr}(\cC)\), and write \(d_i\) for the quantum
+dimension of \(i\).  On a simple object \(i\), write
+\(\eta_i\in\mathbb C^\times\) for the scalar such that the component of the
+natural transformation is \(\eta|_i=\eta_i\operatorname{id}_i\).  The Kirby
+colour is the formal morphism
+\[
+  \Omega_{\cC}
+  =\sum_{i\in\operatorname{Irr}(\cC)}
+    d_i\,\operatorname{id}_i.
+\]
+All ribbon graphs below are closed by the same fixed exterior context and
+are evaluated by \(\operatorname{ev}_{\cC}\), followed by the canonical
+identification
+\(\operatorname{End}_{\cC}(\mathbf1)\cong\mathbb C\).
+
+Consider an oriented \(2/2\) slide.  Let \(a,b\in\mathbb Z\) be the source
+cocycle coordinates of the moving and stationary components.  Our oriented
+handle convention gives
+\[
+  (a,b)\longmapsto(a+b,b)
+  \quad\text{or}\quad
+  (a,b)\longmapsto(a-b,b).
+\]
+These are the positive and negative local orientations, respectively.
+
+\begin{lemma}[Character-decorated \(2/2\) sliding]
+\label{lem:character-decorated-two-over-two-slide}
+For either orientation of the marked \(2/2\) slide, the complete
+Kirby-colour evaluation before the slide equals the evaluation after the
+cocycle coordinates have been transported by the displayed formulas.
+\end{lemma}
+
+\begin{proof}
+We first compare the character factors.  For simple labels \(x,y\), the
+positive orientation has a fusion channel
+\[
+  z\subset x\otimes y^*.
+\]
+Monoidality on this simple summand and compatibility with duals give
+\[
+  \eta_z=\eta_x\eta_y^{-1},
+  \qquad
+  \eta_{z^*}=\eta_z^{-1}=\eta_x^{-1}\eta_y.
+\]
+Consequently
+\begin{equation*}
+  \eta_x^a\eta_y^b
+  =\eta_x^{a+b}\eta_{z^*}^b.
+  \tag{\(C_+\)}
+\end{equation*}
+For the negative orientation the fusion channel satisfies
+\[
+  z\subset x\otimes y,
+  \qquad
+  \eta_z=\eta_x\eta_y,
+\]
+and hence
+\begin{equation*}
+  \eta_x^a\eta_y^b
+  =\eta_x^{a-b}\eta_z^b.
+  \tag{\(C_-\)}
+\end{equation*}
+Both identities are independent of the multiplicity index of the channel.
+
+It remains to place these scalar identities into the complete Kirby-colour
+sum without comparing fixed labels before and after the slide.  Set
+\[
+  V^+_{x,y}=x\otimes y^*,
+  \qquad
+  V^-_{x,y}=x\otimes y.
+\]
+For every simple summand \(z\) of \(V^\varepsilon_{x,y}\), choose
+composition-dual bases
+\[
+  u^\varepsilon_{z,\mu}\colon z\longrightarrow V^\varepsilon_{x,y},
+  \qquad
+  p^\varepsilon_{z,\mu}\colon V^\varepsilon_{x,y}\longrightarrow z,
+\]
+so that
+\[
+  \operatorname{id}_{V^\varepsilon_{x,y}}
+  =\sum_{z,\mu}
+    u^\varepsilon_{z,\mu}\circ p^\varepsilon_{z,\mu}.
+\]
+
+Starting from the before-slide local graph, attach the band, replace the
+identity on its attaching channel by the single summand
+\(u^\varepsilon_{z,\mu}p^\varepsilon_{z,\mu}\), transport that resolved
+channel, and detach.  After restoring the fixed exterior context, denote the
+resulting closed untwisted ribbon graph by
+\(R^\varepsilon_{x,y,z,\mu}\), and set
+\[
+  r^\varepsilon_{x,y,z,\mu}
+  :=\left\langle
+      \operatorname{ev}_{\cC}
+        \bigl(R^\varepsilon_{x,y,z,\mu}\bigr)
+    \right\rangle
+  \in\mathbb C.
+\]
+Thus \(d_xd_y r^\varepsilon_{x,y,z,\mu}\) contains exactly the two
+Kirby-colour coefficients, the chosen fusion inclusion and projection, and
+the evaluation of the unchanged exterior context.  It contains neither a
+character factor nor a suppressed label sum.
+
+The ordinary sliding identity \cite[Lemma~2.30]{Tham2021} says that inserting
+the displayed identity resolution at attachment and contracting the same
+dual bases at detachment gives this same family of closed graphs from the
+after-slide side.  Hence the two sides have the same index set and the same
+scalars \(d_xd_y r^\varepsilon_{x,y,z,\mu}\); only their displayed character
+factors differ.
+
+For the positive orientation, the complete comparison is
+\[
+\begin{aligned}
+ Z^+_{\mathrm{before}}(a,b)
+ &=\sum_{\substack{x,y,z,\mu\\z\subset x\otimes y^*}}
+   d_xd_y r^+_{x,y,z,\mu}\,
+   \eta_x^a\eta_y^b \\
+ &=\sum_{\substack{x,y,z,\mu\\z\subset x\otimes y^*}}
+   d_xd_y r^+_{x,y,z,\mu}\,
+   \eta_x^{a+b}\eta_{z^*}^{b}
+   &&\text{by \((C_+)\)}\\
+ &=Z^+_{\mathrm{after}}(a+b,b).
+\end{aligned}
+\]
+The first and last equalities are the two directions of the common
+untwisted fusion expansion; the middle equality is the termwise character
+comparison.
+
+For the negative orientation, the corresponding comparison is
+\[
+\begin{aligned}
+ Z^-_{\mathrm{before}}(a,b)
+ &=\sum_{\substack{x,y,z,\mu\\z\subset x\otimes y}}
+   d_xd_y r^-_{x,y,z,\mu}\,
+   \eta_x^a\eta_y^b \\
+ &=\sum_{\substack{x,y,z,\mu\\z\subset x\otimes y}}
+   d_xd_y r^-_{x,y,z,\mu}\,
+   \eta_x^{a-b}\eta_z^{b}
+   &&\text{by \((C_-)\)}\\
+ &=Z^-_{\mathrm{after}}(a-b,b).
+\end{aligned}
+\]
+Again, only the middle equality is new.  The slide changes neither the number
+of \(3\)-handles nor any uninvolved label or cocycle coordinate, so the
+exterior factors and the normalization agree.  This proves invariance for
+both orientations.
+\end{proof}
+
+\begin{remark}[Untwisted specialization]
+When \(\eta=\operatorname{id}\), every character factor in the two displayed
+computations is \(1\).  Both computations then reduce exactly to the common
+fusion expansion of the ordinary sliding identity
+\cite[Lemma~2.30]{Tham2021}; no additional term remains.
+\end{remark}
