@@ -3,24 +3,28 @@
 
 The identity-character evaluator is already invariant under Kirby--Cerf
 moves by \cref{rem:identity-character-specialization}.  We prove that the
-same local ribbon identities remain valid after the character coupons are
-inserted.  The only new inputs are the cocycle-coordinate transport of
-\cref{prop:marking-coordinate-transport} and the naturality, monoidality,
-and duality identities for \(\eta\).
+presentation-level scalar remains unchanged after the transported character
+coupons are inserted.  The proof compares the same local ribbon identities;
+the only new inputs are the cocycle-coordinate transport of
+\cref{prop:marking-coordinate-transport} and the naturality, monoidality, and
+duality identities for \(\eta\).
 
-\begin{lemma}[Character compatibility with elementary moves]
+\begin{lemma}[Elementary-move invariance for transported cocycles]
 \label{lem:character-compatibility-elementary-moves}
 Let
 \[
-  m\colon(\mathcal H,\beta)\longrightarrow(\mathcal H',\beta')
+  m\colon(\mathcal H,\beta)
+  \longrightarrow(\mathcal H',|m|_*\beta)
 \]
-be a marked elementary Kirby--Cerf move between one-ended Kirby data.  Choose
-a cocycle \(\omega\) representing \(\xi_{\mathcal H,\beta}\), and choose the
-target representative \(\omega'\) prescribed by
-\cref{prop:marking-coordinate-transport}.  Every local ribbon identity used
-to prove the identity-character invariance of \(m\) remains valid after the
-source and target graphs are decorated by \(\omega\) and \(\omega'\),
-respectively.
+be a marked elementary Kirby--Cerf move between one-ended Kirby data.  Let
+\(\omega\) represent \(\xi_{\mathcal H,\beta}\), and choose a representative
+\(\omega'\) of \(\xi_{\mathcal H',|m|_*\beta}\) whose coordinates satisfy
+\cref{prop:marking-coordinate-transport}.  Then
+\[
+  \CY_{\cC,\eta}(\mathcal H,\omega)
+  =
+  \CY_{\cC,\eta}(\mathcal H',\omega').
+\]
 \end{lemma}
 
 \begin{proof}
@@ -113,6 +117,15 @@ These are the following four directed move types.
 In all four cases the untwisted cancellation and normalization identities
 therefore apply without alteration.
 \end{itemize}
+
+For the identity character, the cited handle-decomposition invariance proves
+the required local ribbon identity together with its label weights and
+normalization factor.  The checks above show, move by move, that inserting the
+transported character coupons preserves that identity on every labelled
+summand.  Summing over the simple labels therefore gives the asserted equality
+of presentation-level scalars.  In a death move, the replacement by a
+zero-coordinate source representative does not change the scalar by
+\cref{prop:representative-independence}.
 \end{proof}
 
 \begin{theorem}[Elementary marked Kirby--Cerf invariance]
@@ -129,14 +142,12 @@ be a marked elementary Kirby--Cerf move between one-ended Kirby data.  Then
 \end{theorem}
 
 \begin{proof}
-For the identity character this is the handle-decomposition invariance cited
-in \cref{rem:identity-character-specialization}.  The proof is a finite set
-of local ribbon identities, with the standard normalization changes for
-adjacent-index cancellations.  By
-\cref{lem:character-compatibility-elementary-moves}, every one of those local
-identities remains valid for the transported character decorations.  By
-\cref{prop:representative-independence}, the answer is independent of the
-chosen source and target cocycle representatives.
+Choose a source cocycle \(\omega\), and choose a target cocycle \(\omega'\)
+as in \cref{prop:marking-coordinate-transport}.  By
+\cref{lem:character-compatibility-elementary-moves}, their presentation-level
+evaluations are equal.  The definition on cohomology classes and
+\cref{prop:representative-independence} identify these two values with the
+displayed marked evaluations.
 \end{proof}
 
 \begin{corollary}[Finite marked-movie invariance]
